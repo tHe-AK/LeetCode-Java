@@ -57,6 +57,17 @@ public class Solution {
 
 public class Solution {
     public String strStr(String haystack, String needle) {
+        int len1 = haystack.length();
+        int len2 = needle.length();
+        
+        if (len2 == 0) {
+            return haystack;
+        }
+        
+        if (len2 > len1) {
+            return null;
+        }
+        
         int pos = haystack.indexOf(needle);
         if (pos == -1) {
             return null;
