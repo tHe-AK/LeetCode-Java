@@ -54,3 +54,15 @@ public class Solution {
         return null;
     }
 }
+
+public class Solution {
+    public String strStr(String haystack, String needle) {
+        int pos = haystack.indexOf(needle);
+        if (pos == -1) {
+            return null;
+        }
+        else {
+            return haystack.substring(pos);
+        }
+    }
+}
