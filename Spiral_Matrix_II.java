@@ -1,6 +1,15 @@
 public class Solution {
     public int[][] generateMatrix(int n) {
+        if (n < 0) {
+            return null;
+        }
+        
         int[][] matrix = new int[n][n];
+        
+        if (n == 0) {
+            return matrix;
+        }
+        
         int count = 1;
         int left = 0;
         int right = n - 1;
