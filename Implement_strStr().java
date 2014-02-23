@@ -1,5 +1,9 @@
 public class Solution {
     public String strStr(String haystack, String needle) {
+        if (haystack == null || needle == null) {
+            return null;
+        }
+        
         int len1 = haystack.length();
         int len2 = needle.length();
 
