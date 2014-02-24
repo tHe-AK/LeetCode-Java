@@ -16,16 +16,15 @@ public class Solution {
         }
         
         for (int i = 0; i < len1 - len2 + 1; i++) {
-            boolean flag = true;
             int j = i;
-            for (int k = 0; k < len2; j++, k++) {
+            int k;
+            for (k = 0; k < len2; j++, k++) {
                 if (haystack.charAt(j) != needle.charAt(k)) {
-                    flag = false;
                     break;
                 }
             }
             
-            if (flag) {
+            if (k == len2) {
                 return haystack.substring(i);
             }
         }
