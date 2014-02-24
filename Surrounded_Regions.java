@@ -1,6 +1,6 @@
 public class Solution {
     public void solve(char[][] board) {
-        if (board == null || board.length == 0 || board[0].length == 0) {
+        if (board == null || board.length == 0 || board[0] == null || board[0].length == 0) {
             return;
         }
         
