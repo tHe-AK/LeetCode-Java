@@ -1,10 +1,11 @@
 public class Solution {
     public int trap(int[] A) {
+        if (A == null || A.length < 3) {
+            return 0;
+        }
+        
         int len = A.length;
         int water = 0;
-        if (len < 2) {
-            return water;
-        }
     
         int[] left = new int[len];
         int[] right = new int[len];
