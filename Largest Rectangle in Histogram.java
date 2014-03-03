@@ -6,9 +6,7 @@ public class Solution {
         
         int len = height.length;
         int[] copy = new int[len + 1];
-        for (int i = 0; i < len; i++) {
-            copy[i] = height[i];
-        }
+        System.arraycopy(height, 0, copy, 0, height.length);
         copy[len] = 0;
         
         Stack<Integer> s = new Stack<Integer>();
