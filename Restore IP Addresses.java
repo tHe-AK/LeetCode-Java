@@ -22,7 +22,7 @@ public class Solution {
         
         for (int i = index; i < s.length() && i < index + 3; i++) {
             String temp = s.substring(index, i + 1);
-            if ((temp.length() == 2 && temp.charAt(0) == '0') || (temp.length() == 3 && Integer.parseInt(temp) > 255)) {
+            if ((temp.length() == 2 && temp.charAt(0) == '0') || (temp.length() == 3 && Integer.valueOf(temp) > 255)) {
                 break;
             }
             cur.add(temp);
