@@ -4,7 +4,7 @@ public class Solution {
             return false;
         }
         
-        int len = Integer.toString(x).length();
+        int len = String.valueOf(x).length();
         int low = 1;
         int high = (int) Math.pow(10, len - 1);
         
