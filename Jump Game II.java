@@ -4,10 +4,10 @@ public class Solution {
             return -1;
         }
         
-        int max = A[0];
+        int max = 0;
         int pre = 0;
         int step = 0;
-        for (int i = 1; i < A.length; i++) {
+        for (int i = 0; i < A.length; i++) {
             if (i > max) {
                 return -1;
             }
