@@ -34,27 +34,27 @@ public class Solution {
             Queue<Integer> queue = new LinkedList<Integer>();
             int x = board.length;
             int y = board[0].length;
-            queue.offer(i * y + j);
+            queue.add(i * y + j);
             board[i][j] = '+';
             
             while (queue.size() > 0) {
-                int val = queue.poll();
+                int val = queue.remove();
                 i = val / y;
                 j = val % y;
                 if (i - 1 >= 0 && board[i - 1][j] == 'O') {
-                    queue.offer((i - 1) * y + j);
+                    queue.add((i - 1) * y + j);
                     board[i - 1][j] = '+';
                 }
                 if (i + 1 < x && board[i + 1][j] == 'O') {
-                    queue.offer((i + 1) * y + j);
+                    queue.add((i + 1) * y + j);
                     board[i + 1][j] = '+';
                 }
                 if (j - 1 >= 0 && board[i][j - 1] == 'O') {
-                    queue.offer(i * y + j - 1);
+                    queue.add(i * y + j - 1);
                     board[i][j - 1] = '+';
                 }
                 if (j + 1 < y && board[i][j + 1] == 'O') {
-                    queue.offer(i* y + j + 1);
+                    queue.add(i* y + j + 1);
                     board[i][j + 1] = '+';
                 }
             }
