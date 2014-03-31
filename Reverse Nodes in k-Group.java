@@ -18,13 +18,13 @@ public class Solution {
         ListNode dummy = new ListNode(0);
         dummy.next = head;
         ListNode start = dummy;
-        ListNode node = head;
+        ListNode cur = head;
         int i = 1;
         
-        while (node != null) {
+        while (cur != null) {
             if (i % k == 0) {
                 ListNode pre = start.next;
-                ListNode cur = start.next.next;
+                cur = start.next.next;
                 for (int j = 0; j < k - 1; j++) {
                     pre.next = cur.next;
                     cur.next = start.next;
@@ -32,10 +32,9 @@ public class Solution {
                     cur = pre.next;
                 }
                 start = pre;
-                node = cur;
             }
             else {
-                node = node.next;
+                cur = cur.next;
             }
             i++;
         }
