@@ -5,26 +5,24 @@ public class Solution {
         }
         
         int len = height.length;
-        int[] copy = new int[len + 1];
-        System.arraycopy(height, 0, copy, 0, height.length);
-        copy[len] = 0;
-        
+        int[] rec = new int[len + 1];
+        System.arraycopy(height, 0, rec, 0, height.length);
+
         Stack<Integer> s = new Stack<Integer>();
         int area = 0;
         int i = 0;
-        while (i < copy.length) {
-            if (s.empty() == true || copy[i] >= copy[s.peek()]) {
+        while (i < rec.length) {
+            if (s.empty() == true || rec[i] >= rec[s.peek()]) {
                 s.push(i);
                 i++;
             }
             else {
-                int cur = s.peek();
-                s.pop();
+                int cur = s.pop();
                 if (s.empty() == true) {
-                    area = Math.max(area, i * copy[cur]);
+                    area = Math.max(area, i * rec[cur]);
                 }
                 else {
-                    area = Math.max(area, (i - s.peek() - 1) * copy[cur]);
+                    area = Math.max(area, (i - s.peek() - 1) * rec[cur]);
                 }
             }
         }
