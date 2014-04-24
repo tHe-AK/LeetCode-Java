@@ -46,23 +46,21 @@ public class Solution {
         
         Queue<TreeNode> q1 = new LinkedList<TreeNode>();
         Queue<TreeNode> q2 = new LinkedList<TreeNode>();
-        q1.offer(root.left);
-        q2.offer(root.right);
+        q1.add(root.left);
+        q2.add(root.right);
         
         while (q1.isEmpty() == false) {
-            TreeNode cur1 = q1.peek();
-            TreeNode cur2 = q2.peek();
-            q1.poll();
-            q2.poll();
+            TreeNode cur1 = q1.remove();
+            TreeNode cur2 = q2.remove();
             
             if (cur1 == null && cur2 == null) {
                 continue;
             }
             else if (cur1 != null && cur2 != null && cur1.val == cur2.val) {
-                q1.offer(cur1.left);
-                q2.offer(cur2.right);
-                q1.offer(cur1.right);
-                q2.offer(cur2.left);
+                q1.add(cur1.left);
+                q2.add(cur2.right);
+                q1.add(cur1.right);
+                q2.add(cur2.left);
             }
             else {
                 return false;
