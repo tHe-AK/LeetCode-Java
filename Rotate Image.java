@@ -1,6 +1,6 @@
 public class Solution {
     public void rotate(int[][] matrix) {
-        if (matrix == null || matrix.length == 0 || matrix[0].length == 0 || matrix.length != matrix[0].length) {
+        if (matrix == null || matrix[0] == null || matrix.length != matrix[0].length || matrix.length < 2) {
             return;
         }
         
