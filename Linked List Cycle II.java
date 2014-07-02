@@ -11,23 +11,22 @@
  */
 public class Solution {
     public ListNode detectCycle(ListNode head) {
-        if (head == null) {
+        // Check the edge case when there are only 2 or 3 nodes
+        if (head == null || head.next == null || head.next.next == null) {
             return null;
         }
         
         ListNode slow = head;
         ListNode fast = head;
-        boolean flag = false;
-        while (slow.next != null && fast.next != null && fast.next.next != null) {
+        while (fast.next != null && fast.next.next != null) {
             slow = slow.next;
             fast = fast.next.next;
             if (slow == fast) {
-                flag = true;
                 break;
             }
         }
         
-        if (flag == false) {
+        if (slow != fast) {
             return null;
         }
         
