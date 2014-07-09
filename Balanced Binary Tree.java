@@ -13,28 +13,29 @@ public class Solution {
             return true;
         }
         
-        return helper(root, new int[1]);
+        return helper(root) != -1;
     }
-    
-    private boolean helper(TreeNode root, int[] height) {
+     
+    private int helper(TreeNode root) {
         if (root == null) {
-            height[0] = 0;
-            return true;
+            return 0;
         }
         
-        int[] left = new int[1];
-        int[] right = new int[1];
-        if (helper(root.left, left) == false) {
-            return false;
-        }
-        if (helper(root.right, right) == false) {
-            return false;
-        }
-        if (Math.abs(left[0] - right[0]) > 1) {
-            return false;
+        int left = helper(root.left);
+        if (left == -1) {
+            return -1;
         }
         
-        height[0] = Math.max(left[0], right[0]) + 1;
-        return true;
+        int right = helper(root.right);
+        if (right == -1) {
+            return -1;
+        }
+        
+        if (Math.abs(left - right) > 1) {
+            return -1;
+        }
+        else {
+            return Math.max(left, right) + 1;
+        }
     }
 }
