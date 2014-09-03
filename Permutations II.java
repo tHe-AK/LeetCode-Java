@@ -1,32 +1,31 @@
 public class Solution {
-    public ArrayList<ArrayList<Integer>> permuteUnique(int[] num) {
-        if (num == null || num.length == 0) {
-            return new ArrayList<ArrayList<Integer>>();
+    public List<List<Integer>> permuteUnique(int[] num) {
+        if (num == null) {
+            return null;
         }
         
-        int len = num.length;
         Arrays.sort(num);
-        boolean[] rec = new boolean[len];
-        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
-        helper(new ArrayList<Integer>(), num, rec, result);
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        helper(num, new boolean[num.length], new ArrayList<Integer>(), result);
         
         return result;
     }
     
-    private void helper(ArrayList<Integer> cur, int[] num, boolean[] rec, ArrayList<ArrayList<Integer>> result) {
+    private void helper(int[] num, boolean[] flag, List<Integer> cur, List<List<Integer>> result) {
         if (cur.size() == num.length) {
             result.add(new ArrayList<Integer>(cur));
             return;
         }
         
         for (int i = 0; i < num.length; i++) {
-            if (rec[i] == true || (i != 0 && num[i] == num[i - 1] && rec[i - 1] == false)) {
+            if (flag[i] == true || (i != 0 && num[i] == num[i - 1] && rec[i - 1] == false)) {
                 continue;
             }
-            rec[i] = true;
+            
+            flag[i] = true;
             cur.add(num[i]);
-            helper(cur, num, rec, result);
-            rec[i] = false;
+            helper(num, flag, cur, result);
+            flag[i] = false;
             cur.remove(cur.size() - 1);
         }
     }
