@@ -1,6 +1,6 @@
 public class Solution {
     public String getPermutation(int n, int k) {
-        if (k < 1) {
+        if (n < 1 || n > 9 || k < 1) {
             return null;
         }
         
