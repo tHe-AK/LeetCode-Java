@@ -1,35 +1,26 @@
 public class Solution {
     public String getPermutation(int n, int k) {
-        if (n < 1) {
-            return "";
+        if (k < 1) {
+            return null;
         }
         
-        int[] factorial = new int[n];
-        factorial[n - 1] = 1;
-        for (int i = n - 2; i >= 0; i--) {
-            factorial[i] = factorial[i + 1] * (n - i - 1);
+        int[] rec = new int[n + 2];
+        rec[1] = 1;
+        ArrayList<Character> num = new ArrayList<Character>();
+        for (int i = 1; i <= n; i++) {
+            rec[i + 1] = rec[i] * i;
+            num.add((char)('0' + i));
         }
+        k = (k - 1) % rec[n + 1];
         
-        char[] rec = new char[n];
-        boolean[] flag = new boolean[n];
-        k--;
-        for (int i = 0; i < n; i++) {
-            int cur = k / factorial[i];
-            k %= factorial[i];
-            for (int j = 0; j < n; j++) {
-                if (flag[j] == false) {
-                    if (cur == 0) {
-                        flag[j] = true;
-                        rec[i] = (char) ('1' + j);
-                        break;
-                    }
-                    else {
-                        cur--;
-                    }
-                }
-            }
+        StringBuilder sb = new StringBuilder();
+        for (int i = n; i >= 1; i--) {
+            int index = k / rec[i];
+            sb.append(num.get(index));
+            num.remove(index);
+            k %= rec[i];
         }
-        
-        return String.valueOf(rec);
+
+        return sb.toString();
     }
 }
