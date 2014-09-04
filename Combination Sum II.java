@@ -1,17 +1,17 @@
 public class Solution {
-    public ArrayList<ArrayList<Integer>> combinationSum2(int[] num, int target) {
-        if (num == null || num.length == 0 || target < 0) {
-            return new ArrayList<ArrayList<Integer>>();
+    public List<List<Integer>> combinationSum2(int[] num, int target) {
+        if (num == null || num.length == 0 || target < 1) {
+            return null;
         }
         
         Arrays.sort(num);
-        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
-        helper(target, 0, new ArrayList<Integer>(), num, result);
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        helper(num, target, 0, new ArrayList<Integer>(), result);
         
         return result;
     }
     
-    private void helper(int target, int index, ArrayList<Integer> cur, int[] num, ArrayList<ArrayList<Integer>> result) {
+    private void helper(int[] num, int target, int start, List<Integer> cur, List<List<Integer>> result) {
         if (target < 0) {
             return;
         }
@@ -21,12 +21,13 @@ public class Solution {
             return;
         }
         
-        for (int i = index; i < num.length; i++) {
-            if (i != index && num[i] == num[i - 1]) {
+        for (int i = start; i < num.length; i++) {
+            if (i != start && num[i] == num[i - 1]) {
                 continue;
             }
+            
             cur.add(num[i]);
-            helper(target - num[i], i + 1, cur, num, result);
+            helper(num, target - num[i], i + 1, cur, result);
             cur.remove(cur.size() - 1);
         }
     }
