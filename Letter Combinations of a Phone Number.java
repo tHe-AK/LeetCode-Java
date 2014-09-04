@@ -1,7 +1,7 @@
 public class Solution {
-    public ArrayList<String> letterCombinations(String digits) {
+    public List<String> letterCombinations(String digits) {
         if (digits == null) {
-            return new ArrayList<String>();
+            return null;
         }
         
         HashMap<Character, String> rec = new HashMap<Character, String>();
@@ -16,22 +16,21 @@ public class Solution {
         rec.put('9', "wxyz");
         rec.put('0', " ");
         
-        ArrayList<String> result = new ArrayList<String>();
-        helper(0, digits, "", rec, result);
+        List<String> result = new ArrayList<String>();
+        helper(digits, 0, rec, "", result);
         
         return result;
     }
     
-    private void helper(int index, String digits, String cur, HashMap<Character, String> rec, ArrayList<String> result) {
+    private void helper(String digits, int index, HashMap<Character, String> rec, String cur, List<String> result) {
         if (index == digits.length()) {
-            result.add(cur);
+            result.add(cur.toString());
             return;
         }
         
-        char digit = digits.charAt(index);
-        String str = rec.get(digit);
-        for (int i = 0; i < str.length(); i++) {
-            helper(index + 1, digits, cur + str.charAt(i), rec, result);
+        String value = rec.get(digits.charAt(index));
+        for (int i = 0; i < value.length(); i++) {
+            helper(digits, index + 1, rec, cur + value.charAt(i), result);
         }
     }
 }
