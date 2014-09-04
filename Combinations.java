@@ -10,13 +10,13 @@ public class Solution {
         return result;
     }
     
-    private void helper(int n, int k, int num, List<Integer> cur, List<List<Integer>> result) {
+    private void helper(int n, int k, int start, List<Integer> cur, List<List<Integer>> result) {
         if (cur.size() == k) {
             result.add(new ArrayList<Integer>(cur));
             return;
         }
         
-        for (int i = num; i <= n; i++) {
+        for (int i = start; i <= n; i++) {
             cur.add(i);
             helper(n, k, i + 1, cur, result);
             cur.remove(cur.size() - 1);
