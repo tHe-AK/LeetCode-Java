@@ -23,14 +23,14 @@ public class Solution {
 }
 
 public class Solution {
-    public ArrayList<ArrayList<Integer>> subsets(int[] S) {
+    public List<List<Integer>> subsets(int[] S) {
         if (S == null || S.length == 0) {
             return null;
         }
         
         Arrays.sort(S);
-        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
-        ArrayList<Integer> cur = new ArrayList<Integer>();
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        List<Integer> cur = new ArrayList<Integer>();
         result.add(cur);
         for (int i = 0; i < S.length; i++) {
             int size = result.size();
