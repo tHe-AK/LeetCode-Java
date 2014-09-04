@@ -1,22 +1,22 @@
 public class Solution {
-    public ArrayList<ArrayList<Integer>> subsets(int[] S) {
+    public List<List<Integer>> subsets(int[] S) {
         if (S == null || S.length == 0) {
-            return new ArrayList<ArrayList<Integer>>();
+            return null;
         }
         
         Arrays.sort(S);
-        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
-        helper(new ArrayList<Integer>(), 0, S, result);
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        helper(S, 0, new ArrayList<Integer>(), result);
         
         return result;
     }
     
-    private void helper(ArrayList<Integer> cur, int index, int[] S, ArrayList<ArrayList<Integer>> result) {
+    private void helper(int[] S, int start, List<Integer> cur, List<List<Integer>> result) {
         result.add(new ArrayList<Integer>(cur));
         
-        for (int i = index; i < S.length; i++) {
+        for (int i = start; i < S.length; i++) {
             cur.add(S[i]);
-            helper(cur, i + 1, S, result);
+            helper(S, i + 1, cur, result);
             cur.remove(cur.size() - 1);
         }
     }
@@ -24,8 +24,8 @@ public class Solution {
 
 public class Solution {
     public ArrayList<ArrayList<Integer>> subsets(int[] S) {
-        if (S.length == 0) {
-            return new ArrayList<ArrayList<Integer>>();
+        if (S == null || S.length == 0) {
+            return null;
         }
         
         Arrays.sort(S);
