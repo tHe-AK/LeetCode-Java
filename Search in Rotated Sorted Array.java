@@ -14,8 +14,7 @@ public class Solution {
             if (A[mid] == target) {
                 return mid;
             }
-            
-            if (A[low] <= A[mid]) {
+            else if (A[low] <= A[mid]) {
                 if (A[low] <= target && target < A[mid]) {
                     high = mid - 1;
                 }
