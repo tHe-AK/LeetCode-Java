@@ -1,22 +1,18 @@
 public class Solution {
     public int[] searchRange(int[] A, int target) {
-        int[] result = new int[2];
-        result[0] = -1;
-        result[1] = -1;
-        
         if (A == null || A.length == 0) {
-            return result;
+            return null;
         }
+        
+        int[] result = new int[] { -1, -1 };
         
         int low = 0;
         int high = A.length - 1;
+        int mid;
+        
         while (low <= high) {
-            int mid = low + (high - low) / 2;
-            if (A[mid] == target) {
-                result[0] = mid;
-                high = mid - 1;
-            }
-            else if (A[mid] < target) {
+            mid = low + (high - low) / 2;
+            if (A[mid] < target) {
                 low = mid + 1;
             }
             else {
@@ -24,26 +20,27 @@ public class Solution {
             }
         }
         
-        if (result[0] == -1) {
+        if (low == A.length || A[low] != target) {
             return result;
+        }
+        else {
+            result[0] = low;
         }
         
         low = 0;
         high = A.length - 1;
+
         while (low <= high) {
-            int mid = low + (high - low) / 2;
-            if (A[mid] == target) {
-                result[1] = mid;
-                low = mid + 1;
-            }
-            else if (A[mid] < target) {
-                low = mid + 1;
+            mid = low + (high - low) / 2;
+            if (A[mid] > target) {
+                high = mid - 1;
             }
             else {
-                high = mid - 1;
+                low = mid + 1;
             }
         }
         
+        result[1] = high;
         return result;
     }
 }
