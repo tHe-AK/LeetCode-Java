@@ -23,6 +23,8 @@ public class Solution {
             int temp = nums.get(start);
             nums.set(start, nums.get(end));
             nums.set(end, temp);
+            start++;
+            end--;
         }
     }
 }
