@@ -13,14 +13,6 @@ public class Solution {
             return 0;
         }
         
-        return helper(root);
-    }
-    
-    private int helper(TreeNode root) {
-        if (root == null) {
-            return 0;
-        }
-        
-        return Math.max(helper(root.left), helper(root.right)) + 1;
+        return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
     }
 }
