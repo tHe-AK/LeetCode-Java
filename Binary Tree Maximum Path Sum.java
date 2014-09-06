@@ -10,26 +10,27 @@
 public class Solution {
     public int maxPathSum(TreeNode root) {
         if (root == null) {
-            throw new IllegalArgumentException(); 
+            return 0;
         }
         
-        int[] result = new int[1];
-        result[0] = root.val;
-        helper(root, result);
+        int[] maxPath = new int[1];
+        maxPath[0] = root.val;
+        helper(root, maxPath);
         
-        return result[0];
+        return maxPath[0];
     }
     
-    private int helper(TreeNode root, int[] result) {
+    private int helper(TreeNode root, int[] maxPath) {
         if (root == null) {
             return 0;
         }
         
-        int left = helper(root.left, result);
-        int right = helper(root.right, result);
-        int cur = Math.max(root.val, Math.max(left, right) + root.val);
-        result[0] = Math.max(result[0], Math.max(cur, root.val + left + right));
+        int left = helper(root.left, maxPath);
+        int right = helper(root.right, maxPath);
         
-        return cur;
+        int singlePath = Math.max(Math.max(left, right) + root.val, root.val);
+        maxPath[0] = Math.max(maxPath[0], Math.max(singlePath, left + root.val + right));
+        
+        return singlePath;
     }
 }
