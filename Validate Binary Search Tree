@@ -8,24 +8,31 @@
  * }
  */
 public class Solution {
-    private TreeNode pre;
-    
     public boolean isValidBST(TreeNode root) {
         if (root == null) {
             return true;
         }
         
-        if (!isValidBST(root.left)) {
+        TreeNode[] pre = new TreeNode[1];
+        
+        return helper(root, pre);
+    }
+    
+    private boolean helper(TreeNode root, TreeNode[] pre) {
+        if (root == null) {
+            return true;
+        }
+        
+        if (!helper(root.left, pre)) {
             return false;
         }
         
-        if (pre != null && pre.val >= root.val) {
+        if (pre[0] != null && root.val <= pre[0].val) {
             return false;
         }
+        pre[0] = root;
         
-        pre = root;
-        
-        if (!isValidBST(root.right)) {
+        if (!helper(root.right, pre)) {
             return false;
         }
         
