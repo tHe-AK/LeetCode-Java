@@ -8,24 +8,25 @@
  * }
  */
 public class Solution {
-    public ArrayList<Integer> preorderTraversal(TreeNode root) {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> result = new ArrayList<Integer>();
         if (root == null) {
-            return new ArrayList<Integer>();
+            return result;
         }
         
-        Stack<TreeNode> s = new Stack<TreeNode>();
-        s.push(root);
-        ArrayList<Integer> result = new ArrayList<Integer>();
-        while (s.empty() == false) {
-            TreeNode cur = s.peek();
-            s.pop();
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        stack.push(root);
+        
+        while (!stack.empty()) {
+            TreeNode cur = stack.pop();
             result.add(cur.val);
             
             if (cur.right != null) {
-                s.push(cur.right);
+                stack.push(cur.right);
             }
+            
             if (cur.left != null) {
-                s.push(cur.left);
+                stack.push(cur.left);
             }
         }
         
