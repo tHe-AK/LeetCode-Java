@@ -8,32 +8,38 @@
  * }
  */
 public class Solution {
-    public ArrayList<ArrayList<Integer>> levelOrderBottom(TreeNode root) {
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        
         if (root == null) {
-            return new ArrayList<ArrayList<Integer>>();
+            return result;
         }
         
-        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
         Queue<TreeNode> queue = new LinkedList<TreeNode>();
         queue.add(root);
-        while (queue.isEmpty() == false) {
+        
+        while (!queue.isEmpty()) {
+            List<Integer> level = new ArrayList<Integer>();
             int size = queue.size();
-            ArrayList<Integer> level = new ArrayList<Integer>();
+            
             for (int i = 0; i < size; i++) {
-                TreeNode cur = queue.element();
-                queue.remove();
+                TreeNode cur = queue.remove();
                 level.add(cur.val);
+                
                 if (cur.left != null) {
                     queue.add(cur.left);
                 }
+                
                 if (cur.right != null) {
                     queue.add(cur.right);
                 }
             }
+            
             result.add(level);
         }
         
         Collections.reverse(result);
+        
         return result;
     }
 }
