@@ -21,8 +21,6 @@ public class Solution {
             return 0;
         }
         
-        int left = helper(root.left);
-        int right = helper(root.right);
-        return Math.max(left, right) + 1;
+        return Math.max(helper(root.left), helper(root.right)) + 1;
     }
 }
