@@ -5,15 +5,14 @@ public class Solution {
         }
         
         for (int i = 0; i < haystack.length() - needle.length() + 1; i++) {
-            int j = i;
-            int k;
-            for (k = 0; k < needle.length(); j++, k++) {
-                if (haystack.charAt(j) != needle.charAt(k)) {
+            int j;
+            for (j = 0; j < needle.length(); j++) {
+                if (haystack.charAt(i + j) != needle.charAt(j)) {
                     break;
                 }
             }
             
-            if (k == needle.length()) {
+            if (j == needle.length()) {
                 return haystack.substring(i);
             }
         }
