@@ -115,7 +115,7 @@ public class Solution {
     }
     
     public int select(int k) {
-        if (k < 1 || k > size(root)) {
+        if (k < 1 || k > size()) {
             throw new IllegalArgumentException();
         }
         
