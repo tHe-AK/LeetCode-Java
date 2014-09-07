@@ -1,4 +1,6 @@
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 class TreeNode {
@@ -39,6 +41,7 @@ public class Solution {
         }
         
         if (root.val == val) {
+            throw new RuntimeException("Can not insert");
         }
         else if (root.val < val) {
             root.right = insert(root.right, val);
@@ -49,6 +52,45 @@ public class Solution {
         
         root.size = size(root.left) + size(root.right) + 1;
         return root;
+    }
+    
+    public void delete(int val) {
+        root = delete(root, val);
+    }
+    
+    private TreeNode delete(TreeNode root, int val) {
+        if (root == null) {
+            throw new RuntimeException("Can not delete");
+        }
+        
+        if (val == root.val) {
+            if (root.left == null) {
+                return root.right;
+            }
+            else if (root.right == null) {
+                return root.left;
+            }
+            else {
+                root.val = deleteHelper(root.left);
+                root.left = delete(root.left, root.val);
+            }
+        }
+        else if (val < root.val) {
+            root.left = delete(root.left, val);
+        }
+        else {
+            root.right = delete(root.right, val);
+        }
+        
+        return root;
+    }
+    
+    private int deleteHelper(TreeNode root) {
+        if (root.right != null) {
+            root = root.right;
+        }
+        
+        return root.val;
     }
     
     public boolean search(int val) {
@@ -120,6 +162,44 @@ public class Solution {
         }
     }
     
+    public Iterator<TreeNode> preorderIterator() {
+        return new PreorderIterator();
+    }
+    
+    private class PreorderIterator implements Iterator<TreeNode> {
+        private Stack<TreeNode> stack;
+        
+        public PreorderIterator() {
+            stack = new Stack<TreeNode>();
+            if (root != null) {
+                stack.push(root);
+            }
+        }
+        
+        public boolean hasNext() {
+            return !stack.empty();
+        }
+
+        public TreeNode next() {
+            if (hasNext()) {
+                TreeNode cur = stack.pop();
+                
+                if (cur.right != null) {
+                    stack.push(cur.right);
+                }
+                
+                if (cur.left != null) {
+                    stack.push(cur.left);
+                }
+                
+                return cur;
+            }
+            else {
+                return null;
+            }
+        }
+    }
+    
     public Iterator<TreeNode> inorderIterator() {
         return new InorderIterator();
     }
@@ -158,6 +238,85 @@ public class Solution {
         }
     }
     
+    public Iterator<TreeNode> postorderIterator() {
+        return new PostorderIterator();
+    }
+    
+    private class PostorderIterator implements Iterator<TreeNode> {
+        private Stack<TreeNode> stack;
+        private TreeNode pre;
+        
+        public PostorderIterator() {
+            stack = new Stack<TreeNode>();
+            TreeNode cur = root;
+            while (cur != null) {
+                stack.push(cur);
+                cur = cur.left;
+            }
+        }
+        
+        public boolean hasNext() {
+            return !stack.empty();
+        }
+
+        public TreeNode next() {
+            if (hasNext()) {        
+                while (stack.peek().right != null && stack.peek().right != pre) {
+                    TreeNode cur = stack.peek().right;
+                    
+                    while (cur != null) {
+                        stack.push(cur);
+                        cur = cur.left;
+                    }
+                }
+                
+                pre = stack.pop();
+                return pre;
+            }
+            else {
+                return null;
+            }
+        }
+    }
+    
+    public Iterator<TreeNode> levelorderIterator() {
+        return new LevelorderIterator();
+    }
+    
+    private class LevelorderIterator implements Iterator<TreeNode> {
+        private Queue<TreeNode> queue;
+        
+        public LevelorderIterator() {
+            queue = new LinkedList<TreeNode>();
+            if (root != null) {
+                queue.add(root);
+            }
+        }
+        
+        public boolean hasNext() {
+            return !queue.isEmpty();
+        }
+        
+        public TreeNode next() {
+            if (hasNext()) {
+                TreeNode cur = queue.remove();
+                
+                if (cur.left != null) {
+                    queue.add(cur.left);
+                }
+                
+                if (cur.right != null) {
+                    queue.add(cur.right);
+                }
+                
+                return cur;
+            }
+            else {
+                return null;
+            }
+        }
+    }
+    
     public static void main(String[] args) {
         Solution s = new Solution();
         
@@ -166,16 +325,5 @@ public class Solution {
         s.insert(5);
         s.insert(9);
         s.insert(7);
-        System.out.println(s.select(1));
-        System.out.println(s.select(2));
-        System.out.println(s.select(3));
-        System.out.println(s.select(4));
-        System.out.println(s.select(5));
-        
-        s.traverseRange(3, 8);
-        
-        for (Iterator<TreeNode> it = s.inorderIterator(); it.hasNext();) {
-            System.out.println(it.next().val);
-        }
     }
 }
