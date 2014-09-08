@@ -16,25 +16,25 @@ public class Solution {
         }
         
         ListNode dummy1 = new ListNode(0);
-        ListNode head1 = dummy1;
         ListNode dummy2 = new ListNode(0);
-        ListNode head2 = dummy2;
+        ListNode cur1 = dummy1;
+        ListNode cur2 = dummy2;
         
-        ListNode cur = head;
-        while (cur != null) {
-            if (cur.val < x) {
-                head1.next = cur;
-                head1 = cur;
+        while (head != null) {
+            if (head.val < x) {
+                cur1.next = head;
+                cur1 = cur1.next;
             }
             else {
-                head2.next = cur;
-                head2 = cur;
+                cur2.next = head;
+                cur2 = cur2.next;
             }
-            cur = cur.next;
+            
+            head = head.next;
         }
         
-        head1.next = dummy2.next;
-        head2.next = null;
+        cur1.next = dummy2.next;
+        cur2.next = null;
         
         return dummy1.next;
     }
