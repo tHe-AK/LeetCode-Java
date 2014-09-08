@@ -17,16 +17,18 @@ public class Solution {
         
         ListNode slow = head;
         ListNode fast = head;
-
+        
         while (fast.next != null && fast.next.next != null) {
             slow = slow.next;
             fast = fast.next.next;
-        }
+        } 
         
-        ListNode pre = null;
         ListNode cur = slow.next;
         slow.next = null;
+        
+        ListNode pre = null;
         ListNode next;
+        
         while (cur != null) {
             next = cur.next;
             cur.next = pre;
@@ -34,14 +36,14 @@ public class Solution {
             cur = next;
         }
         
-        ListNode cur1 = head;
-        ListNode cur2 = pre;
-        while (cur2 != null) {
-            next = cur2.next;
-            cur2.next = cur1.next;
-            cur1.next = cur2;
-            cur1 = cur2.next;
-            cur2 = next;
+        cur = head;
+        
+        while (pre != null) {
+            next = pre.next;
+            pre.next = cur.next;
+            cur.next = pre;
+            pre = next;
+            cur = cur.next.next;
         }
     }
 }
