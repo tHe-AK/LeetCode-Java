@@ -18,24 +18,18 @@ public class Solution {
         ListNode dummy = new ListNode(0);
         dummy.next = head;
         ListNode cur = dummy;
-        ListNode start = null;
-        ListNode pre = null;
         
-        for (int i = 1; i <= n; i++) {
-            if (i == m) {
-                start = cur;
-                pre = cur.next;
-                cur = cur.next.next;
-            }
-            else if (i > m) {
-                pre.next = cur.next;
-                cur.next = start.next;
-                start.next = cur;
-                cur = pre.next;
-            }
-            else {
-                cur = cur.next;
-            }
+        for (int i = 1; i < m; i++) {
+            cur = cur.next;
+        }
+        
+        ListNode end = cur.next;
+        ListNode start;
+        for (int i = 1; i <= n - m; i++) {
+            start = cur.next;
+            cur.next = end.next;
+            end.next = cur.next.next;
+            cur.next.next = start;
         }
         
         return dummy.next;
