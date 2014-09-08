@@ -21,34 +21,35 @@ public class Solution {
             return null;
         }
         
-        ListNode[] cur = new ListNode[1];
-        cur[0] = head;
-        int count = 0;
-        while (cur[0] != null) {
-            count++;
-            cur[0] = cur[0].next;
-        }
+        int len = 0;
+        ListNode cur = head;
         
-        cur[0] = head;
-        return helper(0, count - 1, cur);
+        while (cur != null) {
+            len++;
+            cur = cur.next;
+        } 
+        
+        ListNode[] rec = new ListNode[1];
+        rec[0] = head;
+        
+        return helper(0, len - 1, rec);
     }
     
-    private TreeNode helper(int low, int high, ListNode[] cur) {
-        if (low > high) {
+    private TreeNode helper(int start, int end, ListNode[] rec) {
+        if (start > end) {
             return null;
         }
-        
-        int mid = low + (high - low) / 2;
-        
-        TreeNode left = helper(low, mid - 1, cur);
-        
-        TreeNode root = new TreeNode(cur[0].val);
-        cur[0] = cur[0].next;
+
+        int mid = start + (end - start) / 2;
+            
+        TreeNode left = helper(start, mid - 1, rec);
+            
+        TreeNode root = new TreeNode(rec[0].val);
         root.left = left;
-        
-        TreeNode right = helper(mid + 1, high, cur);
-        root.right = right;
-        
+        rec[0] = rec[0].next;
+            
+        root.right = helper(mid + 1, end, rec);
+            
         return root;
     }
 }
