@@ -9,34 +9,41 @@
 public class Solution {
     public RandomListNode copyRandomList(RandomListNode head) {
         if (head == null) {
-            return null;
+            return head;
         }
         
         RandomListNode cur = head;
+        RandomListNode copy;
+        
         while (cur != null) {
-            RandomListNode node = new RandomListNode(cur.label);
-            node.next = cur.next;
-            cur.next = node;
-            cur = node.next;
+            copy = new RandomListNode(cur.label);
+            copy.next = cur.next;
+            cur.next = copy;
+            cur = cur.next.next;
         }
         
         cur = head;
+        
         while (cur != null) {
             if (cur.random != null) {
                 cur.next.random = cur.random.next;
             }
+            
             cur = cur.next.next;
         }
         
         cur = head;
         RandomListNode start = cur.next;
+
         while (cur != null) {
-            RandomListNode temp = cur.next;
+            copy = cur.next;
             cur.next = cur.next.next;
-            cur = cur.next;
-            if (cur != null) {
-                temp.next = cur.next;
+            
+            if (cur.next != null) {
+                copy.next = cur.next.next;
             }
+            
+            cur = cur.next;
         }
         
         return start;
