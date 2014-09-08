@@ -15,30 +15,21 @@ public class Solution {
             return null;
         }
         
-        
         ListNode dummy = new ListNode(0);
         dummy.next = head;
-        ListNode pre = dummy;
-        ListNode cur = head.next;
-        boolean flag = false;
-        while (cur != null) {
-            if (cur.val == pre.next.val) {
-                flag = true;
+        ListNode cur = dummy;
+
+        while (cur.next != null && cur.next.next != null) {
+            if (cur.next.val == cur.next.next.val) {
+                int val = cur.next.val;
+
+                while (cur.next != null && cur.next.val == val) {
+                    cur.next = cur.next.next;;
+                }
             }
             else {
-                if (flag == true) {
-                    flag = false;
-                    pre.next = cur;
-                }
-                else {
-                    pre = pre.next;
-                }
+                cur = cur.next;
             }
-            cur = cur.next;
-        }
-        
-        if (flag == true) {
-            pre.next = cur;
         }
         
         return dummy.next;
