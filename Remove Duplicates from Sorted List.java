@@ -15,19 +15,17 @@ public class Solution {
             return null;
         }
         
-        ListNode cur = head.next;
-        ListNode pre = head;
-        
-        while (cur != null) {
-            if (cur.val != pre.val) {
-                pre.next = cur;
-                pre = pre.next;
+        ListNode cur = head;
+
+        while (cur.next != null) {
+            if (cur.val == cur.next.val) {
+                cur.next = cur.next.next;
             }
-            
-            cur = cur.next;
+            else {
+                cur = cur.next;
+            }
         }
         
-        pre.next = null;
         return head;
     }
 }
