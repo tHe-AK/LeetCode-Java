@@ -21,35 +21,33 @@ public class Solution {
             slow = slow.next;
             fast = fast.next.next;
         }
-
-        ListNode sorted2 = sortList(slow.next);
-        slow.next = null;
-        ListNode sorted1 = sortList(head);
         
-        return merge(sorted1, sorted2);
-    }
-    
-    private ListNode merge(ListNode sorted1, ListNode sorted2) {
+        ListNode right = sortList(slow.next);
+        slow.next = null;
+        ListNode left = sortList(head);
+        
         ListNode dummy = new ListNode(0);
         ListNode cur = dummy;
         
-        while (sorted1 != null && sorted2 != null) {
-            if (sorted1.val < sorted2.val) {
-                cur.next = sorted1;
-                sorted1 = sorted1.next;
+        while (left != null && right != null) {
+            if (left.val < right.val) {
+                cur.next = left;
+                left = left.next;
             }
             else {
-                cur.next = sorted2;
-                sorted2 = sorted2.next;
+                cur.next = right;
+                right = right.next;
             }
+            
             cur = cur.next;
         }
         
-        if (sorted1 == null) {
-            cur.next = sorted2;
+        if (left != null) {
+            cur.next = left;
         }
-        else {
-            cur.next = sorted1;
+        
+        if (right != null) {
+            cur.next = right;
         }
         
         return dummy.next;
