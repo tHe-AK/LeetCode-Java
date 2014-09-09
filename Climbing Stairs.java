@@ -4,7 +4,7 @@ public class Solution {
             throw new IllegalArgumentException();
         }
         
-        if (n <= 2) {
+        if (n < 3) {
             return n;
         }
         
