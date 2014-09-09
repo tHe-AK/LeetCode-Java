@@ -1,22 +1,21 @@
 public class Solution {
-    public int minimumTotal(ArrayList<ArrayList<Integer>> triangle) {
+    public int minimumTotal(List<List<Integer>> triangle) {
         if (triangle == null || triangle.size() == 0) {
-            return 0;
+            throw new IllegalArgumentException();
         }
         
-        int size = triangle.size();
-        int[] cur = new int[triangle.get(size - 1).size()];
+        int[] rec = new int[triangle.size()];
         
-        for (int j = 0; j < triangle.get(size - 1).size(); j++) {
-            cur[j] = triangle.get(size - 1).get(j);
-        }
-        
-        for (int i = size - 2; i >= 0; i--) {
+        for (int i = triangle.size() - 1; i >= 0; i--) {
             for (int j = 0; j < triangle.get(i).size(); j++) {
-                cur[j] = triangle.get(i).get(j) + Math.min(cur[j], cur[j + 1]);
+                rec[j] += triangle.get(i).get(j);
+                
+                if (j > 0) {
+                    rec[j - 1] = Math.min(rec[j - 1], rec[j]);
+                }
             }
         }
         
-        return cur[0];
+        return rec[0];
     }
 }
