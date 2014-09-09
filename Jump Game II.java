@@ -1,20 +1,21 @@
 public class Solution {
     public int jump(int[] A) {
         if (A == null || A.length == 0) {
-            return -1;
+            throw new IllegalArgumentException();
         }
         
-        int max = 0;
-        int pre = 0;
+        int max = A[0];
+        int cur = 0;
         int step = 0;
-        for (int i = 0; i < A.length; i++) {
-            if (i > max) {
+        
+        for (int i = 1; i < A.length; i++) {
+            if (max < i) {
                 return -1;
             }
             
-            if (i > pre) {
+            if (cur < i) {
+                cur = max;
                 step++;
-                pre = max;
             }
             
             max = Math.max(max, i + A[i]);
