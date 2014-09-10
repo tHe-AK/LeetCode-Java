@@ -1,6 +1,6 @@
 public class Solution {
     public boolean wordBreak(String s, Set<String> dict) {
-        if (s == null || s.length() == 0 || dict == null) {
+        if (s == null || s.length() == 0 || dict == null || dict.size() == 0) {
             return false;
         }
         
