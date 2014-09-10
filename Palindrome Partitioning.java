@@ -6,18 +6,15 @@ public class Solution {
             return result;
         }
         
-        List<List<Integer>> rec = new ArrayList<List<Integer>>();
+        int len = s.length();
+        boolean[][] rec = new boolean[len][len];
         
-        for (int i = 0; i < s.length(); i++) {
-            rec.add(new ArrayList<Integer>());
-        }
-        
-        for (int i = 0; i < s.length(); i++) {
+        for (int i = 0; i < len; i++) {
             int left = i;
             int right = i;
             
-            while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
-                rec.get(left).add(right);
+            while (left >= 0 && right < len && s.charAt(left) == s.charAt(right)) {
+                rec[left][right] = true;
                 left--;
                 right++;
             }
@@ -25,8 +22,8 @@ public class Solution {
             left = i - 1;
             right = i;
             
-            while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
-                rec.get(left).add(right);
+            while (left >= 0 && right < len && s.charAt(left) == s.charAt(right)) {
+                rec[left][right] = true;
                 left--;
                 right++;
             }
@@ -37,17 +34,18 @@ public class Solution {
         return result;
     }
     
-    private void helper(String s, int start, List<List<Integer>> rec, List<String> cur, List<List<String>> result) {
+    private void helper(String s, int start, boolean[][] rec, List<String> cur, List<List<String>> result) {
         if (start == s.length()) {
             result.add(new ArrayList<String>(cur));
             return;
         }
         
-        for (int i = 0; i < rec.get(start).size(); i++) {
-            int end = rec.get(start).get(i);
-            cur.add(s.substring(start, end + 1));
-            helper(s, end + 1, rec, cur, result);
-            cur.remove(cur.size() - 1);
+        for (int i = 0; i < rec[start].length; i++) {
+            if (rec[start][i]) {
+                cur.add(s.substring(start, i + 1));
+                helper(s, i + 1, rec, cur, result);
+                cur.remove(cur.size() - 1);
+            }
         }
     }
 }
