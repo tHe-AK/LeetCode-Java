@@ -1,20 +1,21 @@
 public class Solution {
     public boolean wordBreak(String s, Set<String> dict) {
-        if (s == null || s.isEmpty() == true) {
-            return dict == null || dict.isEmpty() == true;
+        if (s == null || s.length() == 0 || dict == null) {
+            return false;
         }
         
         int len = s.length();
-        boolean[] flag = new boolean[len];
+        boolean[] result = new boolean[len];
+        
         for (int i = 0; i < len; i++) {
-            for (int j = i; j >= 0; j--) {
-                if ((j == 0 || flag[j - 1] == true) && dict.contains(s.substring(j, i + 1))) {
-                    flag[i] = true;
+            for (int j = 0; j < len; j++) {
+                if ((j == 0 || result[j - 1]) && dict.contains(s.substring(j, i + 1))) {
+                    result[i] = true;
                     break;
                 }
             }
         }
         
-        return flag[len - 1];
+        return result[len - 1];
     }
 }
