@@ -1,38 +1,27 @@
 public class Solution {
-    public ArrayList<String> wordBreak(String s, Set<String> dict) {
+    public List<String> wordBreak(String s, Set<String> dict) {
+        List<String> result = new ArrayList<String>();
+        
         if (s == null || s.length() == 0 || dict == null || dict.size() == 0) {
-            return new ArrayList<String>();
+            return result;
         }
         
-        int len = s.length();
-        ArrayList<ArrayList<String>> rec = new ArrayList<ArrayList<String>>();
-        for (int i = 0; i < len; i++) {
-            rec.add(new ArrayList<String>());
-        }
-        
-        for (int i = 0; i < len; i++) {
-            for (int j = i; j < len; j++) {
-                String str = s.substring(i, j + 1);
-                if (dict.contains(str)) {
-                    rec.get(j).add(str);
-                }
-            }
-        }
-        
-        ArrayList<String> result = new ArrayList<String>();
-        helper(len - 1, "", rec, result);
+        helper(s, dict, s.length() - 1, "", result);
         
         return result;
     }
     
-    private void helper(int index, String cur, ArrayList<ArrayList<String>> rec, ArrayList<String> result) {
-        if (index == -1) {
+    private void helper(String s, Set<String> dict, int end, String cur, List<String> result) {
+        if (end == -1) {
             result.add(cur.trim());
             return;
         }
         
-        for (String str : rec.get(index)) {
-            helper(index - str.length(), str + " " + cur, rec, result);
+        for (int i = 0; i <= end; i++) {
+            String word = s.substring(i, end + 1);
+            if (dict.contains(word)) {
+                helper(s, dict, i - 1, word + " " + cur, result);
+            }
         }
     }
 }
