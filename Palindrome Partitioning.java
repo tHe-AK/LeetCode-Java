@@ -1,46 +1,53 @@
 public class Solution {
-    public ArrayList<ArrayList<String>> partition(String s) {
-        if (s == null || s.length() == 0) {
-            return new ArrayList<ArrayList<String>>();
+    public List<List<String>> partition(String s) {
+        List<List<String>> result = new ArrayList<List<String>>();
+        
+        if (s == null) {
+            return result;
         }
         
-        int len = s.length();
-        boolean[][] rec = new boolean[len][len];
-        for (int i = 0; i < len; i++) {
+        List<List<Integer>> rec = new ArrayList<List<Integer>>();
+        
+        for (int i = 0; i < s.length(); i++) {
+            rec.add(new ArrayList<Integer>());
+        }
+        
+        for (int i = 0; i < s.length(); i++) {
             int left = i;
             int right = i;
-            while (left >= 0 && right < len && s.charAt(left) == s.charAt(right)) {
-                rec[left][right] = true;
+            
+            while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+                rec.get(left).add(right);
                 left--;
                 right++;
             }
-            left = i;
-            right = i + 1;
-            while (left >= 0 && right < len && s.charAt(left) == s.charAt(right)) {
-                rec[left][right] = true;
+            
+            left = i - 1;
+            right = i;
+            
+            while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+                rec.get(left).add(right);
                 left--;
                 right++;
             }
         }
         
-        ArrayList<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
-        helper(0, s, new ArrayList<String>(), rec, result);
+        helper(s, 0, rec, new ArrayList<String>(), result);
         
         return result;
     }
     
-    private void helper(int index, String s, ArrayList<String> cur, boolean[][] rec, ArrayList<ArrayList<String>> result) {
-        if (index == s.length()) {
+    private void helper(String s, int start, List<List<Integer>> rec, List<String> cur, List<List<String>> result) {
+        if (start == s.length()) {
             result.add(new ArrayList<String>(cur));
             return;
         }
         
-        for (int i = index; i < s.length(); i++) {
-            if (rec[index][i] == true) {
-                cur.add(s.substring(index, i + 1));
-                helper(i + 1, s, cur, rec, result);
-                cur.remove(cur.size() - 1);
-            }
+        for (int i = 0; i < rec.get(start).size(); i++) {
+            int end = rec.get(start).get(i);
+            cur.add(s.substring(start, end + 1));
+            helper(s, end + 1, rec, cur, result);
+            cur.remove(cur.size() - 1);
         }
     }
 }
