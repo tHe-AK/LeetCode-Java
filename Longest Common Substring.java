@@ -19,6 +19,14 @@ public class Solution {
             }
         }
         
-        return rec[len1][len2];
+        int max = 0;
+        
+        for (int i = 1; i < len1 + 1; i++) {
+            for (int j = 1; j < len2 + 1; j++) {
+                max = Math.max(max, rec[i][j]);
+            }
+        }
+        
+        return max;
     }
 }
