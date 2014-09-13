@@ -1,41 +1,34 @@
 public class Solution {
     public int totalNQueens(int n) {
-        if (n < 1) {
-            return 0;
-        }
-        if (n == 1) {
-            return 1;
+        if (n <= 0) {
+            throw new IllegalArgumentException();
         }
         
-        int[] rec = new int[n];
         int[] count = new int[1];
-        count[0] = 0;
-        helper(0, rec, count);
+        helper(n, 0, new int[n], count);
         
         return count[0];
     }
     
-    private void helper(int row, int[] rec, int[] count) {
-        if (row == rec.length) {
+    private void helper(int n, int row, int[] rec, int[] count) {
+        if (row == n) {
             count[0]++;
             return;
         }
         
-        for (int i = 0; i < rec.length; i++) {
-            if (valid(row, i, rec)) {
-                rec[row] = i;
-                helper(row + 1, rec, count);
+        for (int j = 0; j < n; j++) {
+            int i;
+            
+            for (i = 0; i < row; i++) {
+                if (rec[i] == j || row - i == Math.abs(j - rec[i])) {
+                    break;
+                }
+            }
+            
+            if (i == row) {
+                rec[row] = j;
+                helper(n, row + 1, rec, count);
             }
         }
-    }
-    
-    private boolean valid(int row, int col, int[] rec) {
-        for (int i = 0; i < row; i++) {
-            if (rec[i] == col || row - i == Math.abs(col - rec[i])) {
-                return false;
-            }
-        }
-        
-        return true;
     }
 }
