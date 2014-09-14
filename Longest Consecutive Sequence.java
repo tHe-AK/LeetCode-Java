@@ -1,36 +1,26 @@
 public class Solution {
     public int longestConsecutive(int[] num) {
-        if (num == null || num.length == 0) {
-            return 0;
+        if (num == null) {
+            throw new IllegalArgumentException();
         }
         
         int max = 0;
         HashMap<Integer, Integer> hashMap = new HashMap<Integer, Integer>();
+        
         for (int i = 0; i < num.length; i++) {
-            if (hashMap.containsKey(num[i]) == false) {
-                int len = 1;
-                int pre = num[i] - 1;
-                int next = num[i] + 1;
-                
-                if (hashMap.containsKey(pre) == true) {
-                    len += hashMap.get(pre);
-                }
-                if (hashMap.containsKey(next) == true) {
-                    len += hashMap.get(next);
-                }
-                
-                hashMap.put(num[i], len);
-                if (len > max) {
-                    max = len;
-                }
-                
-                if (hashMap.containsKey(pre) == true) {
-                    hashMap.put(pre - hashMap.get(pre) + 1, len);
-                }
-                if (hashMap.containsKey(next) == true) {
-                    hashMap.put(next + hashMap.get(next) - 1, len);
-                }
+            if (hashMap.containsKey(num[i])) {
+                continue;
             }
+            
+            int len1 = hashMap.containsKey(num[i] - 1) ? hashMap.get(num[i] - 1) : 0;
+            int len2 = hashMap.containsKey(num[i] + 1) ? hashMap.get(num[i] + 1) : 0;
+            int len = len1 + len2 + 1;
+            
+            hashMap.put(num[i], len);
+            hashMap.put(num[i] - len1, len);
+            hashMap.put(num[i] + len2, len);
+            
+            max = Math.max(max, len);
         }
         
         return max;
