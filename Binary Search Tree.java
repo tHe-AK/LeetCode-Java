@@ -50,7 +50,7 @@ public class Solution {
             p.left = insert(p.left, val);
         }
         
-        p.size = size(p.left) + size(p) + 1;
+        p.size = size(p.left) + size(p.right) + 1;
         return p;
     }
     
