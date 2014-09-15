@@ -26,7 +26,7 @@ public class MinStack extends Stack<Integer> {
     
     public int min() {
         if (super.empty()) {
-            throw new RunTimeException("Stack is Empty");
+            throw new RuntimeException("Stack is Empty");
         }
         else {
             return minStack.peek();
