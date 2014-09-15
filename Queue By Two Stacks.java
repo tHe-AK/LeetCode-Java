@@ -23,7 +23,7 @@ public class MyQueue<T> {
     
     public T poll() {
         if (empty()) {
-            throw new RunTimeException("Stack is empty.");
+            throw new RuntimeException("Stack is empty.");
         }
         
         shifStack();
@@ -33,7 +33,7 @@ public class MyQueue<T> {
     
     public T peek() {
         if (empty()) {
-            throw new RunTimeException("Stack is empty.");
+            throw new RuntimeException("Stack is empty.");
         }
         
         shifStack();
