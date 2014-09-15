@@ -60,7 +60,7 @@ public class PriorityQueue {
     private void shiftUp() {
         int i = size;
         
-        while (i > 1 && myComparator.compare(array[i / 2], array[i]) < 0) {
+        while (i > 1 && myComparator.compare(array[i / 2], array[i]) > 0) {
             swap(i, i / 2);
             i = i / 2;
         }
@@ -70,9 +70,9 @@ public class PriorityQueue {
         int i = 1;
         
         while (2 * i <= size) {
-            int index = (2 * i + 1 > size || myComparator.compare(array[2 * i], array[2 * i + 1]) > 0) ? 2 * i : 2 * i + 1;
+            int index = (2 * i + 1 > size || myComparator.compare(array[2 * i], array[2 * i + 1]) < 0) ? 2 * i : 2 * i + 1;
 
-            if (myComparator.compare(array[i], array[index]) < 0) {
+            if (myComparator.compare(array[i], array[index]) > 0) {
                 swap(i, index);
                 i = index;
             }
