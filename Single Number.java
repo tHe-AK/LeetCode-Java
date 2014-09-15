@@ -4,9 +4,9 @@ public class Solution {
             throw new IllegalArgumentException();
         }
         
-        int result = A[0];
+        int result = 0;
         
-        for (int i = 1; i < A.length; i++) {
+        for (int i = 0; i < A.length; i++) {
             result ^= A[i];
         }
         
