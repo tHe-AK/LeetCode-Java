@@ -1,8 +1,8 @@
 public class PriorityQueue {
-    int[] array;
-    int capacity;
-    int size;
-    MyComparator myComparator;
+    private int[] array;
+    private int capacity;
+    private int size;
+    private MyComparator myComparator;
     
     public PriorityQueue(int capacity) {
         this.capacity = capacity;
