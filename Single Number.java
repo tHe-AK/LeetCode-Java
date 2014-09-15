@@ -1,14 +1,15 @@
 public class Solution {
     public int singleNumber(int[] A) {
-        if (A.length == 0) {
+        if (A == null || A.length == 0) {
             throw new IllegalArgumentException();
         }
         
-        int cur = 0;
-        for (int i = 0; i < A.length; i++) {
-            cur ^= A[i];
+        int result = A[0];
+        
+        for (int i = 1; i < A.length; i++) {
+            result ^= A[i];
         }
         
-        return cur;
+        return result;
     }
 }
