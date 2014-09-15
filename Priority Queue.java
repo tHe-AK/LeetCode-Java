@@ -81,4 +81,10 @@ public class PriorityQueue {
             }
         }
     }
+    
+    private void swap(int i, int j) {
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
 }
