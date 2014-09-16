@@ -9,11 +9,11 @@ public class Solution {
         int i = 1;
         
         while (i < num.length) {
-            if (num[i] != candidate) {
-                count--;
+            if (num[i] == candidate) {
+                count++;
             }
             else {
-                count++;
+                count--;
             }
             
             i++;
