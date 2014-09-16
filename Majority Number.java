@@ -4,7 +4,7 @@ public class Solution {
             throw new IllegalArgumentException();
         }
         
-        int candidate = num[0];
+        Integer candidate = num[0];
         int count = 1;
         int i = 1;
         
@@ -20,13 +20,19 @@ public class Solution {
             
             if (count == 0) {
                 if (i >= num.length) {
-                    throw new RuntimeException("Does not exist.");
+                    candidate = null;
+                    break;
                 }
-                
-                candidate = num[i];
-                count = 1;
-                i++;
+                else {
+                    candidate = num[i];
+                    count = 1;
+                    i++;
+                }
             }
+        }
+        
+        if (candidate == null) {
+            throw new RuntimeException("Input is not valid.");
         }
         
         return candidate;
