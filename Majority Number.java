@@ -4,37 +4,40 @@ public class Solution {
             throw new IllegalArgumentException();
         }
         
-        Integer candidate = num[0];
-        int count = 1;
-        int i = 1;
+        Integer candidate = null;
+        int count = 0;
         
-        while (i < num.length) {
-            if (num[i] == candidate) {
+        for (int i = 0; i < num.length; i++) {
+            if (candidate == null) {
+                candidate = num[i];
+                count = 1;
+            }
+            else if (candidate == num[i]) {
                 count++;
             }
             else {
                 count--;
-            }
-            
-            i++;
-            
-            if (count == 0) {
-                if (i >= num.length) {
+                
+                if (count == 0) {
                     candidate = null;
-                    break;
-                }
-                else {
-                    candidate = num[i];
-                    count = 1;
-                    i++;
                 }
             }
         }
         
-        if (candidate == null) {
-            throw new RuntimeException("Input is not valid.");
+        if (candidate != null) {
+            count = 0;
+            
+            for (int i = 0; i < num.length; i++) {
+                if (num[i] == candidate) {
+                    count++;
+                }
+            }
+            
+            if (count > num.length / 2) {
+                return candidate;
+            }
         }
         
-        return candidate;
+        throw new RuntimeException("Input is not valid.");
     }
 }
