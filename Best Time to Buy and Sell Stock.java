@@ -4,12 +4,16 @@ public class Solution {
             throw new IllegalArgumentException();
         }
         
-        int profit = 0;
-        int low = Integer.MAX_VALUE;
+        if (prices.length == 0) {
+            return 0;
+        }
         
-        for (int i = 0; i < prices.length; i++) {
-            low = Math.min(low, prices[i]);
+        int profit = 0;
+        int low = prices[0];
+        
+        for (int i = 1; i < prices.length; i++) {
             profit = Math.max(profit, prices[i] - low);
+            low = Math.min(low, prices[i]);
         }
         
         return profit;
