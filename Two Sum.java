@@ -13,9 +13,8 @@ public class Solution {
                 result[1] = i + 1;
                 return result;
             }
-            else {
-                rec.put(numbers[i], i);
-            }
+            
+            rec.put(numbers[i], i);
         }
         
         return null;
