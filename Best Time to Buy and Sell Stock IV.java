@@ -28,7 +28,7 @@ public class Solution {
                 } else {
                     int profit = 0;
 
-                    for (int k = i + 1; k < j; k++) {
+                    for (int k = i; k < j; k++) {
                         profit = Math.max(profit, result[i - 1][k] + rec[k][j]);
                     }
 
