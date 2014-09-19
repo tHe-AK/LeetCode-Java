@@ -22,7 +22,7 @@ public class Solution {
         }
         
         for (int i = 0; i < count; i++) {
-            for (int j = 0; j < len; j++) {
+            for (int j = i; j < len; j++) {
                 if (i == 0) {
                     result[i][j] = rec[0][j];
                 }
