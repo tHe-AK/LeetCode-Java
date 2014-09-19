@@ -4,7 +4,7 @@ public class Solution {
             throw new IllegalArgumentException();
         }
         
-        if (prices.length == 0) {
+        if (prices.length == 0 || prices.length == 1) {
             return 0;
         }
         
