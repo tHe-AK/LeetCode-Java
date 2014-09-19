@@ -5,7 +5,7 @@ public class Solution {
         }
         
         int[] result = new int[2];
-        SortedMap<Integer, Integer> rec = new TreeMap<Integer, Integer>();
+        TreeMap<Integer, Integer> rec = new TreeMap<Integer, Integer>();
         int sum = 0;
         rec.put(sum, -1);
         
