@@ -9,7 +9,7 @@ public class Solution {
         
         for (int i = 1; i < A.length; i++) {
             cur = Math.min(cur + A[i], A[i]);
-            min = Math.min(max, cur);
+            min = Math.min(min, cur);
         }
         
         return min;
