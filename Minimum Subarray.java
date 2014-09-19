@@ -1,5 +1,5 @@
 public class Solution {
-    public int maxSubArray(int[] A) {
+    public int minSubArray(int[] A) {
         if (A == null || A.length == 0) {
             throw new IllegalArgumentException();
         }
