@@ -1,33 +1,51 @@
 public class Solution {
-    public int threeSumClosest(int[] num, int target) {
-        int len = num.length;
-        if (len < 3) {
-            return target;
+    public List<List<Integer>> threeSum(int[] num) {
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        
+        if (num == null || num.length < 3) {
+            return result;
         }
         
         Arrays.sort(num);
-        int max = num[0] + num[1] + num[2];
-        for (int i = 0; i < len - 2; i++) {
-            int start = i + 1;
-            int end = len - 1;
-            while (start < end) {
-                int sum = num[i] + num[start] + num[end];
+        
+        for (int i = 0; i < num.length - 2; i++) {
+            if (i != 0 && num[i] == num[i - 1]) {
+                continue;
+            }
+            
+            int target = -num[i];
+            int left = i + 1;
+            int right = num.length - 1;
+            
+            while (left < right) {
+                int sum = num[left] + num[right];
                 if (sum == target) {
-                    return sum;
+                    List<Integer> tuple = new ArrayList<Integer>();
+                    tuple.add(num[i]);
+                    tuple.add(num[left]);
+                    tuple.add(num[right]);
+                    result.add(tuple);
+                    
+                    left++;
+                    right--;
+                    
+                    while (left < right && num[left] == num[left - 1]) {
+                        left++;
+                    }
+                    
+                    while (left < right && num[right] == num[right + 1]) {
+                        right--;
+                    }
                 }
                 else if (sum < target) {
-                    start++;
+                    left++;
                 }
                 else {
-                    end--;
-                }
-                
-                if (Math.abs(target - sum) < Math.abs(target - max)) {
-                    max = sum;
+                    right--;
                 }
             }
         }
         
-        return max;
+        return result;
     }
 }
