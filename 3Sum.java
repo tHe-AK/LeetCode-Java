@@ -19,6 +19,7 @@ public class Solution {
             
             while (left < right) {
                 int sum = num[left] + num[right];
+                
                 if (sum == target) {
                     List<Integer> tuple = new ArrayList<Integer>();
                     tuple.add(num[i]);
