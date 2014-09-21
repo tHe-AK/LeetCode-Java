@@ -23,6 +23,10 @@ public class Solution {
         
         for (int i = 0; i < k; i++) {
             for (int j = i; j < len; j++) {
+                if (j != len - 1 && num[j] == num[j + 1]) {
+                    continue;
+                }
+                
                 if (i == 0) {
                     rec[i][j][num[j] - minK] = 1;
                 }
