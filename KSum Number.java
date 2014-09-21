@@ -1,56 +1,43 @@
 public class Solution {
-    public int kSumNum(int[] num, int target, int k) {
-        int[] result = new int[1];
-        
-        if (num == null || num.length < k) {
-            return result[0];
+    public int kSumNum(int[] num, int k, int target) {
+        if (num == null || num.length == 0 || k < 1 || k > num.length) {
+            return 0;
         }
         
         Arrays.sort(num);
+        int len = num.length;
+        int minK = 0;
+        int maxK = 0;
         
-        helper(num, target, k, 0, result);
-        
-        return result[0];
-    }
-    
-    private void helper(int[] num, int target, int k, int start, int[] result) {
-        if (k > 2) {
-            for (int i = start; i < num.length - k + 1; i++) {
-                if (i != start && num[i] == num[i - 1]) {
-                    continue;
-                }
-                
-                helper(num, target - num[i], k - 1, i + 1, result);
-            }
+        for (int i = 0; i < k; i++) {
+            minK += num[i];
+            maxK += num[len - i - 1];
         }
-        else {
-            int left = start;
-            int right = num.length - 1;
-                
-            while (left < right) {
-                int sum = num[left] + num[right];
-                    
-                if (sum == target) {
-                    result[0]++;
-                        
-                    left++;
-                    right--;
-                        
-                    while (left < right && num[left] == num[left - 1]) {
-                        left++;
-                    }
-                        
-                    while (left < right && num[right] == num[right + 1]) {
-                        right--;
-                    }
-                }
-                else if (sum < target) {
-                    left++;
+        
+        if (target < minK || target > maxK) {
+            return 0;
+        }
+        
+        int range = maxK - minK + 1;
+        int[][][] rec = new int[k][len][range];
+        
+        for (int i = 0; i < k; i++) {
+            for (int j = i; j < len; j++) {
+                if (i == 0) {
+                    rec[i][j][num[j] - minK] = 1;
                 }
                 else {
-                    right--;
+                    for (int l = 0; l < j; l++) {
+                        for (int t = 0; t < range; t++) {
+                            if (rec[i - 1][l][t] > 0) {
+                                rec[i][j][t + num[j]] += rec[i - 1][l][t];
+                            }
+                        }
+                    }
                 }
             }
         }
+        
+        return rec[k - 1][len - 1][target - minK];
     }
 }
