@@ -1,24 +1,30 @@
-class Solution {
-public:
-    void sortColors(int A[], int n) {
-        if (n <= 1) {
+public class Solution {
+    public void sortColors(int[] A) {
+        if (A == null || A.length <= 1) {
             return;
         }
         
-        int r = 0;
-        int w = 0;
-        int b = n - 1;
+        int low = 0;
+        int high = A.length - 1;
+        int cur = 0;
         
-        while (w <= b) {
-            if (A[w] == 0) {
-                swap(A[w++], A[r++]);
+        while (cur <= high) {
+            if (A[cur] == 0) {
+                int temp = A[cur];
+                A[cur] = A[low];
+                A[low] = temp;
+                low++;
+                cur++;
             }
-            else if (A[w] == 2) {
-                swap(A[w], A[b--]);
+            else if (A[cur] == 2) {
+                int temp = A[cur];
+                A[cur] = A[high];
+                A[high] = temp;
+                high--;
             }
             else {
-                w++;
+                cur++;
             }
         }
     }
-};
+}
