@@ -1,15 +1,14 @@
 public class Solution {
     public int search(int[] A, int target) {
-        if (A == null || A.length == 0) {
-            return -1;
+        if (A == null) {
+            throw new IllegalArgumentException();
         }
         
         int low = 0;
         int high = A.length - 1;
-        int mid;
         
         while (low <= high) {
-            mid = low + (high - low) / 2;
+            int mid = low + (high - low) / 2;
             
             if (A[mid] == target) {
                 return mid;
