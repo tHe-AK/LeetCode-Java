@@ -1,12 +1,11 @@
 public class Solution {
     public List<List<Integer>> fourSum(int[] num, int target) {
-        List<List<Integer>> result = new ArrayList<List<Integer>>();
-        
-        if (num == null || num.length < 4) {
-            return result;
+        if (num == null) {
+            throw new IllegalArgumentException();
         }
         
         Arrays.sort(num);
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
         
         for (int i = 0; i < num.length - 3; i++) {
             if (i != 0 && num[i] == num[i - 1]) {
@@ -18,37 +17,36 @@ public class Solution {
                     continue;
                 }
                 
-                int diff = target - num[i] - num[j];
-                int left = j + 1;
-                int right = num.length - 1;
+                int low = j + 1;
+                int high = num.length - 1;
                 
-                while (left < right) {
-                    int sum = num[left] + num[right];
+                while (low < high) {
+                    int sum = num[i] + num[j] + num[low] + num[high];
                     
-                    if (sum == diff) {
+                    if (sum == target) {
                         List<Integer> cur = new ArrayList<Integer>();
                         cur.add(num[i]);
                         cur.add(num[j]);
-                        cur.add(num[left]);
-                        cur.add(num[right]);
+                        cur.add(num[low]);
+                        cur.add(num[high]);
                         result.add(cur);
                         
-                        left++;
-                        right--;
+                        low++;
+                        high--;
                         
-                        while (left < right && num[left] == num[left - 1]) {
-                            left++;
+                        while (low < high && num[low] == num[low - 1]) {
+                            low++;
                         }
                         
-                        while (left < right && num[right] == num[right + 1]) {
-                            right--;
+                        while (low < high && num[high] == num[high + 1]) {
+                            high--;
                         }
                     }
-                    else if (sum < diff) {
-                        left++;
+                    else if (sum < target) {
+                        low++;
                     }
                     else {
-                        right--;
+                        high--;
                     }
                 }
             }

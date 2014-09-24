@@ -1,6 +1,6 @@
 public class Solution {
     public int[] twoSum(int[] numbers, int target) {
-        if (numbers == null || numbers.length <= 1) {
+        if (numbers == null) {
             throw new IllegalArgumentException();
         }
         
@@ -11,12 +11,13 @@ public class Solution {
             if (rec.containsKey(target - numbers[i])) {
                 result[0] = rec.get(target - numbers[i]) + 1;
                 result[1] = i + 1;
+                
                 return result;
             }
             
             rec.put(numbers[i], i);
         }
         
-        return null;
+        return result;
     }
 }

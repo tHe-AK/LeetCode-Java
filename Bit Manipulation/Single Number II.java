@@ -4,10 +4,16 @@ public class Solution {
             throw new IllegalArgumentException();
         }
         
+        int[] rec = new int[32];
         int result = 0;
         
-        for (int i = 0; i < A.length; i++) {
-            result ^= A[i];
+        for (int i = 0; i < 32; i++) {
+            for (int j = 0; j < A.length; j++) {
+                rec[i] += A[j] >> i & 1;
+                rec[i] %= 3;
+            }
+            
+            result |= rec[i] << i;
         }
         
         return result;
