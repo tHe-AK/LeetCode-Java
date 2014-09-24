@@ -11,19 +11,21 @@
  */
 public class Solution {
     public ListNode removeNthFromEnd(ListNode head, int n) {
+        if (n <= 0) {
+            throw new IllegalArgumentException();
+        }
+        
         if (head == null) {
             return head;
         }
         
-        ListNode slow = head;
-        ListNode fast = head;
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode slow = dummy;
+        ListNode fast = dummy;
         
         for (int i = 1; i <= n; i++) {
             fast = fast.next;
-        }
-        
-        if (fast == null) {
-            return head.next;
         }
         
         while (fast.next != null) {
@@ -33,6 +35,6 @@ public class Solution {
         
         slow.next = slow.next.next;
         
-        return head;
+        return dummy.next;
     }
 }

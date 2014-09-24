@@ -13,36 +13,33 @@ public class Solution {
         }
         
         RandomListNode cur = head;
-        RandomListNode copy;
         
         while (cur != null) {
-            copy = new RandomListNode(cur.label);
+            RandomListNode copy = new RandomListNode(cur.label);
             copy.next = cur.next;
             cur.next = copy;
-            cur = cur.next.next;
+            cur = copy.next;
         }
         
         cur = head;
         
         while (cur != null) {
+            RandomListNode copy = cur.next;
             if (cur.random != null) {
-                cur.next.random = cur.random.next;
+                copy.random = cur.random.next;
             }
-            
-            cur = cur.next.next;
+            cur = copy.next;
         }
         
-        cur = head;
-        RandomListNode start = cur.next;
-
-        while (cur != null) {
-            copy = cur.next;
-            cur.next = cur.next.next;
-            
+        RandomListNode start = head.next;
+        cur = start;
+        
+        while (head != null) {
+            head.next = head.next.next;
             if (cur.next != null) {
-                copy.next = cur.next.next;
+                cur.next = cur.next.next;
             }
-            
+            head = head.next;
             cur = cur.next;
         }
         

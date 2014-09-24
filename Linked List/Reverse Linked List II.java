@@ -17,19 +17,20 @@ public class Solution {
         
         ListNode dummy = new ListNode(0);
         dummy.next = head;
-        ListNode cur = dummy;
+        head = dummy;
         
         for (int i = 1; i < m; i++) {
-            cur = cur.next;
+            head = head.next;
         }
         
-        ListNode end = cur.next;
-        ListNode start;
+        ListNode pre = head.next;
+        ListNode cur = head.next.next;
+        
         for (int i = 1; i <= n - m; i++) {
-            start = cur.next;
-            cur.next = end.next;
-            end.next = cur.next.next;
-            cur.next.next = start;
+            pre.next = cur.next;
+            cur.next = head.next;
+            head.next = cur;
+            cur = pre.next;
         }
         
         return dummy.next;

@@ -19,11 +19,11 @@ public class Solution {
             return l1;
         }
         
-        int carry = 0;
         ListNode dummy = new ListNode(0);
-        ListNode cur = dummy;
+        ListNode head = dummy;
+        int carry = 0;
         
-        while (carry > 0 || l1 != null || l2 != null) {
+        while (l1 != null || l2 != null || carry != 0) {
             if (l1 != null) {
                 carry += l1.val;
                 l1 = l1.next;
@@ -34,9 +34,9 @@ public class Solution {
                 l2 = l2.next;
             }
             
-            ListNode temp = new ListNode(carry % 10);
-            cur.next = temp;
-            cur = temp;
+            ListNode cur = new ListNode(carry % 10);
+            head.next = cur;
+            head = cur;
             
             carry /= 10;
         }
