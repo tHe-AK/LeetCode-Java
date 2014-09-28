@@ -10,6 +10,7 @@
 public class Solution {
     public List<Integer> postorderTraversal(TreeNode root) {
         List<Integer> result = new ArrayList<Integer>();
+        
         if (root == null) {
             return result;
         }
@@ -20,15 +21,16 @@ public class Solution {
         
         while (cur != null || !stack.empty()) {
             if (cur != null) {
-                stack.push(cur);
+                stack.add(cur);
                 cur = cur.left;
             }
             else if (stack.peek().right != null && stack.peek().right != pre) {
                 cur = stack.peek().right;
             }
             else {
-                pre = stack.pop();
-                result.add(pre.val);
+                TreeNode peek = stack.pop();
+                result.add(peek.val);
+                pre = peek;
                 cur = null;
             }
         }

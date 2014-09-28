@@ -20,11 +20,11 @@ public class Solution {
         if (left == null && right == null) {
             return true;
         }
-        else if (left != null && right != null && left.val == right.val && helper(left.left, right.right) && helper(left.right, right.left)) {
-            return true;
+        else if (left == null || right == null) {
+            return false;
         }
         else {
-            return false;
+            return left.val == right.val && helper(left.left, right.right) && helper(left.right, right.left);
         }
     }
 }
@@ -44,26 +44,29 @@ public class Solution {
             return true;
         }
         
-        Queue<TreeNode> q1 = new LinkedList<TreeNode>();
-        Queue<TreeNode> q2 = new LinkedList<TreeNode>();
-        q1.add(root.left);
-        q2.add(root.right);
+        Queue<TreeNode> queue1 = new LinkedList<TreeNode>();
+        Queue<TreeNode> queue2 = new LinkedList<TreeNode>();
+        queue1.offer(root.left);
+        queue2.offer(root.right);
         
-        while (q1.isEmpty() == false) {
-            TreeNode cur1 = q1.remove();
-            TreeNode cur2 = q2.remove();
+        while (!queue1.isEmpty() && !queue2.isEmpty()) {
+            TreeNode peek1 = queue1.poll();
+            TreeNode peek2 = queue2.poll();
             
-            if (cur1 == null && cur2 == null) {
+            if (peek1 == null && peek2 == null) {
                 continue;
             }
-            else if (cur1 != null && cur2 != null && cur1.val == cur2.val) {
-                q1.add(cur1.left);
-                q2.add(cur2.right);
-                q1.add(cur1.right);
-                q2.add(cur2.left);
+            else if (peek1 == null || peek2 == null) {
+                return false;
+            }
+            else if (peek1.val != peek2.val) {
+                return false;
             }
             else {
-                return false;
+                queue1.add(peek1.left);
+                queue1.add(peek1.right);
+                queue2.add(peek2.right);
+                queue2.add(peek2.left);
             }
         }
         
