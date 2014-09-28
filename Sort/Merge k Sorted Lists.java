@@ -17,30 +17,31 @@ public class Solution {
     }
     
     public ListNode mergeKLists(List<ListNode> lists) {
-        if (lists == null || lists.size() == 0) {
+        if (lists == null || lists.isEmpty()) {
             return null;
         }
         
-        Queue<ListNode> heap = new PriorityQueue<ListNode>(lists.size(), new MyComparator());
+        int size = lists.size();
+        PriorityQueue<ListNode> queue = new PriorityQueue<ListNode>(size, new MyComparator());
+        ListNode dummy = new ListNode(0);
+        ListNode head = dummy;
         
-        for (int i = 0; i < lists.size(); i++) {
-            if (lists.get(i) != null) {
-                heap.offer(lists.get(i));
+        for (int i = 0; i < size; i++) {
+            ListNode first = lists.get(i);
+            
+            if (first != null) {
+                queue.offer(first);
             }
         }
         
-        ListNode dummy = new ListNode(0);
-        ListNode cur = dummy;
-        
-        while (!heap.isEmpty()) {
-            ListNode peek = heap.poll();
+        while (!queue.isEmpty()) {
+            ListNode peek = queue.poll();
+            head.next = peek;
+            head = head.next;
             
             if (peek.next != null) {
-                heap.offer(peek.next);
+                queue.offer(peek.next);
             }
-            
-            cur.next = peek;
-            cur = cur.next;
         }
         
         return dummy.next;
