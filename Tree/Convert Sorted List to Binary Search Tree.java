@@ -21,13 +21,13 @@ public class Solution {
             return null;
         }
         
-        int len = 0;
         ListNode cur = head;
+        int len = 0;
         
         while (cur != null) {
             len++;
             cur = cur.next;
-        } 
+        }
         
         ListNode[] rec = new ListNode[1];
         rec[0] = head;
@@ -39,17 +39,18 @@ public class Solution {
         if (start > end) {
             return null;
         }
-
+        
         int mid = start + (end - start) / 2;
-            
+        
         TreeNode left = helper(start, mid - 1, rec);
-            
+        
         TreeNode root = new TreeNode(rec[0].val);
         root.left = left;
         rec[0] = rec[0].next;
-            
-        root.right = helper(mid + 1, end, rec);
-            
+        
+        TreeNode right = helper(mid + 1, end, rec);
+        root.right = right;
+        
         return root;
     }
 }

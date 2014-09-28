@@ -12,35 +12,44 @@ public class Solution {
             return;
         }
         
-        TreeLinkNode start = root;
-        while (start != null) {
-            TreeLinkNode cur = start;
+        while (root != null) {
+            TreeLinkNode cur = root;
             TreeLinkNode pre = null;
-            TreeLinkNode next = null;
+            TreeLinkNode first = null;
             
             while (cur != null) {
                 if (cur.left != null) {
-                    if (next == null) {
-                        next = cur.left;
+                    if (first == null) {
+                        first = cur.left;
                     }
-                    if (pre != null) {
+                    
+                    if (pre == null) {
+                        pre = cur.left;
+                    }
+                    else {
                         pre.next = cur.left;
+                        pre = pre.next;
                     }
-                    pre = cur.left;
                 }
+                
                 if (cur.right != null) {
-                    if (next == null) {
-                        next = cur.right;
+                    if (first == null) {
+                        first = cur.right;
                     }
-                    if (pre != null) {
+                    
+                    if (pre == null) {
+                        pre = cur.right;
+                    }
+                    else {
                         pre.next = cur.right;
+                        pre = pre.next;
                     }
-                    pre = cur.right;
                 }
+                
                 cur = cur.next;
             }
             
-            start = next;
+            root = first;
         }
     }
 }

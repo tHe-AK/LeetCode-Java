@@ -13,9 +13,7 @@ public class Solution {
             return true;
         }
         
-        TreeNode[] pre = new TreeNode[1];
-        
-        return helper(root, pre);
+        return helper(root, new TreeNode[1]);
     }
     
     private boolean helper(TreeNode root, TreeNode[] pre) {
@@ -27,7 +25,7 @@ public class Solution {
             return false;
         }
         
-        if (pre[0] != null && root.val <= pre[0].val) {
+        if (pre[0] != null && pre[0].val >= root.val) {
             return false;
         }
         pre[0] = root;
