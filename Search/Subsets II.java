@@ -1,11 +1,12 @@
 public class Solution {
     public List<List<Integer>> subsetsWithDup(int[] num) {
-        if (num == null || num.length == 0) {
-            return null;
+        if (num == null) {
+            throw new IllegalArgumentException();
         }
         
         Arrays.sort(num);
         List<List<Integer>> result = new ArrayList<List<Integer>>();
+
         helper(num, 0, new ArrayList<Integer>(), result);
         
         return result;
@@ -15,7 +16,7 @@ public class Solution {
         result.add(new ArrayList<Integer>(cur));
         
         for (int i = start; i < num.length; i++) {
-            if (i != start && num[i - 1] == num[i]) {
+            if (i != start && num[i] == num[i - 1]) {
                 continue;
             }
             

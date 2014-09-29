@@ -1,9 +1,10 @@
 public class Solution {
     public List<String> letterCombinations(String digits) {
         if (digits == null) {
-            return null;
+            throw new IllegalArgumentException();
         }
         
+        List<String> result = new ArrayList<String>();
         HashMap<Character, String> rec = new HashMap<Character, String>();
         rec.put('1', "");
         rec.put('2', "abc");
@@ -16,21 +17,21 @@ public class Solution {
         rec.put('9', "wxyz");
         rec.put('0', " ");
         
-        List<String> result = new ArrayList<String>();
-        helper(digits, 0, rec, "", result);
+        helper(digits, rec, 0, "", result);
         
         return result;
     }
     
-    private void helper(String digits, int index, HashMap<Character, String> rec, String cur, List<String> result) {
-        if (index == digits.length()) {
-            result.add(cur.toString());
+    private void helper(String digits, HashMap<Character, String> rec, int start, String cur, List<String> result) {
+        if (start == digits.length()) {
+            result.add(cur);
             return;
         }
         
-        String value = rec.get(digits.charAt(index));
+        String value = rec.get(digits.charAt(start));
+        
         for (int i = 0; i < value.length(); i++) {
-            helper(digits, index + 1, rec, cur + value.charAt(i), result);
+            helper(digits, rec, start + 1, cur + value.charAt(i), result);
         }
     }
 }

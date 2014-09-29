@@ -1,10 +1,11 @@
 public class Solution {
     public List<List<Integer>> combine(int n, int k) {
-        if (n < 1 || k < 1 || k > n) {
-            return null;
+        if (n < 0 || k < 0) {
+            throw new IllegalArgumentException();
         }
         
         List<List<Integer>> result = new ArrayList<List<Integer>>();
+        
         helper(n, k, 1, new ArrayList<Integer>(), result);
         
         return result;
