@@ -1,7 +1,7 @@
 public class Solution {
     public void sortColors(int[] A) {
-        if (A == null || A.length <= 1) {
-            return;
+        if (A == null) {
+            throw new IllegalArgumentException();
         }
         
         int low = 0;

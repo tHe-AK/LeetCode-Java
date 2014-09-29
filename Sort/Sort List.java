@@ -17,6 +17,7 @@ public class Solution {
         
         ListNode slow = head;
         ListNode fast = head;
+        
         while (fast.next != null && fast.next.next != null) {
             slow = slow.next;
             fast = fast.next.next;
@@ -33,13 +34,13 @@ public class Solution {
             if (left.val < right.val) {
                 cur.next = left;
                 left = left.next;
+                cur = cur.next;
             }
             else {
                 cur.next = right;
                 right = right.next;
+                cur = cur.next;
             }
-            
-            cur = cur.next;
         }
         
         if (left != null) {

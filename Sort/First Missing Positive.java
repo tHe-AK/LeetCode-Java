@@ -1,24 +1,25 @@
 public class Solution {
     public int firstMissingPositive(int[] A) {
-        int len = A.length;
-        if (len == 0) {
-            return 1;
+        if (A == null) {
+            throw new IllegalArgumentException();
         }
         
-        for (int i = 0; i < len; i++) {
-            while (A[i] - 1 >= 0 && A[i] - 1 < len && A[A[i] - 1] != A[i]) {
+        for (int i = 0; i < A.length; i++) {
+            while (A[i] > 0 && A[i] != i + 1 && A[i] - 1 < A.length && A[A[i] - 1] != A[i]) {
                 int temp = A[A[i] - 1];
                 A[A[i] - 1] = A[i];
                 A[i] = temp;
             }
         }
         
-        for (int i = 0; i < len; i++) {
+        int i = 0;
+        
+        for (i = 0; i < A.length; i++) {
             if (A[i] != i + 1) {
                 return i + 1;
             }
         }
         
-        return len + 1;
+        return i + 1;
     }
 }
