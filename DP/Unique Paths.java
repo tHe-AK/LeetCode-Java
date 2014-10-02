@@ -1,7 +1,7 @@
 public class Solution {
     public int uniquePaths(int m, int n) {
         if (m <= 0 || n <= 0) {
-            return 0;
+            throw new IllegalArgumentException();
         }
         
         int[][] rec = new int[m][n];
@@ -12,7 +12,7 @@ public class Solution {
                     rec[i][j] = 1;
                 }
                 else {
-                    rec[i][j] = rec[i - 1][j] + rec[i][j - 1];
+                    rec[i][j] = rec[i][j - 1] + rec[i - 1][j];
                 }
             }
         }

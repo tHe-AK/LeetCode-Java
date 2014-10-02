@@ -6,6 +6,37 @@ public class Solution {
         
         Arrays.sort(num);
         List<List<Integer>> result = new ArrayList<List<Integer>>();
+        result.add(new ArrayList<Integer>());
+        int sizePre = 0;
+        
+        for (int i = 0; i < num.length; i++) {
+            int size = result.size();
+            
+            for (int j = 0; j < size; j++) {
+                if (i > 0 && num[i] == num[i - 1] && j < sizePre) {
+                    continue;
+                }
+                
+                List<Integer> cur = new ArrayList(result.get(j));
+                cur.add(num[i]);
+                result.add(cur);
+            }
+            
+            sizePre = size;
+        }
+        
+        return result;
+    }
+}
+
+public class Solution {
+    public List<List<Integer>> subsetsWithDup(int[] num) {
+        if (num == null) {
+            throw new IllegalArgumentException();
+        }
+        
+        Arrays.sort(num);
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
 
         helper(num, 0, new ArrayList<Integer>(), result);
         

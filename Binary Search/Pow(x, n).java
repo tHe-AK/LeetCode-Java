@@ -4,16 +4,16 @@ public class Solution {
             return 1;
         }
         
-        double cur = pow(x, n / 2);
+        double half = pow(x, n / 2);
         
         if (n % 2 == 0) {
-            return cur * cur;
+            return half * half;
         }
         else if (n > 0) {
-            return cur * cur * x;
+            return half * half * x;
         }
         else {
-            return cur * cur / x;
+            return half * half / x;
         }
     }
 }

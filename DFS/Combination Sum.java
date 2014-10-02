@@ -1,11 +1,12 @@
 public class Solution {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        if (candidates == null || candidates.length == 0 || target < 1) {
-            return null;
+        if (candidates == null) {
+            throw new IllegalArgumentException();
         }
         
         Arrays.sort(candidates);
         List<List<Integer>> result = new ArrayList<List<Integer>>();
+        
         helper(candidates, target, 0, new ArrayList<Integer>(), result);
         
         return result;
