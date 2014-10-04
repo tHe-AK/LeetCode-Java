@@ -1,7 +1,7 @@
 public class Solution {
     public int numDecodings(String s) {
-        if (s == null || s.length() == 0) {
-            return 0;
+        if (s == null) {
+            throw new IllegalArgumentException();
         }
         
         int pre1 = 1;
@@ -11,12 +11,12 @@ public class Solution {
         for (int i = 0; i < s.length(); i++) {
             cur = 0;
             
-            if (i >= 1 && (s.charAt(i - 1) == '1' || (s.charAt(i - 1) == '2' && s.charAt(i) >= '0' && s.charAt(i) <= '6'))) {
-                cur += pre1;
-            }
-            
             if (s.charAt(i) != '0') {
                 cur += pre2;
+            }
+            
+            if (i > 0 && (s.charAt(i - 1) == '1' || (s.charAt(i - 1) == '2' && s.charAt(i) <= '6'))) {
+                cur += pre1;
             }
             
             pre1 = pre2;

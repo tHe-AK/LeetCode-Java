@@ -5,11 +5,11 @@ public class Solution {
         }
         
         int profit = 0;
-        
-        for (int i = 0; i < prices.length - 1; i++) {
-            if (prices[i] < prices[i + 1]) {
-                profit += prices[i + 1] - prices[i];
-            }
+        int min = Integer.MAX_VALUE;
+
+        for (int i = 0; i < prices.length; i++) {
+            min = Math.min(min, prices[i]);
+            profit = Math.max(profit, prices[i] - min);
         }
         
         return profit;

@@ -4,8 +4,8 @@ public class Solution {
             throw new IllegalArgumentException();
         }
         
+        int max = A[0];
         int cur = A[0];
-        int max = cur;
         
         for (int i = 1; i < A.length; i++) {
             cur = Math.max(cur + A[i], A[i]);

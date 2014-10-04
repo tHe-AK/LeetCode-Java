@@ -4,16 +4,12 @@ public class Solution {
             throw new IllegalArgumentException();
         }
         
-        int max = A[0];
-        int cur = 0;
         int step = 0;
+        int cur = 0;
+        int max = 0;
         
-        for (int i = 1; i < A.length; i++) {
-            if (max < i) {
-                return -1;
-            }
-            
-            if (cur < i) {
+        for (int i = 0; i < A.length; i++) {
+            if (i > cur) {
                 cur = max;
                 step++;
             }

@@ -4,18 +4,14 @@ public class Solution {
             throw new IllegalArgumentException();
         }
         
-        int[] rec = new int[triangle.size()];
+        List<Integer> result = triangle.get(triangle.size() - 1);
         
-        for (int i = triangle.size() - 1; i >= 0; i--) {
+        for (int i = triangle.size() - 2; i >= 0; i--) {
             for (int j = 0; j < triangle.get(i).size(); j++) {
-                rec[j] += triangle.get(i).get(j);
-                
-                if (j > 0) {
-                    rec[j - 1] = Math.min(rec[j - 1], rec[j]);
-                }
+                result.set(j, triangle.get(i).get(j) + Math.min(result.get(j), result.get(j + 1)));
             }
         }
         
-        return rec[0];
+        return result.get(0);
     }
 }

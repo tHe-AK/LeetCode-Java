@@ -20,7 +20,7 @@ public class Solution {
                     rec[i][j] = rec[i - 1][j - 1];
                 }
                 else {
-                    rec[i][j] = Math.min(rec[i - 1][j - 1], Math.min(rec[i - 1][j], rec[i][j - 1])) + 1;
+                    rec[i][j] = Math.min(Math.min(rec[i][j - 1], rec[i - 1][j]), rec[i - 1][j - 1]) + 1;
                 }
             }
         }

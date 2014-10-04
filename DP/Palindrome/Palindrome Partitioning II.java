@@ -1,38 +1,38 @@
 public class Solution {
     public int minCut(String s) {
-        if (s == null) {
-            return 0;
+        if (s == null || s.length() == 0) {
+            throw new IllegalArgumentException();
         }
         
         int len = s.length();
         boolean[][] rec = new boolean[len][len];
         
         for (int i = 0; i < len; i++) {
-            int left = i;
-            int right = i;
+            int low = i;
+            int high = i;
             
-            while (left >= 0 && right < len && s.charAt(left) == s.charAt(right)) {
-                rec[left][right] = true;
-                left--;
-                right++;
+            while (low >= 0 && high < len && s.charAt(low) == s.charAt(high)) {
+                rec[low][high] = true;
+                low--;
+                high++;
             }
             
-            left = i - 1;
-            right = i;
+            low = i - 1;
+            high = i;
             
-            while (left >= 0 && right < len && s.charAt(left) == s.charAt(right)) {
-                rec[left][right] = true;
-                left--;
-                right++;
+            while (low >= 0 && high < len && s.charAt(low) == s.charAt(high)) {
+                rec[low][high] = true;
+                low--;
+                high++;
             }
         }
         
-        int[] result = new int[len];
+        int[] result = new int[len + 1];
         
         for (int i = 0; i < len; i++) {
             result[i] = i;
         }
-
+        
         for (int i = 0; i < len; i++) {
             for (int j = 0; j <= i; j++) {
                 if (rec[j][i]) {

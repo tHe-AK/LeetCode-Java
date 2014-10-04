@@ -4,10 +4,10 @@ public class Solution {
             throw new IllegalArgumentException();
         }
         
-        int max = A[0];
-
-        for (int i = 1; i < A.length; i++) {
-            if (max < i) {
+        int max = 0;
+        
+        for (int i = 0; i < A.length; i++) {
+            if (i > max) {
                 return false;
             }
             

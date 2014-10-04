@@ -7,11 +7,11 @@ public class Solution {
         HashMap<Integer, Integer> hashMap = new HashMap<Integer, Integer>();
 
         for (int i = 0; i < num.length; i++) {
-            if (hashMap.size() < k - 1 && !hashMap.containsKey(num[i])) {
-                hashMap.put(num[i], 1);
-            }
-            else if (hashMap.containsKey(num[i])) {
+            if (hashMap.containsKey(num[i])) {
                 hashMap.put(num[i], hashMap.get(num[i]) + 1);
+            }
+            else if (hashMap.size() < k - 1) {
+                hashMap.put(num[i], 1);
             }
             else {
                 List<Integer> remove = new ArrayList<Integer>();
