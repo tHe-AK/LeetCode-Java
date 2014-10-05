@@ -4,16 +4,22 @@ public class Solution {
             return false;
         }
         
-        int len = String.valueOf(x).length();
+        int cur = x;
+        int high = 1;
         int low = 1;
-        int high = (int) Math.pow(10, len - 1);
-        
+
+        while (cur / 10 != 0) {
+            high *= 10;
+            cur /= 10;
+        }
+
         while (low < high) {
-            if (x / low % 10 != x / high % 10) {
+            if (x / high % 10 != x / low % 10) {
                 return false;
             }
-            low *= 10;
+            
             high /= 10;
+            low *= 10;
         }
         
         return true;

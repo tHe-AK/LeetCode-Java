@@ -1,55 +1,58 @@
 public class Solution {
     public int[][] generateMatrix(int n) {
         if (n < 0) {
-            return null;
+            throw new IllegalArgumentException();
         }
         
-        int[][] matrix = new int[n][n];
-        
-        if (n == 0) {
-            return matrix;
-        }
-        
-        int count = 1;
+        int[][] rec = new int[n][n];
         int left = 0;
         int right = n - 1;
         int top = 0;
         int bottom = n - 1;
+        int cur = 1;
         
         while (true) {
             if (left > right) {
                 break;
             }
+            
             for (int j = left; j <= right; j++) {
-                matrix[top][j] = count++;
+                rec[top][j] = cur;
+                cur++;
             }
             top++;
             
             if (top > bottom) {
                 break;
             }
+            
             for (int i = top; i <= bottom; i++) {
-                matrix[i][right] = count++;
+                rec[i][right] = cur;
+                cur++;
             }
             right--;
             
             if (left > right) {
                 break;
             }
+            
             for (int j = right; j >= left; j--) {
-                matrix[bottom][j] = count++;
+                rec[bottom][j] = cur;
+                cur++;
             }
             bottom--;
             
             if (top > bottom) {
                 break;
             }
+            
             for (int i = bottom; i >= top; i--) {
-                matrix[i][left] = count++;
+                rec[i][left] = cur;
+                cur++;
             }
             left++;
         }
         
-        return matrix;
+        return rec;
     }
 }

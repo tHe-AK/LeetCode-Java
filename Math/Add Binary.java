@@ -7,7 +7,7 @@ public class Solution {
         int cur1 = a.length() - 1;
         int cur2 = b.length() - 1;
         int carry = 0;
-        String result = new String();
+        String result = "";
         
         while (cur1 >= 0 || cur2 >= 0 || carry > 0) {
             if (cur1 >= 0) {
