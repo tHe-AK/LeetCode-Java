@@ -27,7 +27,7 @@ public class Solution {
             }
         }
         
-        int[] result = new int[len + 1];
+        int[] result = new int[len];
         
         for (int i = 0; i < len; i++) {
             result[i] = i;
