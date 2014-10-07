@@ -13,7 +13,7 @@ public class Solution {
             return true;
         }
         
-        return helper(root) != -1 ? true : false;
+        return helper(root) != -1;
     }
     
     private int helper(TreeNode root) {
