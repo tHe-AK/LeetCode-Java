@@ -1,16 +1,16 @@
 public class Solution {
-    public void sortLetters(char[] array) {
-        if (array == null) {
+    public void sortLetters(char[] chars) {
+        if (chars == null) {
             throw new IllegalArgumentException();
         }
         
         int cur = 0;
         
-        for (int i = 0; i < array.length; i++) {
-            if ('a' <= array[i] && array[i] <= 'z') {
-                char temp = array[i];
-                array[i] = array[cur];
-                array[cur] = temp;
+        for (int i = 0; i < chars.length; i++) {
+            if ('a' <= chars[i] && chars[i] <= 'z') {
+                char temp = chars[i];
+                chars[i] = chars[cur];
+                chars[cur] = temp;
                 cur++;
             }
         }

@@ -1,39 +1,35 @@
 public class Solution {
-    public int majorityNumber(int[] num) {
-        if (num == null || num.length == 0) {
+    public int majorityNumber(ArrayList<Integer> nums) {
+        if (nums == null || nums.size() == 0) {
             throw new IllegalArgumentException();
         }
         
-        Integer candidate = null;
+        int candidate = 0;
         int count = 0;
         
-        for (int i = 0; i < num.length; i++) {
-            if (candidate == null) {
-                candidate = num[i];
+        for (int i = 0; i < nums.size(); i++) {
+            if (count == 0) {
+                candidate = nums.get(i);
                 count = 1;
             }
-            else if (candidate == num[i]) {
+            else if (candidate == nums.get(i)) {
                 count++;
             }
             else {
                 count--;
-                
-                if (count == 0) {
-                    candidate = null;
-                }
             }
         }
         
-        if (candidate != null) {
+        if (count != 0) {
             count = 0;
             
-            for (int i = 0; i < num.length; i++) {
-                if (num[i] == candidate) {
+            for (int i = 0; i < nums.size(); i++) {
+                if (nums.get(i) == candidate) {
                     count++;
                 }
             }
             
-            if (count > num.length / 2) {
+            if (count > nums.size() / 2) {
                 return candidate;
             }
         }
@@ -41,3 +37,4 @@ public class Solution {
         throw new RuntimeException("Input is not valid.");
     }
 }
+

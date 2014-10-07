@@ -12,7 +12,7 @@ public class Solution {
             }
         }
         
-        int i = 0;
+        int i;
         
         for (i = 0; i < A.length; i++) {
             if (A[i] != i + 1) {
