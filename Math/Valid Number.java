@@ -8,15 +8,10 @@ public class Solution {
         int len = s.length();
         boolean num = false;
         boolean sign = false;
-        boolean point = false;
         boolean e = false;
+        boolean point = false;
         
         while (i < len && s.charAt(i) == ' ') {
-            i++;
-        }
-        
-        if (i < len && (s.charAt(i) == '+' || s.charAt(i) == '+')) {
-            sign = true;
             i++;
         }
         
