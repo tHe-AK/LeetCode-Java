@@ -14,17 +14,18 @@ public class Solution {
         else if (j + 1 < p.length() && p.charAt(j + 1) == '*') {
             int k = i;
             
-            while (k < s.length() && (p.charAt(j) == '.' || s.charAt(k) == p.charAt(j))) {
+            while (k < s.length() && (p.charAt(j) == '.' || (s.charAt(k) == p.charAt(j)))) {
                 if (helper(s, k + 1, p, j + 2)) {
                     return true;
                 }
+                
                 k++;
             }
             
             return helper(s, i, p, j + 2);
         }
         else {
-            return i < s.length() && (p.charAt(j) == '.' || s.charAt(i) == p.charAt(j)) && helper(s, i + 1, p, j + 1);
+            return i < s.length() && (p.charAt(j) == '.' || (s.charAt(i) == p.charAt(j))) && helper(s, i + 1, p, j + 1);
         }
     }
 }

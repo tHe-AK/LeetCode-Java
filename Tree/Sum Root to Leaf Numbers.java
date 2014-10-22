@@ -29,6 +29,7 @@ public class Solution {
         
         if (root.left == null && root.right == null) {
             sum[0] += cur;
+            return;
         }
         
         helper(root.left, cur, sum);
