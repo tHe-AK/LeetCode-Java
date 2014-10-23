@@ -28,3 +28,23 @@ public class Solution {
         return high;
     }
 }
+
+public class Solution {
+    public double sqrt(double x, double precision) {
+        double low = 0;
+        double high = x;
+        double mid = low + (high - low) / 2;
+        
+        while (Math.abs(x - mid * mid) > precision) {
+            if (mid * mid < x) {
+                low = mid;
+            }
+            else {
+                high = mid;
+            }
+            
+            mid = low + (high - low) / 2;
+        }
+        
+        return mid;
+    }
