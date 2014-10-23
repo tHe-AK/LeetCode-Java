@@ -31,8 +31,22 @@ public class Solution {
 
 public class Solution {
     public double sqrt(double x, double precision) {
-        double low = 0;
-        double high = x;
+        if (x < 0) {
+            throw new IllegalArgumentException();
+        }
+        
+        double low;
+        double high;
+        
+        if (x < 1) {
+            low = x;
+            high = 1;
+        }
+        else {
+            low = 1;
+            high = x;
+        }
+        
         double mid = low + (high - low) / 2;
         
         while (Math.abs(x - mid * mid) > precision) {
@@ -48,3 +62,4 @@ public class Solution {
         
         return mid;
     }
+}
