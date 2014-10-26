@@ -1,6 +1,6 @@
 public class Solution {
     public int evalRPN(String[] tokens) {
-        if (tokens == null || tokens.length < 3) {
+        if (tokens == null || tokens.length < 1) {
             throw new IllegalArgumentException();
         }
         

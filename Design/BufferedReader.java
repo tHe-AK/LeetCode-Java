@@ -1,4 +1,4 @@
-public class GenericReader {
+public class BufferedReader {
 	private String rec;
 	private int cur;
 

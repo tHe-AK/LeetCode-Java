@@ -31,6 +31,7 @@ public class Solution {
                     if (sq[i / 3 * 3 + j / 3][val]) {
                         return false;
                     }
+                    
                     sq[i / 3 * 3 + j / 3][val] = true;
                 }
             }
