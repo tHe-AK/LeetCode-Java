@@ -7,8 +7,9 @@ public static int findPeak(int[] array) {
     int high = array.length - 1;
     int mid;
 
-    while (low + 1 < high) {
+    while (low <= high) {
         mid = low + (high - low) / 2;
+        
         if (array[mid - 1] < array[mid] && array[mid] > array[mid + 1]) {
             return mid;
         } else if (array[low] < array[low + 1] && array[mid - 1] > array[mid]) {

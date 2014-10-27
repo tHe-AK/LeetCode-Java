@@ -1,5 +1,5 @@
 class Solution {
-    public static int findFirstBadVersion(int[] array) {
+    public static int findFirstBadVersion(boolean[] array) {
         if (array == null || array.length == 0) {
             return -1;
         }
@@ -10,7 +10,8 @@ class Solution {
 
         while (low <= high) {
             mid = low + (high - low) / 2;
-            if (isBadVersion(array[mid])) {
+            
+            if (!array[mid]) {
                 high = mid - 1;
             } else {
                 low = mid + 1;

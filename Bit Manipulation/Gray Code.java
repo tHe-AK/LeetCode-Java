@@ -6,7 +6,7 @@ public class Solution {
         
         List<Integer> result = new ArrayList<Integer>();
         
-        for (int i = 0; i < Math.pow(2, n); i++) {
+        for (int i = 0; i < 1 << n; i++) {
             result.add(i ^ i >> 1);
         }
         

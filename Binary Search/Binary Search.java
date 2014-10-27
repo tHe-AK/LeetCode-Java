@@ -1,11 +1,4 @@
 class Solution {
-    /**
-     * @param array
-     *            source array
-     * @param target
-     *            target to search
-     * @return the first occurrence position of target
-     */
     public static int binarySearch(int[] array, int target) {
         if (array == null || array.length == 0) {
             return -1;

@@ -47,13 +47,10 @@ public class Solution {
             high = x;
         }       
         
-        while (low <= high) {
-            double mid = low + (high - low) / 2;
-            
-            if (Math.abs(x - mid * mid) <= precision) {
-                return mid;
-            }
-            else if (mid * mid < x) {
+        double mid = low + (high - low) / 2;
+
+        while (Math.abs(x - mid * mid) <= precision) { 
+            if (mid * mid < x) {
                 low = mid;
             }
             else {
@@ -63,6 +60,6 @@ public class Solution {
             mid = low + (high - low) / 2;
         }
         
-        throw new IllegalArgumentException();
+        return mid;
     }
 }

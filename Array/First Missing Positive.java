@@ -5,7 +5,7 @@ public class Solution {
         }
         
         for (int i = 0; i < A.length; i++) {
-            while (A[i] - 1 >= 0 && A[i] - 1 != i && A[i] - 1 < A.length && A[A[i] - 1] != A[i]) {
+            while (A[i] - 1 >= 0 && A[i] - 1 < A.length && A[i] - 1 != i && A[A[i] - 1] - 1 != A[i] - 1) {
                 int temp = A[A[i] - 1];
                 A[A[i] - 1] = A[i];
                 A[i] = temp;
