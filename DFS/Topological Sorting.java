@@ -13,22 +13,19 @@ public class Solution {
         }
         
         HashSet<DirectedGraphNode> visited = new HashSet<DirectedGraphNode>();
-        Stack<Integer> stack = new Stack<Integer>();
         
         for (DirectedGraphNode node : nodes) {
             if (!visited.contains(node)) {
-                helper(node, visited, stack);
+                helper(node, visited, result);
             }
         }
         
-        while (!stack.empty()) {
-            result.add(stack.pop());
-        }
+        Collections.reverse(result);
         
         return result;        
     }
     
-    private void helper(DirectedGraphNode node, HashSet<DirectedGraphNode> visited, Stack<Integer> stack) {
+    private void helper(DirectedGraphNode node, HashSet<DirectedGraphNode> visited, ArrayList<Integer> result) {
         visited.add(node);
         
         for (DirectedGraphNode neighbor : node.neighbors) {
@@ -37,6 +34,6 @@ public class Solution {
             }
         }
         
-        stack.add(node.label);
+        result.add(node.label);
     }
 }

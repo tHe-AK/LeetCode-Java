@@ -22,6 +22,7 @@ public class Solution {
         
         if (count == 0) {
             result.add(cur.substring(0, cur.length() - 1));
+            return;
         }
         
         for (int i = start; i < start + 3 && i < s.length(); i++) {
