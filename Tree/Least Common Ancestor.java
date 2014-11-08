@@ -16,10 +16,19 @@ public class Solution {
             return null;
         }
 
-        return helper(root, x, y);
+        boolean[] flag = new boolean[1];
+
+        TreeNode root = helper(root, x, y, flag);
+
+        if (flag[0]) {
+            return root;
+        }
+        else {
+            return null;
+        }
     }
 
-    private TreeNode helper(TreeNode p, TreeNode x, TreeNode y) {
+    private TreeNode helper(TreeNode p, TreeNode x, TreeNode y, boolean[] flag) {
         if (p == null || p == x || p == y) {
             return p;
         }
@@ -32,6 +41,8 @@ public class Solution {
         } else if (right == null) {
             return left;
         } else {
+            flag[0] = true;
+            
             return p;
         }
     }

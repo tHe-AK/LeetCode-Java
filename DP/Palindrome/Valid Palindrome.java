@@ -11,11 +11,11 @@ public class Solution {
         int low = 0;
         int high = s.length() - 1;
         
-        while (low < high) {
-            if (!isAlphanumeric(s.charAt(low))) {
+        while (low <= high) {
+            if (!Character.isLetterOrDigit(s.charAt(low))) {
                 low++;
             }
-            else if (!isAlphanumeric(s.charAt(high))) {
+            else if (!Character.isLetterOrDigit(s.charAt(high))) {
                 high--;
             }
             else if (Character.toLowerCase(s.charAt(low)) != Character.toLowerCase(s.charAt(high))) {
@@ -28,14 +28,5 @@ public class Solution {
         }
         
         return true;
-    }
-    
-    private boolean isAlphanumeric(char c) {
-        if (('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z') || ('0' <= c && c <= '9')) {
-            return true;
-        }
-        else {
-            return false;
-        }
     }
 }

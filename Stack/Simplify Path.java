@@ -19,10 +19,8 @@ public class Solution {
             String cur = path.substring(i + 1, j);
             i = j;
             
-            if (cur.equals("..")) {
-                if (!stack.empty()) {
-                    stack.pop();
-                }
+            if (cur.equals("..") && !stack.empty()) {
+                stack.pop();
                 continue;
             }
             

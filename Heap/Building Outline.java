@@ -66,7 +66,7 @@ public class Solution {
             Point point = points.get(i);
             
             if (point.flag) {
-                queue.add(point.height);
+                queue.offer(point.height);
                 
                 if (queue.size() == 1) {
                     cur = new Building(point.x, 0, queue.peek());

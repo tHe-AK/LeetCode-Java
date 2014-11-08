@@ -14,7 +14,7 @@ public class Solution {
         int cc = words[0].length();
         
         for (int i = 0; i < words.length; i++) {
-            if (i == words.length - 1 || cc + wc + words[i + 1].length() > L) {
+            if (i + 1 < words.length || cc + wc + words[i + 1].length() > L) {
                 String row = "";
                 
                 if (i == words.length - 1 || wc == 1) {
@@ -47,7 +47,7 @@ public class Solution {
                     result.add(row);
                 }
                 
-                if (i < words.length - 1) {
+                if (i + 1 < words.length) {
                     wc = 1;
                     cc = words[i + 1].length();
                 }

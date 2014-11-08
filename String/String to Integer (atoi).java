@@ -14,11 +14,11 @@ public class Solution {
             i++;
         }
         
-        if (i < len && str.charAt(i) == '+') {
-            i++;
-        }
-        else if (i < len && str.charAt(i) == '-') {
-            sign = -1;
+        if (i < len && (str.charAt(i) == '+' || str.charAt(i) == '-')) {
+            if (str.charAt(i) == '-') {
+                sign = -1;
+            }
+
             i++;
         }
         
