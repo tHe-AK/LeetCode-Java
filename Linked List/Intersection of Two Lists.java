@@ -1,42 +1,50 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
 public class Solution {
-    public ListNode intersectionOfLists(ListNode head1, ListNode head2) {
-        if (head1 == null || head2 == null) {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if (headA == null || headB == null) {
             return null;
         }
         
-        ListNode cur1 = head1;
-        ListNode cur2 = head2;
-        int len1 = 0;
-        int len2 = 0;
+        int lenA = 0;
+        int lenB = 0;
+        ListNode curA = headA;
+        ListNode curB = headB;
         
-        while (cur1 != null) {
-            len1++;
-            cur1 = cur1.next;
+        while (curA != null) {
+            lenA++;
+            curA = curA.next;
         }
         
-        while (cur2 != null) {
-            len2++;
-            cur2 = cur2.next;
+        while (curB != null) {
+            lenB++;
+            curB = curB.next;
         }
         
-        cur1 = head1;
-        cur2 = head2;
-        
-        while (len1 < len2) {
-            cur2 = cur2.next;
-            len2--;
+        while (lenA > lenB) {
+            lenA--;
+            headA = headA.next;
         }
         
-        while (len1 > len2) {
-            cur1 = cur1.next;
-            len1--;
+        while (lenB > lenA) {
+            lenB--;
+            headB = headB.next;
+        }
+
+        while (headA != headB) {
+            headA = headA.next;
+            headB = headB.next;
         }
         
-        while (cur1 != cur2) {
-            cur1 = cur1.next;
-            cur2 = cur2.next;
-        }
-        
-        return cur1;
+        return headA;
     }
 }
