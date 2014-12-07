@@ -1,35 +1,45 @@
-public class MinStack extends Stack<Integer> {
-    private Stack<Integer> minStack;
+class MinStack {
+    private Stack<Integer> num;
+    private Stack<Integer> min;
     
     public MinStack() {
-        minStack = new Stack<Integer>();
+        num = new Stack<Integer>();
+        min = new Stack<Integer>();
     }
     
-    public void push(int val) {
-        super.push(val);
-
-        if (val <= min()) {
-            minStack.push(val);
+    public void push(int x) {
+        num.push(x);
+        
+        if (min.empty() || x <= min.peek()) {
+            min.push(x);
         }
     }
-    
-    // Must return Integer type.
-    public Integer pop() {        
-        Integer val = super.pop();
 
-        if (val == minStack.peek()) {
-            minStack.pop();
+    public void pop() {
+        if (num.empty()) {
+            throw new RuntimeException("The stack is empty");
         }
         
-        return val;
+        int peek = num.pop();
+        
+        if (peek == min.peek()) {
+            min.pop();
+        }
     }
-    
-    public int min() {
-        if (super.empty()) {
-            throw new RuntimeException("Stack is Empty");
+
+    public int top() {
+        if (num.empty()) {
+            throw new RuntimeException("The stack is empty");
         }
-        else {
-            return minStack.peek();
+        
+        return num.peek();
+    }
+
+    public int getMin() {
+        if (num.empty()) {
+            throw new RuntimeException("The stack is empty");
         }
+        
+        return min.peek();
     }
 }
