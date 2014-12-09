@@ -1,6 +1,6 @@
 public class Solution {
     public int findPeakElement(int[] num) {
-        if (num == null) {
+        if (num == null || num.length == 0) {
             throw new IllegalArgumentException();
         }
         
