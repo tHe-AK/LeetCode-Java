@@ -9,19 +9,17 @@ class TreeNode {
 }
 
 public class Solution {
-    private TreeNode root;
-
-    public TreeNode LeastCommonAncestor(TreeNode x, TreeNode y) {
+    public TreeNode LeastCommonAncestor(TreeNode root, TreeNode x, TreeNode y) {
         if (x == null || y == null) {
             return null;
         }
 
         boolean[] flag = new boolean[1];
 
-        TreeNode root = helper(root, x, y, flag);
+        TreeNode ancestor = helper(root, x, y, flag);
 
         if (flag[0]) {
-            return root;
+            return ancestor;
         }
         else {
             return null;
