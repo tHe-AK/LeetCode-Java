@@ -1,14 +1,17 @@
 public class Solution {
     public String RotateString(String str, int offset) {
-        if (offset < 0) {
+        if (str == null || offset < 0) {
             return null;
         }
         
-        if (str == null || str.length() <= 1) {
+        int len = str.length();
+
+        if (len <= 1) {
             return str;
         }
         
-        offset = offset % str.length();
+        offset = offset % len;
+        
         if (offset == 0) {
             return str;
         }
