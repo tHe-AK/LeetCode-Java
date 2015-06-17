@@ -10,19 +10,11 @@
 public class Solution {
     public TreeNode invertTree(TreeNode root) {
         if (root == null) {
-            return root;
-        }
-        
-        return helper(root);
-    }
-    
-    private TreeNode helper(TreeNode root) {
-        if (root == null) {
             return null;
         }
         
-        TreeNode left = helper(root.left);
-        TreeNode right = helper(root.right);
+        TreeNode left = invertTree(root.left);
+        TreeNode right = invertTree(root.right);
         root.left = right;
         root.right = left;
         
