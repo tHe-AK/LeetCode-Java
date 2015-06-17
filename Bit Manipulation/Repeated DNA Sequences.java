@@ -16,8 +16,9 @@ public class Solution {
 
 		int cur = 0;
 		for (int i = 0; i < s.length(); i++) {
-			cur = (cur << 2) + map.get(s.charAt(i));
-			cur = cur & ((1 << 20) - 1);
+			cur <<= 2;
+			cur += map.get(s.charAt(i));
+			cur &= (1 << 20) - 1;
 
 			if (i >= 9) {
 				if (!rec.contains(cur)) {
