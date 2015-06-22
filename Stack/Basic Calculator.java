@@ -25,14 +25,14 @@ public class Solution {
             }
             else if (cur == ')') {
                 while (opr.peek() != '(') {
-                    num.push(calculate(num.pop(), num.pop(), opr.pop()));
+                    num.push(helper(num.pop(), num.pop(), opr.pop()));
                 }
                 
                 opr.pop();
             }
             else if (cur == '+' || cur == '-') {
                 while (!opr.empty() && opr.peek() != '(') {
-                    num.push(calculate(num.pop(), num.pop(), opr.pop()));
+                    num.push(helper(num.pop(), num.pop(), opr.pop()));
                 }
                 
                 opr.push(cur);
@@ -42,13 +42,13 @@ public class Solution {
         }
         
         while (!opr.empty()) {
-            num.push(calculate(num.pop(), num.pop(), opr.pop()));
+            num.push(helper(num.pop(), num.pop(), opr.pop()));
         }
                 
         return num.peek();
     }
     
-    private int calculate(int b, int a, char sign) {
+    private int helper(int b, int a, char sign) {
         switch (sign) {
             case '+':
                 return a + b;
