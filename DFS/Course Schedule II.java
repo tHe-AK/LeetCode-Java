@@ -1,6 +1,6 @@
 class GraphNode {
     int label;
-    List<GraphNode> neighbors = new ArrayList<GraphNode>();
+    List<GraphNode> neighbors;
     
     GraphNode(int x) {
         label = x;
