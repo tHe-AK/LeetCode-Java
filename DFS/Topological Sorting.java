@@ -1,23 +1,25 @@
-class DirectedGraphNode {
-    int label;
-    List<DirectedGraphNode> neighbors;
-    DirectedGraphNode(int x) { label = x; neighbors = new ArrayList<DirectedGraphNode>(); }
-};
-
+/**
+ * Definition for Directed graph.
+ * class DirectedGraphNode {
+ *     int label;
+ *     ArrayList<DirectedGraphNode> neighbors;
+ *     DirectedGraphNode(int x) { label = x; neighbors = new ArrayList<DirectedGraphNode>(); }
+ * };
+ */
 public class Solution {
-    public List<Integer> topologicalSorting(List<DirectedGraphNode> nodes) {
-        List<Integer> result = new ArrayList<Integer>();
+    /**
+     * @param graph: A list of Directed graph node
+     * @return: Any topological order for the given graph.
+     */    
+    public ArrayList<DirectedGraphNode> topSort(ArrayList<DirectedGraphNode> graph) {
+        ArrayList<DirectedGraphNode> result = new ArrayList<DirectedGraphNode>();
         
-        if (nodes == null || nodes.size() == 0) {
+        if (graph == null || graph.size() == 0) {
             return result;
         }
         
-        HashSet<DirectedGraphNode> visited = new HashSet<DirectedGraphNode>();
-        
-        for (DirectedGraphNode node : nodes) {
-            if (!visited.contains(node)) {
-                helper(node, visited, result);
-            }
+        for (DirectedGraphNode node : graph) {
+            helper(node, result);
         }
         
         Collections.reverse(result);
@@ -25,15 +27,15 @@ public class Solution {
         return result;        
     }
     
-    private void helper(DirectedGraphNode node, HashSet<DirectedGraphNode> visited, ArrayList<Integer> result) {
-        visited.add(node);
-        
-        for (DirectedGraphNode neighbor : node.neighbors) {
-            if (!visited.contains(neighbor)) {
-                helper(neighbor, visited, stack);
-            }
+    private void helper(DirectedGraphNode node, ArrayList<DirectedGraphNode> result) {
+        if (result.contains(node)) {
+            return;
         }
         
-        result.add(node.label);
+        for (DirectedGraphNode neighbor : node.neighbors) {
+            helper(neighbor, result);
+        }
+        
+        result.add(node);
     }
 }
