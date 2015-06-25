@@ -1,42 +1,41 @@
 public class Solution {
-    public int maxProfit(int[] prices, int count) {
-        if (prices == null) {
-            throw new IllegalArgumentException();
-        }
-
-        if (prices.length == 0 || prices.length == 1) {
+    public int maxProfit(int k, int[] prices) {
+        if (prices == null || prices.length <= 1) {
             return 0;
         }
-
+        
         int len = prices.length;
-        int[][] rec = new int[len][len];
-        int[][] result = new int[count][len];
-
-        for (int i = 0; i < len; i++) {
-            int low = prices[i];
-
-            for (int j = i + 1; j < len; j++) {
-                rec[i][j] = Math.max(rec[i][j - 1], prices[j] - low);
-                low = Math.min(low, prices[j]);
+        
+        if (k >= len) {
+            return helper(prices);
+        }
+        
+        int[][] local = new int[len][k + 1];
+        int[][] global = new int[len][k + 1];
+         
+        for (int i = 1; i < len; i++) {
+        	int diff = prices[i] - prices[i - 1];
+        
+        	for (int j = 1; j <= k; j++) {
+        		local[i][j] = Math.max(global[i - 1][j - 1] + Math.max(diff, 0), local[i - 1][j] + diff);
+        		global[i][j] = Math.max(global[i - 1][j], local[i][j]);
+        	}
+        }
+        
+        return global[len - 1][k];
+    }
+    
+    private int helper(int[] prices) {
+        int sum = 0;
+        
+        for (int i = 1; i < prices.length; i++) {
+            int diff = prices[i] - prices[i - 1];
+            
+            if (diff > 0) {
+                sum += diff;
             }
         }
-
-        for (int i = 0; i < count; i++) {
-            for (int j = i + 1; j < len; j++) {
-                if (i == 0) {
-                    result[i][j] = rec[0][j];
-                } else {
-                    int profit = 0;
-
-                    for (int k = i; k < j; k++) {
-                        profit = Math.max(profit, result[i - 1][k] + rec[k][j]);
-                    }
-
-                    result[i][j] = profit;
-                }
-            }
-        }
-
-        return result[count - 1][len - 1];
+        
+        return sum;
     }
 }
