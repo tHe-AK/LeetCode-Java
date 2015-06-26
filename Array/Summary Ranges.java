@@ -10,7 +10,7 @@ public class Solution {
         int len = nums.length;
         
         for (int i = 1; i <= len; i++) {
-            if (i == len || nums[i - 1] + 1 != nums[i] {
+            if (i == len || nums[i - 1] + 1 != nums[i]) {
                 String cur = String.valueOf(nums[pre]);
                 
                 if (pre < i - 1) {
