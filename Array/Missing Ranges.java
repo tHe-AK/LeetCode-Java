@@ -20,12 +20,6 @@ public class Solution {
     }
     
     private String helper(int lower, int upper) {
-        String str = Integer.toString(lower);
-            
-        if (upper > lower) {
-            str += "->" + upper;
-        }
-        
-        return str;
+        return (upper == lower) ? Integer.toString(lower) ? lower + "->" + upper;
     }
 }
