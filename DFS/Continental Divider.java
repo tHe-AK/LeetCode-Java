@@ -32,22 +32,22 @@ public class Solution {
         
         boolean[][] visited = new boolean[row][col];
         for (int i = 0; i < row; i++) {
-            helper(matrix, i, 0, -1, visited, rec, 0);
+            helper(matrix, i, 0, 0, visited, rec, 0);
         }
         
         visited = new boolean[row][col];
         for (int i = 0; i < row; i++) {
-            helper(matrix, i, col - 1, -1, visited, rec, 1);
+            helper(matrix, i, col - 1, 0, visited, rec, 1);
         }
         
         visited = new boolean[row][col];
         for (int j = 0; j < col; j++) {
-            helper(matrix, 0, j, -1, visited, rec, 2);
+            helper(matrix, 0, j, 0, visited, rec, 2);
         }
         
         visited = new boolean[row][col];
         for (int j = 0; j < col; j++) {
-            helper(matrix, row - 1, j, -1, visited, rec, 3);
+            helper(matrix, row - 1, j, 0, visited, rec, 3);
         }
         
         for (int i = 0; i < row; i++) {
