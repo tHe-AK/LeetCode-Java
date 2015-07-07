@@ -6,7 +6,7 @@ public class Solution {
             int high = (n >> (31 - i)) & 1;
             
             if ((low ^ high) == 1) {
-                n ^= (1 << i) | (1 << (31 -i));
+                n ^= (1 << i) | (1 << (31 - i));
             }
         }
         
