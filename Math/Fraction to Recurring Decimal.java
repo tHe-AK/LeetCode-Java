@@ -14,10 +14,8 @@ public class Solution {
             sb.append("-");
         }
         
-        long num = numerator;
-        long den = denominator;
-        num = Math.abs(num);
-        den = Math.abs(den);
+        num = Math.abs((long) numerator);
+        den = Math.abs((long) denominator);
         sb.append(num / den);
         
         if (num % den == 0) {
