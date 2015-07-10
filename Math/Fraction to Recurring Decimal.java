@@ -14,8 +14,8 @@ public class Solution {
             sb.append("-");
         }
         
-        num = Math.abs((long) numerator);
-        den = Math.abs((long) denominator);
+        long num = Math.abs((long) numerator);
+        long den = Math.abs((long) denominator);
         sb.append(num / den);
         
         if (num % den == 0) {
@@ -33,7 +33,7 @@ public class Solution {
                 return sb.toString();
             }
             else {
-                rec.put(num, sb.length() - 1);
+                rec.put(num, sb.length());
                 sb.append(num / den);
                 num = num % den * 10;
             }
