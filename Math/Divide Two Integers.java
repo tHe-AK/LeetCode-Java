@@ -21,7 +21,7 @@ public class Solution {
             result += (long) 1 << shift;
         }
         
-        result = ((dividend >> 31 ^ divisor >> 31) == 0) ? result : -result;
+        result = (dividend < 0) ^ (divisor < 0) ? -result : result;
         
         if (result > Integer.MAX_VALUE) {
             return Integer.MAX_VALUE;
