@@ -4,14 +4,14 @@ public class Solution {
             return false;
         }
         
-        int cur = x;
-        int high = 1;
-        int low = 1;
+        long high = 1;
+        long low = 1;
 
-        while (cur / 10 != 0) {
+        while (x / high > 0) {
             high *= 10;
-            cur /= 10;
         }
+        
+        high /= 10;
 
         while (low < high) {
             if (x / high % 10 != x / low % 10) {
