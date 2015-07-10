@@ -6,15 +6,27 @@ public class Solution {
         
         long a = Math.abs((long)dividend);
         long b = Math.abs((long)divisor);
-        int result = 0;
+        long result = 0;
         
         while (a >= b) {
-            for (int i = 0; b << i <= a; i++) {
-                a -= b << i;
-                result += 1 << i;
+            int shift = 0;
+            
+            while (a >= (b << shift)) {
+                shift++;
             }
+            
+            shift--;
+        
+            a -= b << shift;
+            result += (long) 1 << shift;
         }
         
-        return ((dividend >> 31 ^ divisor >> 31) == 0) ? result : -result;
+        result = ((dividend >> 31 ^ divisor >> 31) == 0) ? result : -result;
+        
+        if (result > Integer.MAX_VALUE) {
+            return Integer.MAX_VALUE;
+        }
+        
+        return (int) result;
     }
 }
