@@ -14,7 +14,7 @@ public class Solution {
         
         Arrays.sort(rec, new Comparator<String>() {
             public int compare(String a, String b) {
-                return -(a + b).compareTo(b + a);
+                return (b + a).compareTo(a + b);
             }
         });
         
