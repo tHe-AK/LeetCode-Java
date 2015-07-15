@@ -8,20 +8,23 @@ public class Solution {
             return i == s.length();
         }
         else if (j + 1 < p.length() && p.charAt(j + 1) == '*') {
-            int k = i;
+            if (helper(s, i, p, j + 2)) {
+                return true;
+            }
             
-            while (equal(s, k, p, j)) {
-                if (helper(s, k + 1, p, j + 2)) {
+            while (equal(s, i, p, j)) {
+                if (helper(s, i + 1, p, j + 2)) {
                     return true;
                 }
                 
-                k++;
+                i++;
             }
             
-            return helper(s, i, p, j + 2);
+            return false;
         }
         else {
             return equal(s, i, p, j) && helper(s, i + 1, p, j + 1);
+            }
         }
     }
     
