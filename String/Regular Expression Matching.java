@@ -24,7 +24,6 @@ public class Solution {
         }
         else {
             return equal(s, i, p, j) && helper(s, i + 1, p, j + 1);
-            }
         }
     }
     
