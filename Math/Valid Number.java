@@ -4,16 +4,13 @@ public class Solution {
             throw new IllegalArgumentException();
         }
         
+        s = s.trim();
         int i = 0;
         int len = s.length();
         boolean num = false;
         boolean sign = false;
         boolean e = false;
         boolean point = false;
-        
-        while (i < len && s.charAt(i) == ' ') {
-            i++;
-        }
         
         while (i < len) {
             char cur = s.charAt(i);
@@ -37,10 +34,6 @@ public class Solution {
                 break;
             }
             
-            i++;
-        }
-        
-        while (i < len && s.charAt(i) == ' ') {
             i++;
         }
         
