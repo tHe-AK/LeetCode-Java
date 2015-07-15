@@ -5,9 +5,7 @@ public class Solution {
         int pre = -1;
         
         for (int i = 0; i < s.length(); i++) {
-            char cur = s.charAt(i);
-            
-            if (cur == '(') {
+            if (s.charAt(i) == '(') {
                 stack.push(i);
             }
             else if (stack.empty()) {
