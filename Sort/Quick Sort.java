@@ -1,8 +1,8 @@
 public class Solution {
     public void quickSort(int[] array) {
-    	if (array == null) {
-    		return;
-    	}
+        if (array == null) {
+            return;
+        }
 
         helper(array, 0, array.length - 1);
         System.out.println(Arrays.toString(array));
@@ -14,9 +14,9 @@ public class Solution {
         }
         
         int pivot = array[start];
-        int cur = start;
+        int cur = start + 1;
 
-        for (int i = start; i <= end; i++) {
+        for (int i = start + 1; i <= end; i++) {
             if (array[i] < pivot) {
                 int temp = array[i];
                 array[i] = array[cur];
@@ -49,7 +49,7 @@ public class Solution {
         }
         
         int pivot = array[start];
-        int low = start;
+        int low = start + 1;
         int high = end;
 
        	while (low <= high) {
