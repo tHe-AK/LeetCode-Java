@@ -60,11 +60,11 @@ public class Solution {
                    high--;
                }
                else {
-                int temp = array[low];
-                array[low] = array[high];
-                array[high] = temp;
-                low++;
-                high--;
+                   int temp = array[low];
+                   array[low] = array[high];
+                   array[high] = temp;
+                   low++;
+                   high--;
                }
            }
         
