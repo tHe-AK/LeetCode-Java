@@ -4,14 +4,15 @@ public class Solution {
      * @return: the length of the longest common substring.
      */
     public int longestCommonSubstring(String A, String B) {
+        int max = 0;
+        
         if (A == null || A.length() == 0 || B == null || B.length() == 0) {
-            return 0;
+            return max;
         }
         
         int len1 = A.length();
         int len2 = B.length();
         int[][] rec = new int[len1 + 1][len2 + 1];
-        int max = 0;
 
         for (int i = 0; i <= len1; i++) {
             for (int j = 0; j <= len2; j++) {
