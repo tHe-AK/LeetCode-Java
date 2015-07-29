@@ -1,20 +1,21 @@
 public class Solution {
-    public int longestCommonSubstring(String str1, String str2) {
-        if (str1 == null || str1.length() == 0 || str2 == null || str2.length() == 0) {
+    /**
+     * @param A, B: Two string.
+     * @return: the length of the longest common substring.
+     */
+    public int longestCommonSubstring(String A, String B) {
+        if (A == null || A.length() == 0 || B == null || B.length() == 0) {
             return 0;
         }
         
-        int len1 = str1.length();
-        int len2 = str2.length();
+        int len1 = A.length();
+        int len2 = B.length();
         int[][] rec = new int[len1 + 1][len2 + 1];
         int max = 0;
 
-        for (int i = 0; i < len1 + 1; i++) {
-            for (int j = 0;j < len2 + 1; j++) {
-                if (i == 0 || j == 0 || str1.charAt(i - 1) != str2.charAt(j - 1)) {
-                    rec[i][j] = 0;
-                }
-                else {
+        for (int i = 0; i <= len1; i++) {
+            for (int j = 0; j <= len2; j++) {
+                if (i > 0 && j > 0 && A.charAt(i - 1) == B.charAt(j - 1)) {
                     rec[i][j] = rec[i - 1][j - 1] + 1;
                     max = Math.max(max, rec[i][j]);
                 }
