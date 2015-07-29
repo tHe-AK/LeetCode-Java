@@ -1,16 +1,21 @@
 public class Solution {
     public List<String> anagrams(String[] strs) {
+        List<String> result = new ArrayList<String>();
+        
         if (strs == null) {
-            throw new IllegalArgumentException();
+            return result;
         }
         
-        List<String> result = new ArrayList<String>();
-        HashMap<String, ArrayList<String>> rec = new HashMap<String, ArrayList<String>>();
+        HashMap<String, List<String>> rec = new HashMap<String, List<String>>();
         
         for (int i = 0; i < strs.length; i++) {
-            char[] temp = strs[i].toCharArray();
-            Arrays.sort(temp);
-            String key = new String(temp);
+            String key = null;
+            
+            if (strs[i] != null) {
+                char[] temp = strs[i].toCharArray();
+                Arrays.sort(temp);
+                key = new String(temp);
+            }
             
             if (rec.containsKey(key)) {
                 rec.get(key).add(strs[i]);
