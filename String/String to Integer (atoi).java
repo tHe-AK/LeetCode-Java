@@ -4,9 +4,9 @@ public class Solution {
             return 0;
         }
         
+        int i = 0;
         int len = str.length();
         int sign = 1;
-        int i = 0;
         long value = 0;
         long result = 0;
         
@@ -18,7 +18,7 @@ public class Solution {
             if (str.charAt(i) == '-') {
                 sign = -1;
             }
-
+            
             i++;
         }
         
@@ -37,6 +37,6 @@ public class Solution {
             i++;
         }
         
-        return (int)(result);
+        return (int) (result);  
     }
 }
