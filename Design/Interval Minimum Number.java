@@ -8,7 +8,7 @@
  *     }
  */
  
- class SegmentTreeNode {
+class SegmentTreeNode {
     int start;
     int end;
     int min;
@@ -29,7 +29,7 @@
         this.left = null;
         this.right = null;
     }
- }
+}
  
 public class Solution {
     /**
