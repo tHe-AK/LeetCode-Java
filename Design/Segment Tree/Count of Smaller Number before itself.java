@@ -1,0 +1,100 @@
+class SegmentTreeNode {
+    int start;
+    int end;
+    int count;
+    SegmentTreeNode left;
+    SegmentTreeNode right;
+    
+    public SegmentTreeNode(int start, int end) {
+        this.start = start;
+        this.end = end;
+        this.count = 0;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+public class Solution {
+   /**
+     * @param A: An integer array
+     * @return: Count the number of element before this element 'ai' is 
+     *          smaller than it and return count number array
+     */ 
+    public ArrayList<Integer> countOfSmallerNumberII(int[] A) {
+        if (A == null) {
+            throw new IllegalArgumentException();
+        }
+        
+        SegmentTreeNode root = build(0, 10000);
+        ArrayList<Integer> result = new ArrayList<Integer>();
+
+        for (int i = 0; i < A.length; i++) {
+            result.add(query(root, 0, A[i] - 1));
+            modify(root, A[i]);
+        }
+        
+        return result;
+    }
+    
+    private SegmentTreeNode build(int start, int end) {
+        if (start > end) {
+            return null;
+        }
+        
+        if (start == end) {
+            return new SegmentTreeNode(start, end);
+        }
+
+        int mid = start + (end - start) / 2;
+        SegmentTreeNode root = new SegmentTreeNode(start, end);
+        root.left = build(start, mid);
+        root.right = build(mid + 1, end);
+
+        return root;
+    }
+    
+    private void modify(SegmentTreeNode root, int index) {
+        if (root == null || index < root.start || root.end < index) {
+            return;
+        }
+        
+        if (root.start == index && root.end == index) {
+            root.count++;
+            return;
+        }
+        
+        int mid = root.start + (root.end - root.start) / 2;
+        
+        if (index <= mid) {
+            modify(root.left, index);
+        }
+        else {
+            modify(root.right, index);
+        }
+        
+        root.count = root.left.count + root.right.count;
+    }
+    
+    private int query(SegmentTreeNode root, int start, int end) {
+        if (root == null || start > end) {
+            return 0;
+        }
+        
+        if (start <= root.start && root.end <= end) {
+            return root.count;
+        }
+        
+        int mid = root.start + (root.end - root.start) / 2;
+        
+        if (end <= mid) {
+            return query(root.left, start, end);
+        }
+        else if (start > mid) {
+            return query(root.right, start, end);
+        }
+        else {
+            return query(root.left, start, mid) + query(root.right, mid + 1, end);
+        }
+    }
+}
+
