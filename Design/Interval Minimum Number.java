@@ -89,10 +89,7 @@ public class Solution {
             return query(root.right, start, end);
         }
         else {
-            int left = query(root.left, start, mid);
-            int right = query(root.right, mid + 1, end);
-            
-            return Math.min(left, right);
+            return Math.min(query(root.left, start, mid), query(root.right, mid + 1, end));
         }
     }
 }
