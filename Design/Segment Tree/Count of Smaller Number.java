@@ -34,7 +34,7 @@ public class Solution {
         ArrayList<Integer> result = new ArrayList<Integer>();
 
         for (int i = 0; i < queries.length; i++) {
-            result.add(query(root, queries[i] - 1));
+            result.add(query(root, 0, queries[i] - 1));
         }
         
         return result;
@@ -79,22 +79,25 @@ public class Solution {
         root.count = root.left.count + root.right.count;
     }
     
-    private int query(SegmentTreeNode root, int end) {
-        if (root == null) {
+    private int query(SegmentTreeNode root, int start, int end) {
+        if (root == null || start > end) {
             return 0;
         }
         
-        if (root.end <= end) {
+        if (start <= root.start && root.end <= end) {
             return root.count;
         }
         
         int mid = root.start + (root.end - root.start) / 2;
         
         if (end <= mid) {
-            return query(root.left, end);
+            return query(root.left, start, end);
+        }
+        else if (start > mid) {
+            return query(root.right, start, end);
         }
         else {
-            return query(root.left, mid) + query(root.right, end);
+            return query(root.left, start, mid) + query(root.right, mid + 1, end);
         }
     }
 }
