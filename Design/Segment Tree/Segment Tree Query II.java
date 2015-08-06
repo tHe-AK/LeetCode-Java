@@ -22,15 +22,7 @@ public class Solution {
             return 0;
         }
         
-        if (start < root.start) {
-            start = root.start;
-        }
-        
-        if (root.end < end) {
-            end = root.end;
-        }
-        
-        if (root.start == start && root.end == end) {
+        if (start <= root.start && root.end <= end) {
             return root.count;
         }
         
