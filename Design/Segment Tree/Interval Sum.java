@@ -29,7 +29,7 @@ class SegmentTreeNode {
         this.left = null;
         this.right = null;
     }
- }
+}
  
 public class Solution {
     /**
@@ -38,14 +38,13 @@ public class Solution {
      */
     public ArrayList<Long> intervalSum(int[] A, 
                                        ArrayList<Interval> queries) {
-        ArrayList<Long> result = new ArrayList<Long>();
-        
         if (A == null || A.length == 0) {
-            return result;
+            throw new IllegalArgumentException();
         }
         
         SegmentTreeNode root = build(A, 0, A.length - 1);
-        
+        ArrayList<Long> result = new ArrayList<Long>();
+
         for (Interval i : queries) {
             result.add(query(root, i.start, i.end));
         }
