@@ -18,6 +18,10 @@ public class Solution {
      *@return: The maximum number in the interval [start, end]
      */
     public int query(SegmentTreeNode root, int start, int end) {
+        if (root == null || start < root.start || root.end < end) {
+            throw new IllegalArgumentException();
+        }
+        
         if (root.start == start && root.end == end) {
             return root.max;
         }
