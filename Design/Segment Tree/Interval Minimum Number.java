@@ -38,13 +38,12 @@ public class Solution {
      */
     public ArrayList<Integer> intervalMinNumber(int[] A, 
                                                 ArrayList<Interval> queries) {
-        ArrayList<Integer> result = new ArrayList<Integer>();
-        
         if (A == null || A.length == 0) {
-            return result;
+            throw new IllegalArgumentException();
         }
         
         SegmentTreeNode root = build(A, 0, A.length - 1);
+        ArrayList<Integer> result = new ArrayList<Integer>();
         
         for (Interval i : queries) {
             result.add(query(root, i.start, i.end));
@@ -89,7 +88,10 @@ public class Solution {
             return query(root.right, start, end);
         }
         else {
-            return Math.min(query(root.left, start, mid), query(root.right, mid + 1, end));
+            int left = query(root.left, start, mid);
+            int right = query(root.right, mid + 1, end);
+            
+            return Math.min(left, right);
         }
     }
 }
