@@ -35,10 +35,7 @@ public class Solution {
             return query(root.right, start, end);
         }
         else {
-            int left = query(root.left, start, mid);
-            int right = query(root.right, mid + 1, end);
-            
-            return Math.max(left, right);
+            return Math.max(query(root.left, start, mid), query(root.right, mid + 1, end));
         }
     }
 }
