@@ -18,7 +18,7 @@ public class Solution {
      *@return: The count number in the interval [start, end]
      */
     public int query(SegmentTreeNode root, int start, int end) {
-        if (root == null) {
+        if (root == null || start > end) {
             return 0;
         }
         
