@@ -60,26 +60,45 @@ public class Solution {
                 if (grid[i][j]) {
                     int cur = id(i, j, col);
                     uf.add(cur);
+    
+                    int neighbor;
                     
-                    helper(i - 1, j, row, col, cur, uf);
-                    helper(i + 1, j, row, col, cur, uf);
-                    helper(i, j - 1, row, col, cur, uf);
-                    helper(i, j + 1, row, col, cur, uf);
+                    if (valid(i - 1, j, row, col)) {
+                        neighbor = id(i - 1, j, col);
+                        
+                        if (uf.contain(neighbor)) {
+                            uf.union(cur, neighbor);
+                        }
+                    }
+                    
+                    if (valid(i + 1, j, row, col)) {
+                        neighbor = id(i + 1, j, col);
+                        
+                        if (uf.contain(neighbor)) {
+                            uf.union(cur, neighbor);
+                        }
+                    }
+                    
+                    if (valid(i, j - 1, row, col)) {
+                        neighbor = id(i, j - 1, col);
+                        
+                        if (uf.contain(neighbor)) {
+                            uf.union(cur, neighbor);
+                        }
+                    }
+                    
+                    if (valid(i, j + 1, row, col)) {
+                        neighbor = id(i, j + 1, col);
+                        
+                        if (uf.contain(neighbor)) {
+                            uf.union(cur, neighbor);
+                        }
+                    }
                 }
             }
         }
         
         return uf.count;
-    }
-    
-    private void helper(int i, int j, int row, int col, int cur, UnionFind uf) {
-        if (valid(i, j, row, col)) {
-            int neighbor = id(i, j, col);
-                        
-            if (uf.contain(neighbor)) {
-                uf.union(cur, neighbor);
-            }
-        }
     }
     
     private int id(int i, int j, int col) {
