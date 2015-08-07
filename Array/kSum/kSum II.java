@@ -1,59 +1,42 @@
 public class Solution {
-    public List<List<Integer>> kSum(int[] num, int target, int k) {
-        List<List<Integer>> result = new ArrayList<List<Integer>>();
+    /**
+     * @param A: an integer array.
+     * @param k: a positive integer (k <= length(A))
+     * @param target: a integer
+     * @return a list of lists of integer 
+     */ 
+    public ArrayList<ArrayList<Integer>> kSumII(int A[], int k, int target) {
+        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
         
-        if (num == null || num.length < k) {
+        if (A == null || A.length < k) {
             return result;
         }
         
-        Arrays.sort(num);
+        Arrays.sort(A);
         
-        helper(num, target, k, 0, new ArrayList<Integer>(), result);
+        helper(A, target, k, 0, new ArrayList<Integer>(), result);
         
         return result;
     }
     
-    private void helper(int[] num, int target, int k, int start, List<Integer> cur, List<List<Integer>> result) {
-        if (k > 2) {
-            for (int i = start; i < num.length - k + 1; i++) {
-                if (i != start && num[i] == num[i - 1]) {
-                    continue;
-                }
+    private void helper(int[] A, int target, int k, int start, ArrayList<Integer> cur, ArrayList<ArrayList<Integer>> result) {
+        
+        for (int i = start; i < A.length - k + 1; i++) {
+            if (i != start && A[i] == A[i - 1]) {
+                continue;
+            }
                 
-                cur.add(num[i]);
-                helper(num, target - num[i], k - 1, i + 1, cur, result);
+            if (k > 1) {
+                cur.add(A[i]);
+                helper(A, target - A[i], k - 1, i + 1, cur, result);
                 cur.remove(cur.size() - 1);
             }
-        }
-        else {
-            int left = start;
-            int right = num.length - 1;
-                
-            while (left < right) {
-                int sum = num[left] + num[right];
-                    
-                if (sum == target) {
-                    List<Integer> temp = new ArrayList<Integer>(cur);
-                    temp.add(num[left]);
-                    temp.add(num[right]);
-                    result.add(temp);
-                        
-                    left++;
-                    right--;
-                        
-                    while (left < right && num[left] == num[left - 1]) {
-                        left++;
-                    }
-                        
-                    while (left < right && num[right] == num[right + 1]) {
-                        right--;
-                    }
-                }
-                else if (sum < target) {
-                    left++;
-                }
-                else {
-                    right--;
+            else {
+                if (A[i] == target) {
+                    cur.add(A[i]);
+                    result.add(new ArrayList<Integer>(cur));
+                    cur.remove(cur.size() - 1);
+                    break;
                 }
             }
         }
