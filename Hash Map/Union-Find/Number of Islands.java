@@ -58,42 +58,13 @@ public class Solution {
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
                 if (grid[i][j]) {
-                    int cur = helper(i, j, col);
+                    int cur = id(i, j, col);
                     uf.add(cur);
-    
-                    int neighbor;
                     
-                    if (valid(i - 1, j, row, col)) {
-                        neighbor = helper(i - 1, j, col);
-                        
-                        if (uf.contain(neighbor)) {
-                            uf.union(cur, neighbor);
-                        }
-                    }
-                    
-                    if (valid(i + 1, j, row, col)) {
-                        neighbor = helper(i + 1, j, col);
-                        
-                        if (uf.contain(neighbor)) {
-                            uf.union(cur, neighbor);
-                        }
-                    }
-                    
-                    if (valid(i, j - 1, row, col)) {
-                        neighbor = helper(i, j - 1, col);
-                        
-                        if (uf.contain(neighbor)) {
-                            uf.union(cur, neighbor);
-                        }
-                    }
-                    
-                    if (valid(i, j + 1, row, col)) {
-                        neighbor = helper(i, j + 1, col);
-                        
-                        if (uf.contain(neighbor)) {
-                            uf.union(cur, neighbor);
-                        }
-                    }
+                    helper(i - 1, j, row, col, cur, uf);
+                    helper(i + 1, j, row, col, cur, uf);
+                    helper(i, j - 1, row, col, cur, uf);
+                    helper(i, j + 1, row, col, cur, uf);
                 }
             }
         }
@@ -101,7 +72,17 @@ public class Solution {
         return uf.count;
     }
     
-    private int helper(int i, int j, int col) {
+    private void helper(int i, int j, int row, int col, int cur, UnionFind uf) {
+        if (valid(i, j, row, col)) {
+            int neighbor = id(i, j, col);
+                        
+            if (uf.contain(neighbor)) {
+                uf.union(cur, neighbor);
+            }
+        }
+    }
+    
+    private int id(int i, int j, int col) {
         return i * col + j;
     }
     
