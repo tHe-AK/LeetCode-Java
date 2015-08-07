@@ -54,6 +54,8 @@ public class Solution {
         UnionFind uf = new UnionFind();
         int row = grid.length;
         int col = grid[0].length;
+        int[] x = new int[] {-1, 1, 0, 0};
+        int[] y = new int[] {0, 0, -1, 1};
         
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
@@ -61,38 +63,14 @@ public class Solution {
                     int cur = id(i, j, col);
                     uf.add(cur);
     
-                    int neighbor;
-                    
-                    if (valid(i - 1, j, row, col)) {
-                        neighbor = id(i - 1, j, col);
+                    for (int k = 0; k < 4; k++) {
+                        if (valid(i + x[k], j + y[k], row, col)) {
+                            int neighbor = id(i + x[k], j + y[k], col);
                         
-                        if (uf.contain(neighbor)) {
-                            uf.union(cur, neighbor);
-                        }
-                    }
-                    
-                    if (valid(i + 1, j, row, col)) {
-                        neighbor = id(i + 1, j, col);
-                        
-                        if (uf.contain(neighbor)) {
-                            uf.union(cur, neighbor);
-                        }
-                    }
-                    
-                    if (valid(i, j - 1, row, col)) {
-                        neighbor = id(i, j - 1, col);
-                        
-                        if (uf.contain(neighbor)) {
-                            uf.union(cur, neighbor);
-                        }
-                    }
-                    
-                    if (valid(i, j + 1, row, col)) {
-                        neighbor = id(i, j + 1, col);
-                        
-                        if (uf.contain(neighbor)) {
-                            uf.union(cur, neighbor);
-                        }
+                            if (uf.contain(neighbor)) {
+                                uf.union(cur, neighbor);
+                            }
+                        } 
                     }
                 }
             }
