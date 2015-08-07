@@ -66,7 +66,9 @@ public class Solution {
         }
         
         UnionFind uf = new UnionFind();
-
+        int[] x = new int[] {-1, 1, 0, 0};
+        int[] y = new int[] {0, 0, -1, 1};
+        
         for (Point p : operators) {
             int i = p.x;
             int j = p.y;
@@ -74,38 +76,14 @@ public class Solution {
             int cur = id(i, j, m);
             uf.add(cur);
     
-            int neighbor;
+            for (int k = 0; k < 4; k++) {
+                if (valid(i + x[k], j + y[k], n, m)) {
+                    int neighbor = id(i + x[k], j + y[k], m);
                     
-            if (valid(i - 1, j, n, m)) {
-                neighbor = id(i - 1, j, m);
-                        
-                if (uf.contain(neighbor)) {
-                    uf.union(cur, neighbor);
-                }
-            }
-                    
-            if (valid(i + 1, j, n, m)) {
-                neighbor = id(i + 1, j, m);
-                        
-                if (uf.contain(neighbor)) {
-                    uf.union(cur, neighbor);
+                    if (uf.contain(neighbor)) {
+                        uf.union(cur, neighbor);          
                     }
-                }
-                    
-            if (valid(i, j - 1, n, m)) {
-                neighbor = id(i, j - 1, m);
-                        
-                if (uf.contain(neighbor)) {
-                    uf.union(cur, neighbor);
-                }
-            }
-                    
-            if (valid(i, j + 1, n, m)) {
-                neighbor = id(i, j + 1, m);
-                        
-                if (uf.contain(neighbor)) {
-                    uf.union(cur, neighbor);
-                }
+                } 
             }
             
             result.add(uf.count);
