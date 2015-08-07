@@ -25,7 +25,7 @@ class UnionFind {
     }
     
     int find(int child) {
-        if (!rec.containsKey(child)) {
+        if (!contain(child)) {
             throw new RuntimeException();
         }
         
