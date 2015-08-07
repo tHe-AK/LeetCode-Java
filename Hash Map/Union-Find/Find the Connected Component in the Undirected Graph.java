@@ -14,12 +14,18 @@ class UnionFind {
         rec = new HashMap<Integer, Integer>();
     }
     
+    boolean contain(int child) {
+        return rec.containsKey(child);
+    }
+    
     void add(int child) {
-        rec.put(child, child);
+        if (!contain(child)) {
+            rec.put(child, child);
+        }
     }
     
     int find(int child) {
-        if (!rec.containsKey(child)) {
+        if (contain(child)) {
             throw new RuntimeException();
         }
         
@@ -77,13 +83,12 @@ public class Solution {
         }
         
         UnionFind uf = new UnionFind();
-        
+
         for (UndirectedGraphNode node : nodes) {
             uf.add(node.label);
-        }
-        
-        for (UndirectedGraphNode node : nodes) {
+            
             for (UndirectedGraphNode neighbor : node.neighbors) {
+                uf.add(neighbor.label);
                 uf.union(node.label, neighbor.label);
             }
         }
