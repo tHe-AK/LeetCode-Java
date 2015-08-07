@@ -10,34 +10,34 @@ public class Solution {
         
         int len = height.length;
         int sum = 0;
-        int index = 0;
         int max = height[0];
+        int maxIndex = 0;
         
         for (int i = 1; i < len; i++) {
             if (height[i] > max) {
                 max = height[i];
-                index = i;
+                maxIndex = i;
             }
         }
         
-        int high = 0;
+        int curMax = 0;
         
-        for (int i = 0; i < index; i++) {
-            if (height[i] < high) {
-                sum += high - height[i];
+        for (int i = 0; i < maxIndex; i++) {
+            if (height[i] < curMax) {
+                sum += curMax - height[i];
             }
             
-            high = Math.max(high, height[i]);
+            curMax = Math.max(curMax, height[i]);
         }
         
-        high = 0;
+        curMax = 0;
         
-        for (int i = len - 1; i > index; i--) {
-            if (height[i] < high) {
-                sum += high - height[i];
+        for (int i = len - 1; i > maxIndex; i--) {
+            if (height[i] < curMax) {
+                sum += curMax - height[i];
             }
             
-            high = Math.max(high, height[i]);
+            curMax = Math.max(curMax, height[i]);
         }
         
         return sum;
