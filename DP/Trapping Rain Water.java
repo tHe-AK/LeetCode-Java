@@ -32,7 +32,7 @@ public class Solution {
         
         high = 0;
         
-        for (int i = height.length - 1; i > index; i--) {
+        for (int i = len - 1; i > index; i--) {
             if (height[i] < high) {
                 sum += high - height[i];
             }
