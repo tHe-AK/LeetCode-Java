@@ -1,24 +1,23 @@
 public class Solution {
     public int largestRectangleArea(int[] height) {
-        if (height == null) {
-            throw new IllegalArgumentException();
+        if (height == null || height.length == 0) {
+            return 0;
         }
         
-        int max = 0;
-        int[] rec = new int[height.length + 1];
-        System.arraycopy(height, 0, rec, 0, height.length);
         Stack<Integer> stack = new Stack<Integer>();
-        int i = 0;
+        int len = height.length;
+        int max = 0;
         
-        while (i < rec.length) {
-            if (stack.empty() || rec[stack.peek()] < rec[i]) {
-                stack.push(i);
-                i++;
+        for (int i = 0; i <= len; i++) {
+            int cur = (i == len) ? -1 : height[i];
+            
+            while (!stack.isEmpty() && cur <= height[stack.peek()]) {
+                int h = height[stack.pop()];
+                int w = stack.isEmpty() ? i : i - stack.peek() - 1;
+                max = Math.max(max, h * w);
             }
-            else {
-                int peek = stack.pop();
-                max = Math.max(max, stack.empty() ? rec[peek] * i : rec[peek] * (i - stack.peek() - 1));
-            }
+            
+            stack.push(i);
         }
         
         return max;
