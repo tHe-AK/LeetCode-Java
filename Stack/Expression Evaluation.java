@@ -44,20 +44,17 @@ public class Solution {
     }
     
     private int helper(int b, int a, String sign) {
-        if (sign.equals("+")) {
-            return a + b;
-        }
-        else if (sign.equals("-")) {
-            return a - b;
-        }
-        else if (sign.equals("*")) {
-            return a * b;
-        }
-        else if (sign.equals("/")) {
-            return a / b;
-        }
-        else {
-            throw new RuntimeException();
+        switch (sign) {
+            case "+":
+                return a + b;
+            case "-":
+                return a - b;
+            case "*":
+                return a * b;
+            case "/":
+                return a / b;
+            default:
+                throw new RuntimeException();
         }
     }
     
