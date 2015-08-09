@@ -10,23 +10,22 @@ public class Solution {
         
         Stack<Integer> num = new Stack<Integer>();
         Stack<String> opr = new Stack<String>();
-
-        for (int i = 0; i < expression.length; i++) {
-            String cur = expression[i];
-            
+        String list = "+-*/";
+        
+        for (String cur : expression) {
             if (cur.equals("(")) {
                 opr.push(cur);
             }
             else if (cur.equals(")")) {
                 while (!opr.peek().equals("(")) {
-                    num.push(helper(num.pop(), num.pop(), opr.pop()));
+                    calculate(num, opr);
                 }
                 
                 opr.pop();
             }
-            else if (cur.equals("+") || cur.equals("-") || cur.equals("*") || cur.equals("/")) {
+            else if (list.contains(cur)) {
                 while (!opr.empty() && !opr.peek().equals("(") && priority(opr.peek(), cur)) {
-                    num.push(helper(num.pop(), num.pop(), opr.pop()));
+                    calculate(num, opr);
                 }
                 
                 opr.push(cur);
@@ -37,24 +36,31 @@ public class Solution {
         }
         
         while (!opr.empty()) {
-            num.push(helper(num.pop(), num.pop(), opr.pop()));
+            calculate(num, opr);
         }
                 
         return num.empty() ? 0 : num.peek();
     }
     
-    private int helper(int b, int a, String sign) {
-        switch (sign) {
-            case "+":
-                return a + b;
-            case "-":
-                return a - b;
-            case "*":
-                return a * b;
-            case "/":
-                return a / b;
-            default:
-                throw new RuntimeException();
+    private void calculate(Stack<Integer> num, Stack<String> opr) {
+        int b = num.pop();
+        int a = num.pop();
+        String sign = opr.pop();
+        
+        if (sign.equals("+")) {
+            num.push(a + b);
+        }
+        else if (sign.equals("-")) {
+            num.push(a - b);
+        }
+        else if (sign.equals("*")) {
+            num.push(a * b);
+        }
+        else if (sign.equals("/")) {
+            num.push(a / b);
+        }
+        else {
+            throw new RuntimeException(sign);
         }
     }
     
