@@ -22,10 +22,9 @@ public class Solution {
         
         Stack<ExpressionTreeNode> rec = new Stack<ExpressionTreeNode>();
         Stack<String> opr = new Stack<String>();
-
-        for (int i = 0; i < expression.length; i++) {
-            String cur = expression[i];
-            
+        String list = "+-*/";
+        
+        for (String cur : expression) {
             if (cur.equals("(")) {
                 opr.push(cur);
             }
@@ -36,7 +35,7 @@ public class Solution {
                 
                 opr.pop();
             }
-            else if (cur.equals("+") || cur.equals("-") || cur.equals("*") || cur.equals("/")) {
+            else if (list.contains(cur)) {
                 while (!opr.empty() && !opr.peek().equals("(") && priority(opr.peek(), cur)) {
                     helper(opr.pop(), rec);
                 }
