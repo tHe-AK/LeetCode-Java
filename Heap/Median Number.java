@@ -1,16 +1,10 @@
 public class Solution { 
-    private class MyComparator implements Comparator<Integer> {
-        public int compare(Integer a, Integer b) {
-            return b - a;
-        }
-    }
-    
     public void medianNumber(int[] num) {
         if (num == null || num.length == 0) {
             throw new IllegalArgumentException();
         }
         
-        PriorityQueue<Integer> max = new PriorityQueue<Integer>(num.length / 2 + 1, new MyComparator());
+        PriorityQueue<Integer> max = new PriorityQueue<Integer>(num.length / 2 + 1, Collections.reverseOrder());
         PriorityQueue<Integer> min = new PriorityQueue<Integer>();
         
         for (int i = 0; i < num.length; i++) {
@@ -21,14 +15,12 @@ public class Solution {
                 min.offer(num[i]);
             }
             
-            if (max.size() - min.size() == 2) {
-                min.offer(max.peek());
-                max.poll();
+            if (max.size() > min.size() + 1) {
+                min.offer(max.poll());
             }
             
-            if (min.size() - max.size() == 1) {
-                max.offer(min.peek());
-                min.poll();
+            if (max.size() < min.size()) {
+                max.offer(min.poll());
             }
             
             System.out.println((max.size() + min.size()) % 2 == 0 ? (max.peek() + min.peek()) / 2.0 : max.peek());
