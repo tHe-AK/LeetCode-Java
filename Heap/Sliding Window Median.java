@@ -1,12 +1,13 @@
 class Node {
-    int id;
-    int count;
-    
-    Node(int id, int count) {
-        this.id = id;
-        this.count = count;
-    }
+	int id;
+	int count;
+	
+	Node(int id, int count) {
+		this.id = id;
+		this.count = count;
+	}
 }
+
 
 class HashHeap {
     HashMap<Integer, Node> hash;
@@ -20,18 +21,18 @@ class HashHeap {
         size = 0;
         
         if (type.equals("max")) {
-            comparator = new Comparator<Integer>() {
-                public int compare(Integer a, Integer b) {
-                    return b.compareTo(a);
-                }
-            };
+        	comparator = new Comparator<Integer>() {
+	            public int compare(Integer a, Integer b) {
+	                return b.compareTo(a);
+	            }
+        	};
         }
         else {
-            comparator = new Comparator<Integer>() {
-                public int compare(Integer a, Integer b) {
-                    return a.compareTo(b);
-                }
-            };
+        	comparator = new Comparator<Integer>() {
+	            public int compare(Integer a, Integer b) {
+	                return a.compareTo(b);
+	            }
+        	};
         }
     }
     
@@ -44,18 +45,18 @@ class HashHeap {
     }
     
     void offer(int val) {
-        if (hash.containsKey(val)) {
-            hash.get(val).count++;
-        }
-        else {
+    	if (hash.containsKey(val)) {
+    		hash.get(val).count++;
+    	}
+    	else {
             int id = heap.size();
             heap.add(val);
             Node node = new Node(id, 1);
             hash.put(val, node);
             shiftUp(id);
-        }
-        
-        size++;
+    	}
+    	
+    	size++;
     }
     
     int poll() {
@@ -81,17 +82,16 @@ class HashHeap {
         Node node = hash.get(val);
         
         if (node.count > 1) {
-            node.count--;
+        	node.count--;
         }
         else {
-            int id = node.id;
-            heap.remove(id);
+        	int id = node.id;
+        	int last = heap.size() - 1;
+        	swap(id, last);
+            heap.remove(last);
             hash.remove(val);
             
             if (id < heap.size()) {
-                val = heap.remove(heap.size() - 1);
-                heap.add(id, val);
-                hash.get(val).id = id;
                 shiftUp(id);
                 shiftDown(id);
             }
@@ -177,7 +177,7 @@ public class Solution {
                     max.remove(nums[i - k]);
                 }
                 else {
-                    min.remove(nums[i - k]);
+                	min.remove(nums[i - k]);
                 }
             }
             
@@ -190,7 +190,7 @@ public class Solution {
             }
 
             if (i >= k - 1) {
-                result.add(max.peek());
+            	result.add(max.peek());
             }
         }
         
