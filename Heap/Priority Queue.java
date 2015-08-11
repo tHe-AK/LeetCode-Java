@@ -2,19 +2,17 @@ public class PriorityQueue {
     private int[] array;
     private int capacity;
     private int size;
-    private MyComparator myComparator;
+    private Comparator<Integer> comparator;
     
     public PriorityQueue(int capacity) {
         this.capacity = capacity;
         array = new int[capacity + 1];
         size = 0;
-        myComparator = new MyComparator();
-    }
-    
-    private class MyComparator implements Comparator<Integer> {
-        public int compare(Integer o1, Integer o2) {
-            return o1 - o2;
-        }
+        comparator = new Comparator<Integer>() {
+            public int compare(Integer o1, Integer o2) {
+                return o1.compareTo(o2);
+            }
+        };
     }
     
     public int size() {
@@ -32,7 +30,7 @@ public class PriorityQueue {
         
         size++;
         array[size] = val;
-        shiftUp();
+        shiftUp(size);
     }
     
     public int poll() {
@@ -46,7 +44,7 @@ public class PriorityQueue {
         size--;
         
         if (size > 0) {
-            shiftDown();
+            shiftDown(1);
         }
         
         return val;
@@ -60,20 +58,16 @@ public class PriorityQueue {
         return array[1];
     }
     
-    private void shiftUp() {
-        int i = size;
-        
-        while (i > 1 && myComparator.compare(array[i / 2], array[i]) > 0) {
+    private void shiftUp(int i) {
+        while (i > 1 && comparator.compare(array[i / 2], array[i]) > 0) {
             swap(i, i / 2);
             i = i / 2;
         }
     }
     
-    private void shiftDown() {
-        int i = 1;
-        
+    private void shiftDown(int i) {
         while (2 * i <= size) {
-            int index = (2 * i + 1 > size || myComparator.compare(array[2 * i], array[2 * i + 1]) < 0) ? 2 * i : 2 * i + 1;
+            int index = (2 * i + 1 > size || comparator.compare(array[2 * i], array[2 * i + 1]) < 0) ? 2 * i : 2 * i + 1;
 
             if (myComparator.compare(array[i], array[index]) > 0) {
                 swap(i, index);
