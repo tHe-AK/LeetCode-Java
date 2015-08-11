@@ -1,13 +1,12 @@
-class Node {
-	int id;
-	int count;
+class Node { 
+    int id;
+    int count;
 	
-	Node(int id, int count) {
-		this.id = id;
-		this.count = count;
-	}
+    Node(int id, int count) {
+        this.id = id;
+        this.count = count;
+    }
 }
-
 
 class HashHeap {
     HashMap<Integer, Node> hash;
