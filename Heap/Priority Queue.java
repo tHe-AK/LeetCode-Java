@@ -69,7 +69,7 @@ public class PriorityQueue {
         while (2 * i <= size) {
             int index = (2 * i + 1 > size || comparator.compare(array[2 * i], array[2 * i + 1]) < 0) ? 2 * i : 2 * i + 1;
 
-            if (myComparator.compare(array[i], array[index]) > 0) {
+            if (comparator.compare(array[i], array[index]) > 0) {
                 swap(i, index);
                 i = index;
             }
