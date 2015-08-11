@@ -44,7 +44,10 @@ public class PriorityQueue {
         swap(1, size);
         array[size] = 0;
         size--;
-        shiftDown();
+        
+        if (size > 0) {
+            shiftDown();
+        }
         
         return val;
     }
