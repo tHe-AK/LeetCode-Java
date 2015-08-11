@@ -43,7 +43,7 @@ public class PriorityQueue {
         array[size] = 0;
         size--;
         
-        if (size > 0) {
+        if (size >= 1) {
             shiftDown(1);
         }
         
