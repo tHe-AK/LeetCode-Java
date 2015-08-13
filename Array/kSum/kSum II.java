@@ -20,7 +20,6 @@ public class Solution {
     }
     
     private void helper(int[] A, int target, int k, int start, ArrayList<Integer> cur, ArrayList<ArrayList<Integer>> result) {
-        
         for (int i = start; i < A.length - k + 1; i++) {
             if (i != start && A[i] == A[i - 1]) {
                 continue;
