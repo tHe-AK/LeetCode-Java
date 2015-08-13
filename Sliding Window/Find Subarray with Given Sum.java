@@ -4,23 +4,19 @@ public class Solution {
             return false;
         }
         
-        int low = 0;
-        int high = 0;
+        int start = 0;
         int sum = 0;
         
-        while (low <= high && high < array.length) {
-            while (high < array.length && sum < t) {
-                sum += array[high];
-                high++;
-            }
+        for (int i = 0; i < array.length; i++) {
+            sum += array[i];
             
-            while (low <= high && sum >= t) {
+            while (start <= i && sum >= t) {
                 if (sum == t) {
                     return true;
                 }
                 else {
-                    sum -= array[low];
-                    low++;
+                    sum -= array[start];
+                    start++;
                 }
             }
         }
