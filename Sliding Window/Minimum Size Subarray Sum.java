@@ -4,21 +4,17 @@ public class Solution {
             return 0;
         }
         
-        int low = 0;
-        int high = 0;
+        int start = 0;
         int sum = 0;
         int min = Integer.MAX_VALUE;
         
-        while (low <= high && high < nums.length) {
-            while (high < nums.length && sum < s) {
-                sum += nums[high];
-                high++;
-            }
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
             
-            while (low <= high && sum >= s) {
-                min = Math.min(min, high - low);
-                sum -= nums[low];
-                low++;
+            while (start <= i && sum >= s) {
+                min = Math.min(min, i - start + 1);
+                sum -= nums[start];
+                start++;
             }
         }
         
