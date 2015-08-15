@@ -1,12 +1,16 @@
 public class Solution {
     public int maxProfit(int k, int[] prices) {
-        if (prices == null || prices.length <= 1) {
+        if (prices == null) {
+            throw new IllegalArgumentException();
+        }
+        
+        if (prices.length <= 1) {
             return 0;
         }
         
         int len = prices.length;
         
-        if (k >= len) {
+        if (k >= len - 1) {
             return helper(prices);
         }
         
