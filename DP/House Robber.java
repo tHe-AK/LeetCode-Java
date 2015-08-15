@@ -1,6 +1,10 @@
 public class Solution {
     public int rob(int[] nums) {
-        if (nums == null || nums.length == 0) {
+        if (nums == null) {
+            throw new IllegalArgumentException();
+        }
+        
+        if (nums.length == 0) {
             return 0;
         }
         
