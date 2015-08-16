@@ -26,7 +26,7 @@ public class Solution {
             } 
         }
         
-        for (int i = 0; i <= n; i++) {
+        for (int i = 1; i <= n; i++) {
             rec[i][1] = dis[1][i];
         }
         
@@ -34,7 +34,7 @@ public class Solution {
             for(int i = x; i <= n; i++) {
                 rec[i][x] = Integer.MAX_VALUE;
                 
-                for(int j = 0; j < i; j++) {  
+                for(int j = 1; j < i; j++) {  
                     if(rec[i][x] > rec[j][x - 1] + dis[j + 1][i]) {
                         rec[i][x] = rec[j][x - 1] + dis[j + 1][i];  
                     }  
