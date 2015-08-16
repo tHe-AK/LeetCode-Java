@@ -17,15 +17,15 @@ public class Solution {
         if (n <= 2) {
             return true;
         }
-
-        int[] rec = new int[n + 1];
-        rec[n] = values[n - 1];
-        rec[n - 1] = values[n - 1] + values[n - 2];
         
-        for (int i = n - 2; i >= 1; i--) {
-            rec[i] = Math.max(values[i - 1] - rec[i + 1], values[i - 1] + values[i] - rec[i + 2]);
+        int[] rec = new int[n];
+        rec[n - 1] = values[n - 1];
+        rec[n - 2] = values[n - 1] + values[n - 2];
+        
+        for (int i = n - 3; i >= 0; i--) {
+            rec[i] = Math.max(values[i] - rec[i + 1], values[i] + values[i + 1] - rec[i + 2]);
         }
         
-        return rec[1] > 0;
+        return rec[0] > 0;
     }
 }
