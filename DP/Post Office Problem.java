@@ -16,8 +16,8 @@ public class Solution {
         int[][] rec = new int[n + 1][k + 1];
         int result = Integer.MAX_VALUE;
         
-        for(int i = 1; i <= n; i++) {  
-            for(int j = i + 1; j <= n; j++) {  
+        for (int i = 1; i <= n; i++) {  
+            for (int j = i + 1; j <= n; j++) {  
                 int mid = j + (i - j) / 2;
                 
                 for (int x = i; x <= j; x++) {
@@ -26,11 +26,11 @@ public class Solution {
             } 
         }
         
-        for(int i = 0; i <= n; i++) {
+        for (int i = 0; i <= n; i++) {
             rec[i][1] = dis[1][i];
         }
         
-        for(int x = 2; x <= k; x++) {
+        for (int x = 2; x <= k; x++) {
             for(int i = x; i <= n; i++) {
                 rec[i][x] = Integer.MAX_VALUE;
                 
