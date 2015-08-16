@@ -17,13 +17,7 @@ public class Solution {
         if (n <= 2) {
             return true;
         }
-        
-        int sum = 0;
-        
-        for (int i = 0; i < values.length; i++) {
-            sum += values[i];
-        }
-        
+
         int[] rec = new int[n + 1];
         rec[n] = values[n - 1];
         rec[n - 1] = values[n - 1] + values[n - 2];
