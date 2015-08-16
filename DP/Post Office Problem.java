@@ -17,7 +17,7 @@ public class Solution {
         int result = Integer.MAX_VALUE;
         
         for (int i = 1; i <= n; i++) {  
-            for (int j = i + 1; j <= n; j++) {  
+            for (int j = i; j <= n; j++) {  
                 int mid = j + (i - j) / 2;
                 
                 for (int x = i; x <= j; x++) {
