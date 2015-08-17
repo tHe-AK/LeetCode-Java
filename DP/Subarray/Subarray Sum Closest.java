@@ -1,20 +1,27 @@
 public class Solution {
-    public int[] subArraySumClosestToZero(int[] A) {
-        if (A == null || A.length == 0) {
+    /**
+     * @param nums: A list of integers
+     * @return: A list of integers includes the index of the first number 
+     *          and the index of the last number
+     */
+    public ArrayList<Integer> subarraySumClosest(int[] nums) {
+        if (nums == null) {
             throw new IllegalArgumentException();
         }
         
-        int[] result = new int[2];
+        ArrayList<Integer> result = new ArrayList<Integer>();
+        result.add(0);
+        result.add(0);
         TreeMap<Integer, Integer> rec = new TreeMap<Integer, Integer>();
         int sum = 0;
         rec.put(sum, -1);
         
-        for (int i = 0; i < A.length; i++) {
-            sum += A[i];
+        for (int i = 0; i < nums.length; i++) {
+            sum += nums[i];
             
             if (rec.containsKey(sum)) {
-                result[0] = rec.get(sum) + 1;
-                result[1] = i;
+                result.set(0, rec.get(sum) + 1);
+                result.set(1, i);
                 
                 return result;
             }
@@ -24,17 +31,15 @@ public class Solution {
         }
         
         int min = Integer.MAX_VALUE;
-        int index1;
-        int index2;
         Integer pre = null;
         
         for (Integer key : rec.keySet()) {
             if (pre != null && Math.abs(key - pre) < min) {
                 min = Math.abs(key - pre);
-                index1 = rec.get(pre);
-                index2 = rec.get(key);
-                result[0] = Math.min(index1, index2) + 1;
-                result[1] = Math.max(index1, index2);
+                int index1 = rec.get(pre);
+                int index2 = rec.get(key);
+                result.set(0, Math.min(index1, index2) + 1);
+                result.set(1, Math.max(index1, index2));
             }
             
             pre = key;
