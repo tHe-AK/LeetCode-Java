@@ -23,7 +23,7 @@ public class Solution {
             rec[i] = new Bucket();
         }
         
-        for (int i = 0; i < len; i++) {
+        for (int i = 1; i < len; i++) {
             min = Math.min(min, nums[i]);
             max = Math.max(max, nums[i]);
         }
