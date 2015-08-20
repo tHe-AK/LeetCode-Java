@@ -11,38 +11,37 @@ public class Solution {
         int len = A.length;
         long result = 0;
         long factorial = 1;
-        
-        for (int i = len - 2; i >= 0; i--) {
+        HashMap<Integer, Integer> rec = new HashMap<Integer, Integer>();
+
+        for (int i = len - 1; i >= 0; i--) {
+            if (rec.containsKey(A[i])) {
+                rec.put(A[i], rec.get(A[i]) + 1);
+            }
+            else {
+                rec.put(A[i], 1);
+            }
+            
             int count = 0;
-            HashMap<Integer, Integer> rec = new HashMap<Integer, Integer>();
-            rec.put(A[i], 1);
             
             for (int j = i + 1; j < len; j++) {
-                if (rec.containsKey(A[j])) {
-                    rec.put(A[j], rec.get(A[j]) + 1);
-                }
-                else {
-                    rec.put(A[j], 1);
-                }
-                
                 if (A[i] > A[j]) {
                     count++;
                 }
             }
             
-            long dup = 1;
+            long duplicate = 1;
             
             for (Integer value : rec.values()) {
                 long temp = 1;
                 
-                for (int x = 2; x <= value; x++) {
-                    temp *= x;
+                for (int k = 2; k <= value; k++) {
+                    temp *= k;
                 }
                 
-                dup *= temp;
+                duplicate *= temp;
             }
             
-            result += count * factorial / dup;
+            result += count * factorial / duplicate;
             factorial *= len - i;
         }
         
