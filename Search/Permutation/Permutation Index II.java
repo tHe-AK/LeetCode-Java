@@ -3,7 +3,7 @@ public class Solution {
      * @param A an integer array
      * @return a long integer
      */
-    public long permutationIndex(int[] A) {
+    public long permutationIndexII(int[] A) {
         if (A == null) {
             throw new IllegalArgumentException();
         }
@@ -30,7 +30,7 @@ public class Solution {
                 }
             }
             
-            long duplicate = 1;
+            long dup = 1;
             
             for (Integer value : rec.values()) {
                 long temp = 1;
@@ -39,10 +39,10 @@ public class Solution {
                     temp *= x;
                 }
                 
-                duplicate *= temp;
+                dup *= temp;
             }
             
-            result += count * factorial / duplicate;
+            result += count * factorial / dup;
             factorial *= len - i;
         }
         
