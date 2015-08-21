@@ -1,32 +1,28 @@
 public class Solution {
-    public int[] twoSingleNumber(int[] A) {
-        if (A == null || A.length < 2) {
+    public int[] singleNumber(int[] nums) {
+        if (nums == null || nums.length < 2) {
             throw new IllegalArgumentException();
         }
         
-        int result = 0;
+        int diff = 0;
         
-        for (int i = 0; i < A.length; i++) {
-            result ^= A[i];
+        for (int num : nums) {
+            diff ^= num;
         }
         
-        int k = 0;
+        diff &= -diff;
         
-        while ((result >> k & 1) == 0) {
-            k++;
-        }
+        int[] result = new int[2];
         
-        int[] num = new int[2];
-        
-        for (int i = 0; i < A.length; i++) {
-            if ((A[i] >> k & 1) == 0) {
-                num[0] ^= A[i];
+        for (int num : nums) {
+            if ((num & diff) == 0) {
+                result[0] ^= num;
             }
             else {
-                num[1] ^= A[i];
+                result[1] ^= num;
             }
         }
         
-        return num;
+        return result;
     }
 }
