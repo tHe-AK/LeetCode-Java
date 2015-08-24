@@ -101,3 +101,87 @@ public class Solution {
         return uf.print();
     }
 }
+
+public class Solution {
+    /**
+     * @param nodes a array of Undirected graph node
+     * @return a connected set of a Undirected graph
+     */
+    public List<List<Integer>> connectedSet(ArrayList<UndirectedGraphNode> nodes) {
+        if (nodes == null) {
+            throw new IllegalArgumentException();
+        }
+        
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        HashSet<UndirectedGraphNode> visited = new HashSet<UndirectedGraphNode>();
+        
+        for (UndirectedGraphNode node : nodes) {
+            if (!visited.contains(node)) {
+                List<Integer> cur = new ArrayList<Integer>();
+                helper(node, visited, cur);
+                Collections.sort(cur);
+                result.add(cur);
+            }
+        }
+        
+        return result;
+    }
+    
+    private void helper(UndirectedGraphNode node, HashSet<UndirectedGraphNode> visited, List<Integer> cur) {
+        visited.add(node);
+        cur.add(node.label);
+        
+        for (UndirectedGraphNode neighbor : node.neighbors) {
+            if (!visited.contains(neighbor)) {
+                helper(neighbor, visited, cur);
+            }
+        }
+    }
+}
+
+public class Solution {
+    /**
+     * @param nodes a array of Undirected graph node
+     * @return a connected set of a Undirected graph
+     */
+    public List<List<Integer>> connectedSet(ArrayList<UndirectedGraphNode> nodes) {
+        if (nodes == null) {
+            throw new IllegalArgumentException();
+        }
+        
+        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        HashSet<UndirectedGraphNode> visited = new HashSet<UndirectedGraphNode>();
+        
+        for (UndirectedGraphNode node : nodes) {
+            if (!visited.contains(node)) {
+                List<Integer> cur = helper(node, visited);
+                Collections.sort(cur);
+                result.add(cur);
+            }
+        }
+        
+        return result;
+    }
+    
+    private List<Integer> helper(UndirectedGraphNode node, HashSet<UndirectedGraphNode> visited) {
+        visited.add(node);
+        List<Integer> result = new ArrayList<Integer>();
+        result.add(node.label);
+        Queue<UndirectedGraphNode> queue = new LinkedList<UndirectedGraphNode>();
+        queue.offer(node);
+        
+        while (!queue.isEmpty()) {
+            UndirectedGraphNode peek = queue.poll();
+            
+            for (UndirectedGraphNode neighbor : peek.neighbors) {
+                if (!visited.contains(neighbor)) {
+                    visited.add(neighbor);
+                    result.add(neighbor.label);
+                    queue.add(neighbor);
+                }
+            }
+        }
+        
+        return result;
+    }
+}
