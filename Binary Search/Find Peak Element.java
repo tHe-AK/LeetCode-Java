@@ -4,7 +4,7 @@ class Solution {
      * @return: return any of peek positions.
      */
     public int findPeak(int[] A) {
-     if (A == null || A.length < 3) {
+        if (A == null || A.length < 3) {
             throw new IllegalArgumentException();
         }
         
