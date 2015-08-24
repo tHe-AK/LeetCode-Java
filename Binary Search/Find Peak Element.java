@@ -25,7 +25,7 @@ class Solution {
             }
         }
         
-        return A[low] < A[high] ? high : low; 
+        throw new IllegalArgumentException();
     }
 }
 
