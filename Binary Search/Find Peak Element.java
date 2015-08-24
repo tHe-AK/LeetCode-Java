@@ -1,19 +1,23 @@
-public class Solution {
-    public int findPeakElement(int[] num) {
-        if (num == null || num.length == 0) {
+class Solution {
+    /**
+     * @param A: An integers array.
+     * @return: return any of peek positions.
+     */
+    public int findPeak(int[] A) {
+     if (A == null || A.length == 0) {
             throw new IllegalArgumentException();
         }
         
         int low = 0;
-        int high = num.length - 1;
+        int high = A.length - 1;
         
         while (low + 1 < high) {
             int mid = low + (high - low) / 2;
             
-            if (num[mid - 1] < num[mid] && num[mid] > num[mid + 1]) {
+            if (A[mid - 1] < A[mid] && A[mid] > A[mid + 1]) {
                 return mid;
             }
-            else if (num[mid - 1] > num[mid]) {
+            else if (A[mid - 1] > A[mid]) {
                 high = mid;
             }
             else {
@@ -21,6 +25,7 @@ public class Solution {
             }
         }
         
-        return num[low] < num[high] ? high : low; 
+        return A[low] < A[high] ? high : low; 
     }
 }
+
