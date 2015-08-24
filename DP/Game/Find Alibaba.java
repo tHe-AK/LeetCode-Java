@@ -1,7 +1,7 @@
 import java.util.Arrays;
 
 public class Solution {
-    boolean alibaba(int numCaves, int[] strategy) {
+    public boolean alibaba(int numCaves, int[] strategy) {
         if (numCaves <= 0 || strategy == null) {
             throw new IllegalArgumentException();
         }
