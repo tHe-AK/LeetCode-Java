@@ -85,10 +85,15 @@ public class Solution {
         UnionFind uf = new UnionFind();
         
         for (DirectedGraphNode node : nodes) {
-            uf.add(node.label);
+            if (!uf.contain(node.label)) {
+                uf.add(node.label);
+            }
             
             for (DirectedGraphNode neighbor : node.neighbors) {
-                uf.add(neighbor.label);
+                if (!uf.contain(node.label)) {
+                    uf.add(neighbor.label);
+                }
+                
                 uf.union(node.label, neighbor.label);
             }
         }
