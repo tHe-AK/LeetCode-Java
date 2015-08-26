@@ -34,17 +34,11 @@ public class Solution {
         }
 
         int n = river.length;
-        int m = (int) Math.sqrt(2 * n);
-
-        if ((m + 1) * m <= 2 * n) {
-            m++;
-        }
-
-        int x = (1 + m) * m / 2;
-        int[][] rec = new int[x][m + 2];
+        int m = (int) Math.sqrt(2 * n) + 1;
+        int[][] rec = new int[n + m][m + 2];
         int min = Integer.MAX_VALUE;
 
-        for (int i = 0; i < x; i++) {
+        for (int i = 0; i < n + m; i++) {
             for (int j = 0; j < m + 2; j++) {
                 rec[i][j] = Integer.MAX_VALUE;
             }
@@ -52,7 +46,7 @@ public class Solution {
 
         rec[0][1] = 0;
 
-        for (int i = 1; i < x; i++) {
+        for (int i = 1; i < n + m; i++) {
             for (int j = 1; j <= m; j++) {
                 boolean stone = i < n ? river[i] == 1 : true;
 
