@@ -37,9 +37,10 @@ public class Solution {
         
         StringBuilder sb = new StringBuilder();
         HashSet<Character> visited = new HashSet<Character>();
+        HashSet<Character> path = new HashSet<Character>();
         
         for (Character key : rec.keySet()) {
-            if (!helper(rec, visited, new HashSet<Character>(), sb, key)) {
+            if (!helper(rec, visited, path, sb, key)) {
                 return "";
             }
         }
