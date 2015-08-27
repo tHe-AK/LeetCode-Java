@@ -36,11 +36,10 @@ public class Solution {
         }
         
         StringBuilder sb = new StringBuilder();
-        HashSet<Character> visited = new HashSet<Character>();
         HashSet<Character> path = new HashSet<Character>();
         
         for (Character key : rec.keySet()) {
-            if (!helper(rec, visited, path, sb, key)) {
+            if (!helper(rec, path, sb, key)) {
                 return "";
             }
         }
@@ -50,20 +49,19 @@ public class Solution {
         return sb.toString();
     }
     
-    private boolean helper(HashMap<Character, HashSet<Character>> rec, HashSet<Character> visited, HashSet<Character> path, StringBuilder sb, char key) {
+    private boolean helper(HashMap<Character, HashSet<Character>> rec, HashSet<Character> path, StringBuilder sb, char key) {
         if (path.contains(key)) {
             return false;
         }
         
-        if (visited.contains(key)) {
+        if (sb.indexOf(Character.toString(key)) != -1) {
             return true;
         }
  
-        visited.add(key);
         path.add(key);
         
         for (Character value : rec.get(key)) {
-            if (!helper(rec, visited, path, sb, value)) {
+            if (!helper(rec, path, sb, value)) {
                 return false;
             }
         }
