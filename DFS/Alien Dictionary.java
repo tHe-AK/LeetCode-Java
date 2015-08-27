@@ -36,7 +36,7 @@ public class Solution {
         }
         
         StringBuilder sb = new StringBuilder();
-        HashSet<Character> path = new HashSet<Character>();
+        boolean[] path = new boolean[26];
         
         for (Character key : rec.keySet()) {
             if (!helper(rec, path, sb, key)) {
@@ -49,8 +49,10 @@ public class Solution {
         return sb.toString();
     }
     
-    private boolean helper(HashMap<Character, HashSet<Character>> rec, HashSet<Character> path, StringBuilder sb, char key) {
-        if (path.contains(key)) {
+    private boolean helper(HashMap<Character, HashSet<Character>> rec, boolean[] path, StringBuilder sb, char key) {
+        int index = key - 'a';
+        
+        if (path[index]) {
             return false;
         }
         
@@ -58,7 +60,7 @@ public class Solution {
             return true;
         }
  
-        path.add(key);
+        path[index] = true;
         
         for (Character value : rec.get(key)) {
             if (!helper(rec, path, sb, value)) {
@@ -66,7 +68,7 @@ public class Solution {
             }
         }
         
-        path.remove(key);
+        path[index] = false;
         sb.append(key);
         
         return true;
