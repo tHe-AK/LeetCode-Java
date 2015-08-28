@@ -1,7 +1,7 @@
 public class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         if (numCourses < 0 || prerequisites == null) {
-            return false;
+            throw new IllegalArgumentException();
         }
         
         List<List<Integer>> rec = new ArrayList<List<Integer>>(numCourses);
