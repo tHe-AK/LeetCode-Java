@@ -1,33 +1,23 @@
-class GraphNode {
-    int label;
-    List<GraphNode> neighbors;
-    
-    GraphNode(int x) {
-        label = x;
-        neighbors = new ArrayList<GraphNode>();
-    }
-}
-
 public class Solution {
     public int[] findOrder(int numCourses, int[][] prerequisites) {
         if (numCourses < 0 || prerequisites == null) {
-            return null;
+            throw new IllegalArgumentException();
         }
         
-        GraphNode[] rec = new GraphNode[numCourses];
-        boolean[] visited = new boolean[numCourses];
-        List<GraphNode> seq = new ArrayList<GraphNode>();
+        List<List<Integer>> rec = new ArrayList<List<Integer>>(numCourses);
         
         for (int i = 0; i < numCourses; i++) {
-            rec[i] = new GraphNode(i);
+            rec.add(new ArrayList<Integer>());
         }
         
         for (int[] pair : prerequisites) {
-            rec[pair[1]].neighbors.add(rec[pair[0]]);
+            rec.get(pair[1]).add(pair[0]);
         }
         
-        for (GraphNode node : rec) {
-            if (!helper(node, visited, seq)) {
+        List<Integer> reverse = new ArrayList<Integer>();
+        
+        for (int i = 0; i < numCourses; i++) {
+            if (!helper(rec, i, new boolean[numCourses], reverse)) {
                 return new int[0];
             }
         }
@@ -35,33 +25,31 @@ public class Solution {
         int[] result = new int[numCourses];
         
         for (int i = 0; i < numCourses; i++) {
-            result[i] = seq.get(numCourses - 1 - i).label;
+            result[i] = reverse.get(numCourses - i - 1);
         }
- 
+        
         return result;
     }
     
-    private boolean helper(GraphNode node, boolean[] visited, List<GraphNode> seq) {
-        if (seq.contains(node)) {
+    private boolean helper(List<List<Integer>> rec, int i, boolean[] path, List<Integer> reverse) {
+        if (path[i]) {
+            return false;
+        }
+        
+        if (reverse.contains(i)) {
             return true;
         }
         
-        int label = node.label;
+        path[i] = true;
         
-        if (visited[label]) {
-            return false;
-        }
-
-        visited[label] = true;
-        
-        for (GraphNode neighbor : node.neighbors) {
-            if (!helper(neighbor, visited, seq)) {
+        for (Integer j : rec.get(i)) {
+            if (!helper(rec, j, path, reverse)) {
                 return false;
             }
         }
         
-        visited[label] = false;
-        seq.add(node);
+        path[i] = false;
+        reverse.add(i);
         
         return true;
     }
