@@ -1,32 +1,21 @@
-class GraphNode {
-    int label;
-    List<GraphNode> neighbors = new ArrayList<GraphNode>();
-    
-    GraphNode(int x) {
-        label = x;
-        neighbors = new ArrayList<GraphNode>();
-    }
-}
-
 public class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         if (numCourses < 0 || prerequisites == null) {
             return false;
         }
         
-        GraphNode[] rec = new GraphNode[numCourses];
-        boolean[] visited = new boolean[numCourses];
+        List<List<Integer>> rec = new ArrayList<List<Integer>>(numCourses);
         
         for (int i = 0; i < numCourses; i++) {
-            rec[i] = new GraphNode(i);
+            rec.add(new ArrayList<Integer>());
         }
         
         for (int[] pair : prerequisites) {
-            rec[pair[1]].neighbors.add(rec[pair[0]]);
+            rec.get(pair[1]).add(pair[0]);
         }
         
-        for (GraphNode node : rec) {
-            if (!helper(node, visited)) {
+        for (int i = 0; i < numCourses; i++) {
+            if (!helper(rec, i, new boolean[numCourses])) {
                 return false;
             }
         }
@@ -34,22 +23,20 @@ public class Solution {
         return true;
     }
     
-    private boolean helper(GraphNode node, boolean[] visited) {
-        int label = node.label;
-        
-        if (visited[label]) {
+    private boolean helper(List<List<Integer>> rec, int i, boolean[] path) {
+        if (path[i]) {
             return false;
         }
 
-        visited[label] = true;
+        path[i] = true;
         
-        for (GraphNode neighbor : node.neighbors) {
-            if (!helper(neighbor, visited)) {
+        for (Integer j : rec.get(i)) {
+            if (!helper(rec, j, path)) {
                 return false;
             }
         }
         
-        visited[label] = false;
+        path[i] = false;
         
         return true;
     }
