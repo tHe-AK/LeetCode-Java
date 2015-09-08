@@ -1,16 +1,8 @@
-/**
- * public class VersionControl {
- *     public static boolean isBadVersion(int k);
- * }
- * you can use VersionControl.isBadVersion(k) to judge whether 
- * the kth code version is bad or not.
-*/
-class Solution {
-    /**
-     * @param n: An integers.
-     * @return: An integer which is the first bad version.
-     */
-    public int findFirstBadVersion(int n) {
+/* The isBadVersion API is defined in the parent class VersionControl.
+      boolean isBadVersion(int version); */
+
+public class Solution extends VersionControl {
+    public int firstBadVersion(int n) {
         if (n < 1) {
             throw new IllegalArgumentException();
         }
@@ -21,10 +13,9 @@ class Solution {
         while (low <= high) {
             int mid = low + (high - low) / 2;
             
-            if (VersionControl.isBadVersion(mid)) {
+            if (isBadVersion(mid)) {
                 high = mid - 1;
-            }
-            else {
+            } else {
                 low = mid + 1;
             }
         }
