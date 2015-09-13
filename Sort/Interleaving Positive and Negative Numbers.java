@@ -8,42 +8,29 @@ class Solution {
             throw new IllegalArgumentException();
         }
         
-        int neg = 0;
-        int pos = 0;
+        int len = A.length;
+        int pre = 0;
+        int cur = 0;
         
-        for (int i = 0; i < A.length; i++) {
+        for (int i = 0; i < len; i++) {
             if (A[i] < 0) {
-                neg++;
-            }
-            else {
-                pos++;
+                int temp = A[cur];
+                A[cur] = A[i];
+                A[i] = temp;
+                cur++;
             }
         }
         
-        int negId = 0;
-        int posId = 1;
-        
-        if (neg < pos) {
-            negId = 1;
-            posId = 0;
+        if (cur > len - cur) {
+            pre = 1;
         }
         
-        while (negId < A.length && posId < A.length) {
-            while (negId < A.length && A[negId] < 0) {
-                negId += 2;
-            }
-            
-            while (posId < A.length && A[posId] >= 0) {
-                posId += 2;
-            }
-            
-            if (negId < A.length && posId < A.length) {
-                int temp = A[negId];
-                A[negId] = A[posId];
-                A[posId] = temp;
-                negId += 2;
-                posId += 2;
-            }
+        while (pre < cur && cur < len && A[pre] < 0) {
+            int temp = A[pre];
+            A[pre] = A[cur];
+            A[cur] = temp;
+            pre += 2;
+            cur++;
         }
    }
 }
