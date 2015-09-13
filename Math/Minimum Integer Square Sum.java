@@ -11,11 +11,10 @@ public class Solution {
         List<List<Integer>> rec = new ArrayList<List<Integer>>();
         
         for (int i = 0; i <= num; i++) {
-            int sqrt = (int) Math.sqrt(i);
             int min = Integer.MAX_VALUE;
             List<Integer> result = new ArrayList<Integer>();
             
-            for (int j = 1; j <= sqrt; j++) {
+            for (int j = 1; j * j <= i; j++) {
                 int size = rec.get(i - j * j).size();
                 
                 if (size < min) {
