@@ -14,7 +14,7 @@ public class Solution {
         int factor5 = 5;
         
         for (int i = 2; i <= n; i++){
-            int min = Math.min(Math.min(factor2,factor3),factor5);
+            int min = Math.min(Math.min(factor2, factor3), factor5);
             rec[i] = min;
             
             if (min == factor2) {
