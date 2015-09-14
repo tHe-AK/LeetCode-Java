@@ -1,47 +1,49 @@
-/*
-public class Iterator {
-    public int get_next();
-    public boolean has_next();
-}
-*/
-
 public class ZigzagIterator {
-    private boolean flag;
-    private Iterator a;
-    private Iterator b;
+    private List<Iterator<Integer>> rec;
+    private int cur;
     
-    public ZigzagIterator(Iterator a, Iterator b) {
-        flag = true;
-        a = this.a;
-        b = this.b;
+    public ZigzagIterator(List<Integer> v1, List<Integer> v2) {
+        rec = new ArrayList<Iterator<Integer>>();
+        rec.add(v1.iterator());
+        rec.add(v2.iterator());
+        cur = 0;
     }
-    
+
+    public int next() {
+        if (hasNext()) {
+            int val = rec.get(cur).next();
+            cur = (cur + 1) % rec.size();
+            return val;
+        } else {
+            throw new RuntimeException();
+        }
+    }
+
     public boolean hasNext() {
-        return a.hasNext() || b.hasNext();
-    }
-    
-    public Object next() {
-        if (!has_next()) {
-            return null;
+        if (rec.get(cur).hasNext()) {
+            return true;
         }
         
-        if (a.hasNext() && b.hasNext()) {
-            if (flag) {
-                flag = false;
-                return a.next();
-            }
-            else {
-                flag = true;
-                return b.next();
+        for (int i = cur + 1; i < rec.size(); i++) {
+            if (rec.get(i).hasNext()) {
+                cur = i;
+                return true;
             }
         }
-        else {
-            if (a.hasNext()) {
-                return a.next();
-            }
-            else {
-                return b.next();
+        
+        for (int i = 0; i < cur; i++) {
+            if (rec.get(i).hasNext()) {
+                cur = i;
+                return true;
             }
         }
+        
+        return false;
     }
 }
+
+/**
+ * Your ZigzagIterator object will be instantiated and called as such:
+ * ZigzagIterator i = new ZigzagIterator(v1, v2);
+ * while (i.hasNext()) v[f()] = i.next();
+ */
