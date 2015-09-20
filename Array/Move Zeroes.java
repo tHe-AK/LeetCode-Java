@@ -9,13 +9,11 @@ public class Solution {
         
         for (int i = 0; i < len; i++) {
             if (nums[i] != 0) {
+                int temp = nums[cur];
                 nums[cur] = nums[i];
+                nums[i] = temp;
                 cur++;
             }
-        }
-        
-        for (int i = cur; i < len; i++) {
-            nums[i] = 0;
         }
     }
 }
