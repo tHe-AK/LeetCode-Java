@@ -4,23 +4,27 @@ public class Solution {
             return false;
         }
         
-        HashMap<Character, Character> map = new HashMap<Character, Character>();
-        HashMap<Character, Character> mapReverse = new HashMap<Character, Character>();
+        Map<Character, Character> map = new HashMap<Character, Character>();
+        Set<Character> set = new HashSet<Character>();
         
         for (int i = 0; i < s.length(); i++) {
             char x = s.charAt(i);
             char y = t.charAt(i);
             
-            if (map.containsKey(x) && map.get(x) != y) {
-                return false;
+            if (map.containsKey(x)) {
+                if (map.get(x) == y) {
+                    continue;
+                else {
+                    return false;
+                }
             }
             
-            if (mapReverse.containsKey(y) && mapReverse.get(y) != x) {
+            if (set.contains(y)) {
                 return false;
             }
             
             map.put(x, y);
-            mapReverse.put(y, x);
+            set.add(y);
         }
         
         return true;
