@@ -14,7 +14,7 @@ public class Solution {
             if (map.containsKey(x)) {
                 if (map.get(x) == y) {
                     continue;
-                else {
+                } else {
                     return false;
                 }
             }
