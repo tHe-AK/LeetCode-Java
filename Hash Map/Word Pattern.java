@@ -13,23 +13,26 @@ public class Solution {
         }
         
         Map<Character, String> map = new HashMap<Character, String>();
-        Map<String, Character> reverseMap = new HashMap<String, Character>();
+        Set<String> set = new HashSet<String>();
         
         for (int i = 0; i < len1; i++) {
             char c = pattern.charAt(i);
             String word = words[i];
             
-            if (map.containsKey(c) && !map.get(c).equals(word)) {
+            if (map.containsKey(c)) {
+                if (map.get(c).equals(word)) {
+                    continue;
+                } else {
+                    return false;
+                }
+            }
+            
+            if (set.contains(word)) {
                 return false;
             }
             
             map.put(c, word);
-            
-            if (reverseMap.containsKey(word) && reverseMap.get(word) != c) {
-                return false;
-            }
-            
-            reverseMap.put(word, c);
+            set.add(word);
         }
         
         return true;
