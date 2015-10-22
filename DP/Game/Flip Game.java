@@ -6,8 +6,10 @@ public class Solution {
         
         List<String> result = new ArrayList<String>();
         
-        for (int i = -1; (i = s.indexOf("++", i + 1)) != -1; ) {
-            result.add(s.substring(0, i) + "--" + s.substring(i + 2));
+        for (int i = 0; i < s.length() - 1; i++) {
+            if (s.charAt(i) == '+' && s.charAt(i + 1) == '+') {
+                result.add(s.substring(0, i) + "--" + s.substring(i + 2));
+            }
         }
         
         return result;
