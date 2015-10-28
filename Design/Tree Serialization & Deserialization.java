@@ -11,7 +11,7 @@ class TreeNode {
 }
 
 public class Solution {
-    String serialize(TreeNode root) {
+    public String serialize(TreeNode root) {
         if (root == null) {
             return null;
         }
@@ -22,7 +22,7 @@ public class Solution {
         return sb.toString();
     }
     
-    void serializeHelper(TreeNode root, StringBuilder sb) {
+    private void serializeHelper(TreeNode root, StringBuilder sb) {
         if (root == null) {
             return;
         }
@@ -36,7 +36,7 @@ public class Solution {
         sb.append("] ");
     }
     
-    TreeNode deserialize(String tree) {
+    public TreeNode deserialize(String tree) {
         if (tree == null) {
             return null;
         }
@@ -46,7 +46,7 @@ public class Solution {
         return deserializeHelper(sc);
     }
     
-    TreeNode deserializeHelper(Scanner sc) {
+    private TreeNode deserializeHelper(Scanner sc) {
         String val;
         
         if (!sc.hasNext() || (val = sc.next()).equals("]")) {
