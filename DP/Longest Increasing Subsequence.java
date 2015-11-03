@@ -25,11 +25,7 @@ public class Solution {
 }
 
 public class Solution {
-    /**
-     * @param nums: The integer array
-     * @return: The length of LIS (longest increasing subsequence)
-     */
-    public int longestIncreasingSubsequence(int[] nums) {
+    public int lengthOfLIS(int[] nums) {
         if (nums == null) {
             throw new IllegalArgumentException();
         }
@@ -51,7 +47,7 @@ public class Solution {
                 result[i] = 1;
                 min[0] = nums[i];
             }
-            else if (nums[i] >= min[cur]) {
+            else if (nums[i] > min[cur]) {
                 cur++;
                 result[i] = cur + 1;
                 min[cur] = nums[i];
@@ -63,7 +59,7 @@ public class Solution {
                 while (low <= high) {
                     int mid = low + (high - low) / 2;
                     
-                    if (min[mid] == nums[i] || min[mid] < nums[i]) {
+                    if (min[mid] < nums[i]) {
                         low = mid + 1;
                     }
                     else {
