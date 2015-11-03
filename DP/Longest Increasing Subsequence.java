@@ -1,15 +1,7 @@
 public class Solution {
-    /**
-     * @param nums: The integer array
-     * @return: The length of LIS (longest increasing subsequence)
-     */
-    public int longestIncreasingSubsequence(int[] nums) {
+    public int lengthOfLIS(int[] nums) {
         if (nums == null) {
             throw new IllegalArgumentException();
-        }
-        
-        if (nums.length == 0) {
-            return 0;
         }
         
         int len = nums.length;
@@ -20,7 +12,7 @@ public class Solution {
             result[i] = 1;
             
             for (int j = 0; j < i; j++) {
-                if (nums[j] <= nums[i]) {
+                if (nums[j] < nums[i]) {
                     result[i] = Math.max(result[i], result[j] + 1);
                 }
             }
