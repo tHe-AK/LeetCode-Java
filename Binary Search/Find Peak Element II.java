@@ -41,7 +41,7 @@ class Solution {
             }
             else {
                 int jMid = jLow + (jHigh - jLow) / 2;
-                int i = 0;
+                int i = iLow;
                 
                 for (int x = iLow + 1; x <= iHigh; x++) {
                     if (A[x][jMid] > A[i][jMid]) {
