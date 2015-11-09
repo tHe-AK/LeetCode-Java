@@ -12,7 +12,7 @@ class TreeNode {
 }
 
 public class Solution {
-    public List<Integer> longest_seq(TreeNode root) {
+    public List<Integer> longestIncreasingContinuousSubsequenceIII(TreeNode root) {
         List<Integer> result = new ArrayList<Integer>();
         
         if (root == null) {
@@ -85,7 +85,7 @@ public class Solution {
         e.children.add(k);
         h.children.add(l);
         
-        List<Integer> result = s.longest_seq(a);
+        List<Integer> result = longestIncreasingContinuousSubsequenceIII(a);
         System.out.println(result.toString());
     }
 }
