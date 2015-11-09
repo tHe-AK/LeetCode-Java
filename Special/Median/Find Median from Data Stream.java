@@ -9,16 +9,8 @@ class MedianFinder {
 
     // Adds a number into the data structure.
     public void addNum(int num) {
-        if (max.isEmpty() || num <= max.peek()) {
-            max.offer(num);
-        }
-        else {
-            min.offer(num);
-        }
-            
-        if (max.size() > min.size() + 1) {
-            min.offer(max.poll());
-        }
+        max.offer(num);
+        min.offer(max.poll());
             
         if (max.size() < min.size()) {
             max.offer(min.poll());
