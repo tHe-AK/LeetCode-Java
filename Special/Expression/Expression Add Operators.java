@@ -33,7 +33,7 @@ public class Solution {
             int cur = (int) temp;
             
             if (start == 0) {
-                helper(num, target, end, val + cur, cur, str + cur, result);
+                helper(num, target, end, cur, cur, str + cur, result);
             } else {
                 helper(num, target, end, val + cur, cur, str + "+" + cur, result);
                 helper(num, target, end, val - cur, -cur, str + "-" + cur, result);
