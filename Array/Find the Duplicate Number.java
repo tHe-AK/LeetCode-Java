@@ -4,12 +4,23 @@ public class Solution {
             throw new IllegalArgumentException();
         }
         
-        int slow = nums[0];
-        int fast = nums[nums[0]];
+        int slow = 0;
+        int fast = 0;
+        int len = nums.length;
+        boolean cycle = false;
         
-        while (slow != fast) {
+        while (slow >= 0 && slow < len && fast >= 0 && fast < len) {
             slow = nums[slow];
             fast = nums[nums[fast]];
+            
+            if (slow == fast) {
+                cycle = true;
+                break;
+            }
+        }
+        
+        if (!cycle) {
+            throw new IllegalArgumentException();
         }
         
         slow = 0;
