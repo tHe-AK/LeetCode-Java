@@ -18,9 +18,9 @@ class PeekingIterator implements Iterator<Integer> {
 	}
 
     // Returns the next element in the iteration without advancing the iterator.
-	public Integer peek() {
+    public Integer peek() {
         return next;
-	}
+    }
 
 	// hasNext() and next() should behave the same as in the Iterator interface.
 	// Override them if needed.
