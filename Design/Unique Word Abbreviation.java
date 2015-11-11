@@ -24,11 +24,7 @@ public class ValidWordAbbr {
     public boolean isUnique(String word) {
         String abbr = getAbbreviation(word);
         
-        if (!rec.containsKey(abbr) || (rec.get(abbr).contains(word) && rec.get(abbr).size() == 1)) {
-            return true;
-        } else {
-            return false;
-        }
+        return !rec.containsKey(abbr) || (rec.get(abbr).contains(word) && rec.get(abbr).size() == 1);
     }
     
     private String getAbbreviation(String str) {
@@ -37,7 +33,7 @@ public class ValidWordAbbr {
         }
         
         int len = str.length();
-        return len > 2 ? str.substring(0, 1) + (len - 2) + str.substring(len - 1, len) : str;
+        return len > 2 ? str.charAt(0) + Integer.toString(len - 2) + str.charAt(len - 1) : str;
     }
 }
 
