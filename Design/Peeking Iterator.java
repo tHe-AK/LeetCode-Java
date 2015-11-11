@@ -4,7 +4,7 @@ class PeekingIterator implements Iterator<Integer> {
     private Integer next;
     private Iterator<Integer> it;
     
-	public PeekingIterator(Iterator<Integer> iterator) {
+    public PeekingIterator(Iterator<Integer> iterator) {
 	    // initialize any member here.
 	    if (iterator == null) {
 	        throw new IllegalArgumentException();
@@ -22,8 +22,8 @@ class PeekingIterator implements Iterator<Integer> {
         return next;
     }
 
-	// hasNext() and next() should behave the same as in the Iterator interface.
-	// Override them if needed.
+    // hasNext() and next() should behave the same as in the Iterator interface.
+    // Override them if needed.
 	@Override
 	public Integer next() {
 	    Integer cur = next;
@@ -32,7 +32,7 @@ class PeekingIterator implements Iterator<Integer> {
 	    return cur;
 	}
 
-	@Override
+    @Override
 	public boolean hasNext() {
 	    return next != null;
 	}
