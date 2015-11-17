@@ -7,19 +7,19 @@ class UnionFind {
         count = 0;
     }
     
-    boolean contain(int child) {
+    boolean contains(int child) {
         return rec.containsKey(child);
     }
     
     void add(int child) {
-        if (!contain(child)) {
+        if (!contains(child)) {
             rec.put(child, child);
             count++;
         }
     }
     
     int find(int child) {
-        if (!contain(child)) {
+        if (!contains(child)) {
             throw new RuntimeException();
         }
         
@@ -31,6 +31,10 @@ class UnionFind {
     }
     
     void union(int child1, int child2) {
+        if (!contains(child1) || !contains(child2)) {
+            return;
+        }
+        
         int parent1 = find(child1);
         int parent2 = find(child2);
         
@@ -42,12 +46,12 @@ class UnionFind {
 }
 
 public class Solution {
-    /**
-     * @param grid a boolean 2D matrix
-     * @return an integer
-     */
-    public int numIslands(boolean[][] grid) {
-        if (grid == null || grid.length == 0 || grid[0].length == 0) {
+    public int numIslands(char[][] grid) {
+        if (grid == null) {
+            throw new IllegalArgumentException();
+        }
+        
+        if (grid.length == 0 || grid[0].length == 0) {
             return 0;
         }
         
@@ -59,17 +63,14 @@ public class Solution {
         
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
-                if (grid[i][j]) {
+                if (grid[i][j] == '1') {
                     int cur = id(i, j, col);
                     uf.add(cur);
     
-                    for (int k = 0; k < 4; k++) {
+                    for (int k = 0; k < x.length; k++) {
                         if (valid(i + x[k], j + y[k], row, col)) {
                             int neighbor = id(i + x[k], j + y[k], col);
-                        
-                            if (uf.contain(neighbor)) {
-                                uf.union(cur, neighbor);
-                            }
+                            uf.union(cur, neighbor);
                         } 
                     }
                 }
