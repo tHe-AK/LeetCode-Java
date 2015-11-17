@@ -1,13 +1,3 @@
-/**
- * Definition for a point.
- * class Point {
- *     int x;
- *     int y;
- *     Point() { x = 0; y = 0; }
- *     Point(int a, int b) { x = a; y = b; }
- * }
- */
-
 class UnionFind {
     HashMap<Integer, Integer> rec;
     int count;
@@ -17,19 +7,19 @@ class UnionFind {
         count = 0;
     }
     
-    boolean contain(int child) {
+    boolean contains(int child) {
         return rec.containsKey(child);
     }
     
     void add(int child) {
-        if (!contain(child)) {
+        if (!contains(child)) {
             rec.put(child, child);
             count++;
         }
     }
     
     int find(int child) {
-        if (!contain(child)) {
+        if (!contains(child)) {
             throw new RuntimeException();
         }
         
@@ -52,35 +42,28 @@ class UnionFind {
 }
 
 public class Solution {
-    /**
-     * @param n an integer
-     * @param m an integer
-     * @param operators an array of point
-     * @return an integer array
-     */
-    public List<Integer> numIslands2(int n, int m, Point[] operators) {
-        List<Integer> result = new ArrayList<Integer>();
-        
-        if (n == 0 || m == 0 || operators == null || operators.length == 0) {
-            return result;
+    public List<Integer> numIslands2(int m, int n, int[][] positions) {
+        if (m < 0 || n < 0 || positions == null) {
+            throw new IllegalArgumentException();
         }
         
+        List<Integer> result = new ArrayList<Integer>();
         UnionFind uf = new UnionFind();
         int[] x = new int[] {-1, 1, 0, 0};
         int[] y = new int[] {0, 0, -1, 1};
         
-        for (Point p : operators) {
-            int i = p.x;
-            int j = p.y;
+        for (int[] p : positions) {
+            int i = p[0];
+            int j = p[1];
             
-            int cur = id(i, j, m);
+            int cur = id(i, j, n);
             uf.add(cur);
     
-            for (int k = 0; k < 4; k++) {
-                if (valid(i + x[k], j + y[k], n, m)) {
-                    int neighbor = id(i + x[k], j + y[k], m);
+            for (int k = 0; k < x.length; k++) {
+                if (valid(i + x[k], j + y[k], m, n)) {
+                    int neighbor = id(i + x[k], j + y[k], n);
                     
-                    if (uf.contain(neighbor)) {
+                    if (uf.contains(neighbor)) {
                         uf.union(cur, neighbor);          
                     }
                 } 
