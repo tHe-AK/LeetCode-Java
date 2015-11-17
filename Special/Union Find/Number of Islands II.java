@@ -31,6 +31,10 @@ class UnionFind {
     }
     
     void union(int child1, int child2) {
+        if (!contains(child1) || !contains(child2)) {
+            return;
+        }
+        
         int parent1 = find(child1);
         int parent2 = find(child2);
         
@@ -62,10 +66,7 @@ public class Solution {
             for (int k = 0; k < x.length; k++) {
                 if (valid(i + x[k], j + y[k], m, n)) {
                     int neighbor = id(i + x[k], j + y[k], n);
-                    
-                    if (uf.contains(neighbor)) {
-                        uf.union(cur, neighbor);          
-                    }
+                    uf.union(cur, neighbor);
                 } 
             }
             
