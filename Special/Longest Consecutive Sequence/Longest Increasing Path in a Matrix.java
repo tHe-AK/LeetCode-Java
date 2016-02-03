@@ -28,14 +28,14 @@ public class Solution {
             return record[i][j];
         }
         
-        int[] deltaX = new int[] {-1, -1, 1, 1};
-        int[] deltaY = new int[] {-1, 1, -1, 1};
+        int[] deltaX = new int[] {-1, 1, 0, 0};
+        int[] deltaY = new int[] {0, 0, -1, 1};
         
         for (int k = 0; k < deltaX.length; k++) {
             int x = i + deltaX[k];
             int y = j + deltaY[k];
             
-            if (x >= 0 && x < matrix.length && y >= 0 && y < matrix[0].length && matrix[x][y] >= matrix[i][j]) {
+            if (x >= 0 && x < matrix.length && y >= 0 && y < matrix[0].length && matrix[x][y] > matrix[i][j]) {
                 record[i][j] = Math.max(record[i][j], helper(matrix, record, x, y));
             }
         }
