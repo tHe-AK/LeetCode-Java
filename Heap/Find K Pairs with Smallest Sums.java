@@ -11,12 +11,18 @@ public class Solution {
         }
         
         int[] rec = new int[nums1.length];
+        Arrays.fill(rec, -1);
+        rec[0] = 0;
         
         while (k > 0) {
             int min = Integer.MAX_VALUE;
             int x = -1;
 
             for (int i = 0; i < rec.length; i++) {
+                if (rec[i] == -1) {
+                    break;
+                }
+                
                 if (rec[i] >= 0 && rec[i] < nums2.length) {
                     int sum = nums1[i] + nums2[rec[i]];
                     
@@ -32,6 +38,10 @@ public class Solution {
             }
             
             result.add(new int[] {nums1[x], nums2[rec[x]]});
+            
+            if (rec[x] == 0 && x < rec.length - 1) {
+                rec[x + 1]++;
+            }
             
             if (rec[x] < nums2.length) {
                 rec[x]++;
