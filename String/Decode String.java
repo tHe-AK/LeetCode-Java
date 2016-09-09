@@ -51,3 +51,57 @@ public class Solution {
         return result.toString();
     }
 }
+
+public class Solution {
+    public String decodeString(String s) {
+        if (s == null) {
+            throw new IllegalArgumentException();
+        }
+        
+        StringBuilder result = new StringBuilder();
+        int i = 0;
+        
+        while (i < s.length()) {
+            char c = s.charAt(i);
+            
+            if (Character.isDigit(c)) {
+                int start = i++;
+                
+                while (Character.isDigit(s.charAt(i)) && i < s.length()) {
+                    i++;
+                }
+                
+                int count = Integer.parseInt(s.substring(start, i));
+                int left = 1;
+                start = ++i;
+                
+                while (i < s.length()) {
+                    if (s.charAt(i) == '[') {
+                        left++;
+                    } else if (s.charAt(i) == ']') {
+                        left--;
+                        
+                        if (left == 0) {
+                            break;
+                        }
+                    }
+                    
+                    i++;
+                }
+
+                String str = decodeString(s.substring(start, i));
+                
+                for (int j = 0; j < count; j++) {
+                    result.append(str);
+                }
+                
+                i++;
+            } else {
+                result.append(c);
+                i++;
+            }
+        }
+        
+        return result.toString();
+    }
+}
