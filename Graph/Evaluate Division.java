@@ -28,8 +28,7 @@ public class Solution {
             rec.put(dividend, new HashMap<String, Double>());
         }
         
-        Map<String, Double> val = rec.get(dividend);
-        val.put(divisor, value);
+        rec.get(dividend).put(divisor, value);
     }
     
     private double findInMap(Map<String, Map<String, Double>> rec, String dividend, String divisor, double cur, Set<String> visited) {
