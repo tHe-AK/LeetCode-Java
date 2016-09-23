@@ -67,7 +67,7 @@ public class Solution {
             if (Character.isDigit(c)) {
                 int start = i++;
                 
-                while (Character.isDigit(s.charAt(i)) && i < s.length()) {
+                while (i < s.length() && Character.isDigit(s.charAt(i))) {
                     i++;
                 }
                 
@@ -95,11 +95,11 @@ public class Solution {
                     result.append(str);
                 }
                 
-                i++;
             } else {
                 result.append(c);
-                i++;
             }
+            
+            i++;
         }
         
         return result.toString();
