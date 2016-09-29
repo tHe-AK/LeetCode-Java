@@ -4,11 +4,18 @@ public class Solution {
             throw new IllegalArgumentException();
         }
         
-        return helper(stones, 0, 0);
+        return helper(stones, new HashMap<Integer, Boolean>(), 0, 0);
     }
     
-    private boolean helper(int[] stones, int k, int start) {
+    private boolean helper(int[] stones, Map<Integer, Boolean> rec, int k, int start) {
+        int key = (k << 11) | start; 
+        
+        if (rec.containsKey(key)) {
+            return rec.get(key);
+        }
+        
         if (start == stones.length - 1) {
+            rec.put(key, true);
             return true;
         }
         
@@ -18,7 +25,8 @@ public class Solution {
             if (gap < k - 1) {
                 continue;
             } else if (gap <= k + 1) {
-                if (helper(stones, gap, i)) {
+                if (helper(stones, rec, gap, i)) {
+                    rec.put(key, true);
                     return true;
                 }
             } else {
@@ -26,6 +34,7 @@ public class Solution {
             }
         }
         
+        rec.put(key, false);
         return false;
     }
 }
