@@ -9,7 +9,7 @@ public class Solution {
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 60; j++) {
                 if (Integer.bitCount((i << 6) + j) == num) {
-                    result.add(String.format("%d:%02d"), i, j);
+                    result.add(String.format("%d:%02d", i, j));
                 }
             }
         }
