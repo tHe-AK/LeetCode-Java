@@ -4,9 +4,14 @@ public class Solution {
             throw new IllegalArgumentException();
         }
         
+        if (s.length() < k) {
+            return 0;
+        }
+        
+        int len = s.length();
         int[] counts = new int[26];
         
-        for (int i = 0; i < s.length(); i++) {
+        for (int i = 0; i < len; i++) {
             counts[s.charAt(i) - 'a']++;
         }
         
@@ -24,6 +29,6 @@ public class Solution {
             }
         }
         
-        return s.length();
+        return len;
     }
 }
