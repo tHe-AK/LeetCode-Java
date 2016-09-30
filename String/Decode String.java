@@ -34,8 +34,8 @@ public class Solution {
                 cur[0]++;
                 return result.toString();
             } else {
-                cur[0]++;
                 result.append(c);
+                cur[0]++;
             }
         }
         
