@@ -106,6 +106,7 @@ public class Solution {
         StringBuilder result = new StringBuilder();
         Stack<Integer> counts = new Stack<Integer>();
         Stack<StringBuilder> strs = new Stack<StringBuilder>();
+        strs.push(new StringBuilder());
         
         int i = 0;
         
@@ -120,11 +121,7 @@ public class Solution {
                 StringBuilder str = strs.pop();
 
                 for (int j = 0; j < count; j++) {
-                    if (strs.empty()) {
-                        result.append(str);
-                    } else {
-                        strs.peek().append(str);
-                    }
+                    strs.peek().append(str);
                 }
                 
                 i++;
@@ -137,16 +134,11 @@ public class Solution {
                 
                 counts.push(Integer.parseInt(s.substring(start, i)));
             } else {
-                if (strs.empty()) {
-                    result.append(c);
-                } else {
-                    strs.peek().append(c);
-                }
-                
+                strs.peek().append(c);
                 i++;
             }
         }
         
-        return result.toString();
+        return strs.peek().toString();
     }
 }
