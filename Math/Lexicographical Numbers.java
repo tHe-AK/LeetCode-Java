@@ -5,8 +5,8 @@ public class Solution {
         }
         
         List<Integer> result = new ArrayList<Integer>();
-        int cur = 1;
-        result.add(cur);
+        long cur = 1;
+        result.add((int) cur);
         
         for (int i = 2; i <= n; i++) {
             if (cur * 10 <= n) {
@@ -21,7 +21,7 @@ public class Solution {
                 cur = cur / 10 + 1;
             }
             
-            result.add(cur);
+            result.add((int) cur);
         }
         
         return result;
@@ -40,13 +40,13 @@ public class Solution {
         return result;
     }
     
-    private void helper(int cur, int n, List<Integer> result) {
+    private void helper(long cur, int n, List<Integer> result) {
         if (cur > n) {
             return;
         }
         
         if (cur != 0) {
-            result.add(cur);
+            result.add((int) cur);
             helper(cur * 10, n, result);
         }
         
@@ -55,3 +55,4 @@ public class Solution {
         }
     }
 }
+
