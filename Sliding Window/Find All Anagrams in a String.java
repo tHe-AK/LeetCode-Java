@@ -6,8 +6,8 @@ public class Solution {
         
         int[] rec = new int[26];
         
-        for (int i = 0; i < p.length(); i++) {
-            rec[p.charAt(i) - 'a']++;
+        for (char c : p.toCharArray()) {
+            rec[c - 'a']++;
         }
     
         int start = 0;
@@ -20,12 +20,14 @@ public class Solution {
                 count--;
             }
             
-            if (count == 0) {
-                result.add(start);
-            }
+            while (count == 0) {
+                if (end - start == p.length()) {
+                    result.add(start);
+                }
             
-            if (end - start == p.length() && rec[s.charAt(start++) - 'a']++ >= 0) {
-                count++;
+                if (rec[s.charAt(start++) - 'a']++ >= 0) {
+                    count++;
+                }
             }
         }
         
