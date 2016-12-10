@@ -3,10 +3,10 @@ public class Solution {
         int y = 0;
 
         while (x != 0) {
-            int val = x % 10;
-            int curr = y * 10 + val;
+            int digit = x % 10;
+            int curr = y * 10 + digit;
             
-            if ((curr - val) / 10 != y) {
+            if ((curr - digit) / 10 != y) {
                 return 0;
             }
             
