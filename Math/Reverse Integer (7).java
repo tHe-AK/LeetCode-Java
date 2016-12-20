@@ -5,7 +5,7 @@ public class Solution {
         while (x != 0) {
             int digit = x % 10;
 
-            if ((digit >= 0 && y > (Integer.MAX_VALUE - digit) / 10) || (digit < 0 && y < (Integer.MIN_VALUE - digit) / 10)) {
+            if ((y > 0 && y > (Integer.MAX_VALUE - digit) / 10) || (y < 0 && y < (Integer.MIN_VALUE - digit) / 10)) {
                 return 0;
             }
             
