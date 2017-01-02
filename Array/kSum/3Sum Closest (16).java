@@ -1,9 +1,5 @@
 public class Solution {
-    public int threeSumClosest(int[] num, int target) {
-        if (num == null || num.length < 3) {
-            throw new IllegalArgumentException();
-        }
-        
+    public int threeSumClosest(int[] num, int target) {      
         Arrays.sort(num);
         int result = num[0] + num[1] + num[2];
         
@@ -24,7 +20,9 @@ public class Solution {
                     high--;
                 }
                 
-                result = Math.abs(target - sum) < Math.abs(target - result) ? sum : result;
+                if (Math.abs(target - sum) < Math.abs(target - result)) {
+                    result = sum;
+                }
             }
         }
         
