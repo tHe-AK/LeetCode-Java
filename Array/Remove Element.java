@@ -1,20 +1,32 @@
 public class Solution {
-    public int removeElement(int[] A, int elem) {
-        if (A == null) {
-            throw new IllegalArgumentException();
-        }
+    public int removeElement(int[] nums, int val) {
+        int i = 0;
         
-        int cur = 0;
-        
-        for (int i = 0; i < A.length; i++) {
-            if (A[i] == elem) {
-                continue;
+        for (int j = 0; j < nums.length; j++) {
+            if (nums[j] != val) {
+                nums[i] = nums[j];
+                i++;
             }
-            
-            A[cur] = A[i];
-            cur++;
         }
         
-        return cur;
+        return i;
+    }
+}
+
+public class Solution {
+    public int removeElement(int[] nums, int val) {
+        int i = 0;
+        int n = nums.length;
+        
+        while (i < n) {
+            if (nums[i] == val) {
+                nums[i] = nums[n - 1];
+                n--;
+            } else {
+                i++;
+            }
+        }
+        
+        return n;
     }
 }
