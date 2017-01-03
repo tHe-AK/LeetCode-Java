@@ -39,16 +39,16 @@ public class Solution {
         return result;
     }
     
-    private void helper(String digits, String[] rec, int start, String curr, List<String> result) {
+    private void helper(String digits, String[] rec, int start, String pre, List<String> result) {
         if (start == digits.length()) {
-            result.add(curr);
+            result.add(pre);
             return;
         }
         
         String str = rec[Character.getNumericValue(digits.charAt(start))];
         
         for (int i = 0; i < str.length(); i++) {
-            helper(digits, rec, start + 1, cur + str.charAt(i), result);
+            helper(digits, rec, start + 1, pre + str.charAt(i), result);
         }
     }
 }
