@@ -12,11 +12,11 @@ public class Solution {
             return head;
         }
         
-        ListNode first = head.next;
-        head.next = swapPairs(first.next);
-        first.next = head;
+        ListNode next = head.next;
+        head.next = swapPairs(head.next.next);
+        next.next = head;
         
-        return first;
+        return next;
     }
 }
 
@@ -35,12 +35,12 @@ public class Solution {
         ListNode curr = dummy;
         
         while (curr.next != null && curr.next.next != null) {
-            ListNode second = curr.next;
-            ListNode first = second.next;
-            second.next = first.next;
-            first.next = second;
-            curr.next = first;
-            curr = second;
+            ListNode first = curr.next;
+            ListNode second = curr.next.next;
+            first.next = second.next;
+            second.next = first;
+            curr.next = second;
+            curr = first;
         }
         
         return dummy.next;
