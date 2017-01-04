@@ -1,40 +1,38 @@
 public class Solution {
-    public void nextPermutation(int[] num) {
-        if (num == null) {
-            throw new IllegalArgumentException();
-        }
+    public void nextPermutation(int[] nums) {
+        int i = nums.length - 2;
         
-        int i = num.length - 1;
-        
-        while (i > 0 && num[i - 1] >= num[i]) {
+        while (i >= 0 && nums[i] >= nums[i + 1]) {
             i--;
         }
         
-        if (i == 0) {
-            Arrays.sort(num);
+        if (i >= 0) {
+            int j = nums.length - 1;
             
-            return;
+            while (j >= 0 && nums[i] >= nums[j]) {
+                j--;
+            }
+            
+            swap(nums, i, j);
         }
         
-        int j = num.length - 1;
-        
-        while (j >= i && num[i - 1] >= num[j]) {
-            j--;
-        }
-        
-        int temp = num[j];
-        num[j] = num[i - 1];
-        num[i - 1] = temp;
-        
-        j = num.length - 1;
+        reverse(nums, i + 1);
+    }
+
+    private void reverse(int[] nums, int start) {
+        int i = start;
+        int j = nums.length - 1;
         
         while (i < j) {
-            temp = num[j];
-            num[j] = num[i];
-            num[i] = temp;
-        
+            swap(nums, i, j);
             i++;
             j--;
-        } 
+        }
+    }
+
+    private void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
     }
 }
