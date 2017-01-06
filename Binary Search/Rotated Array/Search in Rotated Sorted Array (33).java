@@ -1,20 +1,16 @@
 public class Solution {
-    public int search(int[] A, int target) {
-        if (A == null) {
-            throw new IllegalArgumentException();
-        }
-        
+    public int search(int[] nums, int target) {
         int low = 0;
-        int high = A.length - 1;
+        int high = nums.length - 1;
         
         while (low <= high) {
             int mid = low + (high - low) / 2;
             
-            if (A[mid] == target) {
+            if (nums[mid] == target) {
                 return mid;
             }
-            else if (A[low] <= A[mid]) {
-                if (A[low] <= target && target < A[mid]) {
+            else if (nums[low] <= nums[mid]) {
+                if (nums[low] <= target && target < nums[mid]) {
                     high = mid - 1;
                 }
                 else {
@@ -22,7 +18,7 @@ public class Solution {
                 }
             }
             else {
-                if (A[mid] < target && target <= A[high]) {
+                if (nums[mid] < target && target <= nums[high]) {
                     low = mid + 1;
                 }
                 else {
@@ -31,6 +27,6 @@ public class Solution {
             }
         }
         
-        return -1;
+        return -1; 
     }
 }
