@@ -1,22 +1,15 @@
 public class Solution {
-    public int[] searchRange(int[] A, int target) {
-        if (A == null) {
-            throw new IllegalArgumentException();
-        }
-        
+    public int[] searchRange(int[] nums, int target) {
         int[] result = new int[2];
         result[0] = -1;
         result[1] = -1;
         int low = 0;
-        int high = A.length - 1;
+        int high = nums.length - 1;
         
         while (low <= high) {
             int mid = low + (high - low) / 2;
             
-            if (A[mid] == target) {
-                high = mid - 1;
-            }
-            else if (A[mid] < target) {
+            if (nums[mid] < target) {
                 low = mid + 1;
             }
             else {
@@ -24,7 +17,7 @@ public class Solution {
             }
         }
         
-        if (low < A.length && A[low] == target) {
+        if (low < nums.length && nums[low] == target) {
             result[0] = low;
         }
         else {
@@ -32,19 +25,16 @@ public class Solution {
         }
         
         low = 0;
-        high = A.length - 1;
+        high = nums.length - 1;
         
         while (low <= high) {
             int mid = low + (high - low) / 2;
             
-            if (A[mid] == target) {
-                low = mid + 1;
-            }
-            else if (A[mid] < target) {
-                low = mid + 1;
+            if (nums[mid] > target) {
+                high = mid - 1;
             }
             else {
-                high = mid - 1;
+                low = mid + 1;
             }
         }
         
