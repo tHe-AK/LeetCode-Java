@@ -1,19 +1,15 @@
 public class Solution {
-    public int searchInsert(int[] A, int target) {
-        if (A == null) {
-            throw new IllegalArgumentException();
-        }
-        
+    public int searchInsert(int[] nums, int target) {
         int low = 0;
-        int high = A.length - 1;
+        int high = nums.length - 1;
         
         while (low <= high) {
             int mid = low + (high - low) / 2;
             
-            if (A[mid] == target) {
+            if (nums[mid] == target) {
                 return mid;
             }
-            else if (A[mid] < target) {
+            else if (nums[mid] < target) {
                 low = mid + 1;
             }
             else {
