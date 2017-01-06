@@ -1,25 +1,25 @@
 public class Solution {
-    public int firstMissingPositive(int[] A) {
-        if (A == null) {
-            throw new IllegalArgumentException();
-        }
+    public int firstMissingPositive(int[] nums) {
+        int n = nums.length;
         
-        for (int i = 0; i < A.length; i++) {
-            while (A[i] - 1 >= 0 && A[i] - 1 < A.length && A[i] - 1 != i && A[A[i] - 1] - 1 != A[i] - 1) {
-                int temp = A[A[i] - 1];
-                A[A[i] - 1] = A[i];
-                A[i] = temp;
+        for (int i = 0; i < n; i++) {
+            while (nums[i] > 0 && nums[i] <= n && nums[nums[i] - 1] != nums[i]) {
+                swap(nums, nums[i] - 1, i);
             }
         }
         
-        int i;
-        
-        for (i = 0; i < A.length; i++) {
-            if (A[i] != i + 1) {
+        for (int i = 0; i < n; i++) {
+            if(nums[i] != i + 1) {
                 return i + 1;
             }
         }
         
-        return i + 1;
+        return n + 1;
+    }
+    
+    private void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
     }
 }
