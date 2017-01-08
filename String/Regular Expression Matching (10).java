@@ -18,10 +18,10 @@ public class Solution {
                 if (c == s.charAt(i - 1) || c == '.') {
                     rec[i][j] = rec[i - 1][j - 1];
                 } else if (c == '*') {
-                    if (p.charAt(j - 2) != '.' && s.charAt(i - 1) != p.charAt(j - 2)) {
-                        rec[i][j] = rec[i][j - 2];
+                    if (s.charAt(i - 1) == p.charAt(j - 2) || p.charAt(j - 2) == '.') {
+                        rec[i][j] = rec[i][j - 2] || rec[i - 1][j];
                     } else {
-                        rec[i][j] = rec[i][j - 2] || rec[i][j - 1] || rec[i - 1][j];
+                        rec[i][j] = rec[i][j - 2];
                     }
                 }
             }
