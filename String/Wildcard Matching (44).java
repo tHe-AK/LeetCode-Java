@@ -1,17 +1,13 @@
 public class Solution {
     public boolean isMatch(String s, String p) {
-        if (s == null || p == null) {
-            throw new IllegalArgumentException();
-        }
-        
         int i = 0;
         int j = 0;
+        int index = -1;
         int star = -1;
-        int pos = -1;
         
         while (i < s.length()) {
             if (j < p.length() && p.charAt(j) == '*') {
-                pos = i;
+                index = i;
                 star = j;
                 j++;
             }
@@ -20,7 +16,7 @@ public class Solution {
                 j++;
             }
             else if (star != -1) {
-                i = ++pos;
+                i = ++index;
                 j = star + 1;
             }
             else {
