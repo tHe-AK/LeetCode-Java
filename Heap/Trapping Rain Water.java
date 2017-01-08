@@ -1,45 +1,31 @@
 public class Solution {
     public int trap(int[] height) {
-        if (height == null) {
-            throw new IllegalArgumentException();
-        }
+        int low = 0;
+        int high = height.length - 1;
+        int leftMax = 0;
+        int rightMax = 0;
+        int result = 0;
         
-        if (height.length < 3) {
-            return 0;
-        }
-        
-        int len = height.length;
-        int sum = 0;
-        int max = height[0];
-        int maxIndex = 0;
-        
-        for (int i = 1; i < len; i++) {
-            if (height[i] > max) {
-                max = height[i];
-                maxIndex = i;
+        while (low <= high) {
+            if (leftMax <= rightMax) {
+                if (leftMax > height[low]) {
+                    result += leftMax - height[low];
+                } else {
+                    leftMax = height[low];
+                }
+
+                low++;
+            } else {
+                if (rightMax > height[high]) {
+                    result += rightMax - height[high];
+                } else {
+                    rightMax = height[high];
+                }
+
+                high--;
             }
         }
         
-        int curMax = 0;
-        
-        for (int i = 0; i < maxIndex; i++) {
-            if (height[i] < curMax) {
-                sum += curMax - height[i];
-            }
-            
-            curMax = Math.max(curMax, height[i]);
-        }
-        
-        curMax = 0;
-        
-        for (int i = len - 1; i > maxIndex; i--) {
-            if (height[i] < curMax) {
-                sum += curMax - height[i];
-            }
-            
-            curMax = Math.max(curMax, height[i]);
-        }
-        
-        return sum;
+        return result;
     }
 }
