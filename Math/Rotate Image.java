@@ -1,22 +1,38 @@
 public class Solution {
     public void rotate(int[][] matrix) {
-        if (matrix == null || matrix[0] == null || matrix.length != matrix[0].length) {
-            throw new IllegalArgumentException();
-        }
-
-        if (matrix.length <= 1) {
-            return;
+        int len = matrix.length;
+        
+        for (int i = 0; i < len; i++) {
+            for (int j = i + 1; j < len; j++) {
+                swap(matrix, i, j, j, i);
+            }
         }
         
+        for (int i = 0; i < len; i++) {
+            for (int j = 0; j < len / 2; j++) {
+                swap(matrix, i, j, i, len - 1 - j);
+            }
+        }
+    }
+    
+    private void swap(int[][] matrix, int i, int j, int x, int y) {
+        int temp = matrix[i][j];
+        matrix[i][j] = matrix[x][y];
+        matrix[x][y] = temp;
+    }
+}
+
+public class Solution {
+    public void rotate(int[][] matrix) {
         int len = matrix.length;
         
         for (int i = 0; i < len / 2; i++) {
-            for (int j = i; j < len - i - 1; j++) {
+            for (int j = i; j < len - 1 - i; j++) {
                 int temp = matrix[i][j];
-                matrix[i][j] = matrix[len - j - 1][i];
-                matrix[len - j - 1][i] = matrix[len - i - 1][len - j - 1];
-                matrix[len - i - 1][len - j - 1] = matrix[j][len - i - 1];
-                matrix[j][len - i - 1] = temp;
+                matrix[i][j] = matrix[len - 1 - j][i];
+                matrix[len - 1 - j][i] = matrix[len - 1 - i][len - 1 - j];
+                matrix[len - 1 - i][len - 1 - j] = matrix[j][len - 1 - i];
+                matrix[j][len - 1 - i] = temp;
             }
         }
     }
