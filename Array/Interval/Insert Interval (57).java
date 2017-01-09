@@ -9,10 +9,6 @@
  */
 public class Solution {
     public List<Interval> insert(List<Interval> intervals, Interval newInterval) {
-        if (intervals == null || newInterval == null) {
-            throw new IllegalArgumentException();
-        }
-        
         List<Interval> result = new ArrayList<Interval>();
         int i = 0;
         
