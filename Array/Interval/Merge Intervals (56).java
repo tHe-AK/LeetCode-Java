@@ -8,35 +8,31 @@
  * }
  */
 public class Solution {
-    private class MyComparator implements Comparator<Interval> {
-        public int compare(Interval a, Interval b) {
-            return a.start - b.start;
-        }
-    }
-    
     public List<Interval> merge(List<Interval> intervals) {
-        if (intervals == null) {
-            throw new IllegalArgumentException();
-        }
-        
-        List<Interval> result = new ArrayList<Interval>();
+        List<Interval> result = new ArrayList<>();
         
         if (intervals.size() == 0) {
             return result;
         }
         
-        Collections.sort(intervals, new MyComparator());
+        Collections.sort(intervals, new Comparator<Interval>() {
+            @Override
+            public int compare(Interval i1, Interval i2) {
+                return i1.start - i2.start;
+            }
+        });
+        
         Interval pre = intervals.get(0);
         
         for (int i = 1; i < intervals.size(); i++) {
-            Interval cur = intervals.get(i);
+            Interval curr = intervals.get(i);
             
-            if (pre.end < cur.start) {
+            if (pre.end < curr.start) {
                 result.add(pre);
-                pre = cur;
+                pre = curr;
             }
             else {
-                pre.end = Math.max(pre.end, cur.end);
+                pre.end = Math.max(pre.end, curr.end);
             }
         }
         
