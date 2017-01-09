@@ -1,15 +1,13 @@
 public class Solution {
-    public int maxSubArray(int[] A) {
-        if (A == null || A.length == 0) {
-            throw new IllegalArgumentException();
-        }
+    public int maxSubArray(int[] nums) {
+        int len = nums.length;
+        int[] rec = new int[len];
+        rec[0] = nums[0];
+        int max = nums[0];
         
-        int max = A[0];
-        int cur = A[0];
-        
-        for (int i = 1; i < A.length; i++) {
-            cur = Math.max(cur + A[i], A[i]);
-            max = Math.max(max, cur);
+        for (int i = 1; i < len; i++) {
+            rec[i] = Math.max(rec[i - 1] + nums[i], nums[i]);
+            max = Math.max(max, rec[i]);
         }
         
         return max;
