@@ -1,20 +1,26 @@
 public class Solution {
     public List<List<String>> solveNQueens(int n) {
         List<List<String>> result = new ArrayList<>();
-
-        dfs(n, new int[n], 0, result);
+        char[][] board = new char[n][n];
+        
+        for (int i = 0; i < n; i++) {
+            Arrays.fill(board[i], '.');
+        }
+        
+        boolean[] col = new boolean[n];
+        boolean[] diag1 = new boolean[2 * n];
+        boolean[] diag2 = new boolean[2 * n];
+        
+        dfs(n, board, 0, col, diag1, diag2, result);
         
         return result;
     }
     
-    private void dfs(int n, int[] rec, int row, List<List<String>> result) {
+    private void dfs(int n, char[][] board, int row, boolean[] col, boolean[] diag1, boolean[] diag2, List<List<String>> result) {
         if (row == n) {
             List<String> list = new ArrayList<>();
             
-            for (int i = 0; i < n; i++) {
-                char[] str = new char[n];
-                Arrays.fill(str, '.');
-                str[rec[i]] = 'Q';
+            for (char[] str : board) {
                 list.add(new String(str));
             }
             
@@ -23,20 +29,13 @@ public class Solution {
         }
         
         for (int j = 0; j < n; j++) {
-            if (isValid(rec, row, j)) {               
-                rec[row] = j;
-                dfs(n, rec, row + 1, result);
+            if (!col[j] && !diag1[row + j] && !diag2[row - j + n]) {
+                board[row][j] = 'Q';
+                col[j] = diag1[row + j] = diag2[row - j + n] = true;
+                dfs(n, board, row + 1, col, diag1, diag2, result);
+                board[row][j] = '.';
+                col[j] = diag1[row + j] = diag2[row - j + n] = false;
             }
         }
-    }
-    
-    private boolean isValid(int[] rec, int row, int col) {
-        for (int i = 0; i < row; i++) {
-            if (col == rec[i] || row - i == Math.abs(col - rec[i])) {
-                return false;
-            }
-        }
-        
-        return true;
     }
 }
