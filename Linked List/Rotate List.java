@@ -3,45 +3,38 @@
  * public class ListNode {
  *     int val;
  *     ListNode next;
- *     ListNode(int x) {
- *         val = x;
- *         next = null;
- *     }
+ *     ListNode(int x) { val = x; }
  * }
  */
 public class Solution {
-    public ListNode rotateRight(ListNode head, int n) {
-        if (n < 0) {
-            throw new IllegalArgumentException();
-        }
-        
-        if (head == null || n == 0) {
+    public ListNode rotateRight(ListNode head, int k) {
+        if (head == null) {
             return head;
         }
         
         int len = 1;
-        ListNode end = head;
+        ListNode tail = head;
         
-        while (end.next != null) {
+        while (tail.next != null) {
             len++;
-            end = end.next;
+            tail = tail.next;
         }
         
-        n %= len;
+        k %= len;
         
-        if (n == 0) {
+        if (k == 0) {
             return head;
         }
         
-        ListNode cur = head;
+        ListNode curr = head;
 
-        for (int i = 1; i < len - n; i++) {
-            cur = cur.next;
+        for (int i = 1; i < len - k; i++) {
+            curr = curr.next;
         }
 
-        end.next = head;
-        head = cur.next;
-        cur.next = null;
+        tail.next = head;
+        head = curr.next;
+        curr.next = null;
         
         return head;
     }
