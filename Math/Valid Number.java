@@ -1,9 +1,5 @@
 public class Solution {
     public boolean isNumber(String s) {
-        if (s == null) {
-            throw new IllegalArgumentException();
-        }
-        
         s = s.trim();
         int i = 0;
         int len = s.length();
@@ -13,30 +9,30 @@ public class Solution {
         boolean point = false;
         
         while (i < len) {
-            char cur = s.charAt(i);
+            char c = s.charAt(i);
             
-            if ('0' <= cur && cur <= '9') {
+            if ('0' <= c && c <= '9') {
                 num = true;
             }
-            else if ((cur == '+' || cur == '-') && !sign && !num && !point) {
+            else if ((c == '+' || c == '-') && !sign && !num && !point) {
                 sign = true;
             }
-            else if (cur == '.' && !point && !e) {
+            else if (c == '.' && !point && !e) {
                 point = true;
             }
-            else if (cur == 'e' && !e && num) {
+            else if (c == 'e' && !e && num) {
                 e = true;
                 num = false;
                 sign = false;
                 point = false;
             }
             else {
-                break;
+                return false;
             }
             
             i++;
         }
         
-        return i == len && num;
+        return num;
     }
 }
