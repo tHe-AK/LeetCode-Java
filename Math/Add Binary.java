@@ -1,29 +1,25 @@
 public class Solution {
     public String addBinary(String a, String b) {
-        if (a == null || b == null) {
-            throw new IllegalArgumentException();
-        }
-        
-        int cur1 = a.length() - 1;
-        int cur2 = b.length() - 1;
+        int i = a.length() - 1;
+        int j = b.length() - 1;
         int carry = 0;
-        String result = "";
+        StringBuilder sb = new StringBuilder();
         
-        while (cur1 >= 0 || cur2 >= 0 || carry > 0) {
-            if (cur1 >= 0) {
-                carry += a.charAt(cur1) - '0';
-                cur1--;
+        while (i >= 0 || j >= 0 || carry > 0) {
+            if (i >= 0) {
+                carry += a.charAt(i) - '0';
+                i--;
             }
             
-            if (cur2 >= 0) {
-                carry += b.charAt(cur2) - '0';
-                cur2--;
+            if (j >= 0) {
+                carry += b.charAt(j) - '0';
+                j--;
             }
             
-            result = carry % 2 + result;
+            sb.append(carry % 2);
             carry /= 2;
         }
         
-        return result;
+        return sb.reverse().toString();
     }
 }
