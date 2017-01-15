@@ -1,9 +1,5 @@
 public class Solution {
-    public int sqrt(int x) {
-        if (x < 0) {
-            throw new IllegalArgumentException();
-        }
-        
+    public int mySqrt(int x) {
         if (x == 0) {
             return 0;
         }
@@ -16,11 +12,9 @@ public class Solution {
             
             if (mid == x / mid) {
                 return mid;
-            }
-            else if (mid < x / mid) {
+            } else if (mid < x / mid) {
                 low = mid + 1;
-            }
-            else {
+            } else {
                 high = mid - 1;
             }
         }
@@ -30,34 +24,27 @@ public class Solution {
 }
 
 public class Solution {
-    public double sqrt(double x, double precision) {
-        if (x < 0) {
-            throw new IllegalArgumentException();
+    public double mySqrt(double x, double precision) {
+        if (x == 0) {
+            return 0;
         }
         
-        double low;
-        double high;
+        double low = 1;
+        double high = x;
         
         if (x < 1) {
             low = x;
             high = 1;
         }
-        else {
-            low = 1;
-            high = x;
-        }
-        
         
         while (low <= high) { 
             double mid = low + (high - low) / 2;
 
             if (Math.abs(x - mid * mid) <= precision) {
                 return mid;
-            }
-            else if (mid * mid < x) {
+            } else if (mid * mid < x) {
                 low = mid;
-            }
-            else {
+            } else {
                 high = mid;
             }            
         }
