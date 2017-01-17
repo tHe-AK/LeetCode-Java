@@ -6,9 +6,9 @@ public class Solution {
         
         while (curr <= high) {
             if (nums[curr] == 0) {
-                swap(low++, curr++);
+                swap(nums, low++, curr++);
             } else if (nums[curr] == 2) {
-                swap(curr, high--);
+                swap(nums, curr, high--);
             } else {
                 curr++;
             }
