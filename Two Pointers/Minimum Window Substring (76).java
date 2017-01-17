@@ -1,9 +1,5 @@
 public class Solution {
     public String minWindow(String s, String t) {
-        if (s == null || t == null) {
-            throw new IllegalArgumentException();
-        }
-        
         int[] rec = new int[256];
         
         for (char c : t.toCharArray()) {
