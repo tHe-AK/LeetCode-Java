@@ -10,9 +10,13 @@ public class Solution {
                 if (matrix[i][j] == 0) {
                     if (i == 0) {
                         row = true;
-                    } else if (j == 0) {
+                    }
+                    
+                    if (j == 0) {
                         col = true;
-                    } else {
+                    }
+                    
+                    if (i > 0 && j > 0) {
                         matrix[i][0] = matrix[0][j] = 0;
                     }
                 }
@@ -21,12 +25,16 @@ public class Solution {
         
         for (int i = m - 1; i >= 0; i--) {
             for (int j = n - 1; j >= 0; j--) {
-                if (i > 0 && j > 0 && matrix[i][0] == 0 || matrix[0][j] == 0) {
-                    matrix[i][j] = 0;
-                } else if (i == 0 && row) {
+                if (i == 0 && row) {
                     matrix[0][j] = 0;
-                } else if (j == 0 && col) {
+                }
+                
+                if (j == 0 && col) {
                     matrix[i][0] = 0;
+                }
+                
+                if (i > 0 && j > 0 && (matrix[i][0] == 0 || matrix[0][j] == 0)) {
+                    matrix[i][j] = 0;
                 }
             }
         }
