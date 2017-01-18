@@ -8,10 +8,6 @@
  */
 public class Solution {
     public ListNode deleteDuplicates(ListNode head) {
-        if (head == null) {
-            return head;
-        }
-        
         ListNode dummy = new ListNode(0);
         dummy.next = head;
         head = dummy;
