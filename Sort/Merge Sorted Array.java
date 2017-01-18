@@ -1,19 +1,14 @@
 public class Solution {
-    public void merge(int A[], int m, int B[], int n) {
-        if (A == null || B == null) {
-            throw new IllegalArgumentException();
-        }
-        
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
         m--;
         n--;
         
         while (n >= 0) {
-            if (m >= 0 && A[m] > B[n]) {
-                A[m + n + 1] = A[m];
+            if (m >= 0 && nums1[m] > nums2[n]) {
+                nums1[m + n + 1] = nums1[m];
                 m--;
-            }
-            else {
-                A[m + n + 1] = B[n];
+            } else {
+                nums1[m + n + 1] = nums2[n];
                 n--;
             }
         }
