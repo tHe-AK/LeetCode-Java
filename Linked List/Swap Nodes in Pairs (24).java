@@ -32,15 +32,15 @@ public class Solution {
     public ListNode swapPairs(ListNode head) {
         ListNode dummy = new ListNode(0);
         dummy.next = head;
-        ListNode curr = dummy;
+        head = dummy;
         
-        while (curr.next != null && curr.next.next != null) {
-            ListNode first = curr.next;
-            ListNode second = curr.next.next;
-            first.next = second.next;
-            second.next = first;
-            curr.next = second;
-            curr = first;
+        while (head.next != null && head.next.next != null) {
+            ListNode pre = head.next;
+            ListNode curr = head.next.next;
+            pre.next = curr.next;
+            curr.next = pre;
+            head.next = curr;
+            head = pre;
         }
         
         return dummy.next;
