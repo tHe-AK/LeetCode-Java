@@ -21,30 +21,24 @@ public class Solution {
 }
 
 public class Solution {
-    public List<List<Integer>> subsetsWithDup(int[] num) {
-        if (num == null) {
-            throw new IllegalArgumentException();
-        }
-        
-        Arrays.sort(num);
-        List<List<Integer>> result = new ArrayList<List<Integer>>();
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> result = new ArrayList<>();
 
-        helper(num, 0, new ArrayList<Integer>(), result);
+        dfs(nums, 0, new ArrayList<Integer>(), result);
         
         return result;
     }
     
-    private void helper(int[] num, int start, List<Integer> cur, List<List<Integer>> result) {
-        result.add(new ArrayList<Integer>(cur));
+    private void dfs(int[] nums, int start, List<Integer> curr, List<List<Integer>> result) {
+        result.add(new ArrayList<Integer>(curr));
         
-        for (int i = start; i < num.length; i++) {
-            if (i != start && num[i] == num[i - 1]) {
-                continue;
+        for (int i = start; i < nums.length; i++) {
+            if (i == start || nums[i] != nums[i - 1]) {
+                curr.add(nums[i]);
+                dfs(nums, i + 1, curr, result);
+                curr.remove(curr.size() - 1);
             }
-            
-            cur.add(num[i]);
-            helper(num, i + 1, cur, result);
-            cur.remove(cur.size() - 1);
         }
     }
 }
