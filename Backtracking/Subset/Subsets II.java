@@ -1,28 +1,19 @@
 public class Solution {
-    public List<List<Integer>> subsetsWithDup(int[] num) {
-        if (num == null) {
-            throw new IllegalArgumentException();
-        }
-        
-        Arrays.sort(num);
-        List<List<Integer>> result = new ArrayList<List<Integer>>();
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> result = new ArrayList<>();
         result.add(new ArrayList<Integer>());
-        int sizePre = 0;
+        int size = 0;
         
-        for (int i = 0; i < num.length; i++) {
-            int size = result.size();
+        for (int i = 0; i < nums.length; i++) {
+            int start = (i > 0 && nums[i] == nums[i - 1]) ? size : 0;
+            size = result.size();
             
-            for (int j = 0; j < size; j++) {
-                if (i > 0 && num[i] == num[i - 1] && j < sizePre) {
-                    continue;
-                }
-                
-                List<Integer> cur = new ArrayList(result.get(j));
-                cur.add(num[i]);
-                result.add(cur);
+            for (int j = start; j < size; j++) {
+            	List<Integer> next = new ArrayList(result.get(j));
+                next.add(nums[i]);
+                result.add(next);
             }
-            
-            sizePre = size;
         }
         
         return result;
