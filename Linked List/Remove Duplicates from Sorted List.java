@@ -3,26 +3,18 @@
  * public class ListNode {
  *     int val;
  *     ListNode next;
- *     ListNode(int x) {
- *         val = x;
- *         next = null;
- *     }
+ *     ListNode(int x) { val = x; }
  * }
  */
 public class Solution {
     public ListNode deleteDuplicates(ListNode head) {
-        if (head == null) {
-            return head;
-        }
+        ListNode curr = head;
         
-        ListNode cur = head;
-        
-        while (cur.next != null) {
-            if (cur.val == cur.next.val) {
-                cur.next = cur.next.next;
-            }
-            else {
-                cur = cur.next;
+        while (curr != null && curr.next != null) {
+            if (curr.next.val == curr.val) {
+                curr.next = curr.next.next;
+            } else {
+                curr = curr.next;
             }
         }
         
