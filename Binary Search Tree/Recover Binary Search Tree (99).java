@@ -1,5 +1,5 @@
 /**
- * Definition for binary tree
+ * Definition for a binary tree node.
  * public class TreeNode {
  *     int val;
  *     TreeNode left;
@@ -9,27 +9,23 @@
  */
 public class Solution {
     public void recoverTree(TreeNode root) {
-        if (root == null) {
-            return;
-        }
-        
         TreeNode[] pre = new TreeNode[1];
         TreeNode[] first = new TreeNode[1];
         TreeNode[] second = new TreeNode[1];
 
-        helper(root, pre, first, second);
+        inorder(root, pre, first, second);
         
         int temp = first[0].val;
         first[0].val = second[0].val;
         second[0].val = temp;
     }
     
-    private void helper(TreeNode root, TreeNode[] pre, TreeNode[] first, TreeNode[] second) {
+    private void inorder(TreeNode root, TreeNode[] pre, TreeNode[] first, TreeNode[] second) {
         if (root == null) {
             return;
         }
         
-        helper(root.left, pre, first, second);
+        inorder(root.left, pre, first, second);
         
         if (pre[0] != null && pre[0].val > root.val) {
             if (first[0] == null) {
@@ -41,6 +37,6 @@ public class Solution {
         
         pre[0] = root;
         
-        helper(root.right, pre, first, second);
+        inorder(root.right, pre, first, second);
     }
 }
