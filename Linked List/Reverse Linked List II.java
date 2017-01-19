@@ -3,15 +3,12 @@
  * public class ListNode {
  *     int val;
  *     ListNode next;
- *     ListNode(int x) {
- *         val = x;
- *         next = null;
- *     }
+ *     ListNode(int x) { val = x; }
  * }
  */
 public class Solution {
     public ListNode reverseBetween(ListNode head, int m, int n) {
-        if (head == null || m == n) {
+        if (head == null) {
             return head;
         }
         
@@ -24,13 +21,13 @@ public class Solution {
         }
         
         ListNode pre = head.next;
-        ListNode cur = head.next.next;
+        ListNode curr = head.next.next;
         
         for (int i = 1; i <= n - m; i++) {
-            pre.next = cur.next;
-            cur.next = head.next;
-            head.next = cur;
-            cur = pre.next;
+            pre.next = curr.next;
+            curr.next = head.next;
+            head.next = curr;
+            curr = pre.next;
         }
         
         return dummy.next;
