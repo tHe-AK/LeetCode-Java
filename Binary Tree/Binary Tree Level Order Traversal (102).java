@@ -1,5 +1,5 @@
 /**
- * Definition for binary tree
+ * Definition for a binary tree node.
  * public class TreeNode {
  *     int val;
  *     TreeNode left;
@@ -9,7 +9,7 @@
  */
 public class Solution {
     public List<List<Integer>> levelOrder(TreeNode root) {
-        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        List<List<Integer>> result = new ArrayList<>();
         
         if (root == null) {
             return result;
@@ -20,7 +20,7 @@ public class Solution {
         
         while (!queue.isEmpty()) {
             int size = queue.size();
-            List<Integer> level = new ArrayList<Integer>();
+            List<Integer> level = new ArrayList<>();
             
             for (int i = 0; i < size; i++) {
                 TreeNode peek = queue.poll();
