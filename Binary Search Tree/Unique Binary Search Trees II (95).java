@@ -9,6 +9,10 @@
  */
 public class Solution {
     public List<TreeNode> generateTrees(int n) {
+        if (n < 1) {
+            return new ArrayList<>(); 
+        }
+        
         return search(1, n);
     }
     
