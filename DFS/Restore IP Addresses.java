@@ -34,12 +34,12 @@ public class Solution {
     public List<String> restoreIpAddresses(String s) {
         List<String> result = new ArrayList<>();
 
-        helper(s, 4, 0, "", result);
+        dfs(s, 4, 0, "", result);
         
         return result;
     }
     
-    private void helper(String s, int count, int start, String curr, List<String> result) {
+    private void dfs(String s, int count, int start, String curr, List<String> result) {
         if (s.length() - start < count || s.length() - start > count * 3) {
             return;
         }
@@ -56,7 +56,7 @@ public class Solution {
                 break;
             }
 
-            helper(s, count - 1, i + 1, curr + (curr.length() == 0 ? "" : ".") + str, result);
+            dfs(s, count - 1, i + 1, curr + (curr.length() == 0 ? "" : ".") + str, result);
         }
     }
 }
