@@ -12,7 +12,7 @@ public class Solution {
         return search(1, n);
     }
     
-    private void search(int start, int end) {
+    private List<TreeNode> search(int start, int end) {
         List<TreeNode> list = new ArrayList<>();
         
         if (start > end) {
