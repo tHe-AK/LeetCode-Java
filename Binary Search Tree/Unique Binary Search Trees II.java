@@ -1,45 +1,39 @@
 /**
- * Definition for binary tree
+ * Definition for a binary tree node.
  * public class TreeNode {
  *     int val;
  *     TreeNode left;
  *     TreeNode right;
- *     TreeNode(int x) { val = x; left = null; right = null; }
+ *     TreeNode(int x) { val = x; }
  * }
  */
 public class Solution {
     public List<TreeNode> generateTrees(int n) {
-        if (n < 0) {
-            throw new IllegalArgumentException();
-        }
-        
-        List<TreeNode> result = new ArrayList<TreeNode>();
-
-        return helper(1, n);
+        return search(1, n);
     }
     
-    private List<TreeNode> helper(int start, int end) {
-        List<TreeNode> rec = new ArrayList<TreeNode>();
+    private void search(int start, int end) {
+        List<TreeNode> list = new ArrayList<>();
         
         if (start > end) {
-            rec.add(null);
-            return rec;
+            list.add(null);
+            return list;
         }
         
         for (int i = start; i <= end; i++) {
-            List<TreeNode> left = helper(start, i - 1);
-            List<TreeNode> right = helper(i + 1, end);
+            List<TreeNode> left = search(start, i - 1);
+            List<TreeNode> right = search(i + 1, end);
             
-            for (int m = 0 ; m < left.size(); m++) {
-                for (int n = 0; n < right.size(); n++) {
+            for (TreeNode leftNode : left) {
+                for (TreeNode rightNode : right) {
                     TreeNode root = new TreeNode(i);
-                    root.left = left.get(m);
-                    root.right = right.get(n);
-                    rec.add(root);
+                    root.left = leftNode;
+                    root.right = rightNode;
+                    list.add(root);
                 }
             }
         }
         
-        return rec;
+        return list;
     }
 }
