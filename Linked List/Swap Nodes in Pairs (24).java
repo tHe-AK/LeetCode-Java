@@ -38,7 +38,7 @@ public class Solution {
             ListNode pre = head.next;
             ListNode curr = head.next.next;
             pre.next = curr.next;
-            curr.next = pre;
+            curr.next = head.next;
             head.next = curr;
             head = pre;
         }
