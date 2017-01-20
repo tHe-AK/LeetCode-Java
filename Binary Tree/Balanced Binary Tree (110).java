@@ -1,5 +1,5 @@
 /**
- * Definition for binary tree
+ * Definition for a binary tree node.
  * public class TreeNode {
  *     int val;
  *     TreeNode left;
@@ -9,25 +9,21 @@
  */
 public class Solution {
     public boolean isBalanced(TreeNode root) {
-        if (root == null) {
-            return true;
-        }
-        
-        return helper(root) != -1;
+        return height(root) != -1;
     }
     
-    private int helper(TreeNode root) {
+    private int height(TreeNode root) {
         if (root == null) {
             return 0;
         }
         
-        int left = helper(root.left);
-        int right = helper(root.right);
+        int left = height(root.left);
+        int right = height(root.right);
         
         if (left == -1 || right == -1 || Math.abs(left - right) > 1) {
             return -1;
+        } else {
+            return Math.max(left, right) + 1;
         }
-        
-        return Math.max(left, right) + 1;
     }
 }
