@@ -1,5 +1,5 @@
 /**
- * Definition for binary tree
+ * Definition for a binary tree node.
  * public class TreeNode {
  *     int val;
  *     TreeNode left;
@@ -11,11 +11,9 @@ public class Solution {
     public boolean hasPathSum(TreeNode root, int sum) {
         if (root == null) {
             return false;
-        }
-        else if (root.left == null && root.right == null && root.val == sum) {
+        } else if (root.left == null && root.right == null && root.val == sum) {
             return true;
-        }
-        else {
+        } else {
             return hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val);
         }
     }
