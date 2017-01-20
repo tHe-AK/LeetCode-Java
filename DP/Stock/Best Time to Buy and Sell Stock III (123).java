@@ -5,13 +5,13 @@ public class Solution {
         int profit1 = 0;
         int profit2 = 0;
         
-		for (int price : prices) {
-			min1 = Math.min(min1, price);
-			profit1 = Math.max(profit1, price - min1);
-			min2 = Math.min(min2, price - profit1);
-			profit2 = Math.max(profit2, price - min2);
-		}
-		
-		return profit2;
+        for (int price : prices) {
+            min1 = Math.min(min1, price);
+            profit1 = Math.max(profit1, price - min1);
+            min2 = Math.min(min2, price - profit1);
+            profit2 = Math.max(profit2, price - min2);
+        }
+        
+        return profit2;
     }
 }
