@@ -13,16 +13,16 @@ public class Solution {
         }
         
         while (root.left != null) {
-            TreeLinkNode cur = root;
+            TreeLinkNode curr = root;
 
-            while (cur != null) {
-                cur.left.next = cur.right;
+            while (curr != null) {
+                curr.left.next = curr.right;
                 
-                if (cur.next != null) {
-                    cur.right.next = cur.next.left;
+                if (curr.next != null) {
+                    curr.right.next = curr.next.left;
                 }
                 
-                cur = cur.next;
+                curr = curr.next;
             }
             
             root = root.left;
