@@ -171,12 +171,12 @@ public class Solution {
         List<String> neighbors = new ArrayList<>();
         
         for (int j = 0; j < str.length(); j++) {
-            StringBuilder sb = new StringBuilder(str);
+            char[] chars = str.toCharArray();
                     
             for (char c = 'a'; c <= 'z'; c++) {
-                if (c != str.charAt(j)) {
-                    sb.setCharAt(j, c);
-                    String neighbor = sb.toString();
+                if (c != chars[j]) {
+                    chars[j] = c;
+                    String neighbor = new String(chars);;
                     neighbors.add(neighbor);
                 }
             }
