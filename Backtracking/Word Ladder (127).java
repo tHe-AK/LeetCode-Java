@@ -63,13 +63,6 @@ public class Solution {
         return neighbors;
     }
 }
-
-public class Solution {
-    public int ladderLength(String beginWord, String endWord, List<String> wordList) {
-        List<List<String>> result = new ArrayList<>();
-
-        return bfs(beginWord, endWord, new HashSet<String>(wordList));
-    }
     
 public class Solution {
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
