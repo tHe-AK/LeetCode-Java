@@ -7,12 +7,8 @@ public class Solution {
         }
         
         Map<String, List<String>> map = new HashMap<>();
-        Set<String> set1 = new HashSet<>();
-        Set<String> set2 = new HashSet<>();
-        set1.add(beginWord);
-        set2.add(endWord);
         
-        if (bfs(beginWord, endWord, new HashSet<String>(wordList), set1, set2, map, true)) {
+        if (bfs(beginWord, endWord, new HashSet<String>(wordList), map)) {
             List<String> curr = new ArrayList<>();
             curr.add(beginWord);
         
@@ -23,43 +19,57 @@ public class Solution {
         return result;
     }
     
-    private boolean bfs(String beginWord, String endWord, Set<String> wordList, Set<String> set1, Set<String> set2, Map<String, List<String>> map, boolean flip) {
-        if (set1.size() > set2.size()) {
-            return bfs(beginWord, endWord, wordList, set2, set1, map , !flip);
-        }
-        
-        if (set1.isEmpty()) {
-            return false;
-        }
-        
-        wordList.removeAll(set1);
-        wordList.removeAll(set2);
-        Set<String> next = new HashSet<>();
+    private boolean bfs(String beginWord, String endWord, Set<String> wordList, Map<String, List<String>> map) {
+        Set<String> set1 = new HashSet<>();
+        Set<String> set2 = new HashSet<>();
+        set1.add(beginWord);
+        set2.add(endWord);
+        wordList.remove(beginWord);
+        wordList.remove(endWord);
         boolean isFound = false;
+        boolean flip = false;
         
-        for (String str : set1) {
-            List<String> neighbors = getNeighbors(str);
+        while (!set1.isEmpty()) {
+            Set<String> next = new HashSet<>();
+
+            for (String str : set1) {
+                List<String> neighbors = getNeighbors(str);
+                
+                for (String neighbor : neighbors) {
+                    String key = flip ? neighbor : str;
+                    String val = flip ? str : neighbor;
+                    List<String> list = map.containsKey(key) ? map.get(key) : new ArrayList<String>();
+                    
+                    if (set2.contains(neighbor)) {
+                        isFound = true;
+                        list.add(val);
+                        map.put(key, list);
+                    }
+                    
+                    if (wordList.contains(neighbor)) {
+                        next.add(neighbor);
+                        list.add(val);
+                        map.put(key, list);
+                    }
+                }
+            }
             
-            for (String neighbor : neighbors) {
-                String key = flip ? str : neighbor;
-                String val = flip ? neighbor : str;
-                List<String> list = map.containsKey(key) ? map.get(key) : new ArrayList<String>();
-                
-                if (set2.contains(neighbor)) {
-                    isFound = true;
-                    list.add(val);
-                    map.put(key, list);
-                }
-                
-                if (wordList.contains(neighbor)) {
-                    next.add(neighbor);
-                    list.add(val);
-                    map.put(key, list);
-                }
+            if (isFound) {
+                return true;
+            }
+            
+            wordList.removeAll(next);
+            set1 = next;
+            
+            if (set1.size() > set2.size()) {
+                flip = !flip;
+                Set<String> temp = new HashSet<>(set1);
+                set1 = set2;
+                set2 = temp;
             }
         }
         
-        return isFound || bfs(beginWord, endWord, wordList, set2, next, map, !flip);
+        return isFound;
     }
     
     private void dfs(String beginWord, String endWord, Map<String, List<String>> map, List<String> curr, List<List<String>> result) {
