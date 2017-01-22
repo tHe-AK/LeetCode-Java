@@ -12,8 +12,8 @@ public class Solution {
             return null;
         }
         
-        HashMap<UndirectedGraphNode, UndirectedGraphNode> hashMap = new HashMap<UndirectedGraphNode, UndirectedGraphNode>();
-        Queue<UndirectedGraphNode> queue = new LinkedList<UndirectedGraphNode>();
+        HashMap<UndirectedGraphNode, UndirectedGraphNode> hashMap = new HashMap<>();
+        Queue<UndirectedGraphNode> queue = new LinkedList<>();
         hashMap.put(node, new UndirectedGraphNode(node.label));
         queue.offer(node);
         
