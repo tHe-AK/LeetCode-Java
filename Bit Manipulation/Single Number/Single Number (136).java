@@ -3,7 +3,7 @@ public class Solution {
         int one = 0;
         
         for (int num : nums) {
-            one ^= nums;
+            one ^= num;
         }
         
         return one;
