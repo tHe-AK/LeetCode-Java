@@ -11,9 +11,7 @@ public class Solution {
         
         for (int i = 0; i < len; i++) {
             result[i] = i;
-        }
-        
-        for (int i = 0; i < len; i++) {
+            
             for (int j = 0; j <= i; j++) {
                 if (rec[j][i]) {
                     result[i] = Math.min(result[i], j == 0 ? 0 : result[j - 1] + 1);
