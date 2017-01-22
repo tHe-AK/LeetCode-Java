@@ -12,24 +12,24 @@ public class Solution {
             return null;
         }
         
-        HashMap<UndirectedGraphNode, UndirectedGraphNode> hashMap = new HashMap<>();
+        Map<UndirectedGraphNode, UndirectedGraphNode> map = new HashMap<>();
         Queue<UndirectedGraphNode> queue = new LinkedList<>();
-        hashMap.put(node, new UndirectedGraphNode(node.label));
+        map.put(node, new UndirectedGraphNode(node.label));
         queue.offer(node);
         
         while (!queue.isEmpty()) {
             UndirectedGraphNode peek = queue.poll();
             
             for (UndirectedGraphNode neighbor : peek.neighbors) {
-                if (!hashMap.containsKey(neighbor)) {
-                    hashMap.put(neighbor, new UndirectedGraphNode(neighbor.label));
+                if (!map.containsKey(neighbor)) {
+                    map.put(neighbor, new UndirectedGraphNode(neighbor.label));
                     queue.offer(neighbor);
                 }
                 
-                hashMap.get(peek).neighbors.add(hashMap.get(neighbor));
+                map.get(peek).neighbors.add(map.get(neighbor));
             }
         }
         
-        return hashMap.get(node);
+        return map.get(node);
     }
 }
