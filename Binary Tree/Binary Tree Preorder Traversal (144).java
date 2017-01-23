@@ -10,24 +10,16 @@
 public class Solution {
     public List<Integer> preorderTraversal(TreeNode root) {
         List<Integer> result = new ArrayList<>();
-        
-        if (root == null) {
-            return result;
-        }
-        
         Stack<TreeNode> stack = new Stack<>();
-        stack.push(root);
-        
-        while (!stack.empty()) {
-            TreeNode peek = stack.pop();
-            result.add(peek.val);
-            
-            if (peek.right != null) {
-                stack.push(peek.right);
-            }
-            
-            if (peek.left != null) {
-                stack.push(peek.left);
+
+        while (root != null || !stack.empty()) {
+            if (root != null) {
+                result.add(root.val);
+                stack.push(root);
+                root = root.left;
+            } else {
+                TreeNode peek = stack.pop();
+                root = peek.right;
             }
         }
         
