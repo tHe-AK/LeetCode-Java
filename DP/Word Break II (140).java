@@ -1,27 +1,39 @@
 public class Solution {
-    public List<String> wordBreak(String s, Set<String> dict) {
-        if (s == null || dict == null) {
-            throw new IllegalArgumentException();
+    public List<String> wordBreak(String s, List<String> wordDict) {
+        Set<String> set = new HashSet(wordDict);
+        int len = s.length();
+        boolean[] dp = new boolean[len + 1];
+        dp[0] = true;
+        
+        for (int i = 1; i <= len; i++) {
+            for (int j = 0; j < i; j++) {
+                if (dp[j] && set.contains(s.substring(j, i))) {
+                    dp[i] = true;
+                    break;
+                }
+            }
         }
         
-        List<String> result = new ArrayList<String>();
+        List<String> result = new ArrayList<>();
         
-        helper(s, dict, s.length() - 1, "", result);
+        if (dp[len]) {
+            dfs(s, set, 0, "", result);
+        }
         
         return result;
     }
     
-    private void helper(String s, Set<String> dict, int start, String cur, List<String> result) {
-        if (start == -1) {
-            result.add(cur.trim());
+    private void dfs(String s, Set<String> wordDict, int start, String curr, List<String> result) {
+        if (start == s.length()) {
+            result.add(curr);
             return;
         }
         
-        for (int i = 0; i <= start; i++) {
-            String word = s.substring(i, start + 1);
+        for (int i = start + 1; i <= s.length(); i++) {
+            String word = s.substring(start, i);
             
-            if (dict.contains(word)) {
-                helper(s, dict, i - 1, word + " " + cur, result);
+            if (wordDict.contains(word)) {
+                dfs(s, wordDict, i, curr + (curr.length() > 0 ? " " : "") + word, result);
             }
         }
     }
