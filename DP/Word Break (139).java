@@ -17,7 +17,7 @@ public class Solution {
         List<String> result = new ArrayList<>();
         
         if (dp[len]) {
-            dfs(s, new HashSet<String>(wordDict), 0, "", result);
+            dfs(s, set, 0, "", result);
         }
         
         return result;
