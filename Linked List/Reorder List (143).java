@@ -1,12 +1,9 @@
 /**
  * Definition for singly-linked list.
- * class ListNode {
+ * public class ListNode {
  *     int val;
  *     ListNode next;
- *     ListNode(int x) {
- *         val = x;
- *         next = null;
- *     }
+ *     ListNode(int x) { val = x; }
  * }
  */
 public class Solution {
@@ -23,26 +20,26 @@ public class Solution {
             fast = fast.next.next;
         }
         
-        ListNode cur1 = head;
-        ListNode cur2 = slow.next;
+        ListNode curr1 = head;
+        ListNode curr2 = slow.next;
         slow.next = null;
         ListNode pre = null;
         
-        while (cur2 != null) {
-            ListNode next = cur2.next;
-            cur2.next = pre;
-            pre = cur2;
-            cur2 = next;
+        while (curr2 != null) {
+            ListNode next = curr2.next;
+            curr2.next = pre;
+            pre = curr2;
+            curr2 = next;
         }
         
-        cur2 = pre;
+        curr2 = pre;
         
-        while (cur2 != null) {
-            ListNode next = cur2.next;
-            cur2.next = cur1.next;
-            cur1.next = cur2;
-            cur2 = next;
-            cur1 = cur1.next.next;
+        while (curr2 != null) {
+            ListNode next = curr2.next;
+            curr2.next = curr1.next;
+            curr1.next = curr2;
+            curr2 = next;
+            curr1 = curr1.next.next;
         }
     }
 }
