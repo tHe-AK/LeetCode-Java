@@ -3,31 +3,23 @@
  * public class ListNode {
  *     int val;
  *     ListNode next;
- *     ListNode(int x) {
- *         val = x;
- *         next = null;
- *     }
+ *     ListNode(int x) { val = x; }
  * }
  */
 public class Solution {
     public ListNode insertionSortList(ListNode head) {
-        if (head == null) {
-            return head;
-        }
-        
         ListNode dummy = new ListNode(0);
         
         while (head != null) {
-            ListNode cur = dummy;
+            ListNode curr = dummy;
             
-            while (cur.next != null && cur.next.val < head.val) {
-                cur = cur.next;
+            while (curr.next != null && curr.next.val < head.val) {
+                curr = curr.next;
             }
             
             ListNode next = head.next;
-            head.next = cur.next;
-            cur.next = head;
-            
+            head.next = curr.next;
+            curr.next = head;
             head = next;
         }
         
