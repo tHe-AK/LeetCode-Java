@@ -1,27 +1,20 @@
 public class Solution {
-    public int findMin(int[] num) {
-        if (num == null || num.length == 0) {
-            throw new IllegalArgumentException();
-        }
-        
+    public int findMin(int[] nums) {
         int low = 0;
-        int high = num.length - 1;
+        int high = nums.length - 1;
         
-        while (low + 1 < high) {
+        while (low < high) {
             int mid = low + (high - low) / 2;
             
-            if (num[low] < num[high]) {
-                return num[low];
-            }
-            else if (num[low] <= num[mid]) {
-                low = mid;
-            }
-            else {
+            if (nums[low] < nums[high]) {
+                return nums[low];
+            } else if (nums[low] <= nums[mid]) {
+                low = mid + 1;
+            } else {
                 high = mid;
             }
         }
         
-        return Math.min(num[low], num[high]);
+        return nums[low];
     }
 }
-
