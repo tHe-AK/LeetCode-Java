@@ -23,3 +23,41 @@ public class Solution {
         return sb.toString();
     }
 }
+
+public class Solution {
+    public String reverseWords(String s) {
+        int len = s.length();
+        char[] chars = s.toCharArray();
+        reverse(chars, 0, len - 1);
+        int index = 0;
+        int i = 0;
+
+        while (i < len) {
+            if (chars[i] != ' ') {
+                if (index > 0) {
+                    chars[index++] = ' ';
+                }
+                
+                int start = index;
+            
+                while (i < len && chars[i] != ' ') {
+                    chars[index++] = chars[i++];
+                }
+                
+                reverse(chars, start, index - 1);
+            } else {
+                i++;
+            }
+        }
+        
+        return new String(chars).substring(0, index);
+    }
+    
+    private void reverse(char[] chars, int start, int end) {
+        while (start < end) {
+            char temp = chars[start];
+            chars[start++] = chars[end];
+            chars[end--] = temp;
+        }
+    }
+}
