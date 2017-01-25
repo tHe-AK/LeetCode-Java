@@ -12,15 +12,15 @@ public class Solution extends Reader4 {
         int bufIdx = 0;
         
         while (bufIdx < n) {
-            int tempCount = read4(temp);
+            int tempCnt = read4(temp);
             
-            if (tempCount == 0) {
+            if (tempCnt == 0) {
                 return bufIdx;
             }
             
             int tempIdx = 0;
             
-            while (bufIdx < n && tempIdx < tempCount) {
+            while (bufIdx < n && tempIdx < tempCnt) {
                 buf[bufIdx++] = temp[tempIdx++];
             }
         }
