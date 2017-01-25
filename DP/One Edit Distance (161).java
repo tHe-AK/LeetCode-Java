@@ -1,24 +1,20 @@
 public class Solution {
     public boolean isOneEditDistance(String s, String t) {
-        if (s == null || t == null) {
-            throw new IllegalArgumentException();
-        }
-        
         int m = s.length();
         int n = t.length();
         
-        if (m > n) {
+        if (m < n) {
             return isOneEditDistance(t, s);
         }
         
-        if (n - m > 1) {
+        if (m - n > 1) {
             return false;
         }
         
         int i = 0;
-        int shift = n - m;
+        int shift = m - n;
         
-        while (i < m && s.charAt(i) == t.charAt(i)) {
+        while (i < n && s.charAt(i) == t.charAt(i)) {
             i++;
         }
         
@@ -26,10 +22,10 @@ public class Solution {
             i++;
         }
         
-        while (i < m && s.charAt(i) == t.charAt(i + shift)) {
+        while (i < n && s.charAt(i + shift) == t.charAt(i)) {
             i++;
         }
         
-        return i == m;
+        return i == n;
     }
 }
