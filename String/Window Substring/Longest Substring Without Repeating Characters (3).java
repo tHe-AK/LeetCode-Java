@@ -4,13 +4,17 @@ public class Solution {
         int[] rec = new int[256];
         int start = 0;
         int end = 0;
+        int count = 0;
         
         while (end < s.length()) {
-            char c = s.charAt(end++);
-            rec[c]++;
+            if (rec[s.charAt(end++)]++ > 0) {
+                count++;
+            }
             
-            while (rec[c] > 1) {
-                rec[s.charAt(start++)]--;
+            while (count > 0) {
+                if (rec[s.charAt(start++)]-- > 1) {
+                    count--;
+                }
             }
             
             result = Math.max(result, end - start);
