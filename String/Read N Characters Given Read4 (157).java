@@ -10,18 +10,17 @@ public class Solution extends Reader4 {
     public int read(char[] buf, int n) {
         char[] temp = new char[4];
         int bufIdx = 0;
-        int tempIdx = 0;
         
         while (bufIdx < n) {
-            int count = read4(temp);
+            int tempCount = read4(temp);
             
-            if (count == 0) {
+            if (tempCount == 0) {
                 return bufIdx;
             }
             
-            tempIdx = 0;
+            int tempIdx = 0;
             
-            while (bufIdx < n && tempIdx < count) {
+            while (bufIdx < n && tempIdx < tempCount) {
                 buf[bufIdx++] = temp[tempIdx++];
             }
         }
