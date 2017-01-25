@@ -6,15 +6,14 @@ public class Solution {
         int end = 0;
         
         while (end < s.length()) {
-            char c = s.charAt(end);
+            char c = s.charAt(end++);
             rec[c]++;
             
             while (rec[c] > 1) {
                 rec[s.charAt(start++)]--;
             }
             
-            result = Math.max(result, end - start + 1);
-            end++;
+            result = Math.max(result, end - start);
         }
         
         return result;
