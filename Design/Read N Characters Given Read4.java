@@ -8,41 +8,24 @@ public class Solution extends Reader4 {
      * @return    The number of characters read
      */
     public int read(char[] buf, int n) {
-        int count = 0;
+        char[] temp = new char[4];
+        int bufIdx = 0;
+        int tempIdx = 0;
         
-        if (n <= 0) {
-            return count;
-        }
-        
-        char[] buffer = new char[4];
-        int start = 0;
-        int size = 0;
-    
-        while (n > 0) {
-            if (size == 0) {
-                size = read4(buffer);
-                
-                if (size == 0) {
-                    return count;
-                }
+        while (bufIdx < n) {
+            int count = read4(temp);
+            
+            if (count == 0) {
+                return bufIdx;
             }
-
-            if (size <= n) {
-                System.arraycopy(buffer, start, buf, count, size);
-                count += size;
-                n -= size;
-                start = 0;
-                size = 0;
-            }
-            else {
-                System.arraycopy(buffer, start, buf, count, n);
-                start += n;
-                size -= n;
-                count += n;
-                n = 0;
+            
+            tempIdx = 0;
+            
+            while (bufIdx < n && tempIdx < count) {
+                buf[bufIdx++] = temp[tempIdx++];
             }
         }
         
-        return count;
+        return bufIdx;
     }
 }
