@@ -15,6 +15,6 @@ public class Solution {
             }
         }
         
-        return -1;
+        return nums[low] >= nums[high] ? low : high;
     }
 }
