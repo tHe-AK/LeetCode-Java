@@ -2,9 +2,9 @@
       int read4(char[] buf); */
 
 public class Solution extends Reader4 {
-    private char[] buffer = new char[4];
-    private int start = 0;
-    private int size = 0;
+    private char[] temp = new char[4];
+    private int tempIdx = 0;
+    private int tempCnt = 0;
     
     /**
      * @param buf Destination buffer
@@ -12,37 +12,26 @@ public class Solution extends Reader4 {
      * @return    The number of characters read
      */
     public int read(char[] buf, int n) {
-        int count = 0;
+        int bufIdx = 0;
         
-        if (n <= 0) {
-            return count;
-        }
-        
-        while (n > 0) {
-            if (size == 0) {
-                size = read4(buffer);
+        while (bufIdx < n) {
+            if (tempIdx == 0) {
+                tempCnt = read4(temp);
                 
-                if (size == 0) {
-                    return count;
+                if (tempCnt == 0) {
+                    return bufIdx;
                 }
             }
-
-            if (size <= n) {
-                System.arraycopy(buffer, start, buf, count, size);
-                count += size;
-                n -= size;
-                start = 0;
-                size = 0;
+            
+            while (bufIdx < n && tempIdx < tempCnt) {
+                buf[bufIdx++] = temp[tempIdx++];
             }
-            else {
-                System.arraycopy(buffer, start, buf, count, n);
-                start += n;
-                size -= n;
-                count += n;
-                n = 0;
+            
+            if (tempIdx == tempCnt) {
+                tempIdx = 0;
             }
         }
         
-        return count;
+        return bufIdx;
     }
 }
