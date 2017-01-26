@@ -29,28 +29,28 @@ public class Solution {
         int len = s.length();
         char[] chars = s.toCharArray();
         reverse(chars, 0, len - 1);
-        int index = 0;
+        int curr = 0;
         int i = 0;
 
         while (i < len) {
             if (chars[i] != ' ') {
-                if (index > 0) {
-                    chars[index++] = ' ';
+                if (curr > 0) {
+                    chars[curr++] = ' ';
                 }
                 
-                int start = index;
+                int start = curr;
             
                 while (i < len && chars[i] != ' ') {
-                    chars[index++] = chars[i++];
+                    chars[curr++] = chars[i++];
                 }
                 
-                reverse(chars, start, index - 1);
+                reverse(chars, start, curr - 1);
             } else {
                 i++;
             }
         }
         
-        return new String(chars).substring(0, index);
+        return new String(chars).substring(0, curr);
     }
     
     private void reverse(char[] chars, int start, int end) {
