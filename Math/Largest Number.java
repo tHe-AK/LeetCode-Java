@@ -1,9 +1,5 @@
 public class Solution {
     public String largestNumber(int[] nums) {
-        if (nums == null || nums.length == 0) {
-            return null;
-        }
-        
         StringBuilder sb = new StringBuilder();
         int len = nums.length;
         String[] rec = new String[len];
@@ -22,8 +18,8 @@ public class Solution {
             sb.append(str);
         }
         
-        while (sb.length() > 1 && sb.charAt(0) == '0') {
-            sb.deleteCharAt(0);
+        if (sb.length() > 0 && sb.charAt(0) == '0') {
+            return "0";
         }
         
         return sb.toString();
