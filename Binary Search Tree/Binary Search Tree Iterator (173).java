@@ -10,10 +10,10 @@
 
 public class BSTIterator {
     private Stack<TreeNode> stack;
-
+    
     public BSTIterator(TreeNode root) {
-        stack = new Stack<TreeNode>();
-        helper(root);
+        stack = new Stack<>();
+        push(root);
     }
 
     /** @return whether we have a next smallest number */
@@ -24,11 +24,11 @@ public class BSTIterator {
     /** @return the next smallest number */
     public int next() {
         TreeNode peek = stack.pop();
-        helper(peek.right);
+        push(peek.right);
         return peek.val;
     }
     
-    private void helper(TreeNode root) {
+    private void push(TreeNode root) {
         while (root != null) {
             stack.push(root);
             root = root.left;
