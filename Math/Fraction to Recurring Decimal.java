@@ -1,44 +1,44 @@
 public class Solution {
     public String fractionToDecimal(int numerator, int denominator) {
-        if (numerator == 0) {
-            return "0";
-        }
-        
         if (denominator == 0) {
             return null;
         }
         
-        StringBuilder sb = new StringBuilder();
-        
-        if ((numerator < 0) ^ (denominator < 0)) {
-            sb.append("-");
+        if (numerator == 0) {
+            return "0";
         }
         
-        long num = Math.abs((long) numerator);
-        long den = Math.abs((long) denominator);
-        sb.append(num / den);
+        StringBuilder fraction = new StringBuilder();
+
+        if (numerator < 0 ^ denominator < 0) {
+            fraction.append("-");
+        }
+
+        long dividend = Math.abs((long) numerator);
+        long divisor = Math.abs((long) denominator);
+        fraction.append(dividend / divisor);
+        long remainder = dividend % divisor;
         
-        if (num % den == 0) {
-            return sb.toString();
+        if (remainder == 0) {
+            return fraction.toString();
         }
         
-        sb.append(".");
-        num = num % den * 10;
-        HashMap<Long, Integer> rec = new HashMap<Long, Integer>();
+        fraction.append(".");
+        Map<Long, Integer> map = new HashMap<>();
         
-        while (num != 0) {
-            if (rec.containsKey(num)) {
-                sb.insert(rec.get(num), "(");
-                sb.append(")");
-                return sb.toString();
+        while (remainder != 0) {
+            if (map.containsKey(remainder)) {
+                fraction.insert(map.get(remainder), "(");
+                fraction.append(")");
+                break;
             }
-            else {
-                rec.put(num, sb.length());
-                sb.append(num / den);
-                num = num % den * 10;
-            }
+            
+            map.put(remainder, fraction.length());
+            remainder *= 10;
+            fraction.append(remainder / divisor);
+            remainder %= divisor;
         }
         
-        return sb.toString();
+        return fraction.toString();
     }
 }
