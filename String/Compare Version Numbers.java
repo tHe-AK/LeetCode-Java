@@ -1,43 +1,21 @@
 public class Solution {
     public int compareVersion(String version1, String version2) {
-        if (version1 == null || version2 == null) {
-            throw new IllegalArgumentException();
-        }
-        
         String[] str1 = version1.split("\\.");
         String[] str2 = version2.split("\\.");
+        int len1 = str1.length;
+        int len2 = str2.length;
         int i = 0;
-        
-        while (i < str1.length || i < str2.length) {
-            if (i < str1.length && i < str2.length) {
-                int val1 = Integer.parseInt(str1[i]);
-                int val2 = Integer.parseInt(str2[i]);
-                
-                if (val1 < val2) {
-                    return -1;
-                }
-                else if (val1 > val2) {
-                    return 1;
-                }
-                else {
-                }
-            }
-            else if (i < str1.length) {
-                int val1 = Integer.parseInt(str1[i]);
-                
-                if (val1 != 0) {
-                    return 1;
-                }
-            }
-            else {
-                int val2 = Integer.parseInt(str2[i]);
-                
-                if (val2 != 0) {
-                    return -1;
-                }
-            }
+
+        while (i < len1 || i < len2) {
+            Integer val1 = i < len1 ? Integer.parseInt(str1[i]) : 0;
+            Integer val2 = i < len2 ? Integer.parseInt(str2[i]) : 0;
+            int compare = val1.compareTo(val2);
             
-            i++;
+        	if (compare != 0) {
+        		return compare;
+        	}
+        	
+        	i++;
         }
         
         return 0;
