@@ -1,9 +1,11 @@
 public class Solution {
     public int trailingZeroes(int n) {
-        if (n < 0) {
-            throw new IllegalArgumentException();
-        }
-        
+        return n == 0 ? 0 : n / 5 + trailingZeroes(n / 5);
+    }
+}
+
+public class Solution {
+    public int trailingZeroes(int n) {
         int count = 0;
         
         for (long i = 5; i <= n; i *= 5) {
