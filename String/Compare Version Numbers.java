@@ -11,11 +11,11 @@ public class Solution {
             Integer val2 = i < len2 ? Integer.parseInt(str2[i]) : 0;
             int compare = val1.compareTo(val2);
             
-        	if (compare != 0) {
-        		return compare;
-        	}
-        	
-        	i++;
+            if (compare != 0) {
+                return compare;
+            }
+            
+            i++;
         }
         
         return 0;
