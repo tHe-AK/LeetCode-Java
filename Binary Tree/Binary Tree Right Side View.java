@@ -22,18 +22,18 @@ public class Solution {
             int size = queue.size();
             
             for (int i = 0; i < size; i++) {
-                TreeNode cur = queue.poll();
-                
-                if (cur.left != null) {
-                    queue.offer(cur.left);
-                }
-                
-                if (cur.right != null) {
-                    queue.offer(cur.right);
-                }
+                TreeNode peek = queue.poll();
                 
                 if (i == size - 1) {
-                    result.add(cur.val);
+                    result.add(peek.val);
+                }
+                
+                if (peek.left != null) {
+                    queue.offer(peek.left);
+                }
+                
+                if (peek.right != null) {
+                    queue.offer(peek.right);
                 }
             }
         }
