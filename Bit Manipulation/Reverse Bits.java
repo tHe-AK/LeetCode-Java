@@ -1,15 +1,13 @@
 public class Solution {
     // you need treat n as an unsigned value
     public int reverseBits(int n) {
-        for (int i = 0; i < 16; i++) {
-            int low = (n >> i) & 1;
-            int high = (n >> (31 - i)) & 1;
-            
-            if ((low ^ high) == 1) {
-                n ^= (1 << i) | (1 << (31 - i));
-            }
+        int m = 0;
+        
+        for (int i = 0; i < 32; i++) {
+            m = (m << 1) + (n & 1);
+            n = n >>> 1;
         }
         
-        return n;
+        return m;
     }
 }
