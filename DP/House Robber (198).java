@@ -3,8 +3,8 @@ public class Solution {
         int prevMax = 0;
         int currMax = 0;
         
-        for (int x : num) {
-            int temp = Math.max(prevMax + x, currMax);
+        for (int num : nums) {
+            int temp = Math.max(prevMax + num, currMax);
             prevMax = currMax;
             currMax = temp;
         }
