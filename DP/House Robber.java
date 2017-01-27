@@ -1,5 +1,20 @@
 public class Solution {
     public int rob(int[] nums) {
+        int prevMax = 0;
+        int currMax = 0;
+        
+        for (int x : num) {
+            int temp = Math.max(prevMax + x, currMax);
+            prevMax = currMax;
+            currMax = temp;
+        }
+        
+        return currMax;
+    }
+}
+
+public class Solution {
+    public int rob(int[] nums) {
         int len = nums.length;
 
         if (len == 0) {
