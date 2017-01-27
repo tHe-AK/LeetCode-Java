@@ -1,7 +1,7 @@
 public class Solution {
     public int myAtoi(String str) {
         int sign = 1;
-        int val = 0;
+        long val = 0;
         int len = str.length();
         int i = 0;
         
@@ -19,19 +19,19 @@ public class Solution {
         
         while (i < len && '0' <= str.charAt(i) && str.charAt(i) <= '9') {
             int digit = sign * (str.charAt(i) - '0');
-
-            if (val > 0 && val > (Integer.MAX_VALUE - digit) / 10) {
+            val = val * 10 + digit;
+            
+            if (val > Integer.MAX_VALUE) {
                 return Integer.MAX_VALUE;
             }
-                
-            if (val < 0 && val < (Integer.MIN_VALUE - digit) / 10) {
+            
+            if (val < Integer.MIN_VALUE) {
                 return Integer.MIN_VALUE;
             }
             
-            val = val * 10 + digit;
             i++;
         }
         
-        return val;
+        return (int) val;
     }
 }
