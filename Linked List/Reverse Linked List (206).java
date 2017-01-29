@@ -3,23 +3,15 @@
  * public class ListNode {
  *     int val;
  *     ListNode next;
- *     ListNode(int x) {
- *         val = x;
- *         next = null;
- *     }
+ *     ListNode(int x) { val = x; }
  * }
  */
 public class Solution {
-    public ListNode reverse(ListNode head) {
-        if (head == null) {
-            return null;
-        }
-        
+    public ListNode reverseList(ListNode head) {
         ListNode pre = null;
-        ListNode next;
-        
+
         while (head != null) {
-            next = head.next;
+            ListNode next = head.next;
             head.next = pre;
             pre = head;
             head = next;
@@ -29,13 +21,17 @@ public class Solution {
     }
 }
 
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
 public class Solution {
     public ListNode reverseList(ListNode head) {
-        if (head == null) {
-            return null;
-        }
-        
-        if (head.next == null) {
+        if (head == null || head.next == null) {
             return head;
         }
         
