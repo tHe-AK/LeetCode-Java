@@ -1,10 +1,6 @@
 public class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
-        if (numCourses < 0 || prerequisites == null) {
-            throw new IllegalArgumentException();
-        }
-        
-        List<List<Integer>> rec = new ArrayList<List<Integer>>(numCourses);
+        List<List<Integer>> rec = new ArrayList<>();
         
         for (int i = 0; i < numCourses; i++) {
             rec.add(new ArrayList<Integer>());
@@ -15,28 +11,30 @@ public class Solution {
         }
         
         for (int i = 0; i < numCourses; i++) {
-            if (!helper(rec, i, new boolean[numCourses])) {
+            if (!dfs(rec, i, new boolean[numCourses])) {
                 return false;
             }
+            
+            rec.get(i).clear();
         }
         
         return true;
     }
     
-    private boolean helper(List<List<Integer>> rec, int i, boolean[] path) {
-        if (path[i]) {
+    private boolean dfs(List<List<Integer>> rec, int i, boolean[] visited) {
+        if (visited[i]) {
             return false;
         }
 
-        path[i] = true;
+        visited[i] = true;
         
         for (Integer j : rec.get(i)) {
-            if (!helper(rec, j, path)) {
+            if (!dfs(rec, j, visited)) {
                 return false;
             }
         }
         
-        path[i] = false;
+        visited[i] = false;
         
         return true;
     }
