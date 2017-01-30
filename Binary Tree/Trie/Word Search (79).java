@@ -25,7 +25,6 @@ public class Solution {
             return false;
         }
         
-        
         visited[i][j] = true;
             
         for (int k = 0; k < delta.length; k++) {
