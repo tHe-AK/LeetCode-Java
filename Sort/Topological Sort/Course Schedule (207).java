@@ -3,7 +3,7 @@ public class Solution {
         List<List<Integer>> rec = new ArrayList<>();
         
         for (int i = 0; i < numCourses; i++) {
-            rec.add(new ArrayList<Integer>());
+            rec.add(new ArrayList<>());
         }
         
         for (int[] pair : prerequisites) {
