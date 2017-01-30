@@ -21,24 +21,23 @@ public class Solution {
             return true;
         }
         
-        if (i < 0 || i >= board.length || j < 0 || j >= board[0].length) {
+        if (i < 0 || i >= board.length || j < 0 || j >= board[0].length || visited[i][j] || board[i][j] != word.charAt(start)) {
             return false;
         }
         
-        if (!visited[i][j] && board[i][j] == word.charAt(start)) {
-            visited[i][j] = true;
+        
+        visited[i][j] = true;
             
-            for (int k = 0; k < delta.length; k++) {
-                int x = i + delta[k][0];
-                int y = j + delta[k][1];
+        for (int k = 0; k < delta.length; k++) {
+            int x = i + delta[k][0];
+            int y = j + delta[k][1];
                 
-                if (dfs(board, word, x, y, visited, start + 1, delta)) {
-                    return true;
-                }
+            if (dfs(board, word, x, y, visited, start + 1, delta)) {
+                return true;
             }
-            
-            visited[i][j] = false;
         }
+            
+        visited[i][j] = false;
         
         return false;
     }
