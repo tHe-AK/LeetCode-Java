@@ -1,55 +1,50 @@
 public class Solution {
     public int[] findOrder(int numCourses, int[][] prerequisites) {
-        if (numCourses < 0 || prerequisites == null) {
-            throw new IllegalArgumentException();
-        }
-        
-        List<List<Integer>> rec = new ArrayList<List<Integer>>(numCourses);
+        List<List<Integer>> rec = new ArrayList<>();
+        List<Integer> order = new ArrayList<>();
         
         for (int i = 0; i < numCourses; i++) {
-            rec.add(new ArrayList<Integer>());
+            rec.add(new ArrayList<>());
         }
         
         for (int[] pair : prerequisites) {
             rec.get(pair[1]).add(pair[0]);
         }
         
-        List<Integer> reverse = new ArrayList<Integer>();
-        
         for (int i = 0; i < numCourses; i++) {
-            if (!helper(rec, i, new boolean[numCourses], reverse)) {
+            if (!dfs(rec, i, new boolean[numCourses], order)) {
                 return new int[0];
             }
         }
         
         int[] result = new int[numCourses];
-        
+
         for (int i = 0; i < numCourses; i++) {
-            result[i] = reverse.get(numCourses - i - 1);
+            result[i] = order.get(numCourses - i - 1);
         }
         
         return result;
     }
     
-    private boolean helper(List<List<Integer>> rec, int i, boolean[] path, List<Integer> reverse) {
-        if (path[i]) {
+    private boolean dfs(List<List<Integer>> rec, int i, boolean[] visited, List<Integer> order) {
+        if (visited[i]) {
             return false;
         }
         
-        if (reverse.contains(i)) {
+        if (order.contains(i)) {
             return true;
         }
         
-        path[i] = true;
+        visited[i] = true;
         
         for (Integer j : rec.get(i)) {
-            if (!helper(rec, j, path, reverse)) {
+            if (!dfs(rec, j, visited, order)) {
                 return false;
             }
         }
         
-        path[i] = false;
-        reverse.add(i);
+        visited[i] = false;
+        order.add(i);
         
         return true;
     }
