@@ -72,7 +72,6 @@ public class Trie {
         
         return node;
     }
-
     
     /** Returns if the word is in the trie. */
     public boolean search(String word) {
