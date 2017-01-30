@@ -15,6 +15,8 @@ public class Solution {
             if (!dfs(rec, i, new boolean[numCourses], order)) {
                 return new int[0];
             }
+            
+            rec.get(i).clear();
         }
         
         int[] result = new int[numCourses];
