@@ -1,33 +1,25 @@
 public class Solution {
     public List<List<Integer>> combinationSum3(int k, int n) {
-        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        List<List<Integer>> result = new ArrayList<>();
         
-        if (k < 1 || n < 1) {
-            return result;
-        }
-        
-        helper(1, k, n, new ArrayList<Integer>(), result);
+        dfs(k, n, 1, new ArrayList<Integer>(), result);
         
         return result;
     }
     
-    private void helper(int start, int k, int n, List<Integer> cur, List<List<Integer>> result) {
-        if (n < 0) {
-            return;
-        }
-        
-        if (k == 0) {
+    private void dfs(int k, int n, int start, List<Integer> curr, List<List<Integer>> result) {
+        if (curr.size() == k) {
             if (n == 0) {
-                result.add(new ArrayList<Integer>(cur));
+                result.add(new ArrayList<Integer>(curr));
             }
             
             return;
         }
         
-        for (int i = start; i <= 9; i++) {
-            cur.add(i);
-            helper(i + 1, k - 1, n - i, cur, result);
-            cur.remove(cur.size() - 1);
+        for (int i = start; i <= 9 && i <= n; i++) {
+            curr.add(i);
+            dfs(k, n - i, i + 1, curr, result);
+            curr.remove(curr.size() - 1);
         }
     }
 }
