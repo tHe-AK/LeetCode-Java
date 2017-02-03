@@ -6,7 +6,7 @@ public class Solution {
     	Stack<Integer> stack = new Stack<>();
     	
     	for (int i = 0; i < len; i++) {
-    		if (Character.isDigit(s.charAt(i))) {
+            if (Character.isDigit(s.charAt(i))) {
     			int sum = s.charAt(i) - '0';
     			
     			while (i + 1 < len && Character.isDigit(s.charAt(i + 1))) {
