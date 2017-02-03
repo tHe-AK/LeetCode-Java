@@ -6,7 +6,9 @@ public class Solution {
         Stack<Integer> stack = new Stack<>();
         
         for (int i = 0; i < len; i++) {
-            if (Character.isDigit(s.charAt(i))) {
+            char ch = s.charAt(i);
+            
+            if (Character.isDigit(ch)) {
                 int sum = s.charAt(i) - '0';
                 
                 while (i + 1 < len && Character.isDigit(s.charAt(i + 1))) {
@@ -15,16 +17,16 @@ public class Solution {
                 }
                 
                 result += sum * sign;
-            } else if (s.charAt(i) == '+') {
+            } else if (ch == '+') {
                 sign = 1;
-            } else if (s.charAt(i) == '-') {
+            } else if (ch == '-') {
                 sign = -1;
-            } else if (s.charAt(i) == '(') {
+            } else if (ch == '(') {
                 stack.push(result);
                 stack.push(sign);
                 result = 0;
                 sign = 1;
-            } else if (s.charAt(i) == ')') {
+            } else if (ch == ')') {
                 result = result * stack.pop() + stack.pop();
             }
         }
