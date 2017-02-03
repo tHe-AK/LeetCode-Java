@@ -1,11 +1,6 @@
 public class Solution {
     public List<String> summaryRanges(int[] nums) {
         List<String> result = new ArrayList<>();
-        
-        if (nums == null || nums.length == 0) {
-            return result;
-        }
-        
         int len = nums.length;
         
         for (int i = 0; i < len; i++) {
