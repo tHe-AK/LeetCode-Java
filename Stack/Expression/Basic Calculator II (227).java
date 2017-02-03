@@ -30,7 +30,7 @@ public class Solution {
             }
         }
         
-        for (int i : stack){
+        for (int i : stack) {
             result += i;
         }
 
