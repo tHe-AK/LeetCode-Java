@@ -28,9 +28,9 @@ public class Solution {
         ListNode head2 = slow.next;
         
         if (fast.next == null) {
-        	head1 = prev;
+            head1 = prev;
         } else {
-        	slow.next = prev;
+            slow.next = prev;
         }
         
         while (head2 != null) {
