@@ -9,6 +9,7 @@ public class Solution {
         for (int i = 0; i < s.length(); i++) {
             table[s.charAt(i) - 'a']++;
         }
+        
         for (int i = 0; i < t.length(); i++) {
             if (--table[t.charAt(i) - 'a'] < 0) {
                 return false;
