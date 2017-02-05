@@ -1,9 +1,5 @@
 public class Solution {
     public int threeSumSmaller(int[] nums, int target) {
-        if (nums == null) {
-            throw new IllegalArgumentException();
-        }
-        
         Arrays.sort(nums);
         int count = 0;
         
@@ -12,9 +8,7 @@ public class Solution {
             int high = nums.length - 1;
             
             while (low < high) {
-                int sum = nums[i] + nums[low] + nums[high];
-                
-                if (sum < target) {
+                if (nums[i] + nums[low] + nums[high] < target) {
                     count += high - low;
                     low++;
                 } else {
