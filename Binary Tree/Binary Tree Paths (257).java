@@ -11,26 +11,25 @@ public class Solution {
     public List<String> binaryTreePaths(TreeNode root) {
         List<String> result = new ArrayList<String>();
         
-        if (root == null) {
-            return result;
+        if (root != null) {
+            traverse(root, "", result);
         }
-        
-        helper(root, result, "");
         
         return result;
     }
     
-    private void helper(TreeNode root, List<String> result, String path) {
+    private void traverse(TreeNode root, String path, List<String> result) {
         if (root.left == null && root.right == null) {
             result.add(path + root.val);
+            return;
         }
         
         if (root.left != null) {
-            helper(root.left, result, path + root.val + "->");
+            traverse(root.left, path + root.val + "->", result);
         }
         
         if (root.right != null) {
-            helper(root.right, result, path + root.val + "->");
+            traverse(root.right, path + root.val + "->", result);
         }
     }
 }
