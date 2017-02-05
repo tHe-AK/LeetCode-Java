@@ -9,18 +9,10 @@
  */
 public class Solution {
     public boolean canAttendMeetings(Interval[] intervals) {
-        if (intervals == null) {
-            throw new IllegalArgumentException();
-        }
-        
-        Arrays.sort(intervals, new Comparator<Interval>() {
-            public int compare(Interval i1, Interval i2) {
-                return i1.start - i2.start;
-            }
-        });
-        
+        Arrays.sort(intervals, (i1, i2) -> i1.start - i2.start);
+
         for (int i = 1; i < intervals.length; i++) {
-            if (intervals[i - 1].end > intervals[i].start) {
+            if (intervals[i].start < intervals[i - 1].end) {
                 return false;
             }
         }
