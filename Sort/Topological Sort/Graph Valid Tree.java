@@ -1,7 +1,46 @@
 public class Solution {
     public boolean validTree(int n, int[][] edges) {
-        if (n < 1 || edges == null) {
-            throw new IllegalArgumentException();
+        if (edges.length != n - 1) {
+            return false;
+        }
+        
+        int[] rec = new int[n];
+        
+        for (int i = 0; i < n; i++) {
+            rec[i] = i;
+        }
+        
+        for (int[] edge : edges) {
+            int parent1 = find(rec, edge[0]);
+            int parent2 = find(rec, edge[1]);
+            
+            if (parent1 == parent2) {
+                return false;
+            } else {
+                rec[parent1] = parent2;
+            }
+        }
+        
+        return true;
+    }
+    
+    int find(int[] rec, int child) {
+        int parent = child;
+        
+        while (parent != rec[parent]) {
+            parent = rec[parent];
+        }
+        
+        rec[child] = parent;
+        
+        return parent;
+    }
+}
+
+public class Solution {
+    public boolean validTree(int n, int[][] edges) {
+        if (edges.length != n - 1) {
+            return false;
         }
         
         List<List<Integer>> rec = new ArrayList<List<Integer>>(n);
@@ -15,14 +54,8 @@ public class Solution {
             rec.get(edge[1]).add(edge[0]);
         }
         
-        boolean[] path = new boolean[n];
-        
-        if (!helper(rec, 0, -1, path)) {
-            return false;
-        }
-        
         for (int i = 0; i < n; i++) {
-            if (!path[i]) {
+            if (!dfs(rec, i, -1, new boolean[n])) {
                 return false;
             }
         }
@@ -30,15 +63,15 @@ public class Solution {
         return true;
     }
     
-    private boolean helper(List<List<Integer>> rec, int i, int parent, boolean[] path) {
-        if (path[i]) {
+    private boolean dfs(List<List<Integer>> rec, int i, int parent, boolean[] visited) {
+        if (visited[i]) {
             return false;
         }
         
-        path[i] = true;
+        visited[i] = true;
 
         for (Integer j : rec.get(i)) {
-            if (j != parent && !helper(rec, j, i, path)) {
+            if (j != parent && !dfs(rec, j, i, visited)) {
                 return false;
             }
         }
