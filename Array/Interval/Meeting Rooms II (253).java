@@ -25,20 +25,20 @@ public class Solution {
         int result = 0;
         
         for (Interval i : intervals) {
-            list.add(new Event(i.start, 1));
-            list.add(new Event(i.end, 0));
+            list.add(new Event(i.start, 0));
+            list.add(new Event(i.end, 1));
         }
         
         list.sort((e1, e2) -> {
             if (e1.time != e2.time) {
                 return e1.time - e2.time;
             } else {
-                return e1.type - e2.type;
+                return e2.type - e1.type;
             }
         });
         
         for (Event e : list) {
-            if (e.type == 1) {
+            if (e.type == 0) {
                 count++;
                 result = Math.max(result, count);
             } else {
