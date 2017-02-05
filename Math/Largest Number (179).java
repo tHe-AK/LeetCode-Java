@@ -8,11 +8,7 @@ public class Solution {
             rec[i] = String.valueOf(nums[i]);
         }
         
-        Arrays.sort(rec, new Comparator<String>() {
-            public int compare(String a, String b) {
-                return (b + a).compareTo(a + b);
-            }
-        });
+        Arrays.sort(rec, (a, b) -> (b + a).compareTo(a + b));
         
         for (String str : rec) {
             sb.append(str);
