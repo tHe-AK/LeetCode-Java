@@ -11,30 +11,28 @@ public class Solution {
     public int countUnivalSubtrees(TreeNode root) {
         int[] count = new int[1];
         
-        helper(root, count);
+        traverse(root, count);
         
         return count[0];
     }
     
-    private boolean helper(TreeNode root, int[] count) {
+    private boolean traverse(TreeNode root, int[] count) {
         if (root == null) {
             return true;
         }
         
-        boolean left = helper(root.left, count);
-        boolean right = helper(root.right, count);
+        boolean left = traverse(root.left, count);
+        boolean right = traverse(root.right, count);
         
         if (left && right) {
             if (root.left != null && root.val != root.left.val) {
                 return false;
-            }
-            
-            if (root.right != null && root.val != root.right.val) {
+            } else if (root.right != null && root.val != root.right.val) {
                 return false;
+            } else {
+                count[0]++;
+                return true;
             }
-            
-            count[0]++;
-            return true;
         }
         
         return false;
