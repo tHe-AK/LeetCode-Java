@@ -12,11 +12,9 @@ public class Solution {
                 
                 if (sum == target) {
                     return sum;
-                }
-                else if (sum < target) {
+                } else if (sum < target) {
                     low++;
-                }
-                else {
+                } else {
                     high--;
                 }
                 
