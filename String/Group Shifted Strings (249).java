@@ -1,11 +1,7 @@
 public class Solution {
     public List<List<String>> groupStrings(String[] strings) {
-        if (strings == null) {
-            throw new IllegalArgumentException();
-        }
-        
-        List<List<String>> result = new ArrayList<List<String>>();
-        Map<String, List<String>> rec = new HashMap<String, List<String>>();
+        List<List<String>> result = new ArrayList<>();
+        Map<String, List<String>> rec = new HashMap<>();
         
         for (String str : strings) {
             int offset = 0;
@@ -16,13 +12,13 @@ public class Solution {
                     offset = str.charAt(0) - 'a';
                 }
                 
-                char cur = (char) (str.charAt(i) - offset);
+                char ch = (char) (str.charAt(i) - offset);
                 
-                if (cur < 'a') {
-                    cur += 26;
+                if (ch < 'a') {
+                    ch += 26;
                 }
                 
-                key += cur;
+                key += ch;
             }
             
             if (!rec.containsKey(key)) {
@@ -33,9 +29,9 @@ public class Solution {
         }
         
         for (String key : rec.keySet()) {
-            List<String> value = rec.get(key);
-            Collections.sort(value);
-            result.add(value);
+            List<String> val = rec.get(key);
+            Collections.sort(val);
+            result.add(val);
         }
         
         return result;
