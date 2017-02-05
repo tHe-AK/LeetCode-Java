@@ -38,11 +38,11 @@ public class Solution {
         });
         
         for (Event e : list) {
-            if (e.type == 0) {
-                count--;
-            } else {
+            if (e.type == 1) {
                 count++;
                 result = Math.max(result, count);
+            } else {
+                count--;
             }
         }
         
