@@ -25,11 +25,9 @@ public class Solution {
                         while (low < high && num[high] == num[high + 1]) {
                             high--;
                         }
-                    }
-                    else if (sum < target) {
+                    } else if (sum < target) {
                         low++;
-                    }
-                    else {
+                    } else {
                         high--;
                     }
                 }
