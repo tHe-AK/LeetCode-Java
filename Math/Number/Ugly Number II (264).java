@@ -9,24 +9,20 @@ public class Solution {
         int index2 = 1;
         int index3 = 1;
         int index5 = 1;
-        int factor2 = 2;
-        int factor3 = 3;
-        int factor5 = 5;
         
         for (int i = 2; i <= n; i++){
-            int min = Math.min(Math.min(factor2, factor3), factor5);
-            rec[i] = min;
+            rec[i] = Math.min(Math.min(rec[index2] * 2, rec[index3] * 3), rec[index5] * 5);
             
-            if (min == factor2) {
-                factor2 = 2 * rec[++index2];
+            if (rec[i] == rec[index2] * 2) {
+                index2++;
             }
             
-            if (min == factor3) {
-                factor3 = 3 * rec[++index3];
+            if (rec[i] == rec[index3] * 3) {
+                index3++;
             }
             
-            if (min == factor5) {
-                factor5 = 5 * rec[++index5];
+            if (rec[i] == rec[index5] * 5) {
+                index5++;
             }
         }
         
