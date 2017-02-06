@@ -1,9 +1,5 @@
 public class Solution {
     public int[] singleNumber(int[] nums) {
-        if (nums == null || nums.length < 2) {
-            throw new IllegalArgumentException();
-        }
-        
         int diff = 0;
         
         for (int num : nums) {
