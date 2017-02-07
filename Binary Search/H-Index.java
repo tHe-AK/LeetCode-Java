@@ -1,29 +1,16 @@
 public class Solution {
     public int hIndex(int[] citations) {
-        if (citations == null) {
-            throw new IllegalArgumentException();
-        }
-        
         int len = citations.length;
         int[] rec = new int[len + 1];
-        int sum = 0;
         
-        for (int citation : citations) {
-            if (citation > len) {
-                rec[len]++;
-            } else {
-                rec[citation]++;
-            }
+        for (int c : citations) {
+            rec[Math.min(c, len)]++;
         }
         
-        for (int i = len; i > 0; i--) {
-            sum += rec[i];
-            
-            if (sum >= i) {
-                return i;
-            }
+        for (int s = rec[len]; s < len; s += rec[len]) {
+            len--;
         }
         
-        return 0;
+        return len;
     }
 }
