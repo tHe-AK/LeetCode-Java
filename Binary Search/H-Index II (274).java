@@ -1,9 +1,5 @@
 public class Solution {
     public int hIndex(int[] citations) {
-        if (citations == null) {
-            throw new IllegalArgumentException();
-        }
-        
         int len = citations.length;
         int low = 0;
         int high = len - 1;
@@ -19,5 +15,18 @@ public class Solution {
         }
         
         return len - low;
+    }
+}
+
+public class Solution {
+    public int hIndex(int[] citations) {
+        int len = citations.length;
+        int i = 0;
+        
+        while (i < len && citations[len - i - 1] > i) {
+            i++;
+        }
+        
+        return i;
     }
 }
