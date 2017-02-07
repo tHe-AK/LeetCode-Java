@@ -9,46 +9,96 @@
  */
 public class Solution {
     public List<Integer> closestKValues(TreeNode root, double target, int k) {
-        List<Integer> result = new ArrayList<Integer>();
-        Stack<Integer> predecessor = new Stack<Integer>();
-        Stack<Integer> successor = new Stack<Integer>();
+        List<Integer> result = new ArrayList<>();
+
+        inorder(root, target, k, result);
         
-        helper(root, false, target, predecessor);
-        helper(root, true, target, successor);
+        return result;
+    }
+    
+    private void inorder(TreeNode root, double target, int k, List<Integer> result) {
+        if (root == null) {
+            return;
+        }
         
-        int i = 1;
+        inorder(root.left, target, k, result);
         
-        while (i <= k) {
-            if (predecessor.empty()) {
-                result.add(successor.pop());
-            } else if (successor.empty()) {
-                result.add(predecessor.pop());
+        if (result.size() == k) {
+            if (Math.abs(root.val - target) < Math.abs(result.get(0) - target)) {
+                result.remove(0);
             } else {
-                if (Math.abs(predecessor.peek() - target) < Math.abs(successor.peek() - target)) {
-                    result.add(predecessor.pop());
+                return;
+            }
+        }
+        
+        result.add(root.val);
+        inorder(root.right, target, k, result);
+    }
+}
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public List<Integer> closestKValues(TreeNode root, double target, int k) {
+        List<Integer> result = new ArrayList<>();
+        Stack<TreeNode> predecessor = new Stack<>();
+        Stack<TreeNode> successor = new Stack<>();
+        
+        while (root != null) {
+            if (root.val < target) {
+                predecessor.push(root);
+                root = root.right;
+            } else {
+                successor.push(root);
+                root = root.left;
+            }
+        }
+        
+        while (k-- > 0) {
+            if (successor.empty()) {
+                result.add(popPredecessor(predecessor));
+            } else if (predecessor.empty()) {
+                result.add(popSuccessor(successor));
+            } else {
+                if (Math.abs(predecessor.peek().val - target) < Math.abs(successor.peek().val - target)) {
+                    result.add(popPredecessor(predecessor));
                 } else {
-                    result.add(successor.pop());
+                    result.add(popSuccessor(successor));
                 }
             }
-            
-            i++;
         }
         
         return result;
     }
     
-    private void helper(TreeNode root, boolean reverse, double target, Stack<Integer> stack) {
-        if (root == null) {
-            return;
+    private int popSuccessor(Stack<TreeNode> successor) {
+        TreeNode peek = successor.pop();
+        TreeNode node = peek.right;
+        
+        while (node != null) {
+            successor.push(node);
+            node = node.left;
         }
         
-        helper(!reverse ? root.left : root.right, reverse, target, stack);
+        return peek.val;
+    }
+    
+    private int popPredecessor(Stack<TreeNode> predecessor) {
+        TreeNode peek = predecessor.pop();
+        TreeNode node = peek.left;
         
-        if ((!reverse && root.val > target) || (reverse && root.val <= target)) {
-            return;
+        while (node != null) {
+            predecessor.push(node);
+            node = node.right;
         }
         
-        stack.add(root.val);
-        helper(!reverse ? root.right : root.left, reverse, target, stack);
+        return peek.val;
     }
 }
