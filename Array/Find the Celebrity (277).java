@@ -3,24 +3,20 @@
 
 public class Solution extends Relation {
     public int findCelebrity(int n) {
-        if (n <= 0) {
-            throw new IllegalArgumentException();
-        }
-        
-        int cur = 0;
+        int candidate = 0;
         
         for (int i = 1; i < n; i++) {
-            if (knows(cur, i)) {
-                cur = i;
+            if (knows(candidate, i)) {
+                candidate = i;
             }
         }
         
         for (int i = 0; i < n; i++) {
-            if (i != cur && (!knows(i, cur) || knows(cur, i))) {
+            if (i != candidate && (!knows(i, candidate) || knows(candidate, i))) {
                 return -1;
             }
         }
         
-        return cur;
+        return candidate;
     }
 }
