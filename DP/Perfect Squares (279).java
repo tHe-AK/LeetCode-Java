@@ -30,7 +30,7 @@ public class Solution {
         }
         
         if (n == 0) {
-            result[0] = Math.min(result[0], count);
+            result[0] = count;
             return;
         }
     
