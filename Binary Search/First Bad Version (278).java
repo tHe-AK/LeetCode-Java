@@ -3,10 +3,6 @@
 
 public class Solution extends VersionControl {
     public int firstBadVersion(int n) {
-        if (n < 1) {
-            throw new IllegalArgumentException();
-        }
-        
         int low = 1;
         int high = n;
         
@@ -18,10 +14,6 @@ public class Solution extends VersionControl {
             } else {
                 low = mid + 1;
             }
-        }
-        
-        if (low > n) {
-            throw new IllegalArgumentException();
         }
         
         return low;
