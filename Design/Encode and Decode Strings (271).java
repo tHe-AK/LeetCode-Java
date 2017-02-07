@@ -2,10 +2,6 @@ public class Codec {
 
     // Encodes a list of strings to a single string.
     public String encode(List<String> strs) {
-        if (strs == null) {
-            throw new IllegalArgumentException();
-        }
-        
         StringBuilder sb = new StringBuilder();
         
         for (String str : strs) {
@@ -17,10 +13,6 @@ public class Codec {
 
     // Decodes a single string to a list of strings.
     public List<String> decode(String s) {
-        if (s == null) {
-            throw new IllegalArgumentException();
-        }
-        
         List<String> strs = new ArrayList<String>();
         int i = 0;
         
