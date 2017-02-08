@@ -1,7 +1,7 @@
 public class Solution {
     public int minTotalDistance(int[][] grid) {
-        List<Integer> x = new ArrayList<>();
-        List<Integer> y = new ArrayList<>();
+        List<Integer> x = new ArrayList<Integer>();
+        List<Integer> y = new ArrayList<Integer>();
         
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[0].length; j++) {
@@ -12,10 +12,10 @@ public class Solution {
             }
         }
         
-        return helper(x) + helper(y);
+        return getDist(x) + getDist(y);
     }
     
-    private int helper(List<Integer> list) {
+    private int getDist(List<Integer> list) {
         Collections.sort(list);
         
         int dist = 0;
