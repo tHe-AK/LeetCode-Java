@@ -1,10 +1,6 @@
 public class Solution {
     public List<String> generatePossibleNextMoves(String s) {
-        if (s == null) {
-            throw new IllegalArgumentException();
-        }
-        
-        List<String> result = new ArrayList<String>();
+        List<String> result = new ArrayList<>();
         
         for (int i = 0; i < s.length() - 1; i++) {
             if (s.startsWith("++", i)) {
