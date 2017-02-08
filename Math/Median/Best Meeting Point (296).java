@@ -1,11 +1,7 @@
 public class Solution {
     public int minTotalDistance(int[][] grid) {
-        if (grid == null) {
-            throw new IllegalArgumentException();
-        }
-        
-        List<Integer> x = new ArrayList<Integer>();
-        List<Integer> y = new ArrayList<Integer>();
+        List<Integer> x = new ArrayList<>();
+        List<Integer> y = new ArrayList<>();
         
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[0].length; j++) {
