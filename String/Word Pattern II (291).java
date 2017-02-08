@@ -1,7 +1,7 @@
 public class Solution {
     public boolean wordPatternMatch(String pattern, String str) {
-        Map<Character, String> map = new HashMap<Character, String>();
-        Set<String> set = new HashSet<String>();
+        Map<Character, String> map = new HashMap<>();
+        Set<String> set = new HashSet<>();
         
         return dfs(pattern, str, 0, 0, map, set);
     }
