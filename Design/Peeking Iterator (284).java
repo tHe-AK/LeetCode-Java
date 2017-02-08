@@ -39,3 +39,4 @@ class PeekingIterator implements Iterator<Integer> {
 	    return hasPeeked || iterator.hasNext();
 	}
 }
+	
