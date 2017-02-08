@@ -5,26 +5,26 @@ class PeekingIterator implements Iterator<Integer> {
     private boolean hasPeeked;
     private Integer peekedElement;
     
-	public PeekingIterator(Iterator<Integer> iterator) {
-	    // initialize any member here.
-	    this.iterator = iterator;
-	}
+    public PeekingIterator(Iterator<Integer> iterator) {
+        // initialize any member here.
+        this.iterator = iterator;
+    }
 
     // Returns the next element in the iteration without advancing the iterator.
-	public Integer peek() {
+    public Integer peek() {
         if (!hasPeeked) {
             peekedElement = iterator.next();
             hasPeeked = true;
         }
         
         return peekedElement;
-	}
+    }
 
-	// hasNext() and next() should behave the same as in the Iterator interface.
-	// Override them if needed.
-	@Override
-	public Integer next() {
-	    if (!hasPeeked) {
+    // hasNext() and next() should behave the same as in the Iterator interface.
+    // Override them if needed.
+    @Override
+    public Integer next() {
+        if (!hasPeeked) {
             return iterator.next();
         }
         
@@ -32,11 +32,11 @@ class PeekingIterator implements Iterator<Integer> {
         hasPeeked = false;
         peekedElement = null;
         return result;
-	}
+    }
 
-	@Override
-	public boolean hasNext() {
-	    return hasPeeked || iterator.hasNext();
-	}
+    @Override
+    public boolean hasNext() {
+        return hasPeeked || iterator.hasNext();
+    }
 }
-	
+    
