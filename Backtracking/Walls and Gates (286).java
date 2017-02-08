@@ -6,6 +6,7 @@ public class Solution {
         
         int row = rooms.length;
         int col = rooms[0].length;
+        int[][] delta = new int[][] { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
         Queue<int[]> queue = new LinkedList<int[]>();
         
         for (int i = 0; i < row; i++) {
@@ -15,8 +16,6 @@ public class Solution {
                 }
             }
         }
-        
-        int[][] delta = new int[][] { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
 
         while (!queue.isEmpty()) {
             int[] peek = queue.poll();
