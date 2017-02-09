@@ -39,9 +39,9 @@ public class Solution {
     }
     
     private TreeNode deserialize(Scanner sc) {
-        String str;
+        String str = sc.next();
         
-        if (!sc.hasNext() || (str = sc.next()).equals("]")) {
+        if (str.equals("]")) {
             return null;
         }
         
