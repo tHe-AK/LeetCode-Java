@@ -143,8 +143,10 @@ public class Solution {
                     	    isFound = true;
                     	}
                     	
-                        next.add(neighbor);
-                        map.get(str).add(neighbor);
+                        if (!isFound) {
+                            next.add(neighbor);
+                            map.get(str).add(neighbor);
+                        }
                     }
                 }
             }
