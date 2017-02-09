@@ -1,28 +1,24 @@
 import java.util.*;
 
 class TreeNode {
-    String val;
-    List<TreeNode> children;
+    public String val;
+    public List<TreeNode> children;
     
     TreeNode(String val) {
         this.val = val;
-        children = new ArrayList<TreeNode>();
+        children = new ArrayList<>();
     }
 }
 
 public class Solution {
     public String serialize(TreeNode root) {
-        if (root == null) {
-            return null;
-        }
-        
         StringBuilder sb = new StringBuilder();
-        serializeHelper(root, sb);
+        serialize(root, sb);
         
         return sb.toString();
     }
     
-    private void serializeHelper(TreeNode root, StringBuilder sb) {
+    private void serialize(TreeNode root, StringBuilder sb) {
         if (root == null) {
             return;
         }
@@ -30,38 +26,33 @@ public class Solution {
         sb.append(root.val + " ");
         
         for (TreeNode child : root.children) {
-            serializeHelper(child, sb);
+            serialize(child, sb);
         }
         
         sb.append("] ");
     }
     
-    public TreeNode deserialize(String tree) {
-        if (tree == null) {
-            return null;
-        }
+    public TreeNode deserialize(String data) {
+        Scanner sc = new Scanner(data);
         
-        Scanner sc = new Scanner(tree);
-        
-        return deserializeHelper(sc);
+        return deserialize(sc);
     }
     
-    private TreeNode deserializeHelper(Scanner sc) {
-        String val;
+    private TreeNode deserialize(Scanner sc) {
+        String str;
         
-        if (!sc.hasNext() || (val = sc.next()).equals("]")) {
+        if (!sc.hasNext() || (str = sc.next()).equals("]")) {
             return null;
         }
         
-        TreeNode root = new TreeNode(val);
+        TreeNode root = new TreeNode(str);
 
-        while (sc.hasNext()) {
-            TreeNode child = deserializeHelper(sc);
+        while (true) {
+            TreeNode child = deserialize(sc);
             
             if (child == null) {
                 break;
-            }
-            else {
+            } else {
                 root.children.add(child);
             }
         }
@@ -80,10 +71,10 @@ public class Solution {
         a.children.add(c);
         b.children.add(d);
         
-        String tree = s.serialize(a);
-        System.out.println(tree);
+        String data = s.serialize(a);
+        System.out.println(data);
         
-        TreeNode root = s.deserialize(tree);
+        TreeNode root = s.deserialize(data);
         System.out.println(root.val);
         
         for (TreeNode child : root.children) {
