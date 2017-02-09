@@ -125,27 +125,30 @@ public class Solution {
     }
     
     private boolean bfs(String beginWord, String endWord, Set<String> wordList, Map<String, List<String>> map) {
-        Set<String> curr = new HashSet<>();
-        curr.add(beginWord);
+        Queue<String> queue = new LinkedList<>();
+        queue.offer(beginWord);
         wordList.remove(beginWord);
         boolean isFound = false;
         
-        while (!curr.isEmpty()) {
-            Set<String> next = new HashSet<>();
+        while (!queue.isEmpty()) {
+            int len = queue.size();
+            Set<String> visited = new HashSet<>();
             
-            for (String str : curr) {
+            for (int i = 0; i < len; i++) {
+                String str = queue.poll();
                 map.put(str, new ArrayList<String>());
                 List<String> neighbors = getNeighbors(str);
                 
                 for (String neighbor : neighbors) {
                     if (wordList.contains(neighbor)) {
+                        map.get(str).add(neighbor);
+                        
                         if (neighbor.equals(endWord)) {
                     	    isFound = true;
                     	}
                     	
-                        if (!isFound) {
-                            next.add(neighbor);
-                            map.get(str).add(neighbor);
+                        if (!isFound && visited.add(neighbor)) {
+                            queue.offer(neighbor);
                         }
                     }
                 }
@@ -155,8 +158,7 @@ public class Solution {
                 break;
             }
             
-            wordList.removeAll(next);
-            curr = next;
+            wordList.removeAll(visited);
         }
         
         return isFound;
