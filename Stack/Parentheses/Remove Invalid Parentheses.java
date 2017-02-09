@@ -1,13 +1,9 @@
 public class Solution {
     public List<String> removeInvalidParentheses(String s) {
-        if (s == null) {
-            throw new IllegalArgumentException();
-        }
-        
-        boolean found = false;
-        List<String> result = new ArrayList<String>();
-        Queue<String> queue = new LinkedList<String>();
+        List<String> result = new ArrayList<>();
+        Queue<String> queue = new LinkedList<>();
         queue.offer(s);
+        boolean isFound = false;
 
         while (!queue.isEmpty()) {
             int len = queue.size();
@@ -16,26 +12,28 @@ public class Solution {
             for (int i = 0; i < len; i++) {
                 String peek = queue.poll();
                 
-                if (valid(peek)) {
-                    found = true;
+                if (isValid(peek)) {
+                    isFound = true;
                     result.add(peek);
                 }
                 
-                for (int j = 0; j < peek.length(); j++) {
-                    char c = peek.charAt(j);
-                        
-                    if (c == '(' || c == ')') {
-                        String str = peek.substring(0, j) + peek.substring(j + 1);
+                if (!isFound) {
+                    for (int j = 0; j < peek.length(); j++) {
+                        char ch = peek.charAt(j);
                             
-                        if (!visited.contains(str)) {
-                            visited.add(str);
-                            queue.add(str);
+                        if (ch == '(' || ch == ')') {
+                            String str = peek.substring(0, j) + peek.substring(j + 1);
+                                
+                            if (!visited.contains(str)) {
+                                visited.add(str);
+                                queue.add(str);
+                            }
                         }
                     }
                 }
             }
 
-            if (found) {
+            if (isFound) {
                 break;
             }
         }
@@ -43,22 +41,18 @@ public class Solution {
         return result;
     }
     
-    private boolean valid(String s) {
+    private boolean isValid(String s) {
         int count = 0;
         
         for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
+            char ch = s.charAt(i);
             
-            if (c == '(') {
+            if (ch == '(') {
                 count++;
-            }
-            
-            if (c == ')') {
-                if (count <= 0) {
+            } else if (ch == ')') {
+                if (count-- <= 0) {
                     return false;
                 }
-                
-                count--;
             }
         }
         
