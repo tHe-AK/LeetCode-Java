@@ -34,14 +34,14 @@ public class Solution {
                 } else {
                     return false;
                 }
+            } else {
+                if (set.contains(ch2)) {
+                    return false;
+                }
+
+                map.put(ch1, ch2);
+                set.add(ch2);
             }
-            
-            if (set.contains(ch2)) {
-                return false;
-            }
-            
-            map.put(ch1, ch2);
-            set.add(ch2);
         }
         
         return true;
