@@ -24,8 +24,7 @@ public class Solution {
                         if (ch == '(' || ch == ')') {
                             String str = peek.substring(0, j) + peek.substring(j + 1);
                                 
-                            if (!visited.contains(str)) {
-                                visited.add(str);
+                            if (visited.add(str)) {
                                 queue.add(str);
                             }
                         }
