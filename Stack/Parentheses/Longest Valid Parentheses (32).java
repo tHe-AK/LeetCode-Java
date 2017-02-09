@@ -48,17 +48,14 @@ public class Solution {
         for (int i = 0; i < s.length(); i++) {
             if (s.charAt(i) == '(') {
                 stack.push(i);
-            }
-            else if (stack.empty()) {
+            } else if (stack.empty()) {
                 pre = i;
-            }
-            else {
+            } else {
                 stack.pop();
                 
                 if (stack.empty()) {
                     max = Math.max(max, i - pre);
-                }
-                else {
+                } else {
                     max = Math.max(max, i - stack.peek());
                 }
             }
