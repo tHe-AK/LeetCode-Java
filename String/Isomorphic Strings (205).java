@@ -5,11 +5,11 @@ public class Solution {
         int[] rec2 = new int[256];
         
         for (int i = 0; i < s.length(); i++) {
-            int char1 = s.charAt(i);
-            int char2 = t.charAt(i);
+            int ch1 = s.charAt(i);
+            int ch2 = t.charAt(i);
             
-            if (rec1[char1] == rec2[char2]) {
-                rec1[char1] = rec2[char2] = i + 1;
+            if (rec1[ch1] == rec2[ch2]) {
+                rec1[ch1] = rec2[ch2] = i + 1;
             } else {
                 return false;
             }
@@ -25,23 +25,23 @@ public class Solution {
         Set<Character> set = new HashSet<>();
         
         for (int i = 0; i < s.length(); i++) {
-            char char1 = s.charAt(i);
-            char char2 = t.charAt(i);
+            char ch1 = s.charAt(i);
+            char ch2 = t.charAt(i);
             
-            if (map.containsKey(char1)) {
-                if (map.get(char1) == char2) {
+            if (map.containsKey(ch1)) {
+                if (map.get(ch1) == ch2) {
                     continue;
                 } else {
                     return false;
                 }
             }
             
-            if (set.contains(char2)) {
+            if (set.contains(ch2)) {
                 return false;
             }
             
-            map.put(char1, char2);
-            set.add(char2);
+            map.put(ch1, ch2);
+            set.add(ch2);
         }
         
         return true;
