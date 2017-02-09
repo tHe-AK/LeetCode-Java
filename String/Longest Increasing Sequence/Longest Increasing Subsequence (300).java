@@ -1,9 +1,5 @@
 public class Solution {
     public int lengthOfLIS(int[] nums) {
-        if (nums == null) {
-            throw new IllegalArgumentException();
-        }
-        
         int[] rec = new int[nums.length];
         int len = 0;
 
@@ -27,24 +23,20 @@ public class Solution {
 
 public class Solution {
     public int lengthOfLIS(int[] nums) {
-        if (nums == null) {
-            throw new IllegalArgumentException();
-        }
-        
         int len = nums.length;
-        int[] result = new int[len];
+        int[] rec = new int[len];
         int max = 0;
         
         for (int i = 0; i < len; i++) {
-            result[i] = 1;
+            rec[i] = 1;
             
             for (int j = 0; j < i; j++) {
                 if (nums[j] < nums[i]) {
-                    result[i] = Math.max(result[i], result[j] + 1);
+                    rec[i] = Math.max(rec[i], rec[j] + 1);
                 }
             }
             
-            max = Math.max(max, result[i]);
+            max = Math.max(max, rec[i]);
         }
         
         return max;
