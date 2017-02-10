@@ -49,7 +49,7 @@ public class Solution {
             if (ch == '(') {
                 count++;
             } else if (ch == ')') {
-                if (count-- <= 0) {
+                if (count-- == 0) {
                     return false;
                 }
             }
