@@ -2,7 +2,7 @@ public class NumMatrix {
     private int[][] sum;
     
     public NumMatrix(int[][] matrix) {
-        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+        if (matrix.length == 0 || matrix[0].length == 0) {
             return;
         }
         
@@ -16,20 +16,14 @@ public class NumMatrix {
             }
         }
     }
-
+    
     public int sumRegion(int row1, int col1, int row2, int col2) {
-        if (row1 < 0 || row1 >= sum.length - 1 || col1 < 0 || col1 >= sum[0].length - 1 ||
-            row2 < 0 || row2 >= sum.length - 1 || col2 < 0 || col2 >= sum[0].length - 1 ||
-            row1 > row2 || col1 > col2) {
-            throw new IllegalArgumentException();
-        }
-        
         return sum[row2 + 1][col2 + 1] - sum[row2 + 1][col1] - sum[row1][col2 + 1] + sum[row1][col1];
     }
 }
 
-
-// Your NumMatrix object will be instantiated and called as such:
-// NumMatrix numMatrix = new NumMatrix(matrix);
-// numMatrix.sumRegion(0, 1, 2, 3);
-// numMatrix.sumRegion(1, 2, 3, 4);
+/**
+ * Your NumMatrix object will be instantiated and called as such:
+ * NumMatrix obj = new NumMatrix(matrix);
+ * int param_1 = obj.sumRegion(row1,col1,row2,col2);
+ */
