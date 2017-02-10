@@ -32,77 +32,25 @@ public class Solution {
     }
 }
 
-class UnionFind<T> {
-    private Map<T, T> rec;
-    private int count;
-    
-    public UnionFind() {
-        rec = new HashMap<>();
-        count = 0;
-    }
-    
-    public int count() {
-        return count;
-    }
-    
-    public boolean contains(T child) {
-        return rec.containsKey(child);
-    }
-    
-    public void add(T child) {
-        if (!contains(child)) {
-            rec.put(child, child);
-            count++;
-        }
-    }
-    
-    public T find(T child) {
-        if (!contains(child)) {
-            return null;
-        }
-        
-        T root = child;
-        
-        while (root != rec.get(root)) {
-            root = rec.get(root);
-        }
-        
-        rec.put(child, root);
-            
-        return root;
-    }
-    
-    public void union(T child1, T child2) {
-        if (!contains(child1) || !contains(child2)) {
-            return;
-        }
-        
-        T root1 = find(child1);
-        T root2 = find(child2);
-        
-        if (root1 != root2) {
-            rec.put(root1, root2);
-            count--;
-        }
-    }
-}
-
 public class Solution {
     public int numIslands(char[][] grid) {
         if (grid.length == 0 || grid[0].length == 0) {
             return 0;
         }
         
-        UnionFind uf = new UnionFind();
         int m = grid.length;
         int n = grid[0].length;
+        int[] rec = new int[m * n];
+        Arrays.fill(rec, -1);
+        int count = 0;
         int[][] delta = new int[][] { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
 
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 if (grid[i][j] == '1') {
                     int curr = getIndex(i, j, n);
-                    uf.add(curr);
+                    rec[curr] = curr;
+                    count++;
     
                     for (int[] diff : delta) {
                         int x = i + diff[0];
@@ -110,14 +58,29 @@ public class Solution {
                         
                         if (x >= 0 && x < m && y >= 0 && y < n) {
                             int neighbor = getIndex(x, y, n);
-                            uf.union(curr, neighbor);
+                            
+                            if (rec[neighbor] != -1) {
+                                int root = neighbor;
+        
+                                while (root != rec[root]) {
+                                    root = rec[root];
+                                }
+                                                        
+                                rec[neighbor] = root;
+                            
+                                if (curr != root) {
+                                    rec[curr] = root;
+                                    curr = root;
+                                    count--;
+                                }
+                            }
                         } 
                     }
                 }
             }
         }
         
-        return uf.count();
+        return count;
     }
     
     private int getIndex(int i, int j, int col) {
