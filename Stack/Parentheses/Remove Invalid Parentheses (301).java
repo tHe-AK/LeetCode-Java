@@ -24,7 +24,7 @@ public class Solution {
     }
     
     private void dfs(String s, int left, int right, Set<String> visited, List<String> result) {
-        if (!visited.add(s) || left < 0 || right < 0) {
+        if (!visited.add(s)) {
             return;
         }
         
@@ -39,9 +39,9 @@ public class Solution {
         for (int i = 0; i < s.length(); i++) {
             char ch = s.charAt(i);
 
-            if (ch == '(') {
+            if (ch == '(' && left > 0) {
                 dfs(s.substring(0, i) + s.substring(i + 1), left - 1, right, visited, result);
-            } else if (ch == ')') {
+            } else if (ch == ')' && right > 0) {
                 dfs(s.substring(0, i) + s.substring(i + 1), left, right - 1, visited, result);
             }
         }
