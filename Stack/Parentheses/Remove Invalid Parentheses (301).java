@@ -1,6 +1,74 @@
 public class Solution {
     public List<String> removeInvalidParentheses(String s) {
         List<String> result = new ArrayList<>();
+        int left = 0;
+        int right = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            
+            if (ch == '(') {
+                left++;
+            } else if (ch == ')') {
+                if (left > 0) {
+                    left--;
+                } else {
+                    right++;
+                }
+            }
+        }
+        
+        dfs(s, left, right, new HashSet<String>(), result);
+        
+        return result;
+    }
+    
+    private void dfs(String s, int left, int right, Set<String> visited, List<String> result) {
+        if (!visited.add(s) || left < 0 || right < 0) {
+            return;
+        }
+        
+        if (left == 0 && right == 0) {
+            if (isValid(s)) {
+                result.add(s);
+            }
+            
+            return;
+        }
+        
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+
+            if (ch == '(') {
+                dfs(s.substring(0, i) + s.substring(i + 1), left - 1, right, visited, result);
+            } else if (ch == ')') {
+                dfs(s.substring(0, i) + s.substring(i + 1), left, right - 1, visited, result);
+            }
+        }
+    }
+    
+    private boolean isValid(String s) {
+        int count = 0;
+        
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            
+            if (ch == '(') {
+                count++;
+            } else if (ch == ')') {
+                if (count-- == 0) {
+                    return false;
+                }
+            }
+        }
+        
+        return count == 0;
+    }
+}
+
+public class Solution {
+    public List<String> removeInvalidParentheses(String s) {
+        List<String> result = new ArrayList<>();
         Queue<String> queue = new LinkedList<>();
         queue.offer(s);
         boolean isFound = false;
