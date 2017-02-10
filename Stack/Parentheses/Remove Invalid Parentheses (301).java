@@ -1,6 +1,48 @@
 public class Solution {
     public List<String> removeInvalidParentheses(String s) {
         List<String> result = new ArrayList<>();
+        dfs(s, 0, 0, '(', ')', result);
+        return result;
+    }
+    
+    private void dfs(String s, int x, int y, char left, char right, List<String> result) {
+        int count = 0;
+        
+        for (int i = x; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            
+            if (ch == left)  {
+                count++;
+            } else if (ch == right) {
+                count--;
+            }
+            
+            if (count < 0) {
+                for (int j = y; j <= i; j++) {
+                    ch = s.charAt(j);
+                    
+                    if (ch == right && (j == y || ch != s.charAt(j - 1))) {
+                        dfs(s.substring(0, j) + s.substring(j + 1), i, j, left, right, result);
+                    }
+                }
+                
+                return;
+            }
+        }
+        
+        String reversed = new StringBuilder(s).reverse().toString();
+        
+        if (left == '(') {
+            dfs(reversed, 0, 0, ')', '(', result);
+        } else {
+            result.add(reversed);
+        }
+    }
+}
+
+public class Solution {
+    public List<String> removeInvalidParentheses(String s) {
+        List<String> result = new ArrayList<>();
         int left = 0;
         int right = 0;
 
