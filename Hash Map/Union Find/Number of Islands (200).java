@@ -5,7 +5,7 @@ public class Solution {
         }
         
         int count = 0;
-        int[][] delta = new int[][] { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
+        int[][] delta = new int[][] { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
 
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[0].length; j++) {
@@ -43,7 +43,7 @@ public class Solution {
         int[] rec = new int[m * n];
         Arrays.fill(rec, -1);
         int count = 0;
-        int[][] delta = new int[][] { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
+        int[][] delta = new int[][] { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
 
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
