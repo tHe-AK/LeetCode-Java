@@ -48,7 +48,7 @@ public class Solution {
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 if (grid[i][j] == '1') {
-                    int curr = getIndex(i, j, n);
+                    int curr = getIdx(i, j, n);
                     rec[curr] = curr;
                     count++;
     
@@ -57,7 +57,7 @@ public class Solution {
                         int y = j + diff[1];
                         
                         if (x >= 0 && x < m && y >= 0 && y < n) {
-                            int neighbor = getIndex(x, y, n);
+                            int neighbor = getIdx(x, y, n);
                             
                             if (rec[neighbor] != -1) {
                                 int root = neighbor;
@@ -83,7 +83,7 @@ public class Solution {
         return count;
     }
     
-    private int getIndex(int i, int j, int col) {
+    private int getIdx(int i, int j, int col) {
         return i * col + j;
     }
 }
