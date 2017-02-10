@@ -1,91 +1,50 @@
-class UnionFind {
-    HashMap<Integer, Integer> rec;
-    int count;
-    
-    UnionFind() {
-        rec = new HashMap<Integer, Integer>();
-        count = 0;
-    }
-    
-    boolean contains(int child) {
-        return rec.containsKey(child);
-    }
-    
-    void add(int child) {
-        if (!contains(child)) {
-            rec.put(child, child);
-            count++;
-        }
-    }
-    
-    int find(int child) {
-        if (!contains(child)) {
-            throw new RuntimeException();
-        }
-        
-        while (child != rec.get(child)) {
-            child = rec.get(child);
-        }
-            
-        return child;
-    }
-    
-    void union(int child1, int child2) {
-        if (!contains(child1) || !contains(child2)) {
-            return;
-        }
-        
-        int parent1 = find(child1);
-        int parent2 = find(child2);
-        
-        if (parent1 != parent2) {
-            rec.put(parent1, parent2);
-            count--;
-        }
-    }
-}
-
 public class Solution {
     public List<Integer> numIslands2(int m, int n, int[][] positions) {
-        if (m < 0 || n < 0 || positions == null) {
-            throw new IllegalArgumentException();
-        }
-        
-        List<Integer> result = new ArrayList<Integer>();
-        UnionFind uf = new UnionFind();
-        int[] x = new int[] {-1, 1, 0, 0};
-        int[] y = new int[] {0, 0, -1, 1};
-        
-        for (int[] p : positions) {
-            int i = p[0];
-            int j = p[1];
-            
-            int cur = id(i, j, n);
-            uf.add(cur);
+        List<Integer> result = new ArrayList<>();
+        int[] rec = new int[m * n];
+        Arrays.fill(rec, -1);
+        int count = 0;
+        int[][] delta = new int[][] { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
+
+        for (int[] position : positions) {
+            int i = position[0];
+            int j = position[1];
+            int curr = getIdx(i, j, n);
+            rec[curr] = curr;
+            count++;
     
-            for (int k = 0; k < x.length; k++) {
-                if (valid(i + x[k], j + y[k], m, n)) {
-                    int neighbor = id(i + x[k], j + y[k], n);
-                    uf.union(cur, neighbor);
-                } 
+            for (int[] diff : delta) {
+                int x = i + diff[0];
+                int y = j + diff[1];
+                        
+                if (x >= 0 && x < m && y >= 0 && y < n) {
+                    int neighbor = getIdx(x, y, n);
+                            
+                    if (rec[neighbor] != -1) {
+                        int root = neighbor;
+        
+                        while (root != rec[root]) {
+                            root = rec[root];
+                        }
+                                                        
+                        rec[neighbor] = root;
+                            
+                        if (curr != root) {
+                            rec[curr] = root;
+                            curr = root;
+                            count--;
+                        }
+                    }
+                }
             }
             
-            result.add(uf.count);
+            result.add(count);
         }
         
         return result;
     }
     
-    private int id(int i, int j, int col) {
+    private int getIdx(int i, int j, int col) {
         return i * col + j;
-    }
-    
-    private boolean valid(int i, int j, int row, int col) {
-        if (i >= 0 && i < row && j >= 0 && j < col) {
-            return true;
-        }
-        else {
-            return false;
-        }
     }
 }
