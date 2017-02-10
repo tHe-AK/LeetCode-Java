@@ -18,51 +18,35 @@ public class Solution {
             }
         }
         
-        dfs(s, left, right, new HashSet<String>(), result);
+        dfs(s, left, right, 0, 0, "", result);
         
         return result;
     }
     
-    private void dfs(String s, int left, int right, Set<String> visited, List<String> result) {
-        if (!visited.add(s)) {
-            return;
-        }
-        
-        if (left == 0 && right == 0) {
-            if (isValid(s)) {
-                result.add(s);
-            }
+    private void dfs(String s, int left, int right, int start, int count, String prev, List<String> result) {
+        for (int i = start; i < s.length(); i++) {
+            char ch = s.charAt(i);
             
-            return;
-        }
-        
-        for (int i = 0; i < s.length(); i++) {
-            char ch = s.charAt(i);
-
-            if (ch == '(' && left > 0) {
-                dfs(s.substring(0, i) + s.substring(i + 1), left - 1, right, visited, result);
-            } else if (ch == ')' && right > 0) {
-                dfs(s.substring(0, i) + s.substring(i + 1), left, right - 1, visited, result);
+            if (i == start || ch != s.charAt(i - 1)) {
+                if (ch == '(' && left > 0) {
+                    dfs(s, left - 1, right, i + 1, count, prev + s.substring(start, i), result);
+                } else if (ch == ')' && right > 0) {
+                    dfs(s, left, right - 1, i + 1, count, prev + s.substring(start, i), result);
+                }
             }
-        }
-    }
-    
-    private boolean isValid(String s) {
-        int count = 0;
-        
-        for (int i = 0; i < s.length(); i++) {
-            char ch = s.charAt(i);
             
             if (ch == '(') {
                 count++;
             } else if (ch == ')') {
                 if (count-- == 0) {
-                    return false;
+                    return;
                 }
             }
         }
         
-        return count == 0;
+        if (left == 0 && right == 0) {
+            result.add(prev + s.substring(start));
+        }
     }
 }
 
