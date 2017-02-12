@@ -3,22 +3,18 @@ public class NumArray {
     private int[] tree;
 
     public NumArray(int[] nums) {
-        this.nums = nums;
-        tree = new int[nums.length + 1];
+        int len = nums.length;
+        this.nums = new int[len];
+        tree = new int[len + 1];
         
-        for (int i = 0; i < nums.length; i++) {
-            updateDiff(i, nums[i]);
+        for (int i = 0; i < len; i++) {
+            update(i, nums[i]);
         }
     }
     
     public void update(int i, int val) {
         int diff = val - nums[i];
-        nums[i] = val;
-        updateDiff(i, diff);
-    }
-    
-    private void updateDiff(int i, int diff) {
-        i++;
+        nums[i++] = val;
         
         while (i < tree.length) {
             tree[i] += diff;
