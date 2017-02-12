@@ -1,4 +1,60 @@
 public class NumMatrix {
+    private int[][] matrix;
+    private int[][] tree;
+    
+    public NumMatrix(int[][] matrix) {
+        if (matrix.length == 0 || matrix[0].length == 0) {
+            return;
+        }
+        
+        int row = matrix.length;
+        int col = matrix[0].length;
+        this.matrix = new int[row][col];
+        tree = new int[row + 1][col + 1];
+        
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                update(i, j, matrix[i][j]);
+            }
+        }
+    }
+    
+    public void update(int row, int col, int val) {
+        int diff = val - matrix[row][col];
+        matrix[row][col] = val;
+        
+        for (int i = row + 1; i < tree.length; i += i & -i) {
+            for (int j = col + 1; j < tree[0].length; j += j & -j) {
+                tree[i][j] += diff;
+            }
+        }
+    }
+    
+    public int sumRegion(int row1, int col1, int row2, int col2) {
+        return getSum(row2, col2) - getSum(row1 - 1, col2) - getSum(row2, col1 - 1) + getSum(row1 - 1, col1 - 1);
+    }
+    
+    private int getSum(int row, int col) {
+        int sum = 0;
+        
+        for (int i = row + 1; i > 0; i -= i & -i) {
+            for (int j = col + 1; j > 0; j -= j & -j) {
+                sum += tree[i][j];
+            }
+        }
+        
+        return sum;
+    }
+}
+
+/**
+ * Your NumMatrix object will be instantiated and called as such:
+ * NumMatrix obj = new NumMatrix(matrix);
+ * obj.update(row,col,val);
+ * int param_2 = obj.sumRegion(row1,col1,row2,col2);
+ */
+
+public class NumMatrix {
     private int[][] sum;
     private int[][] matrix;
     
