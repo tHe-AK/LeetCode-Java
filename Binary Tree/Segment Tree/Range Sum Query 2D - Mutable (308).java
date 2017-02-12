@@ -1,3 +1,51 @@
+public class NumMatrix {
+    private int[][] sum;
+    private int[][] matrix;
+    
+    public NumMatrix(int[][] matrix) {
+        if (matrix.length == 0 || matrix[0].length == 0) {
+            return;
+        }
+        
+        this.matrix = matrix;
+        int row = matrix.length;
+        int col = matrix[0].length;
+        sum = new int[row][col + 1];
+        
+        for (int i = 0; i < row; i++) {
+            for (int j = 1; j <= col; j++) {
+                sum[i][j] = sum[i][j - 1] + matrix[i][j - 1];
+            }
+        }
+    }
+    
+    public void update(int row, int col, int val) {
+        int diff = val - matrix[row][col];
+        matrix[row][col] = val;
+        
+        for (int j = col + 1; j < sum[0].length; j++) {
+            sum[row][j] += diff;
+        }
+    }
+    
+    public int sumRegion(int row1, int col1, int row2, int col2) {
+        int val = 0;
+        
+        for (int i = row1; i <= row2; i++) {
+            val += sum[i][col2 + 1] - sum[i][col1];
+        }
+        
+        return val;
+    }
+}
+
+/**
+ * Your NumMatrix object will be instantiated and called as such:
+ * NumMatrix obj = new NumMatrix(matrix);
+ * obj.update(row,col,val);
+ * int param_2 = obj.sumRegion(row1,col1,row2,col2);
+ */
+
 class SegmentTreeNode {
     public int x1, y1;
     public int x2, y2;
