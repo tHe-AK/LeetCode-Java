@@ -2,7 +2,7 @@ public class Solution {
     public int maxProfit(int k, int[] prices) {
         int len = prices.length;
         
-        if (k >= len - 1) {
+        if (k >= len / 2) {
             return getMaxProfit(prices);
         }
         
