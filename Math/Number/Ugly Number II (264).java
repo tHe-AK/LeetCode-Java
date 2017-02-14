@@ -4,13 +4,13 @@ public class Solution {
             return 0;
         }
         
-        int[] rec = new int[n + 1];
-        rec[1] = 1;
-        int index2 = 1;
-        int index3 = 1;
-        int index5 = 1;
+        int[] rec = new int[n];
+        rec[0] = 1;
+        int index2 = 0;
+        int index3 = 0;
+        int index5 = 0;
         
-        for (int i = 2; i <= n; i++){
+        for (int i = 1; i < n; i++){
             rec[i] = Math.min(Math.min(rec[index2] * 2, rec[index3] * 3), rec[index5] * 5);
             
             if (rec[i] == rec[index2] * 2) {
@@ -26,6 +26,6 @@ public class Solution {
             }
         }
         
-        return rec[n];
+        return rec[n - 1];
     }
 }
