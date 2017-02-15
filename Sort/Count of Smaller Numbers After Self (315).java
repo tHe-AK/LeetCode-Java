@@ -1,3 +1,62 @@
+public class Solution {
+    public List<Integer> countSmaller(int[] nums) {
+        List<Integer> result = new ArrayList<>();
+        
+        if (nums.length == 0) {
+            return result; 
+        }
+        
+        int min = nums[0];
+        int max = nums[0];
+        
+        for (int num : nums) {
+            min = Math.min(min, num);
+            max = Math.max(max, num);
+        }
+        
+        int[] tree = new int[max - min + 1];
+
+        for (int i = nums.length - 1; i >= 0; i--) {
+            int num = nums[i] - min;
+            result.add(sumRange(tree, 0, num - 1));
+            update(tree, num);
+        }
+        
+        Collections.reverse(result);
+        
+        return result;
+    }
+    
+    private void update(int[] tree, int i) {
+        i++;
+        
+        while (i < tree.length) {
+            tree[i]++;
+            i += i & -i;
+        }
+    }
+    
+    private int sumRange(int[] tree, int i, int j) {
+        if (i > j) {
+            return 0;
+        } else {
+            return getSum(tree, j) - getSum(tree, i - 1);
+        }
+    }
+    
+    private int getSum(int[] tree, int i) {
+        i++;
+        int sum = 0;
+        
+        while (i > 0) {
+            sum += tree[i];
+            i -= i & -i;
+        }
+        
+        return sum;
+    }
+}
+
 class SegmentTreeNode {
     public int start;
     public int end;
