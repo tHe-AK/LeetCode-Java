@@ -1,3 +1,98 @@
+class SegmentTreeNode {
+    public int start;
+    public int end;
+    public int count;
+    public SegmentTreeNode left;
+    public SegmentTreeNode right;
+
+    public SegmentTreeNode(int start, int end, int count) {
+        this.start = start;
+        this.end = end;
+        this.count = count;
+    }
+}
+
+public class Solution {
+    public List<Integer> countSmaller(int[] nums) {
+        List<Integer> result = new ArrayList<>();
+        
+        if (nums.length == 0) {
+            return result; 
+        }
+        
+        int min = nums[0];
+        int max = nums[0];
+        
+        for (int num : nums) {
+            min = Math.min(min, num);
+            max = Math.max(max, num);
+        }
+        
+        SegmentTreeNode root = buildTree(0, max - min);
+        
+        for (int i = nums.length - 1; i >= 0; i--) {
+            int num = nums[i] - min;
+            result.add(sumRange(root, 0, num - 1));
+            update(root, num);
+        }
+        
+        Collections.reverse(result);
+        
+        return result;
+    }
+    
+    private SegmentTreeNode buildTree(int start, int end) {
+        if (start > end) {
+            return null;
+        } else if (start == end) {
+            return new SegmentTreeNode(start, end, 0);
+        } else {
+            int mid = start + (end - start) / 2;
+            SegmentTreeNode left  = buildTree(start, mid);
+            SegmentTreeNode right = buildTree(mid + 1, end);
+            SegmentTreeNode root = new SegmentTreeNode(start, end, 0);
+            root.left = left;
+            root.right = right;
+            
+            return root;
+        }
+    }
+
+    private void update(SegmentTreeNode root, int i) {
+        if (root.start == i && root.end == i) {
+            root.count++;
+        } else {
+            int mid = root.start + (root.end - root.start) / 2;
+            
+            if (i <= mid) {
+                update(root.left, i);
+            } else {
+                update(root.right, i);
+            }
+            
+            root.count = root.left.count + root.right.count;
+        }
+    }
+
+    private int sumRange(SegmentTreeNode root, int start, int end) {
+        if (start > end) {
+            return 0;
+        } else if (root.start == start && root.end == end) {
+            return root.count;
+        } else {
+            int mid = root.start + (root.end - root.start) / 2;
+            
+            if (end <= mid) {
+                return sumRange(root.left, start, end);
+            } else if (start > mid) {
+                return sumRange(root.right, start, end);
+            } else {
+                return sumRange(root.left, start, mid) + sumRange(root.right, mid + 1, end);
+            }
+        }
+    }
+}
+
 public class Solution {
     public List<Integer> countSmaller(int[] nums) {
         int len = nums.length;
