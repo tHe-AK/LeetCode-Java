@@ -108,18 +108,20 @@ public class NumArray {
         return sumRange(root, i, j);
     }
     
-    private int sumRange(SegmentTreeNode root, int i, int j) {
-        if (root.start == i && root.end == j) {
+    private int sumRange(SegmentTreeNode root, int start, int end) {
+        if (start > end) {
+            return 0;
+        } else if (root.start == start && root.end == end) {
             return root.sum;
         } else {
             int mid = root.start + (root.end - root.start) / 2;
             
-            if (j <= mid) {
-                return sumRange(root.left, i, j);
-            } else if (i > mid) {
-                return sumRange(root.right, i, j);
+            if (end <= mid) {
+                return sumRange(root.left, start, end);
+            } else if (start > mid) {
+                return sumRange(root.right, start, end);
             } else {
-                return sumRange(root.left, i, mid) + sumRange(root.right, mid + 1, j);
+                return sumRange(root.left, start, mid) + sumRange(root.right, mid + 1, end);
             }
         }
     }
