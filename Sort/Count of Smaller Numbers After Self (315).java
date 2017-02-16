@@ -1,5 +1,38 @@
 public class Solution {
     public List<Integer> countSmaller(int[] nums) {
+        int len = nums.length;
+        Integer[] result = new Integer[len];
+        List<Integer> sorted = new ArrayList<>();
+        
+        for (int i = len - 1; i >= 0; i--) {
+            int idx = binarySearch(sorted, nums[i]);
+            result[i] = idx;
+            sorted.add(idx, nums[i]);
+        }
+        
+        return Arrays.asList(result);
+    }
+    
+    private int binarySearch(List<Integer> nums, int num) {
+        int low = 0;
+        int high = nums.size() - 1;
+        
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            
+            if (nums.get(mid) >= num) {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        
+        return low;
+    }
+}
+
+public class Solution {
+    public List<Integer> countSmaller(int[] nums) {
         List<Integer> result = new ArrayList<>();
         
         if (nums.length == 0) {
