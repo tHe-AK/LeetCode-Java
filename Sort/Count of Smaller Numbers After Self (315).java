@@ -182,12 +182,10 @@ public class Solution {
             
             while (i < m || j < n) {
                 if (i == m || (j < n && left[i][0] > right[j][0])) {
-                    sorted[idx][0] = right[j][0];
-                    sorted[idx++][1] = right[j++][1];
+                    sorted[idx++] = right[j++];
                 } else {
                     result[left[i][1]] += j;
-                    sorted[idx][0] = left[i][0];
-                    sorted[idx++][1] = left[i++][1];
+                    sorted[idx++] = left[i++];
                 }
             }
             
