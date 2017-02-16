@@ -22,3 +22,33 @@ public class Solution {
         }
     }
 }
+
+public class Solution {
+    public List<String> generateAbbreviations(String word) {
+        List<String> result = new ArrayList<>();
+        int len = word.length();
+        
+        for (int i = 0; i <= (1 << len) - 1; i++) {
+            String str = "";
+            int num = i;
+            int count = 0;
+            
+            for (int j = 0; j < len; j++) {
+                if ((num & 1) == 1) {
+                    str += count > 0 ? count : "";
+                    count = 0;
+                    str += word.charAt(j);
+                } else {
+                    count++;
+                }
+                
+                num >>= 1;
+            }
+            
+            str += count > 0 ? count : "";
+            result.add(str);
+        }
+        
+        return result;
+    }
+}
