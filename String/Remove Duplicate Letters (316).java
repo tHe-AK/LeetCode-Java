@@ -1,8 +1,13 @@
 public class Solution {
     public String removeDuplicateLetters(String s) {
+        if (s.length() == 0) {
+            return "";
+        }
+        
         int[] rec = new int[26];
         int len = s.length();
         int idx = 0;
+        String result = "";
         
         for (int i = 0; i < len; i++) {
             rec[s.charAt(i) - 'a']++;
@@ -20,6 +25,6 @@ public class Solution {
             }
         }
         
-        return len == 0 ? "" : s.charAt(idx) + removeDuplicateLetters(s.substring(idx + 1).replaceAll(s.charAt(idx) + "", ""));
+        return s.charAt(idx) + removeDuplicateLetters(s.substring(idx + 1).replaceAll(s.charAt(idx) + "", ""));
     }
 }
