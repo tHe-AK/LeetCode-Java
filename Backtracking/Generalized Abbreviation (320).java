@@ -35,8 +35,11 @@ public class Solution {
             
             for (int j = 0; j < len; j++) {
                 if ((num & 1) == 1) {
-                    str += count > 0 ? count : "";
-                    count = 0;
+                    if (count > 0) {
+                        str += count;
+                        count = 0;
+                    }
+                    
                     str += word.charAt(j);
                 } else {
                     count++;
@@ -45,7 +48,10 @@ public class Solution {
                 num >>= 1;
             }
             
-            str += count > 0 ? count : "";
+            if (count > 0) {
+                str += count;
+            }
+            
             result.add(str);
         }
         
