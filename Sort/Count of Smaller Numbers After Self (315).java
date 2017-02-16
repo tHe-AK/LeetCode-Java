@@ -31,6 +31,54 @@ public class Solution {
     }
 }
 
+class TreeNode {
+    public int val;
+    public TreeNode left;
+    public TreeNode right;
+    public int same;
+    public int count;
+    
+    public TreeNode(int val, int same) {
+        this.val = val;
+        this.same = same;
+    }
+}
+
+public class Solution {
+    public List<Integer> countSmaller(int[] nums) {
+        int len = nums.length;
+        Integer[] result = new Integer[len];
+        TreeNode root = null;
+        
+        for (int i = len - 1; i >= 0; i--) {
+            int[] sum = new int[1];
+            root = insert(root, nums[i], sum);
+            result[i] = sum[0];
+        }
+        
+        return Arrays.asList(result);
+    }
+    
+    private TreeNode insert(TreeNode root, int val, int[] sum) {
+        if (root == null) {
+            return new TreeNode(val, 1);
+        } else {
+            if (root.val == val) {
+                sum[0] += root.count;
+                root.same++;
+            } else if (root.val < val) {
+                sum[0] += root.count + root.same;
+                root.right = insert(root.right, val, sum);
+            } else {
+                root.count++;
+                root.left = insert(root.left, val, sum);
+            }
+            
+            return root;
+        }
+    }
+}
+
 public class Solution {
     public List<Integer> countSmaller(int[] nums) {
         List<Integer> result = new ArrayList<>();
