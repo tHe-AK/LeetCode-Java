@@ -4,8 +4,8 @@ public class Solution {
             return "";
         }
         
-        int[] rec = new int[26];
         int len = s.length();
+        int[] rec = new int[26];
         int idx = 0;
         String result = "";
         
