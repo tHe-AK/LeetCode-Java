@@ -257,16 +257,15 @@ public class Solution {
             int[][] left = mergeSort(nums, start, mid, result);
             int[][] right = mergeSort(nums, mid + 1, end, result);
             int[][] sorted = new int[m + n][2];
-            int idx = 0;
             int i = 0;
             int j = 0;
-            
-            while (i < m || j < n) {
+
+            for (int k = 0; k < m + n; k++) {
                 if (i == m || (j < n && left[i][0] > right[j][0])) {
-                    sorted[idx++] = right[j++];
+                    sorted[k] = right[j++];
                 } else {
                     result[left[i][1]] += j;
-                    sorted[idx++] = left[i++];
+                    sorted[k] = left[i++];
                 }
             }
             
