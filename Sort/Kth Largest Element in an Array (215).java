@@ -38,11 +38,9 @@ public class Solution {
         
         if (count == k) {
             return nums[curr];
-        }
-        else if (count < k) {
+        } else if (count < k) {
             return findKthLargest(nums, k - count, curr + 1, high);
-        }
-        else {
+        } else {
             return findKthLargest(nums, k, low, curr - 1);
         }
     }
