@@ -1,9 +1,5 @@
 public class Solution {
     public boolean isValidSerialization(String preorder) {
-        if (preorder == null || preorder.length() == 0) {
-            throw new IllegalArgumentException();
-        }
-        
         int degree = 1;
         String[] nodes = preorder.split(",");
         
