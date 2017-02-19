@@ -31,10 +31,10 @@ public class Solution {
             }
         }
   
-        int count = idx - low;
         nums[low] = nums[--idx];
         nums[idx] = pivot;
-        
+        int count = idx - low + 1;
+
         if (count == k) {
             return nums[idx];
         } else if (count < k) {
