@@ -1,6 +1,29 @@
 public class Solution {
     public void wiggleSort(int[] nums) {
         int len = nums.length;
+        Integer[] copy = new Integer[len];
+        
+        for (int i = 0; i < len; i++) {
+            copy[i] = nums[i];
+        }
+        
+        Arrays.sort(copy, (a, b) -> b - a);
+        int i = 0;
+        int j = len / 2;
+
+        for (int k = 0; k < len; k++) {
+            if (k % 2 == 0) {
+                nums[k] = copy[j++];
+            } else {
+                nums[k] = copy[i++];
+            }
+        }
+    }
+}
+
+public class Solution {
+    public void wiggleSort(int[] nums) {
+        int len = nums.length;
         int median = findKthLargest(nums, (len + 1) / 2, 0, len - 1);
         
         int low = 0;
@@ -22,7 +45,7 @@ public class Solution {
         int pivot = nums[low];
         int curr = low + 1;
         
-        for (int i = low + 1; i <= high; i++) {
+        for (int i = curr; i <= high; i++) {
             if (nums[i] < pivot) {
                 int temp = nums[i];
                 nums[i] = nums[curr];
@@ -30,10 +53,9 @@ public class Solution {
             }
         }
         
+        int count = curr - low;
         nums[low] = nums[--curr];
         nums[curr] = pivot;
-        
-        int count = curr - low + 1;
         
         if (count == k) {
             return nums[curr];
