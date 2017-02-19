@@ -2,15 +2,15 @@ public class Solution {
     public void sortColors(int[] nums) {
         int low = 0;
         int high = nums.length - 1;
-        int curr = 0;
+        int i = 0;
         
-        while (curr <= high) {
-            if (nums[curr] == 0) {
-                swap(nums, low++, curr++);
-            } else if (nums[curr] == 2) {
-                swap(nums, curr, high--);
+        while (i <= high) {
+            if (nums[i] == 0) {
+                swap(nums, low++, i++);
+            } else if (nums[i] == 2) {
+                swap(nums, i, high--);
             } else {
-                curr++;
+                i++;
             }
         }
     }
