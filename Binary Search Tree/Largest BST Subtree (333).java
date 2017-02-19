@@ -10,10 +10,10 @@
  
 class SubTree {
     public int size;
-    public Long min;
-    public Long max;
+    public Integer min;
+    public Integer max;
      
-    public SubTree(int size, Long min, Long max) {
+    public SubTree(int size, Integer min, Integer max) {
         this.size = size;
         this.min = min;
         this.max = max;
