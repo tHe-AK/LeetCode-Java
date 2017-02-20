@@ -2,7 +2,7 @@ public class TicTacToe {
     private int[] rows;
     private int[] cols;
     private int diagonal;
-    private int antiDiagonal
+    private int antiDiagonal;
 
     /** Initialize your data structure here. */
     public TicTacToe(int n) {
