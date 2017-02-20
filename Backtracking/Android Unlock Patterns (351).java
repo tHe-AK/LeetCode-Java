@@ -48,19 +48,17 @@ public class Solution {
             return true;
         }
         
-        // indexes are at both end of the diagonals for example 0,0, and 8,8          
         int mid = (curr + prev) / 2;
         
         if (mid == 4) {
+            // indexes are at both end of the diagonals for example 0,0, and 8,8          
+            return visited[mid];
+        } else if ((curr % 3 != prev % 3) && (curr / 3 != prev / 3)) {
+            // adjacent cells on diagonal for example 0,0 and 1,1 or 2,0 and 1,1
+            return true;
+        } else {
+            // all other cells which are not adjacent
             return visited[mid];
         }
-        
-        // adjacent cells on diagonal  - for example 0,0 and 1,0 or 2,0 and //1,1
-        if ((curr % 3 != prev % 3) && (curr / 3 != prev / 3)) {
-            return true;
-        }
-        
-        // all other cells which are not adjacent
-        return visited[mid];
     }
 }
