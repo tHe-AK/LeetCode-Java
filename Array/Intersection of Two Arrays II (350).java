@@ -20,13 +20,13 @@ public class Solution {
             }
         }
     
-       int[] result = new int[intersect.size()];
+        int[] result = new int[intersect.size()];
        
-       for (int i = 0; i < result.length; i++) {
-           result[i] = intersect.get(i);
-       }
+        for (int i = 0; i < result.length; i++) {
+            result[i] = intersect.get(i);
+        }
     
-       return result;
+        return result;
     }
 }
 
@@ -50,12 +50,12 @@ public class Solution {
             }
         }
     
-       int[] result = new int[intersect.size()];
+        int[] result = new int[intersect.size()];
        
-       for (i = 0; i < result.length; i++) {
-           result[i] = intersect.get(i);
-       }
+        for (i = 0; i < result.length; i++) {
+            result[i] = intersect.get(i);
+        }
     
-       return result;
+        return result;
     }
 }
