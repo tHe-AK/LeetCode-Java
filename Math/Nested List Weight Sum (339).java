@@ -57,7 +57,7 @@ public class Solution {
         int sum = 0;
         int level = 0;
         
-        Queue<NestedInteger> queue = new LinkedList<NestedInteger>(nestedList);
+        Queue<NestedInteger> queue = new LinkedList<>(nestedList);
         
         while (!queue.isEmpty()) {
             level++;
