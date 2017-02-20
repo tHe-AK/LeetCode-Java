@@ -1,9 +1,15 @@
 public class Solution {
     public int numberOfPatterns(int m, int n) {
         int result = 0;
+        int[] idx = { 0, 1, 4 };
+        boolean[] visited = new boolean[9];
         
-        for (int len = m; len <= n; len++) {                
-            result += calcPatterns(-1, len, new boolean[9]);
+        for (int len = m; len <= n; len++) {
+            for (int i : idx) {
+                visited[i] = true;
+                result += (i == 4 ? 1 : 4) * calcPatterns(i, len - 1, visited);
+                visited[i] = false;
+            }
         }
         
         return result;
@@ -49,7 +55,7 @@ public class Solution {
             return visited[mid];
         }
         
-        // adjacent cells on diagonal  - for example 0,0 and 1,0 or 2,0 and 1,1
+        // adjacent cells on diagonal  - for example 0,0 and 1,0 or 2,0 and //1,1
         if ((curr % 3 != prev % 3) && (curr / 3 != prev / 3)) {
             return true;
         }
