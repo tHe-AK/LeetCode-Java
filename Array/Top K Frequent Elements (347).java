@@ -24,9 +24,9 @@ public class Solution {
     			    
                     if (--k == 0) {
                         break;
-    			    }
-    		    }
-    		}
+                    }
+                }
+            }
     	}
     	
     	return result;
