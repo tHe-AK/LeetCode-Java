@@ -6,15 +6,15 @@ public class Solution {
         List<Integer>[] bucket = new List[len + 1];
 
     	for (int num : nums) {
-    		map.put(num, map.getOrDefault(num, 0) + 1);
+            map.put(num, map.getOrDefault(num, 0) + 1);
     	}
     	
     	for (int i = 0; i <= len; i++) {
-    	    bucket[i] = new ArrayList<>();
+            bucket[i] = new ArrayList<>();
     	}
     
     	for (int key : map.keySet()) {
-    		bucket[map.get(key)].add(key);
+            bucket[map.get(key)].add(key);
     	}
     
     	for (int i = len; i >= 0; i--) {
