@@ -24,7 +24,7 @@ public class TicTacToe {
         int size = rows.length;
         int val = player == 1 ? 1 : -1;
         
-        rows[row] += val
+        rows[row] += val;
         cols[col] += val;
         
         if (row == col) {
