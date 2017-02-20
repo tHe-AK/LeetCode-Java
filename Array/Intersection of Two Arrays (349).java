@@ -27,6 +27,28 @@ public class Solution {
 public class Solution {
     public int[] intersection(int[] nums1, int[] nums2) {
         Arrays.sort(nums1);
+        Set<Integer> intersect = new HashSet<>();
+        
+        for (int i = 0; i < nums2.length; i++) {
+            if (Arrays.binarySearch(nums1, nums2[i]) >= 0) {
+                intersect.add(nums2[i]);
+            }
+        }
+        
+        int[] result = new int[intersect.size()];
+        int i = 0;
+        
+        for (Integer num : intersect) {
+            result[i++] = num;
+        }
+        
+        return result;
+    }
+}
+
+public class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        Arrays.sort(nums1);
         Arrays.sort(nums2);
         List<Integer> intersect = new ArrayList<>();
         int i = 0;
