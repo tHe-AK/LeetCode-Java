@@ -49,7 +49,7 @@ public class Solution {
             return visited[mid];
         }
         
-        // adjacent cells on diagonal  - for example 0,0 and 1,0 or 2,0 and //1,1
+        // adjacent cells on diagonal  - for example 0,0 and 1,0 or 2,0 and 1,1
         if ((curr % 3 != prev % 3) && (curr / 3 != prev / 3)) {
             return true;
         }
