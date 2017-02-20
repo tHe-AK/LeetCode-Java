@@ -18,12 +18,12 @@ public class Solution {
     	}
     
     	for (int i = len; i >= 0; i--) {
-    		for (Integer num : bucket[i]) {
-    		    if (k > 0) {
-    			    result.add(num);
+            for (Integer num : bucket[i]) {
+                if (k > 0) {
+                    result.add(num);
     			    
-    			    if (--k == 0) {
-    			        break;
+                    if (--k == 0) {
+                        break;
     			    }
     		    }
     		}
