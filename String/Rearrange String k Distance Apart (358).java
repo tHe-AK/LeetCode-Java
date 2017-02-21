@@ -26,11 +26,11 @@ public class Solution {
     }
     
     private int findValidIdx(int[] count, int[] valid, int curr) {
-        int max = Integer.MIN_VALUE;
+        int max = 0;
         int idx = -1;
         
         for (int i = 0; i < count.length; i++) {
-            if (count[i] > 0 && count[i] > max && curr >= valid[i]) {
+            if (count[i] > max && curr >= valid[i]) {
                 max = count[i];
                 idx = i;
             }
