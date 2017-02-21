@@ -11,14 +11,14 @@ public class Solution {
         int[] rec = new int[envelopes.length];
         int len = 0;
 
-        for (int envelope : envelopes) {
+        for (int[] envelope : envelopes) {
             int index = Arrays.binarySearch(rec, 0, len, envelope[1]);
             
             if (index < 0) {
                 index = -(index + 1);
             }
             
-            rec[index] = num;
+            rec[index] = envelope[1];
             
             if (index == len) {
                 len++;
