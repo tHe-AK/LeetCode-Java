@@ -90,7 +90,7 @@ public class NestedIterator implements Iterator<Integer> {
 
     @Override
     public Integer next() {
-        if (next != null || hasNext()) {
+        if (hasNext()) {
             Integer i = next.getInteger();
             next = null;
             return i;
