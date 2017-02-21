@@ -11,7 +11,7 @@ class ListNode {
 }
 
 public class LRUCache {
-    private HashMap<Integer, ListNode> rec;
+    private Map<Integer, ListNode> rec;
     private ListNode head;
     private ListNode tail;
     private int capacity;
