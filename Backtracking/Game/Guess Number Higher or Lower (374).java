@@ -5,26 +5,22 @@
 
 public class Solution extends GuessGame {
     public int guessNumber(int n) {
-        if (n < 1) {
-            throw new IllegalArgumentException();
-        }
+        int low = 1;
+        int high = n;
         
-        int start = 1;
-        int end = n;
-        
-        while (start <= end) {
-            int mid = start + (end - start) / 2;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
             int result = guess(mid);
             
             if (result == 0) {
                 return mid;
             } else if (result < 0) {
-                end = mid - 1;
+                high = mid - 1;
             } else {
-                start = mid + 1;
+                low = mid + 1;
             }
         }
         
-        throw new IllegalArgumentException();
+        return -1;
     }
 }
