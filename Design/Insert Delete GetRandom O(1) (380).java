@@ -25,9 +25,10 @@ public class RandomizedSet {
     public boolean remove(int val) {
         if (map.containsKey(val)) {
             int idx = map.get(val);
+            int lastIdx = nums.size() - 1;
             
-            if (idx != nums.size() -1) {
-                int num = nums.get(nums.size() - 1);
+            if (idx != lastIdx) {
+                int num = nums.get(lastIdx);
                 map.put(num, idx);
                 nums.set(idx, num);
             }
