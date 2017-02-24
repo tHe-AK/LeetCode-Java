@@ -28,10 +28,6 @@
  */
 public class Solution {
     public NestedInteger deserialize(String s) {
-        if (s == null || s.length() == 0) {
-            throw new IllegalArgumentException();
-        }
-        
         if (s.charAt(0) != '[') {
             return new NestedInteger(Integer.parseInt(s));
         }
@@ -42,14 +38,14 @@ public class Solution {
         int start = 1;
         
         for (int i = 1; i < s.length(); i++) {
-            char c = s.charAt(i);
+            char ch = s.charAt(i);
             
-            if (c == '[') {
+            if (ch == '[') {
                 NestedInteger ni = new NestedInteger();
                 stack.peek().add(ni);
                 stack.push(ni);
                 start = i + 1;
-            } else if (c == ',' || c == ']') {
+            } else if (ch == ',' || ch == ']') {
                 if (i - start > 0) {
                     NestedInteger ni = new NestedInteger(Integer.parseInt(s.substring(start, i)));
                     stack.peek().add(ni);
@@ -57,7 +53,7 @@ public class Solution {
                 
                 start = i + 1;
                 
-                if (c == ']') {
+                if (ch == ']') {
                     stack.pop();
                 }
             }
