@@ -5,8 +5,8 @@ public class RandomizedSet {
     
     /** Initialize your data structure here. */
     public RandomizedSet() {
-        nums = new ArrayList<Integer>();
-        map = new HashMap<Integer, Integer>();
+        nums = new ArrayList<>();
+        map = new HashMap<>();
         random = new Random();
     }
     
