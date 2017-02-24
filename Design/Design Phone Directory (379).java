@@ -68,11 +68,11 @@ public class PhoneDirectory {
             return -1;
         }
         
-        int num = next;
+        int number = next;
         bitSet.set(next);
         next = bitSet.nextClearBit(next);
 
-        return num;
+        return number;
     }
     
     /** Check if a number is available or not. */
