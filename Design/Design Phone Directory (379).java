@@ -1,7 +1,7 @@
 public class PhoneDirectory {
     private Set<Integer> used;
     private Queue<Integer> available;
-    int maxNumbers;
+    private int maxNumbers;
     
     /** Initialize your data structure here
         @param maxNumbers - The maximum numbers that can be stored in the phone directory. */
