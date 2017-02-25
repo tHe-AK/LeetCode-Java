@@ -1,28 +1,46 @@
 public class Solution {
     public int lengthLongestPath(String input) {
-        if (input == null) {
-            throw new IllegalArgumentException();
-        }
-        
         String[] lines = input.split("\n");
-        List<Integer> rec = new ArrayList<Integer>();
-        rec.add(0);
+        int[] rec = new int[lines.length];
         int max = 0;
         
         for (String line : lines) {
-            String name = line.replace("\t", "");
-            int index = line.length() - name.length() + 1;
+            int idx = line.lastIndexOf('\t') + 1;
+            rec[idx] = line.length() - idx;
             
-            if (name.contains(".")) {
-                max = Math.max(max, rec.get(index - 1) + name.length());
-            } else {
-                int count = rec.get(index - 1) + name.length() + 1;
-                        
-                if (index >= rec.size()) {
-                    rec.add(count);
-                } else {
-                    rec.set(index, count);
-                }
+            if (idx > 0) {
+                rec[idx] += rec[idx - 1];
+            }
+            
+            if (line.contains(".")) {
+                max = Math.max(max, rec[idx] + idx);
+            }
+        }
+        
+        return max;
+    }
+}
+
+public class Solution {
+    public int lengthLongestPath(String input) {
+        String[] lines = input.split("\n");
+        List<Integer> rec = new ArrayList<>();
+        int max = 0;
+        
+        for (String line : lines) {
+            int idx = line.lastIndexOf('\t') + 1;
+            int len = line.length() - idx;
+            
+            if (idx >= rec.size()) {
+                rec.add(len);
+            }
+
+            if (idx > 0) {
+                rec.set(idx, rec.get(idx - 1) + len);
+            }
+            
+            if (line.contains(".")) {
+                max = Math.max(max, rec.get(idx) + idx);
             }
         }
         
