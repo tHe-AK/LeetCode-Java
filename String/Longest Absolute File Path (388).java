@@ -24,7 +24,7 @@ public class Solution {
 public class Solution {
     public int lengthLongestPath(String input) {
         String[] lines = input.split("\n");
-        List<Integer> rec = new ArrayList<>();
+        List<Integer> rec = new ArrayList<Integer>();
         int max = 0;
         
         for (String line : lines) {
@@ -33,6 +33,8 @@ public class Solution {
             
             if (idx >= rec.size()) {
                 rec.add(len);
+            } else {
+                rec.set(idx, len);
             }
 
             if (idx > 0) {
