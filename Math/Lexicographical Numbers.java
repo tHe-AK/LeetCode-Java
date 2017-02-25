@@ -1,27 +1,23 @@
 public class Solution {
     public List<Integer> lexicalOrder(int n) {
-        if (n < 1) {
-            throw new IllegalArgumentException();
-        }
-        
-        List<Integer> result = new ArrayList<Integer>();
-        long cur = 1;
-        result.add((int) cur);
+        List<Integer> result = new ArrayList<>();
+        long curr = 1;
+        result.add(1);
         
         for (int i = 2; i <= n; i++) {
-            if (cur * 10 <= n) {
-                cur *= 10;
-            } else if (cur % 10 != 9 && cur + 1 <= n) {
-                cur += 1;
+            if (curr * 10 <= n) {
+                curr *= 10;
+            } else if (curr % 10 != 9 && curr + 1 <= n) {
+                curr += 1;
             } else {
-                while ((cur / 10) % 10 == 9) {
-                    cur /= 10;
+                while ((curr / 10) % 10 == 9) {
+                    curr /= 10;
                 }
                 
-                cur = cur / 10 + 1;
+                curr = curr / 10 + 1;
             }
             
-            result.add((int) cur);
+            result.add((int) curr);
         }
         
         return result;
@@ -30,28 +26,24 @@ public class Solution {
 
 public class Solution {
     public List<Integer> lexicalOrder(int n) {
-        if (n < 1) {
-            throw new IllegalArgumentException();
-        }
-        
-        List<Integer> result = new ArrayList<Integer>();
-        helper(0, n, result);
+        List<Integer> result = new ArrayList<>();
+        dfs(0, n, result);
         
         return result;
     }
     
-    private void helper(long cur, int n, List<Integer> result) {
-        if (cur > n) {
+    private void dfs(long curr, int n, List<Integer> result) {
+        if (curr > n) {
             return;
         }
         
-        if (cur != 0) {
-            result.add((int) cur);
-            helper(cur * 10, n, result);
+        if (curr != 0) {
+            result.add((int) curr);
+            dfs(curr * 10, n, result);
         }
         
-        if (cur % 10 != 9) {
-            helper(cur + 1, n, result);
+        if (curr % 10 != 9) {
+            dfs(curr + 1, n, result);
         }
     }
 }
