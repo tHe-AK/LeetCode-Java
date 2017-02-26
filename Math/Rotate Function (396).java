@@ -1,9 +1,5 @@
 public class Solution {
     public int maxRotateFunction(int[] A) {
-        if (A == null) {
-            throw new IllegalArgumentException();
-        }
-        
         int sum = 0;
         int F = 0;
         int len = A.length;
