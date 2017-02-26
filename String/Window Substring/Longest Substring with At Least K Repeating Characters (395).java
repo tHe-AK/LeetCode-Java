@@ -1,6 +1,11 @@
 public class Solution {
     public int longestSubstring(String s, int k) {
         int len = s.length();
+        
+        if (len < k) {
+            return 0;
+        }
+        
         int[] counts = new int[26];
         
         for (int i = 0; i < len; i++) {
