@@ -1,9 +1,5 @@
 public class Solution {
     public int integerReplacement(int n) {
-        if (n < 1) {
-            throw new IllegalArgumentException();
-        }
-        
         int count = 0;
         
         while (n != 1) {
