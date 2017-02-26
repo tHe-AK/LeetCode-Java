@@ -1,42 +1,36 @@
 public class Solution {
     public String decodeString(String s) {
-        if (s == null) {
-            throw new IllegalArgumentException();
-        }
-        
-        
-        return helper(s, new int[] {0});
+        return decodeString(s, new int[] { 0 });
     }
     
-    private String helper(String s, int[] cur) {
+    private String decodeString(String s, int[] idx) {
         StringBuilder result = new StringBuilder();
 
-        while (cur[0] < s.length()) {
-            char c = s.charAt(cur[0]);
+        while (idx[0] < s.length()) {
+            char ch = s.charAt(idx[0]);
             
-            if (Character.isDigit(c)) {
-                int start = cur[0]++;
+            if (Character.isDigit(ch)) {
+                int start = idx[0]++;
                 
-                while (cur[0] < s.length() && Character.isDigit(s.charAt(cur[0]))) {
-                    cur[0]++;
+                while (idx[0] < s.length() && Character.isDigit(s.charAt(idx[0]))) {
+                    idx[0]++;
                 }
                 
-                int count = Integer.parseInt(s.substring(start, cur[0]));
+                int count = Integer.parseInt(s.substring(start, idx[0]));
                 
-                cur[0]++;
-                String str = helper(s, cur);
+                idx[0]++;
+                String str = decodeString(s, idx);
                 
                 for (int i = 0; i < count; i++) {
                     result.append(str);
                 }
-                
-            } else if (c == ']') {
-                cur[0]++;
+            } else if (ch == ']') {
                 return result.toString();
             } else {
-                result.append(c);
-                cur[0]++;
+                result.append(ch);
             }
+            
+            idx[0]++;
         }
         
         return result.toString(); 
@@ -45,17 +39,12 @@ public class Solution {
 
 public class Solution {
     public String decodeString(String s) {
-        if (s == null) {
-            throw new IllegalArgumentException();
-        }
-        
         StringBuilder result = new StringBuilder();
-        int i = 0;
         
-        while (i < s.length()) {
-            char c = s.charAt(i);
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
             
-            if (Character.isDigit(c)) {
+            if (Character.isDigit(ch)) {
                 int start = i++;
                 
                 while (i < s.length() && Character.isDigit(s.charAt(i))) {
@@ -87,10 +76,8 @@ public class Solution {
                 }
                 
             } else {
-                result.append(c);
+                result.append(ch);
             }
-            
-            i++;
         }
         
         return result.toString();
@@ -99,46 +86,36 @@ public class Solution {
 
 public class Solution {
     public String decodeString(String s) {
-        if (s == null) {
-            throw new IllegalArgumentException();
-        }
-        
-        StringBuilder result = new StringBuilder();
         Stack<Integer> counts = new Stack<Integer>();
         Stack<StringBuilder> strs = new Stack<StringBuilder>();
-        strs.push(new StringBuilder());
+        StringBuilder result = new StringBuilder();
+        strs.push(result);
         
-        int i = 0;
-        
-        while (i < s.length()) {
-            char c = s.charAt(i);
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
             
-            if (c == '[') {
+            if (ch == '[') {
                 strs.push(new StringBuilder());
-                i++;
-            } else if (c == ']') {
+            } else if (ch == ']') {
                 int count = counts.pop();
                 StringBuilder str = strs.pop();
 
                 for (int j = 0; j < count; j++) {
                     strs.peek().append(str);
                 }
+            } else if (Character.isDigit(ch)) {
+                int start = i;
                 
-                i++;
-            } else if (Character.isDigit(c)) {
-                int start = i++;
-                
-                while (Character.isDigit(s.charAt(i)) && i < s.length()) {
+                while (Character.isDigit(s.charAt(i + 1)) && i + 1 < s.length()) {
                     i++;
                 }
                 
-                counts.push(Integer.parseInt(s.substring(start, i)));
+                counts.push(Integer.parseInt(s.substring(start, i + 1)));
             } else {
-                strs.peek().append(c);
-                i++;
+                strs.peek().append(ch);
             }
         }
         
-        return strs.peek().toString();
+        return result.toString();
     }
 }
