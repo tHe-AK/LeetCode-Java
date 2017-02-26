@@ -35,7 +35,6 @@ public class Solution {
                 for (int j = 0; j < count; j++) {
                     result.append(str);
                 }
-                
             } else {
                 result.append(ch);
             }
