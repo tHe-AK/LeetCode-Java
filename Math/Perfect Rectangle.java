@@ -1,15 +1,11 @@
 public class Solution {
     public boolean isRectangleCover(int[][] rectangles) {
-        if (rectangles == null) {
-            throw new IllegalArgumentException();
-        }
-        
-        Set<String> set = new HashSet<String>();
+        Set<String> set = new HashSet<>();
         int area = 0;
-        int xMin = Integer.MAX_VALUE;
-        int xMax = Integer.MIN_VALUE;
-        int yMin = Integer.MAX_VALUE;
-        int yMax = Integer.MIN_VALUE;
+        int minX = Integer.MAX_VALUE;
+        int minY = Integer.MAX_VALUE;
+        int maxX = Integer.MIN_VALUE;
+        int maxY = Integer.MIN_VALUE;
         
         for (int[] ractangle : rectangles) {
             int x1 = ractangle[0];
@@ -17,27 +13,27 @@ public class Solution {
             int x2 = ractangle[2];
             int y2 = ractangle[3];
             
-            xMin = Math.min(xMin, x1);
-            yMin = Math.min(yMin, y1);
-            xMax = Math.max(xMax, x2);
-            yMax = Math.max(yMax, y2);
+            minX = Math.min(minX, x1);
+            minY = Math.min(minY, y1);
+            maxX = Math.max(maxX, x2);
+            maxY = Math.max(maxY, y2);
             
-            helper(x1 + " " + y1, set);
-            helper(x1 + " " + y2, set);
-            helper(x2 + " " + y1, set);
-            helper(x2 + " " + y2, set);
+            updateSet(x1 + " " + y1, set);
+            updateSet(x1 + " " + y2, set);
+            updateSet(x2 + " " + y1, set);
+            updateSet(x2 + " " + y2, set);
             
             area += (x2 - x1) * (y2 - y1);
         }
         
-        if (set.size() != 4 || !set.contains(xMin + " " + yMin) || !set.contains(xMin + " " + yMax) || !set.contains(xMax + " " + yMin) || !set.contains(xMax + " " + yMax)) {
+        if (set.size() != 4 || !set.contains(minX + " " + minY) || !set.contains(minX + " " + maxY) || !set.contains(maxX + " " + minY) || !set.contains(maxX + " " + maxY)) {
             return false;
         }
         
-        return (xMax - xMin) * (yMax - yMin) == area;
+        return (maxX - minX) * (maxY - minY) == area;
     }
     
-    private void helper(String str, Set<String> set) {
+    private void updateSet(String str, Set<String> set) {
         if (set.contains(str)) {
             set.remove(str);
         } else {
