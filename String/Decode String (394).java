@@ -1,44 +1,5 @@
 public class Solution {
     public String decodeString(String s) {
-        return decodeString(s, new int[] { 0 });
-    }
-    
-    private String decodeString(String s, int[] idx) {
-        StringBuilder result = new StringBuilder();
-
-        while (idx[0] < s.length()) {
-            char ch = s.charAt(idx[0]);
-            
-            if (Character.isDigit(ch)) {
-                int start = idx[0]++;
-                
-                while (idx[0] < s.length() && Character.isDigit(s.charAt(idx[0]))) {
-                    idx[0]++;
-                }
-                
-                int count = Integer.parseInt(s.substring(start, idx[0]));
-                
-                idx[0]++;
-                String str = decodeString(s, idx);
-                
-                for (int i = 0; i < count; i++) {
-                    result.append(str);
-                }
-            } else if (ch == ']') {
-                return result.toString();
-            } else {
-                result.append(ch);
-            }
-            
-            idx[0]++;
-        }
-        
-        return result.toString(); 
-    }
-}
-
-public class Solution {
-    public String decodeString(String s) {
         StringBuilder result = new StringBuilder();
         
         for (int i = 0; i < s.length(); i++) {
@@ -117,5 +78,44 @@ public class Solution {
         }
         
         return result.toString();
+    }
+}
+
+public class Solution {
+    public String decodeString(String s) {
+        return decodeString(s, new int[] { 0 });
+    }
+    
+    private String decodeString(String s, int[] idx) {
+        StringBuilder result = new StringBuilder();
+
+        while (idx[0] < s.length()) {
+            char ch = s.charAt(idx[0]);
+            
+            if (Character.isDigit(ch)) {
+                int start = idx[0]++;
+                
+                while (idx[0] < s.length() && Character.isDigit(s.charAt(idx[0]))) {
+                    idx[0]++;
+                }
+                
+                int count = Integer.parseInt(s.substring(start, idx[0]));
+                
+                idx[0]++;
+                String str = decodeString(s, idx);
+                
+                for (int i = 0; i < count; i++) {
+                    result.append(str);
+                }
+            } else if (ch == ']') {
+                return result.toString();
+            } else {
+                result.append(ch);
+            }
+            
+            idx[0]++;
+        }
+        
+        return result.toString(); 
     }
 }
