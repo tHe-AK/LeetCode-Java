@@ -1,6 +1,6 @@
 public class Solution {
-    int[] nums;
-    Random random;
+    private int[] nums;
+    private Random random;
     
     public Solution(int[] nums) {
         this.nums = nums;
