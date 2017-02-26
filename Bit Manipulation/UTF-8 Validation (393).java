@@ -1,9 +1,5 @@
 public class Solution {
     public boolean validUtf8(int[] data) {
-        if (data == null) {
-            throw new IllegalArgumentException();
-        }
-        
         int count = 0;
         
         for (int num : data) {
