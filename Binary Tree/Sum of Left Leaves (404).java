@@ -9,18 +9,16 @@
  */
 public class Solution {
     public int sumOfLeftLeaves(TreeNode root) {
-        return helper(root, false);
+        return traverse(root, false);
     }
     
-    private int helper(TreeNode root, boolean isLeft) {
+    private int traverse(TreeNode root, boolean isLeft) {
         if (root == null) {
             return 0;
-        }
-        
-        if (root.left == null && root.right == null && isLeft) {
+        } else if (root.left == null && root.right == null && isLeft) {
             return root.val;
+        } else {
+            return traverse(root.left, true) + traverse(root.right, false);
         }
-        
-        return helper(root.left, true) + helper(root.right, false);
     }
 }
