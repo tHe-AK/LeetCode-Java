@@ -1,14 +1,18 @@
 public class Solution {
     public boolean canCross(int[] stones) {
-        return dfs(stones, 0, 0, new HashSet<String>());
+        return dfs(stones, 0, 0, new boolean[stones.length][stones.length]);
     }
     
-    private boolean dfs(int[] stones, int start, int k, Set<String> visited) {
-        if (visited.contains(start + " " + k)) {
+    private boolean dfs(int[] stones, int start, int k, boolean[][] visited) {
+        if (start == stones.length - 1) {
+            return true;
+        }
+        
+        if (visited[start][k]) {
             return false;
         }
 
-        visited.add(start + " " + k);
+        visited[start][k] = true;
         
         for (int i = start + 1; i < stones.length; i++) {
             int diff = stones[i] - stones[start];
@@ -24,6 +28,6 @@ public class Solution {
             }
         }
         
-        return start == stones.length - 1;
+        return false;
     }
 }
