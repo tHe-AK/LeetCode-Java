@@ -1,11 +1,7 @@
 public class Solution {
     public int splitArray(int[] nums, int m) {
-        if (nums == null || nums.length == 0 || m > nums.length) {
-            throw new IllegalArgumentException();
-        }
-        
-        int max = nums[0];
-        long sum = nums[0];
+        int max = Integer.MIN_VALUE;
+        long sum = 0;
         
         for (int num : nums) {
             max = Math.max(max, num);
@@ -29,15 +25,15 @@ public class Solution {
     }
     
     private boolean isValid(int[] nums, int m, long max) {
-        long cur = 0;
+        long curr = 0;
         int count = 1;
         
         for (int num : nums) {
-            cur += num;
+            curr += num;
             
-            if (cur > max) {
+            if (curr > max) {
+                curr = num;
                 count++;
-                cur = num;
                 
                 if (count > m) {
                     return false;
