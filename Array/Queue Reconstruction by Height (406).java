@@ -8,7 +8,7 @@ public class Solution {
             }
         });
         
-        List<int[]> result = new LinkedList<int[]>();
+        List<int[]> result = new LinkedList<>();
         
         for (int[] pair : people) {
             result.add(pair[1], pair);
