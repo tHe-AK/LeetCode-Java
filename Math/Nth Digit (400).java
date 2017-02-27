@@ -1,9 +1,5 @@
 public class Solution {
     public int findNthDigit(int n) {
-        if (n < 0) {
-            throw new IllegalArgumentException();
-        }
-        
         int digit = 1;
         long count = 9;
         int num = 1;
