@@ -1,9 +1,5 @@
 public class Solution {
     public List<String> readBinaryWatch(int num) {
-        if (num < 0 || num > 11) {
-            throw new IllegalArgumentException();
-        }
-        
         List<String> result = new ArrayList<String>();
         
         for (int i = 0; i < 12; i++) {
