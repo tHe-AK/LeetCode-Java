@@ -45,3 +45,65 @@ public class Solution {
         }
     }
 }
+
+public class Solution {
+    public List<int[]> pacificAtlantic(int[][] matrix) {
+        List<int[]> result = new ArrayList<>();
+        
+        if (matrix.length == 0 || matrix[0].length == 0) {
+            return result;
+        }
+        
+        int row = matrix.length;
+        int col = matrix[0].length;
+        boolean[][] pacific = new boolean[row][col];
+        boolean[][] atlantic = new boolean[row][col];
+        int[][] delta = new int[][] { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
+        Queue<int[]> queue1 = new LinkedList<>();
+        Queue<int[]> queue2 = new LinkedList<>();
+        
+        for (int i = 0; i < row; i++) {
+            queue1.offer(new int[] { i, 0 });
+            queue2.offer(new int[] { i, col - 1 });
+            pacific[i][0] = true;
+            atlantic[i][col - 1] = true;
+        }
+        
+        for (int j = 0; j < col; j++) {                                                                                         queue1.offer(new int[] { 0, j });
+            queue2.offer(new int[] { row - 1, j });
+            pacific[0][j] = true;
+            atlantic[row - 1][j] = true;
+        }
+        
+        bfs(matrix, queue1, pacific, delta);
+        bfs(matrix, queue2, atlantic, delta);
+
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (pacific[i][j] && atlantic[i][j]) {
+                    result.add(new int[] { i, j });
+                }
+            }
+        }
+
+        return result;
+    }
+
+    private void bfs(int[][] matrix, Queue<int[]> queue, boolean[][] visited, int[][] delta) {
+        while (!queue.isEmpty()) {
+            int[] peek = queue.poll();
+            int i = peek[0];
+            int j = peek[1];
+            
+            for (int[] diff : delta) {
+                int x = i + diff[0];
+                int y = j + diff[1];
+                
+                if (x >= 0 && x < matrix.length && y >= 0 && y < matrix[0].length && !visited[x][y] && matrix[x][y] >= matrix[i][j]) {
+                    visited[x][y] = true;
+                    queue.offer(new int[] { x, y });
+                }
+            }
+        }
+    }
+}
