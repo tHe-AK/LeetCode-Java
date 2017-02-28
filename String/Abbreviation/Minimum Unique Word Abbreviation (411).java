@@ -10,7 +10,7 @@ public class Solution {
         return result[0];
     }
     
-    private void dfs(String target, String[] dictionary, int start, int count, String curr, int[] min, String[] result) {
+    private void dfs(String target, String[] dictionary, int count, int start, String curr, int[] min, String[] result) {
         if (count >= min[0]) {
             return;
         }
@@ -29,13 +29,13 @@ public class Solution {
             return;
         }
         
-        dfs(target, dictionary, start + 1, count + 1, curr + target.charAt(start), min, result);
+        dfs(target, dictionary, count + 1, start + 1, curr + target.charAt(start), min, result);
         
         for (int end = start + 1; end <= len; end++) {
             if (end < len) {
-                dfs(target, dictionary, end + 1, count + 2, curr + (end - start) + target.charAt(end), min, result);
+                dfs(target, dictionary, count + 2, end + 1, curr + (end - start) + target.charAt(end), min, result);
             } else {
-                dfs(target, dictionary, end, count + 1, curr + (end - start), min, result);
+                dfs(target, dictionary, count + 1, end, curr + (end - start), min, result);
             }
         }
     }
