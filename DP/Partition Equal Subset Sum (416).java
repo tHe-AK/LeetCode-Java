@@ -15,7 +15,6 @@ public class Solution {
         }
         
         sum /= 2;
-
         boolean[] dp = new boolean[sum + 1];
         dp[0] = true;
         
