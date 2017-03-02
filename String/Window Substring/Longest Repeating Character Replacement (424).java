@@ -12,8 +12,10 @@ public class Solution {
             while (end - start - count > k) {
                 rec[s.charAt(start++)]--;
             }
+            
+            result = Math.max(result, end - start);
         }
         
-        return end - start;
+        return result;
     }
 }
