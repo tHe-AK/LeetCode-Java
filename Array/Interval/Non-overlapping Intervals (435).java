@@ -9,20 +9,11 @@
  */
 public class Solution {
     public int eraseOverlapIntervals(Interval[] intervals) {
-        if (intervals == null) {
-            throw new IllegalArgumentException();
-        }
-        
-        if (intervals.length <= 1) {
+        if (intervals.length == 0) {
             return 0;
         }
         
-        Arrays.sort(intervals, new Comparator<Interval>() {
-            @Override
-            public int compare(Interval interval1, Interval interval2) {
-                return interval1.start - interval2.start;
-            }
-        });
+        Arrays.sort(intervals, (a, b) -> a.start - b.start);
         
         int count = 0;
         int min = intervals[0].end;
