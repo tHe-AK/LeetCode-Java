@@ -9,13 +9,9 @@
  */
 public class Solution {
     public int[] findRightInterval(Interval[] intervals) {
-        if (intervals == null) {
-            throw new IllegalArgumentException();
-        }
-        
         int len = intervals.length;
         int[] result = new int[len];
-        TreeMap<Integer, Integer> map = new TreeMap<Integer, Integer>();
+        TreeMap<Integer, Integer> map = new TreeMap<>();
         
         for (int i = 0; i < len; i++) {
             map.put(intervals[i].start, i);
