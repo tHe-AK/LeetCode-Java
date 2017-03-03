@@ -1,22 +1,18 @@
 public class Solution {
     public List<Integer> findAnagrams(String s, String p) {
-        if (s == null || p == null || p.length() == 0) {
-            throw new IllegalArgumentException();
-        }
+        int[] rec = new int[256];
         
-        int[] rec = new int[26];
-        
-        for (char c : p.toCharArray()) {
-            rec[c - 'a']++;
+        for (int i = 0; i < p.length(); i++) {
+            rec[p.charAt(i)]++;
         }
     
         int start = 0;
         int end = 0;
         int count = p.length();
-        List<Integer> result = new ArrayList<Integer>();
+        List<Integer> result = new ArrayList<>();
         
         while (end < s.length()) {
-            if (rec[s.charAt(end++) - 'a']-- > 0) {
+            if (rec[s.charAt(end++)]-- > 0) {
                 count--;
             }
             
@@ -25,7 +21,7 @@ public class Solution {
                     result.add(start);
                 }
             
-                if (rec[s.charAt(start++) - 'a']++ >= 0) {
+                if (rec[s.charAt(start++)]++ >= 0) {
                     count++;
                 }
             }
