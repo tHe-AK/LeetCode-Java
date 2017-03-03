@@ -13,15 +13,15 @@ public class Solution {
             return 0;
         }
         
-        return helper(root, sum) + pathSum(root.left, sum) + pathSum(root.right, sum);
+        return traverse(root, sum) + pathSum(root.left, sum) + pathSum(root.right, sum);
     }
     
-    private int helper(TreeNode root, int sum) {
+    private int traverse(TreeNode root, int sum) {
         if (root == null) {
             return 0;
         }
         
-        return (root.val == sum ? 1 : 0) + helper(root.left, sum - root.val) + helper(root.right, sum - root.val);
+        return (root.val == sum ? 1 : 0) + traverse(root.left, sum - root.val) + traverse(root.right, sum - root.val);
     }
 }
 
@@ -36,28 +36,23 @@ public class Solution {
  */
 public class Solution {
     public int pathSum(TreeNode root, int sum) {
-        if (root == null) {
-            return 0;
-        }
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(0, 1);
         
-        Map<Integer, Integer> rec = new HashMap<Integer, Integer>();
-        rec.put(0, 1);
-        
-        return helper(root, sum, 0, rec);
+        return traverse(root, sum, 0, map);
     }
     
-    private int helper(TreeNode root, int sum, int cur, Map<Integer, Integer> rec) {
+    private int traverse(TreeNode root, int sum, int curr, Map<Integer, Integer> map) {
         if (root == null) {
             return 0;
         }
         
-        cur += root.val;
-        int count = rec.getOrDefault(cur - sum, 0);
-        rec.put(cur, rec.getOrDefault(cur, 0) + 1);
+        curr += root.val;
+        int count = map.getOrDefault(curr - sum, 0);
         
-        count += helper(root.left, sum, cur, rec) + helper(root.right, sum, cur, rec);
-        
-        rec.put(cur, rec.get(cur) - 1);
+        map.put(curr, map.getOrDefault(curr, 0) + 1);
+        count += traverse(root.left, sum, curr, map) + traverse(root.right, sum, curr, map);
+        map.put(curr, map.get(curr) - 1);
         
         return count;
     }
