@@ -1,8 +1,8 @@
 class ListNode {
-    int key;
-    int value;
-    ListNode pre;
-    ListNode next;
+    public int key;
+    public int value;
+    public ListNode pre;
+    public ListNode next;
     
     ListNode(int key, int value) {
         this.key = key;
