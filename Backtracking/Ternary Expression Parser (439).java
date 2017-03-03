@@ -1,35 +1,31 @@
 public class Solution {
     public String parseTernary(String expression) {
-        if (expression == null || expression.length() < 1) {
-            throw new IllegalArgumentException();
-        }
-
-        return helper(expression, new int[1]);
+        return parseTernary(expression, new int[1]);
     }
 
-    private String helper(String expression, int[] start) {
-        String pre = "";
+    private String parseTernary(String expression, int[] start) {
+        String str = "";
 
         while (start[0] < expression.length()) {
-            char c = expression.charAt(start[0]++);
+            char ch = expression.charAt(start[0]++);
 
-            if (c == '?') {
-                if (pre.equals("T")) {
-                    String result = helper(expression, start);
-                    helper(expression, start);
+            if (ch == '?') {
+                if (str.equals("T")) {
+                    String result = parseTernary(expression, start);
+                    parseTernary(expression, start);
                     return result;
                 } else {
-                    helper(expression, start);
-                    return helper(expression, start);
+                    parseTernary(expression, start);
+                    return parseTernary(expression, start);
                 }
-            } else if (c == ':') {
-                return pre;
+            } else if (ch == ':') {
+                return str;
             } else {
-                pre += c;
+                str += ch;
             }
         }
 
-        return pre;
+        return str;
     }
 }
 
