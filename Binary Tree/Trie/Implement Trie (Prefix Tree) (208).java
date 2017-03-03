@@ -1,9 +1,7 @@
 class TrieNode {
     // R links to node children
     private TrieNode[] links;
-
     private final int R = 26;
-
     private boolean isEnd;
 
     public TrieNode() {
