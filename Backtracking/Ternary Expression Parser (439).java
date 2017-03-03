@@ -31,30 +31,24 @@ public class Solution {
 
 public class Solution {
     public String parseTernary(String expression) {
-        if (expression == null || expression.length() < 1) {
-            throw new IllegalArgumentException();
-        }
-
         Stack<Character> stack = new Stack<Character>();
         int i = expression.length() - 1;
         
         while (i >= 0) {
-            char c = expression.charAt(i--);
+            char ch = expression.charAt(i--);
             
             if (!stack.empty() && stack.peek() == '?') {
                 stack.pop();
                 
-                if (c == 'T') {
+                if (ch == 'T') {
                     char left = stack.pop();
-                    stack.pop();
                     stack.pop();
                     stack.push(left);
                 } else {
                     stack.pop();
-                    stack.pop();
                 }
-            } else {
-                stack.push(c);
+            } else if (ch != ':') {
+                stack.push(ch);
             }
         }
         
