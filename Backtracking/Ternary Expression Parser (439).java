@@ -1,5 +1,32 @@
 public class Solution {
     public String parseTernary(String expression) {
+        int len = expression.length();
+        
+        if (len <= 1) {
+            return expression;
+        }
+        
+        int count = 0;
+        int idx = 2;
+        
+        while (idx < len) {
+            char ch = expression.charAt(idx++);
+            
+            if (ch == '?') {
+                count++;
+            } else if (ch == ':') {
+                if (count-- == 0) {
+                    break;
+                }
+            }
+        }
+        
+        return expression.charAt(0) == 'T' ? parseTernary(expression.substring(2, idx - 1)) : parseTernary(expression.substring(idx, len));
+    }
+}
+
+public class Solution {
+    public String parseTernary(String expression) {
         return parseTernary(expression, new int[1]);
     }
 
