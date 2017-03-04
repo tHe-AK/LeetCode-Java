@@ -1,14 +1,10 @@
 public class Solution {
     public int findKthNumber(int n, int k) {
-        if (k < 1 || n < k || n > Math.pow(10, 9)) {
-            throw new IllegalArgumentException();
-        }
-        
-        long cur = 1;
+        long curr = 1;
         
         while (k > 1) {
-            long start = cur;
-            long end = cur + 1;
+            long start = curr;
+            long end = curr + 1;
             long count = 0;
             
             while (start <= n) {
@@ -19,13 +15,13 @@ public class Solution {
             
             if (k > count) {
                 k -= count;
-                cur++;
+                curr++;
             } else {
                 k--;
-                cur *= 10;
+                curr *= 10;
             }
         }
         
-        return (int) cur;
+        return (int) curr;
     }
 }
