@@ -86,7 +86,7 @@ public class Solution {
     }
     
     private int deleteHelper(TreeNode p) {
-        if (p.right != null) {
+        while (p.right != null) {
             p = p.right;
         }
         
