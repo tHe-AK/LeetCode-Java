@@ -84,22 +84,19 @@ public class Codec {
 
     // Decodes your encoded data to tree.
     public TreeNode deserialize(String data) {
-        String[] list = data.split(" ");
-        int[] idx = { 0 };
-        
-        return deserialize(list, idx);
+        return deserialize(Arrays.asList(data.split(" ")).iterator());
     }
     
-    private TreeNode deserialize(String[] list, int[] idx) {
-        String str = list[idx[0]++];
+    private TreeNode deserialize(Iterator<String> it) {
+        String str = it.next();
         
         if (str.equals("#")) {
             return null;
         }
         
         TreeNode root = new TreeNode(Integer.parseInt(str));
-        root.left = deserialize(list, idx);
-        root.right = deserialize(list, idx);
+        root.left = deserialize(it);
+        root.right = deserialize(it);
         
         return root;
     }
