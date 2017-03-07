@@ -17,11 +17,11 @@ public class AllOne {
 
     /** Initialize your data structure here. */
     public AllOne() {
-        head = new ListNode(0, new HashSet<String>());
-        tail = new ListNode(0, new HashSet<String>());
+        head = new ListNode(0, new HashSet<>());
+        tail = new ListNode(0, new HashSet<>());
         head.next = tail;
         tail.pre = head;
-        keyMap = new HashMap<String, ListNode>();
+        keyMap = new HashMap<>();
     }
     
     /** Inserts a new key <Key> with value 1. Or increments an existing key by 1. */
