@@ -12,7 +12,7 @@ public class Solution {
         			sb.append(str);
     			}
     			
-    			if (sb.toString().equals(s)) {
+    			if (sb.toString().equals(str)) {
     			    return true;
     			}
     		}
