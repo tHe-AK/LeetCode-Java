@@ -37,6 +37,10 @@ public class LRUCache {
     }
     
     public void put(int key, int value) {
+        if (capacity == 0) {
+            return;
+        }
+        
         if (rec.containsKey(key)) {
             ListNode curr = rec.get(key);
             curr.value = value;
