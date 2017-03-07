@@ -28,11 +28,11 @@ public class AllOne {
     public void inc(String key) {
         if (keyMap.containsKey(key)) {
             ListNode curr = keyMap.get(key);
-            insertNext(curr, key, curr.val + 1);
+            insertNext(curr, key);
             keyMap.put(key, curr.next);
             remove(curr, key);
         } else {
-            insertNext(head, key, 1);
+            insertNext(head, key);
             keyMap.put(key, head.next);
         }
     }
@@ -43,7 +43,7 @@ public class AllOne {
             ListNode curr = keyMap.get(key);
             
             if (curr.val > 1) {
-                insertPre(curr, key, curr.val - 1);
+                insertPre(curr, key);
                 keyMap.put(key, curr.pre);
             } else {
                 keyMap.remove(key);
@@ -63,7 +63,8 @@ public class AllOne {
         return head.next == tail ? "" : head.next.keySet.iterator().next();
     }
 
-    private void insertPre(ListNode curr, String key, int val) {
+    private void insertPre(ListNode curr, String key) {
+        int val = curr.val - 1;
         ListNode pre = curr.pre;
         
         if (pre.val == val) {
@@ -73,7 +74,8 @@ public class AllOne {
         }
     }
     
-    private void insertNext(ListNode curr, String key, int val) {
+    private void insertNext(ListNode curr, String key) {
+        int val = curr.val + 1;
         ListNode next = curr.next;
         
         if (next.val == val) {
