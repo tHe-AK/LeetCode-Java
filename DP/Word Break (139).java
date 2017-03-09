@@ -1,7 +1,12 @@
 public class Solution {
     public boolean wordBreak(String s, List<String> wordDict) {
-        Set<String> set = new HashSet(wordDict);
         int len = s.length();
+        
+        if (len == 0) {
+            return false;
+        }
+        
+        Set<String> set = new HashSet(wordDict);
         boolean[] dp = new boolean[len + 1];
         dp[0] = true;
         
