@@ -9,7 +9,7 @@ public class Solution {
                 String str = s.substring(i, j + 1);
                 dp[i][j] = str;
                 
-                if (j - i >= 4) {
+                if (l >= 4) {
                     for (int k = i; k < j; k++) {
                         if ((dp[i][k] + dp[k + 1][j]).length() < dp[i][j].length()) {
                             dp[i][j] = dp[i][k] + dp[k + 1][j];
