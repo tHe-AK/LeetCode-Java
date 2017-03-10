@@ -4,7 +4,7 @@ public class MedianFinder {
     
     /** initialize your data structure here. */
     public MedianFinder() {
-        max = new PriorityQueue<Integer>((a, b) -> b - a);
+        max = new PriorityQueue<Integer>((a, b) -> b.compareTo(a));
         min = new PriorityQueue<Integer>();
     }
     
@@ -18,7 +18,7 @@ public class MedianFinder {
     }
     
     public double findMedian() {
-        return max.size() == min.size() ? (max.peek() + min.peek()) / 2.0 : max.peek();
+        return max.size() == min.size() ? ((double) max.peek() + min.peek()) / 2 : max.peek();
     }
 }
 
