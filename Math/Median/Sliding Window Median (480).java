@@ -1,3 +1,59 @@
+public class Solution {
+    public double[] medianSlidingWindow(int[] nums, int k) {
+        Queue<Integer> max = new PriorityQueue<Integer>((a, b) -> b.compareTo(a));
+        Queue<Integer> min = new PriorityQueue<Integer>();
+        
+        int n = nums.length - k + 1;
+        double[] result = new double[n];
+        
+        for (int i = 0; i < nums.length; i++) {
+            addNum(nums[i], max, min);
+            int idx = i - k + 1;
+            
+            if (idx >= 0) {
+                result[idx] = findMedian(max, min);
+                removeNum(nums[idx], max, min);
+            }
+        }
+        
+        return result;
+    }
+    
+    private void addNum(int num, Queue<Integer> max, Queue<Integer> min) {
+        if (max.isEmpty() || num <= max.peek()) {
+            max.offer(num);
+        } else {
+            min.offer(num);
+        }
+        
+        shift(max, min);
+    }
+    
+    private void removeNum(int num, Queue<Integer> max, Queue<Integer> min) {
+        if (num <= max.peek()) {
+            max.remove(num);
+        } else {
+            min.remove(num);
+        }
+        
+        shift(max, min);
+    }
+    
+    private double findMedian(Queue<Integer> max, Queue<Integer> min) {
+        return max.size() == min.size() ? ((double) max.peek() + min.peek()) / 2 : max.peek();
+    }
+    
+    private void shift(Queue<Integer> max, Queue<Integer> min) {
+        if (max.size() > min.size() + 1) {
+            min.offer(max.poll());
+        } 
+        
+        if (max.size() < min.size()) {
+            max.offer(min.poll());
+        }
+    }
+}
+
 class Node { 
     int id;
     int count;
