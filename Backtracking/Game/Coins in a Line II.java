@@ -4,10 +4,6 @@ public class Solution {
      * @return: a boolean which equals to true if the first player will win
      */
     public boolean firstWillWin(int[] values) {
-        if (values == null || values.length < 0) {
-            throw new IllegalArgumentException();
-        }
-        
         int n = values.length;
         
         if (n == 0) {
