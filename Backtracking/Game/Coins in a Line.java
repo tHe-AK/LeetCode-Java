@@ -4,10 +4,6 @@ public class Solution {
      * @return: a boolean which equals to true if the first player will win
      */
     public boolean firstWillWin(int n) {
-        if (n < 0) {
-            throw new IllegalArgumentException();
-        }
-        
         if (n == 0) {
             return false;
         }
@@ -34,10 +30,6 @@ public class Solution {
      * @return: a boolean which equals to true if the first player will win
      */
     public boolean firstWillWin(int n) {
-        if (n < 0) {
-            throw new IllegalArgumentException();
-        }
-        
         return n % 3 != 0;
     }
 }
