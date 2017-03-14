@@ -9,20 +9,13 @@
  */
 public class Solution {
     public List<Interval> merge(List<Interval> intervals) {
-        List<Interval> result = new ArrayList<>();
-        
         if (intervals.size() == 0) {
-            return result;
+            return intervals;
         }
         
-        Collections.sort(intervals, new Comparator<Interval>() {
-            @Override
-            public int compare(Interval i1, Interval i2) {
-                return i1.start - i2.start;
-            }
-        });
-        
+        Collections.sort(intervals, (a, b) -> Integer.compare(a.start, b.start));
         Interval pre = intervals.get(0);
+        List<Interval> result = new ArrayList<>();
         
         for (int i = 1; i < intervals.size(); i++) {
             Interval curr = intervals.get(i);
