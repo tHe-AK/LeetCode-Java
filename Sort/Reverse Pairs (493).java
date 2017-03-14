@@ -56,3 +56,47 @@ public class Solution {
         }
     }
 }
+
+public class Solution {
+    public int reversePairs(int[] nums) {
+        int[] count = new int[1];
+
+        mergeSort(nums, 0, nums.length - 1, count);
+        
+        return count[0];
+    }
+    
+    private int[] mergeSort(int[] nums, int start, int end, int[] count) {
+        if (start > end) {
+            return new int[0];
+        } else if (start == end) {
+            return new int[] { nums[start] };
+        } else {
+            int mid = start + (end - start) / 2;
+            int m = mid - start + 1;
+            int n = end - mid;
+            
+            int[] left = mergeSort(nums, start, mid, count);
+            int[] right = mergeSort(nums, mid + 1, end, count);
+            int[] sorted = new int[m + n];
+
+            for (int i = 0, j = 0; i < m; i++) {
+                while (j < n && left[i] > 2L * right[j]) {
+                    j++;
+                }
+                
+                count[0] += j;
+            }
+            
+            for (int i = 0, j = 0, k = 0; k < m + n; k++) {
+                if (i == m || (j < n && left[i] > right[j])) {
+                    sorted[k] = right[j++];
+                } else {
+                    sorted[k] = left[i++];
+                }
+            }
+            
+            return sorted;
+        }
+    }
+}
