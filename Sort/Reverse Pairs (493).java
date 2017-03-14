@@ -1,3 +1,35 @@
+public class Solution {
+    public int reversePairs(int[] nums) {
+        int len = nums.length;
+        int result = 0;
+        List<Integer> sorted = new ArrayList<>();
+        
+        for (int i = len - 1; i >= 0; i--) {
+            result += binarySearch(sorted, nums[i] / 2.0);
+            sorted.add(binarySearch(sorted, nums[i]), nums[i]);
+        }
+        
+        return result;
+    }
+    
+    private int binarySearch(List<Integer> nums, double num) {
+        int low = 0;
+        int high = nums.size() - 1;
+        
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            
+            if (nums.get(mid) >= num) {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        
+        return low;
+    }
+}
+
 class TreeNode {
     public int val;
     public int same;
