@@ -1,12 +1,12 @@
 public class Solution {
     public String findShortestWay(int[][] maze, int[] ball, int[] hole) {
-        int[] min = new int[1];
+        String[] dir = { "u", "d", "l", "r" };
+        int[][] delta = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
+	int[] min = new int[1];
         min[0] = Integer.MAX_VALUE;
         String[] result = new String[1];
         int[][] rec = new int[maze.length][maze[0].length];
-        String[] dir = { "u", "d", "l", "r" };
-        int[][] delta = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
-        
+
         for (int i = 0; i < rec.length; i++) {
             Arrays.fill(rec[i], Integer.MAX_VALUE);
         }
