@@ -43,7 +43,6 @@ public class Solution {
                 }
                 
                 rec[x][y] = Math.min(rec[x][y], step);
-
             }
             
             if (step > count) {
