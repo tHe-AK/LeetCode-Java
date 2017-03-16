@@ -3,20 +3,20 @@ public class Solution {
         int[] min = new int[1];
         min[0] = Integer.MAX_VALUE;
         String[] result = new String[1];
+        int[][] rec = new int[maze.length][maze[0].length];
         String[] dir = { "u", "d", "l", "r" };
         int[][] delta = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
-        int[][] rec = new int[maze.length][maze[0].length];
         
         for (int i = 0; i < rec.length; i++) {
             Arrays.fill(rec[i], Integer.MAX_VALUE);
         }
 		
-        dfs(maze, hole, ball[0], ball[1], 0, min, "", result, dir, delta, rec);
+        dfs(maze, hole, ball[0], ball[1], 0, min, "", result, rec, dir, delta);
         
         return result[0] == null ? "impossible" : result[0];
     }
     
-    private void dfs(int[][] maze, int[] hole, int i, int j, int count, int[] min, String curr, String[] result, String[] dir, int[][] delta, int[][] rec) {
+    private void dfs(int[][] maze, int[] hole, int i, int j, int count, int[] min, String curr, String[] result, int[][] rec, String[] dir, int[][] delta) {
         if (count > min[0] || count > rec[i][j]) {
             return;
         }
@@ -46,7 +46,7 @@ public class Solution {
             }
             
             if (step > count) {
-                dfs(maze, hole, x, y, step, min, path, result, dir, delta, rec);
+                dfs(maze, hole, x, y, step, min, path, result, rec, dir, delta);
             }
         }
     }
