@@ -14,20 +14,21 @@ public class Solution {
             int[] peek = queue.poll();
             
             for (int[] diff : delta) {
-                int[] next = Arrays.copyOf(peek, peek.length);
-                
-                while (isValid(maze, next, diff)) {
-                    next[0] += diff[0];
-                    next[1] += diff[1];
+                int i = peek[0];
+                int j = peek[1];
+
+                while (isValid(maze, i, j, diff)) {
+                    i += diff[0];
+                    j += diff[1];
                 }
                 
-                if (next[0] == destination[0] && next[1] == destination[1]) {
+                if (i == destination[0] && j == destination[1]) {
                     return true;
                 }
                 
-                if (!visited[next[0]][next[1]]) {
-                    queue.offer(next);
-                    visited[next[0]][next[1]] = true;
+                if (!visited[i][j]) {
+                    queue.offer(new int[] { i, j });
+                    visited[i][j] = true;
                 }
             }
         }
@@ -35,11 +36,11 @@ public class Solution {
         return false;
     }
     
-    private boolean isValid(int[][] maze, int[] start, int[] diff) {
-        int i = start[0] + diff[0];
-        int j = start[1] + diff[1];
+    private boolean isValid(int[][] maze, int i, int j, int[] diff) {
+        int x = i + diff[0];
+        int y = j + diff[1];
         
-        return i >= 0 && i < maze.length && j >= 0 && j < maze[0].length && maze[i][j] == 0;
+        return x >= 0 && x < maze.length && y >= 0 && y < maze[0].length && maze[x][y] == 0;
     }
 }
 
@@ -48,13 +49,10 @@ public class Solution {
         boolean[][] visited = new boolean[maze.length][maze[0].length];
         int[][] delta = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
 		
-        return dfs(maze, start, destination, visited, delta);
+        return dfs(maze, destination, start[0], start[1], visited, delta);
     }
     
-    private boolean dfs(int[][] maze, int[] start, int[] destination, boolean[][] visited, int[][] delta) {
-        int i = start[0];
-        int j = start[1];
-        
+    private boolean dfs(int[][] maze, int[] destination, int i, int j, boolean[][] visited, int[][] delta) {
         if (visited[i][j]) {
             return false;
         }
@@ -66,14 +64,15 @@ public class Solution {
         visited[i][j] = true;
         
         for (int[] diff : delta) {
-            int[] next = Arrays.copyOf(start, start.length);
+            int x = i;
+            int y = j;
             
-            while (isValid(maze, next, diff)) {
-                next[0] += diff[0];
-                next[1] += diff[1];
+            while (isValid(maze, x, y, diff)) {
+                x += diff[0];
+                y += diff[1];
             }
             
-            if (dfs(maze, next, destination, visited, delta)) {
+            if (dfs(maze, destination, x, y, visited, delta)) {
                 return true;
             }
         }
@@ -81,10 +80,10 @@ public class Solution {
         return false;
     }
     
-    private boolean isValid(int[][] maze, int[] start, int[] diff) {
-        int i = start[0] + diff[0];
-        int j = start[1] + diff[1];
+    private boolean isValid(int[][] maze, int i, int j, int[] diff) {
+        int x = i + diff[0];
+        int y = j + diff[1];
         
-        return i >= 0 && i < maze.length && j >= 0 && j < maze[0].length && maze[i][j] == 0;
+        return x >= 0 && x < maze.length && y >= 0 && y < maze[0].length && maze[x][y] == 0;
     }
 }
