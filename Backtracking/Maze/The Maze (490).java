@@ -1,9 +1,5 @@
 public class Solution {
     public boolean hasPath(int[][] maze, int[] start, int[] destination) {
-        if (start[0] == destination[0] && start[1] == destination[1]) {
-            return true;
-        }
-        
         Queue<int[]> queue = new LinkedList<>();
         queue.offer(start);
         boolean[][] visited = new boolean[maze.length][maze[0].length];
