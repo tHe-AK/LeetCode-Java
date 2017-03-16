@@ -10,7 +10,8 @@ public class Solution {
         for (int i = 0; i < rec.length; i++) {
             Arrays.fill(rec[i], Integer.MAX_VALUE);
         }
-		
+	
+	rec[ball[0]][ball[1]] = 0;
         dfs(maze, hole, ball[0], ball[1], 0, min, "", result, rec, dir, delta);
         
         return result[0] == null ? "impossible" : result[0];
