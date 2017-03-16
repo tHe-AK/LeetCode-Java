@@ -1,10 +1,10 @@
 public class Solution {
     public boolean hasPath(int[][] maze, int[] start, int[] destination) {
+        int[][] delta = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
         Queue<int[]> queue = new LinkedList<>();
         queue.offer(start);
         boolean[][] visited = new boolean[maze.length][maze[0].length];
         visited[start[0]][start[1]] = true;
-        int[][] delta = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
 		
         while (!queue.isEmpty()) {
             int[] peek = queue.poll();
@@ -42,8 +42,8 @@ public class Solution {
 
 public class Solution {
     public boolean hasPath(int[][] maze, int[] start, int[] destination) {
-        boolean[][] visited = new boolean[maze.length][maze[0].length];
         int[][] delta = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
+        boolean[][] visited = new boolean[maze.length][maze[0].length];
 		
         return dfs(maze, destination, start[0], start[1], visited, delta);
     }
