@@ -109,8 +109,6 @@ public class Solution {
                         } else if (path.compareTo(result) < 0) {
                             result = path;
                         }
-                        
-                        break;
                     }
                     
                     rec[x][y] = Math.min(rec[x][y], step);
