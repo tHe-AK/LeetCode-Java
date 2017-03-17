@@ -86,7 +86,7 @@ public class Solution {
             Arrays.fill(rec[i], Integer.MAX_VALUE);
         }
 	
-	    rec[ball[0]][ball[1]] = 0;
+	rec[ball[0]][ball[1]] = 0;
         
         while (!queue.isEmpty()) {
             Point peek = queue.poll();
