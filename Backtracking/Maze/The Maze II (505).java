@@ -2,14 +2,18 @@ public class Solution {
     public int shortestDistance(int[][] maze, int[] start, int[] destination) {
         int[][] delta = { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
         int[][] rec = new int[maze.length][maze[0].length];
-
-        dfs(maze, destination, start[0], start[1], 1, rec, delta);
         
-        return rec[destination[0]][destination[1]] - 1;
+        for (int i = 0; i < rec.length; i++) {
+            Arrays.fill(rec[i], Integer.MAX_VALUE);
+        }
+        
+        dfs(maze, destination, start[0], start[1], 0, rec, delta);
+        
+        return rec[destination[0]][destination[1]] == Integer.MAX_VALUE ? -1 : rec[destination[0]][destination[1]];
     }
     
     private void dfs(int[][] maze, int[] hole, int i, int j, int count, int[][] rec, int[][] delta) {
-        if ((rec[hole[0]][hole[1]] > 0 && count >= rec[hole[0]][hole[1]]) || (rec[i][j] > 0 && count >= rec[i][j])) {
+        if (count >= rec[hole[0]][hole[1]] || count >= rec[i][j]) {
             return;
         }
         
