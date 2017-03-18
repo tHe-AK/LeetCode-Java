@@ -53,7 +53,7 @@ public class Solution {
             return false;
         }
 		
-		visited[i][j] = true;
+	visited[i][j] = true;
 
         if (i == destination[0] && j == destination[1]) {
             return true;
