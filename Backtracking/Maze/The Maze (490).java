@@ -52,13 +52,13 @@ public class Solution {
         if (visited[i][j]) {
             return false;
         }
-        
+		
+		visited[i][j] = true;
+
         if (i == destination[0] && j == destination[1]) {
             return true;
         }
-        
-        visited[i][j] = true;
-        
+		
         for (int[] diff : delta) {
             int x = i;
             int y = j;
