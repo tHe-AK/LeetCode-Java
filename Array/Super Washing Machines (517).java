@@ -16,8 +16,9 @@ public class Solution {
         
         for (int machine: machines) {
             int diff = machine - avg;
+            max = Math.max(max, diff);
             curr += diff;
-            max = Math.max(max, Math.max(diff, Math.abs(curr)));
+            max = Math.max(max, Math.abs(curr));
         }
         
         return max;
