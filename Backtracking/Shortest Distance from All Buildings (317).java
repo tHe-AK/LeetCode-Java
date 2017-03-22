@@ -4,22 +4,19 @@ public class Solution {
             return -1;
         }
         
-        int min = -1;
         int row = grid.length;
         int col = grid[0].length;
         int[][] total = new int[row][col];
         int[][] delta = new int[][] { { 0, 1 }, { 0, - 1 }, { 1, 0 }, { -1, 0 } };
-        int count = 0;
         int val = 0;
         
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
                 if (grid[i][j] == 1) {
-                    min = -1;
-                    count++;
+                    int min = -1;
+                    int dist = 0;
                     Queue<int[]> queue = new LinkedList<>();
                     queue.offer(new int[] { i, j });
-                    int dist = 0;
                     
                     while (!queue.isEmpty()) {
                         int len = queue.size();
