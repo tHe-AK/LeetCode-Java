@@ -1,44 +1,29 @@
 public class Solution {
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
         Set<String> wordSet = new HashSet<>(wordList);
-        
-        if (!wordSet.contains(endWord)) {
-            return 0;
-        }
-        
-        Set<String> set1 = new HashSet<>();
-        Set<String> set2 = new HashSet<>();
-        set1.add(beginWord);
-        set2.add(endWord);
+        Queue<String> queue = new LinkedList<>();
+        queue.offer(beginWord);
         wordSet.remove(beginWord);
-        wordSet.remove(endWord);
         int len = 1;
-
-        while (!set1.isEmpty()) {
-            Set<String> next = new HashSet<>();
+        
+        while (!queue.isEmpty()) {
+            int size = queue.size();
             len++;
             
-            for (String str : set1) {
-                List<String> neighbors = getNeighbors(str);
+            for (int i = 0; i < size; i++) {
+                String peek = queue.poll();
+                List<String> neighbors = getNeighbors(peek);
                 
                 for (String neighbor : neighbors) {
-                    if (set2.contains(neighbor)) {
-                        return len;
-                    }
-                    
                     if (wordSet.contains(neighbor)) {
-                        next.add(neighbor);
+                        if (neighbor.equals(endWord)) {
+                    	    return len;
+                    	}
+                    	
+                        queue.offer(neighbor);
+                        wordSet.remove(neighbor);
                     }
                 }
-            }
-            
-            wordSet.removeAll(next);
-            set1 = next;
-            
-            if (set1.size() > set2.size()) {
-                Set<String> temp = new HashSet<>(set1);
-                set1 = set2;
-                set2 = temp;
             }
         }
         
@@ -63,35 +48,48 @@ public class Solution {
         return neighbors;
     }
 }
-    
+
 public class Solution {
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
         Set<String> wordSet = new HashSet<>(wordList);
-        Set<String> curr = new HashSet<>();
-        curr.add(beginWord);
-        wordSet.remove(beginWord);
-        int len = 1;
         
-        while (!curr.isEmpty()) {
-            Set<String> next = new HashSet<>();
+        if (!wordSet.contains(endWord)) {
+            return 0;
+        }
+        
+        Queue<String> queue1 = new LinkedList<>();
+        Queue<String> queue2 = new LinkedList<>();
+        queue1.add(beginWord);
+        queue2.add(endWord);
+        wordSet.remove(beginWord);
+        wordSet.remove(endWord);
+        int len = 1;
+
+        while (!queue1.isEmpty()) {
+            int size = queue1.size();
             len++;
             
-            for (String str : curr) {
-                List<String> neighbors = getNeighbors(str);
+            for (int i = 0; i < size; i++) {
+                String peek = queue1.poll();
+                List<String> neighbors = getNeighbors(peek);
                 
                 for (String neighbor : neighbors) {
+                    if (queue2.contains(neighbor)) {
+                        return len;
+                    }
+                    
                     if (wordSet.contains(neighbor)) {
-                        if (neighbor.equals(endWord)) {
-                    	    return len;
-                    	}
-                    	
-                        next.add(neighbor);
+                        queue1.offer(neighbor);
+                        wordSet.remove(neighbor);
                     }
                 }
             }
             
-            wordSet.removeAll(next);
-            curr = next;
+            if (queue1.size() > queue2.size()) {
+                Queue<String> temp = new LinkedList<>(queue1);
+                queue1 = queue2;
+                queue2 = temp;
+            }
         }
         
         return 0;
