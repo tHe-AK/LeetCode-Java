@@ -13,10 +13,10 @@ public class Solution {
             for (int j = 1; j <= n; j++) {
                 char ch = p.charAt(j - 1);
                 
-                if (ch == s.charAt(i - 1) || ch == '?') {
-                    dp[i][j] = dp[i - 1][j - 1];
-                } else if (ch == '*') {
+                if (ch == '*') {
                     dp[i][j] = dp[i][j - 1] || dp[i - 1][j];
+                } else if (ch == s.charAt(i - 1) || ch == '?') {
+                    dp[i][j] = dp[i - 1][j - 1];
                 }
             }
         }
