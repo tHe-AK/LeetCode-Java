@@ -16,22 +16,20 @@ public class Solution {
                     int x = i + diff[0];
                     int y = j + diff[1];
                     
-                    if (x >= 0 && x < row && y >= 0 && y < col && (board[x][y] == 1 || board[x][y] == 2)) {
-                        count++;
+                    if (x >= 0 && x < row && y >= 0 && y < col) {
+                        count += board[x][y] & 1;
                     }
                 }
                 
-                if (board[i][j] == 0 && count == 3) {
-                    board[i][j] = 3;
-                } else if (board[i][j] == 1 && (count < 2 || count > 3)) {
-                    board[i][j] = 2;
+                if (board[i][j] == 0 && count == 3) || (board[i][j] == 1 && (count == 2 || count == 3)) {
+                    board[i][j] += 2;
                 }
             }
         }
         
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
-                board[i][j] %= 2;
+                board[i][j] >>= 1;
             }
         }
     }
