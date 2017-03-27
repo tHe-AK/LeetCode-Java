@@ -59,6 +59,6 @@ public class Solution {
     }
     
     private boolean isEqual(String s, int i, String p, int j) {
-        return p.charAt(j) == '.' || s.charAt(i) == p.charAt(j);
+        return s.charAt(i) == p.charAt(j) || p.charAt(j) == '.';
     }
 }
