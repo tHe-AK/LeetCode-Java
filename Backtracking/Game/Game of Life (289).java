@@ -6,7 +6,7 @@ public class Solution {
         
         int row = board.length;
         int col = board[0].length;
-        int[][] delta = new int[][] { { -1, -1 }, { -1, 0 }, { -1, 1 }, { 0, -1 }, { 0, 1 }, { 1, -1 }, { 1, 0 }, { 1, 1 } };
+        int[][] delta = { { -1, -1 }, { -1, 0 }, { -1, 1 }, { 0, -1 }, { 0, 1 }, { 1, -1 }, { 1, 0 }, { 1, 1 } };
 
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
