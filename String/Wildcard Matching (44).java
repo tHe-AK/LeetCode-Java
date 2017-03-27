@@ -15,7 +15,7 @@ public class Solution {
                 
                 if (ch == '*') {
                     dp[i][j] = dp[i][j - 1] || dp[i - 1][j];
-                } else if (ch == s.charAt(i - 1) || ch == '?') {
+                } else if (s.charAt(i - 1) == ch || ch == '?') {
                     dp[i][j] = dp[i - 1][j - 1];
                 }
             }
