@@ -21,7 +21,7 @@ public class Solution {
                     } else {
                         dp[i][j] = dp[i][j - 2];
                     }
-                } else if (ch == s.charAt(i - 1) || ch == '.') {
+                } else if (s.charAt(i - 1) == ch || ch == '.') {
                     dp[i][j] = dp[i - 1][j - 1];
                 }
             }
