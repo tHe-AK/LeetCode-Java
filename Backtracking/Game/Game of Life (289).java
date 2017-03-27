@@ -21,7 +21,7 @@ public class Solution {
                     }
                 }
                 
-                if (board[i][j] == 0 && count == 3) || (board[i][j] == 1 && (count == 2 || count == 3)) {
+                if ((board[i][j] == 0 && count == 3) || (board[i][j] == 1 && (count == 2 || count == 3)) {
                     board[i][j] += 2;
                 }
             }
