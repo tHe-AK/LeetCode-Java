@@ -14,7 +14,7 @@ public class FilterIterator implements Iterator<Integer> {
 
     public Integer next() {
         if (!hasNext()) {
-        	throw new NoSuchElementException();
+            throw new NoSuchElementException();
         }
         
         Integer temp = next;
