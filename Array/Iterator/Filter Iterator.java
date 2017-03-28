@@ -34,7 +34,7 @@ public class FilterIterator implements Iterator<Integer> {
 
     private boolean setNext() {
         while (iterator.hasNext()) {
-        	canRemove = false;
+            canRemove = false;
             Integer num = iterator.next();
             
             if (num % 5 == 0) {
