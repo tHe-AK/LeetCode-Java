@@ -29,6 +29,7 @@ public class FilterIterator implements Iterator<Integer> {
             throw new IllegalStateException();
         }
         
+        canRemove = false;
         iterator.remove();
     }
 
@@ -44,6 +45,8 @@ public class FilterIterator implements Iterator<Integer> {
             }
         }
         
+        next = null;
+        nextSet = false;
         return false;
     }
 }
