@@ -14,7 +14,9 @@ public class Solution {
                 
                 for (int[] diff : delta) {
                     int x = i + diff[0];
+                    //int x = (i + diff[0] + row) % row;
                     int y = j + diff[1];
+                    //int y = (j + diff[1] + col) % col;
                     
                     if (x >= 0 && x < row && y >= 0 && y < col) {
                         count += board[x][y] & 1;
@@ -34,3 +36,4 @@ public class Solution {
         }
     }
 }
+
