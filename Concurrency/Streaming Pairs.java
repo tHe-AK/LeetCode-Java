@@ -38,7 +38,7 @@ public class StreamingPair implements Runnable {
     }
     
     private void printPairs(double last) {
-        queue1.add(last);
+        queue1.offer(last);
         
         while (!queue2.isEmpty() && queue2.peek() <= last - 1) {
             queue2.poll();
