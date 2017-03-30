@@ -7,11 +7,11 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class StreamingPair implements Runnable {
-private BlockingQueue<Double> stream;
-private Queue<Double> queue1;
-private Queue<Double> queue2;
-private ReentrantLock lock;
-
+    private BlockingQueue<Double> stream;
+    private Queue<Double> queue1;
+    private Queue<Double> queue2;
+    private ReentrantLock lock;
+    
     public StreamingPair(BlockingQueue<Double> stream, Queue<Double> queue1, Queue<Double> queue2, ReentrantLock lock) {
         this.stream = stream;
         this.queue1 = queue1;
@@ -20,40 +20,40 @@ private ReentrantLock lock;
     }
 
     @Override
-public void run() {
-    while (true) {
-    try {
-    double last = stream.take();
-    lock.lock();
+    public void run() {
+        while (true) {
+            try {
+                double last = stream.take();
+                lock.lock();
+                
+                try {
+                    printPairs(last);
+                } finally {
+                    lock.unlock();
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     
-    try {
-    printPairs(last);
-    } finally {
-    lock.unlock();
-    }
-    } catch (InterruptedException e) {
-    e.printStackTrace();
-    }
-    }
-}
-
     private void printPairs(double last) {
-    queue1.add(last);
+        queue1.add(last);
         
         while (!queue2.isEmpty() && queue2.peek() <= last - 1) {
-        queue2.poll();
+            queue2.poll();
         }
                 
         for (double num : queue2) {
-        if (Math.abs(num - last) < 1) {
-        System.out.println(last + ", " + num);
-        } else {
-        break;
-        }
+            if (Math.abs(num - last) < 1) {
+                System.out.println(last + ", " + num);
+            } else {
+                break;
+            }
         }
     }
     
-public static void main(String[] args) {
+    public static void main(String[] args) {
         BlockingQueue<Double> stream1 = new ArrayBlockingQueue<>(3);
         BlockingQueue<Double> stream2 = new ArrayBlockingQueue<>(3);
         stream1.add(1.0);
