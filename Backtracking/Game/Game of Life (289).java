@@ -37,3 +37,20 @@ public class Solution {
     }
 }
 
+public class Solution {
+    public void gameOfLife(int[] board) {
+        int n = board.length;
+        
+        for (int i = 0; i < n; i++) {
+            int count = (board[(i - 1 + n) % n] & 1) + (board[(i + 1) % n] & 1);
+            
+            if ((board[i] == 0 && count == 1) || (board[i] == 1 && count != 1)) {
+                board[i] += 2;
+            }
+        }
+        
+        for (int i = 0; i < n; i++) {
+            board[i] >>= 1;
+        }
+    }
+}
