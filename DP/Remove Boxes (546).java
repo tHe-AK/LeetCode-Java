@@ -1,5 +1,35 @@
 public class Solution {
     public int removeBoxes(int[] boxes) {
+        int n = boxes.length;
+        int[][][] dp = new int[n][n][n];
+
+        return dfs(boxes, dp, 0, n - 1, 1);
+    }
+
+    private int dfs(int[] boxes, int[][][] dp, int i, int j, int k) {
+        if (i > j) {
+            return 0;
+        } else if (i == j) {
+            return k * k;
+        } else if (dp[i][j][k] > 0) {
+            return dp[i][j][k];
+        } else {
+            int temp = dfs(boxes, dp, i + 1, j, 1) + k * k;
+
+            for (int m = i + 1; m <= j; m++) {
+                if (boxes[i] == boxes[m]) {
+                    temp = Math.max(temp, dfs(boxes, dp, i + 1, m - 1, 1) + dfs(boxes, dp, m, j, k + 1));
+                }
+            }
+
+            dp[i][j][k] = temp;
+            return temp;
+        }
+    }
+}
+
+public class Solution {
+    public int removeBoxes(int[] boxes) {
         Map<String, Integer> map = new HashMap<>();
         return remove(boxes, map);
     }
