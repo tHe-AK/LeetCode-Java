@@ -29,8 +29,8 @@ public class FilterIterator implements Iterator<Integer> {
             throw new IllegalStateException();
         }
         
-        canRemove = false;
         iterator.remove();
+        canRemove = false;
     }
 
     private boolean setNext() {
