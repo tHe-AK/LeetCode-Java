@@ -35,14 +35,12 @@ public class Solution {
         while (i < s.length()) {
             if (j < p.length() && p.charAt(j) == '*') {
                 idx = i;
-                star = j;
-                j++;
+                star = j++;
             } else if (j < p.length() && (s.charAt(i) == p.charAt(j) || p.charAt(j) == '?')) {
                 i++;
                 j++;
             } else if (star != -1) {
-                idx++;
-                i = idx;
+                i = ++idx;
                 j = star + 1;
             } else {
                 return false;
