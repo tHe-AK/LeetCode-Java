@@ -3,28 +3,32 @@ public class Solution {
         int n = boxes.length;
         int[][][] dp = new int[n][n][n];
 
-        return dfs(boxes, dp, 0, n - 1, 1);
+        return dfs(boxes, dp, 0, n - 1, 0);
     }
 
-    private int dfs(int[] boxes, int[][][] dp, int i, int j, int k) {
-        if (i > j) {
+    public int dfs(int[] boxes, int[][][] dp, int l, int r, int k) {
+        if (l > r) {
             return 0;
-        } else if (i == j) {
-            return k * k;
-        } else if (dp[i][j][k] > 0) {
-            return dp[i][j][k];
-        } else {
-            int temp = dfs(boxes, dp, i + 1, j, 1) + k * k;
-
-            for (int m = i + 1; m <= j; m++) {
-                if (boxes[i] == boxes[m]) {
-                    temp = Math.max(temp, dfs(boxes, dp, i + 1, m - 1, 1) + dfs(boxes, dp, m, j, k + 1));
-                }
-            }
-
-            dp[i][j][k] = temp;
-            return temp;
         }
+        
+        if (dp[l][r][k] > 0) {
+            return dp[l][r][k];
+        }
+        
+        while (l < r && boxes[r] == boxes[r - 1]) {
+            r--;
+            k++;
+        }
+        
+        dp[l][r][k] = dfs(boxes, dp, l, r - 1, 0) + (k + 1) * (k + 1);
+        
+        for (int i = l; i < r; i++) {
+            if (boxes[i] == boxes[r]) {
+                dp[l][r][k] = Math.max(dp[l][r][k], dfs(boxes, dp, l, i, k + 1) + dfs(boxes, dp, i + 1, r - 1, 0));
+            }
+        }
+        
+        return dp[l][r][k];
     }
 }
 
