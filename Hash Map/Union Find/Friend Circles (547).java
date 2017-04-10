@@ -1,6 +1,51 @@
 public class Solution {
     public int findCircleNum(int[][] M) {
         int len = M.length;
+        int[] count = new int[1];
+        count[0] = len;
+        int[] idx = new int[len];
+        
+        for (int i = 0; i < len; i++) {
+            idx[i] = i;
+        }
+        
+        for (int i = 0; i < len; i++) {
+            for (int j = i + 1; j < len; j++) {
+                if (M[i][j] == 1) {
+                    union(idx, i, j, count);
+                }
+            }
+        }
+        
+        return count[0];
+    }
+
+    private void union(int[] idx, int i, int j, int[] count) {
+        int parent1 = find(idx, i);
+        int parent2 = find(idx, j);
+        
+        if (parent1 != parent2) {
+            idx[parent1] = parent2;
+            count[0]--;
+        }
+    }
+    
+        
+    private int find(int[] idx, int i) {
+        int parent = i;
+        
+        while (idx[parent] != parent) {
+            parent = idx[parent];
+        }
+        
+        idx[i] = parent;
+        return parent;
+    }
+}
+
+public class Solution {
+    public int findCircleNum(int[][] M) {
+        int len = M.length;
         boolean[] visited = new boolean[len];
         int count = 0;
         
