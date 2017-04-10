@@ -14,7 +14,7 @@ public class Solution {
         return count;
     }
     
-    public void dfs(int[][] M, int i, boolean[] visited) {
+    private void dfs(int[][] M, int i, boolean[] visited) {
         visited[i] = true;
         
         for (int j = 0; j < M.length; j++) {
