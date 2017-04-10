@@ -22,10 +22,10 @@ public class Solution {
         
         int inr = 1;
         int dcr = 1;
+        int[] left = postorder(root.left, max);
+        int[] right = postorder(root.right, max);
         
         if (root.left != null) {
-            int[] left = postorder(root.left, max);
-
             if (root.val == root.left.val + 1) {
                 dcr = left[1] + 1;
             } else if (root.val == root.left.val - 1) {
@@ -34,8 +34,6 @@ public class Solution {
         }
         
         if (root.right != null) {
-            int[] right = postorder(root.right, max);
-        
             if (root.val == root.right.val + 1) {
                 dcr = Math.max(dcr, right[1] + 1);
             } else if (root.val == root.right.val - 1) {
