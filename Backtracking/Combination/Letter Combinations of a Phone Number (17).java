@@ -34,12 +34,12 @@ public class Solution {
         List<String> result = new ArrayList<String>();
         String[] rec = { " ", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz" };
         
-        helper(digits, rec, 0, "", result);
+        dfs(digits, rec, 0, "", result);
         
         return result;
     }
     
-    private void helper(String digits, String[] rec, int start, String curr, List<String> result) {
+    private void dfs(String digits, String[] rec, int start, String curr, List<String> result) {
         if (start == digits.length()) {
             result.add(curr);
             return;
@@ -48,7 +48,7 @@ public class Solution {
         String str = rec[Character.getNumericValue(digits.charAt(start))];
         
         for (int i = 0; i < str.length(); i++) {
-            helper(digits, rec, start + 1, curr + str.charAt(i), result);
+            dfs(digits, rec, start + 1, curr + str.charAt(i), result);
         }
     }
 }
