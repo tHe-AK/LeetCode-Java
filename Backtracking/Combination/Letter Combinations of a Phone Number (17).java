@@ -6,7 +6,7 @@ public class Solution {
         
         List<String> result = new LinkedList<String>();
         result.add("");
-        String[] rec = new String[] { " ", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz" };
+        String[] rec = { " ", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz" };
         
         for (int i = 0; i < digits.length(); i++) {
             String str = rec[Character.getNumericValue(digits.charAt(i))];
@@ -32,23 +32,23 @@ public class Solution {
         }
         
         List<String> result = new ArrayList<String>();
-        String[] rec = new String[] { " ", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz" };
+        String[] rec = { " ", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz" };
         
         helper(digits, rec, 0, "", result);
         
         return result;
     }
     
-    private void helper(String digits, String[] rec, int start, String pre, List<String> result) {
+    private void helper(String digits, String[] rec, int start, String curr, List<String> result) {
         if (start == digits.length()) {
-            result.add(pre);
+            result.add(curr);
             return;
         }
         
         String str = rec[Character.getNumericValue(digits.charAt(start))];
         
         for (int i = 0; i < str.length(); i++) {
-            helper(digits, rec, start + 1, pre + str.charAt(i), result);
+            helper(digits, rec, start + 1, curr + str.charAt(i), result);
         }
     }
 }
