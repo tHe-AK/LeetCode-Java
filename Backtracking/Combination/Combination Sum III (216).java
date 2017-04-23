@@ -23,3 +23,37 @@ public class Solution {
         }
     }
 }
+
+public class Solution {
+    public List<List<Integer>> combinationSum3(int k, int n) {
+        List<List<Integer>>[] rec = new List[n + 1];
+        
+        for (int i = 0; i < rec.length; i++) {
+            rec[i] = new ArrayList<>();
+        }
+        
+        rec[0].add(new ArrayList<>());
+        
+        for (int i = 1; i <= 9; i++) {
+            for (int j = rec.length - 1; j >= i; j--) {
+                for (List<Integer> list : rec[j - i]) {
+                    if (list.size() < k) {
+                        List<Integer> next = new ArrayList<>(list);
+                        next.add(i);
+                        rec[j].add(next);
+                    }
+                }
+            }
+        }
+        
+        List<List<Integer>> result = new ArrayList<>();
+        
+        for (List<Integer> list : rec[n]) {
+            if (list.size() == k) {
+                result.add(list);
+            }
+        }
+        
+        return result;
+    }
+}
