@@ -4,28 +4,28 @@ public class Solution {
         int high = height.length - 1;
         int leftMax = 0;
         int rightMax = 0;
-        int result = 0;
+        int sum = 0;
         
         while (low <= high) {
             if (leftMax <= rightMax) {
-                if (leftMax > height[low]) {
-                    result += leftMax - height[low];
+                int curr = height[low++];
+                
+                if (leftMax > curr) {
+                    sum += leftMax - curr;
                 } else {
-                    leftMax = height[low];
+                    leftMax = curr;
                 }
-
-                low++;
             } else {
-                if (rightMax > height[high]) {
-                    result += rightMax - height[high];
+                int curr = height[high--];
+                
+                if (rightMax > curr) {
+                    sum += rightMax - curr;
                 } else {
-                    rightMax = height[high];
+                    rightMax = curr;
                 }
-
-                high--;
             }
         }
         
-        return result;
+        return sum;
     }
 }
