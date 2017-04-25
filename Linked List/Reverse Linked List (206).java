@@ -9,7 +9,7 @@
 public class Solution {
     public ListNode reverseList(ListNode head) {
         ListNode pre = null;
-
+        
         while (head != null) {
             ListNode next = head.next;
             head.next = pre;
@@ -35,11 +35,10 @@ public class Solution {
             return head;
         }
         
-        ListNode node = reverseList(head.next);
-        
+        ListNode newHead = reverseList(head.next);
         head.next.next = head;
         head.next = null;
         
-        return node;
+        return newHead;
     }
 }
