@@ -10,9 +10,11 @@ public class Solution {
         int j = 0;
         
         while (i >= 0 && j < col) {
-            if (matrix[i][j] == target) {
+            int val = matrix[i][j];
+            
+            if (val == target) {
                 return true;
-            } else if (matrix[i][j] < target) {
+            } else if (val < target) {
                 j++;
             } else {
                 i--;
