@@ -24,7 +24,7 @@ public class Solution {
         int idx = start + 1;
         
         for (int i = idx; i <= end; i++) {
-            if (nums[i] >= pivot) {
+            if (nums[i] > pivot) {
                 int temp = nums[idx];
                 nums[idx] = nums[i];
                 nums[i] = temp;
