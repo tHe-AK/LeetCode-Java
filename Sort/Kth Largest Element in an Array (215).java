@@ -16,31 +16,32 @@ public class Solution {
 
 public class Solution {
     public int findKthLargest(int[] nums, int k) {
-        return findKthLargest(nums, k, 0, nums.length - 1);
+        return findKthLargest(nums, 0, nums.length - 1, k);
     }
     
-    private int findKthLargest(int[] nums, int k, int low, int high) {
-        int pivot = nums[low];
-        int idx = low + 1;
+    private int findKthLargest(int[] nums, int start, int end, int k) {
+        int pivot = nums[start];
+        int idx = start + 1;
         
-        for (int i = idx; i <= high; i++) {
-            if (nums[i] > pivot) {
-                int temp = nums[i];
-                nums[i] = nums[idx];
-                nums[idx++] = temp;
+        for (int i = idx; i <= end; i++) {
+            if (nums[i] >= pivot) {
+                int temp = nums[idx];
+                nums[idx] = nums[i];
+                nums[i] = temp;
+                idx++;
             }
         }
-  
-        nums[low] = nums[--idx];
+        
+        nums[start] = nums[--idx];
         nums[idx] = pivot;
-        int count = idx - low + 1;
-
+        int count = idx - start + 1;
+        
         if (count == k) {
-            return nums[idx];
+            return pivot;
         } else if (count < k) {
-            return findKthLargest(nums, k - count, idx + 1, high);
+            return findKthLargest(nums, idx + 1, end, k - count);
         } else {
-            return findKthLargest(nums, k, low, idx - 1);
+            return findKthLargest(nums, start, idx - 1, k);
         }
     }
 }
