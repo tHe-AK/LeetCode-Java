@@ -9,44 +9,38 @@
  */
 public class Solution {
     public int maxPoints(Point[] points) {
-        int max = 0;
+        int len = points.length;
+        int res = 0;
         
-        for (int i = 0; i < points.length; i++) {
-            Map<Integer, Map<Integer, Integer>> rec = new HashMap<>();
-            int duplicate = 1;
-            int curr = 0;
+        for (int i = 0; i < len; i++) {
+            int same = 1;
+            int max = 0;
+            Map<String, Integer> map = new HashMap<>();
             
-            for (int j = i + 1; j < points.length; j++) {
+            for (int j = i + 1; j < len; j++) {
+                if (points[j].x == points[i].x && points[j].y == points[i].y) {
+                    same++;
+                    continue;
+                }
+                
                 int diffX = points[j].x - points[i].x;
                 int diffY = points[j].y - points[i].y;
                 
                 if (diffX == 0 && diffY == 0) {
-                    duplicate++;
+                    same++;
                 } else {
                     int gcd = GCD(diffX, diffY);
-                    int x = diffX / gcd;
-                    int y = diffY / gcd;
-                    
-                    if (rec.containsKey(x)) {
-                        if (rec.get(x).containsKey(y)) {
-                            rec.get(x).put(y, rec.get(x).get(y) + 1);
-                        } else {
-                            rec.get(x).put(y, 1);
-                        }
-                    } else {
-                        Map<Integer, Integer> val = new HashMap<>();
-                        val.put(y, 1);
-                        rec.put(x, val);
-                    }
-                    
-                    curr = Math.max(curr, rec.get(x).get(y));
+                    String key = diffX / gcd + " " + diffY / gcd;
+                    int val = map.getOrDefault(key, 0) + 1;
+                    max = Math.max(max, val);
+                    map.put(key, val);
                 }
             }
             
-            max = Math.max(max, curr + duplicate);
+            res = Math.max(res, max + same);
         }
         
-        return max;
+        return res;
     }
     
     private int GCD(int x, int y) {
