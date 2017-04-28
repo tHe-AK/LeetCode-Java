@@ -18,11 +18,6 @@ public class Solution {
             Map<String, Integer> map = new HashMap<>();
             
             for (int j = i + 1; j < len; j++) {
-                if (points[j].x == points[i].x && points[j].y == points[i].y) {
-                    same++;
-                    continue;
-                }
-                
                 int diffX = points[j].x - points[i].x;
                 int diffY = points[j].y - points[i].y;
                 
