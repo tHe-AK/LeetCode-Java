@@ -1,36 +1,37 @@
 public class Solution {
-    public double findMedianSortedArrays(int A[], int B[]) {
-        int len = A.length + B.length;
-        
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int len = nums1.length + nums2.length;
+
         if (len % 2 == 0) {
-            return (findK(A, 0, B, 0, len / 2) + findK(A, 0, B, 0, len / 2 + 1)) / 2.0;
-        }
-        else {
-            return findK(A, 0, B, 0, len / 2 + 1);
+            return (findKth(nums1, 0, nums2, 0, len / 2) + findKth(nums1, 0, nums2, 0, len / 2 + 1)) / 2.0;
+        } else {
+            return findKth(nums1, 0, nums2, 0, len / 2 + 1);
         }
     }
     
-    private int findK(int[] A, int i, int[] B, int j, int k) {
-        if (i >= A.length) {
-            return B[j + k - 1];
+    private int findKth(int[] nums1, int i, int[] nums2, int j, int k) {
+        int len1 = nums1.length;
+        int len2 = nums2.length;
+        
+        if (i >= len1) {
+            return nums2[j + k - 1];
         }
-
-        if (j >= B.length) {
-            return A[i + k - 1];
+        
+        if (j >= len2) {
+            return nums1[i + k - 1];
         }
-
+        
         if (k == 1) {
-            return Math.min(A[i], B[j]);
+            return Math.min(nums1[i], nums2[j]);
         }
-
-        int x = i + k / 2 - 1 < A.length ? A[i + k / 2 - 1] : Integer.MAX_VALUE;
-        int y = j + k / 2 - 1 < B.length ? B[j + k / 2 - 1] : Integer.MAX_VALUE;
-
-        if (x <= y) {
-            return findK(A, i + k / 2, B, j, k - k / 2);
-        }
-        else {
-            return findK(A, i, B, j + k / 2, k - k / 2);
+        
+        int num1 = i + k / 2 - 1 < len1 ? nums1[i + k / 2 - 1] : Integer.MAX_VALUE;
+        int num2 = j + k / 2 - 1 < len2 ? nums2[j + k / 2 - 1] : Integer.MAX_VALUE;
+            
+        if (num1 <= num2) {
+            return findKth(nums1, i + k / 2, nums2, j, k - k / 2);
+        } else {
+            return findKth(nums1, i, nums2, j + k / 2, k - k / 2);
         }
     }
 }
