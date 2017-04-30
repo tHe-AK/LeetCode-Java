@@ -1,18 +1,15 @@
 public class Solution {
     public int compareVersion(String version1, String version2) {
-        String[] str1 = version1.split("\\.");
-        String[] str2 = version2.split("\\.");
-        int len1 = str1.length;
-        int len2 = str2.length;
+        String[] strs1 = version1.split("\\.");
+        String[] strs2 = version2.split("\\.");
         int i = 0;
-
-        while (i < len1 || i < len2) {
-            Integer val1 = i < len1 ? Integer.parseInt(str1[i]) : 0;
-            Integer val2 = i < len2 ? Integer.parseInt(str2[i]) : 0;
-            int compare = val1.compareTo(val2);
+        
+        while (i < strs1.length || i < strs2.length) {
+            int num1 = i < strs1.length ? Integer.parseInt(strs1[i]) : 0;
+            int num2 = i < strs2.length ? Integer.parseInt(strs2[i]) : 0;
             
-            if (compare != 0) {
-                return compare;
+            if (num1 != num2) {
+                return Integer.compare(num1, num2);
             }
             
             i++;
