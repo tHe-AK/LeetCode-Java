@@ -1,26 +1,25 @@
 public class Solution {
     public boolean isValidSudoku(char[][] board) {
-        boolean[][] row = new boolean[9][9];
-        boolean[][] col = new boolean[9][9];
-        boolean[][] sq = new boolean[9][9];
+        int N = 9;
+        boolean[][] row = new boolean[N][N];
+        boolean[][] col = new boolean[N][N];
+        boolean[][] sq = new boolean[N][N];
         
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
                 if (board[i][j] != '.') {
-                    int val = board[i][j] - '1';
+                    int num = board[i][j] - '1';
                     int k = i / 3 * 3 + j / 3;
                     
-                    if (row[i][val] || col[j][val] || sq[k][val]) {
+                    if (row[i][num] || col[j][num] || sq[k][num]) {
                         return false;
+                    } else {
+                        row[i][num] = col[j][num] = sq[k][num] = true;
                     }
-                    
-                    row[i][val] = true;
-                    col[j][val] = true;
-                    sq[k][val] = true;
                 }
             }
         }
         
-        return true; 
+        return true;
     }
 }
