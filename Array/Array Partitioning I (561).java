@@ -13,21 +13,21 @@ public class Solution {
 
 public class Solution {
     public int arrayPairSum(int[] nums) {
-        int max = 10000;
-        int[] rec = new int[max * 2 + 1];
+        int N = 10000;
+        int[] rec = new int[N * 2 + 1];
         int sum = 0;
         boolean flag = true;
         
         for (int num : nums) {
-            rec[num + max]++;
+            rec[num + N]++;
         }
         
         for (int i = 0; i < rec.length; i++) {
             if (rec[i] > 0) {
-                sum += (i - max) * (rec[i] / 2);
+                sum += (i - N) * (rec[i] / 2);
                 
                 if (rec[i] % 2 == 1) {
-                    sum += flag ? i - max : 0;
+                    sum += flag ? i - N : 0;
                     flag = !flag;
                 }
             }
