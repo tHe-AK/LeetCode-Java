@@ -1,22 +1,20 @@
 public class Solution {
     public int[] findOrder(int numCourses, int[][] prerequisites) {
-        List<List<Integer>> rec = new ArrayList<>();
+        List<Integer>[] rec = new List[numCourses];
         List<Integer> order = new ArrayList<>();
         
         for (int i = 0; i < numCourses; i++) {
-            rec.add(new ArrayList<>());
+            rec[i] = new ArrayList<>();
         }
         
         for (int[] pair : prerequisites) {
-            rec.get(pair[1]).add(pair[0]);
+            rec[pair[1]].add(pair[0]);
         }
         
         for (int i = 0; i < numCourses; i++) {
             if (!dfs(rec, i, new boolean[numCourses], order)) {
                 return new int[0];
             }
-            
-            rec.get(i).clear();
         }
         
         int[] result = new int[numCourses];
@@ -28,7 +26,7 @@ public class Solution {
         return result;
     }
     
-    private boolean dfs(List<List<Integer>> rec, int i, boolean[] visited, List<Integer> order) {
+    private boolean dfs(List<Integer>[] rec, int i, boolean[] visited, List<Integer> order) {
         if (visited[i]) {
             return false;
         }
@@ -39,7 +37,7 @@ public class Solution {
         
         visited[i] = true;
         
-        for (Integer j : rec.get(i)) {
+        for (Integer j : rec[i]) {
             if (!dfs(rec, j, visited, order)) {
                 return false;
             }
@@ -47,7 +45,6 @@ public class Solution {
         
         visited[i] = false;
         order.add(i);
-        
         return true;
     }
 }
