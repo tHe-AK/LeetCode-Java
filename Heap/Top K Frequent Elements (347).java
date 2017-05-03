@@ -23,7 +23,7 @@ public class Solution {
     	for (int i = len; i > 0; i--) {
             for (Integer num : buckets[i]) {
                 result.add(num);
-    			k--;
+                k--;
     			
                 if (k == 0) {
                     return result;
