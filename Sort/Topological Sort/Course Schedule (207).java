@@ -1,41 +1,38 @@
 public class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
-        List<List<Integer>> rec = new ArrayList<>();
+        List<Integer>[] rec = new List[numCourses];
         
         for (int i = 0; i < numCourses; i++) {
-            rec.add(new ArrayList<>());
+            rec[i] = new ArrayList<>();
         }
         
-        for (int[] pair : prerequisites) {
-            rec.get(pair[1]).add(pair[0]);
+        for (int[] pre : prerequisites) {
+            rec[pre[1]].add(pre[0]);
         }
         
         for (int i = 0; i < numCourses; i++) {
             if (!dfs(rec, i, new boolean[numCourses])) {
                 return false;
             }
-            
-            rec.get(i).clear();
         }
         
         return true;
     }
     
-    private boolean dfs(List<List<Integer>> rec, int i, boolean[] visited) {
+    private boolean dfs(List<Integer>[] rec, int i, boolean[] visited) {
         if (visited[i]) {
             return false;
         }
-
+        
         visited[i] = true;
         
-        for (Integer j : rec.get(i)) {
+        for (int j : rec[i]) {
             if (!dfs(rec, j, visited)) {
                 return false;
             }
         }
         
         visited[i] = false;
-        
         return true;
     }
 }
