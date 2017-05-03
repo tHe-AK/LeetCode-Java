@@ -26,7 +26,7 @@ public class Solution {
         
         visited[i] = true;
         
-        for (int j : rec[i]) {
+        for (Integer j : rec[i]) {
             if (!dfs(rec, j, visited)) {
                 return false;
             }
