@@ -9,27 +9,24 @@
  */
 public class Solution {
     public List<String> binaryTreePaths(TreeNode root) {
-        List<String> result = new ArrayList<String>();
-        
-        if (root != null) {
-            traverse(root, "", result);
-        }
-        
-        return result;
+        List<String> res = new ArrayList<>();
+        preorder(root, "", res);
+        return res;
     }
     
-    private void traverse(TreeNode root, String path, List<String> result) {
-        if (root.left == null && root.right == null) {
-            result.add(path + root.val);
+    private void preorder(TreeNode root, String str, List<String> res) {
+        if (root == null) {
             return;
         }
         
-        if (root.left != null) {
-            traverse(root.left, path + root.val + "->", result);
+        str += (str.isEmpty() ? "" : "->") + root.val;
+        
+        if (root.left == null && root.right == null) {
+            res.add(str);
+            return;
         }
         
-        if (root.right != null) {
-            traverse(root.right, path + root.val + "->", result);
-        }
+        preorder(root.left, str, res);
+        preorder(root.right, str, res);
     }
 }
