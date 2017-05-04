@@ -49,6 +49,6 @@ public class Solution {
             }            
         }
         
-        throw new IllegalArgumentException();
+        return -1;
     }
 }
