@@ -64,8 +64,7 @@ public class Solution {
             return dp[i][j][N];
         }
         
-        dp[i][j][N] = 0;
-        dp[i][j][N] = (dp[i][j][N] + findPaths(m, n, N - 1, i - 1, j, dp, M)) % M;
+        dp[i][j][N] = findPaths(m, n, N - 1, i - 1, j, dp, M);
         dp[i][j][N] = (dp[i][j][N] + findPaths(m, n, N - 1, i + 1, j, dp, M)) % M;
         dp[i][j][N] = (dp[i][j][N] + findPaths(m, n, N - 1, i, j - 1, dp, M)) % M;
         dp[i][j][N] = (dp[i][j][N] + findPaths(m, n, N - 1, i, j + 1, dp, M)) % M;
