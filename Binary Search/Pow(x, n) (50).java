@@ -8,11 +8,9 @@ public class Solution {
         
         if (n % 2 == 0) {
             return half * half;
-        }
-        else if (n > 0) {
+        } else if (n > 0) {
             return half * half * x;
-        }
-        else {
+        } else {
             return half * half / x;
         }
     }
