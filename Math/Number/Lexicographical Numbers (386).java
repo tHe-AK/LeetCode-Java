@@ -27,7 +27,7 @@ public class Solution {
 public class Solution {
     public List<Integer> lexicalOrder(int n) {
         List<Integer> result = new ArrayList<>();
-        dfs(0, n, result);
+        dfs(1, n, result);
         
         return result;
     }
@@ -37,14 +37,11 @@ public class Solution {
             return;
         }
         
-        if (curr != 0) {
-            result.add((int) curr);
-            dfs(curr * 10, n, result);
-        }
+        result.add((int) curr);
+        dfs(curr * 10, n, result);
         
         if (curr % 10 != 9) {
             dfs(curr + 1, n, result);
         }
     }
 }
-
