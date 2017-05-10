@@ -23,8 +23,7 @@ public class Solution {
             if (pre.end < curr.start) {
                 result.add(pre);
                 pre = curr;
-            }
-            else {
+            } else {
                 pre.end = Math.max(pre.end, curr.end);
             }
         }
