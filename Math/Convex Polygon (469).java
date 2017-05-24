@@ -9,7 +9,7 @@ public class Solution {
             List<Integer> B = points.get((i + 1) % size);
             List<Integer> C = points.get((i + 2) % size);
             
-            int crossProduct = (A.get(0) - B.get(0)) * (C.get(1) - B.get(1)) - (C.get(0) - B.get(0)) * (A.get(1) - B.get(1));
+            int crossProduct = getCrossProduct(A, B, C);
             
             if (crossProduct < 0) {
                 negative = true;
@@ -23,5 +23,9 @@ public class Solution {
         }
         
         return true;
+    }
+    
+    private int getCrossProduct(List<Integer> A, List<Integer> B, List<Integer> C) {
+        return (A.get(0) - B.get(0)) * (C.get(1) - B.get(1)) - (C.get(0) - B.get(0)) * (A.get(1) - B.get(1));
     }
 }
