@@ -1,11 +1,13 @@
 public class StringIterator {
     private String s;
-    private int idx = 0;
-    private int count = 0;
-    private char ch = ' ';
+    private int idx;
+    private int count;
+    private char ch;
     
-    public StringIterator(String s) {
+    public Solution(String s) {
         this.s = s;
+        idx = 0;
+        count = 0;
     }
     
     public char next() {
@@ -17,16 +19,15 @@ public class StringIterator {
             ch = s.charAt(idx++);
             
             while (idx < s.length() && Character.isDigit(s.charAt(idx))) {
-                count = count * 10 + res.charAt(idx++) - '0';
+                count = count * 10 + s.charAt(idx++) - '0';
             }
-        } else {
-            count--;
         }
-        
+
+        count--;
         return ch;
     }
     
     public boolean hasNext() {
-        return idx != res.length() || count != 0;
+        return idx != s.length() || count != 0;
     }
 }
