@@ -1,6 +1,49 @@
 public class Solution {
     public String rearrangeString(String s, int k) {
         int len = s.length();
+        StringBuilder sb = new StringBuilder();
+        Map<Character, Integer> map = new HashMap<>();
+        Queue<Map.Entry<Character, Integer>> queue = new PriorityQueue<>((a, b) -> a.getValue() != b.getValue()
+                ? Integer.compare(b.getValue(), a.getValue()) : Character.compare(a.getKey(), b.getKey()));
+        
+        for (int i = 0; i < len; i++) {
+            char ch = s.charAt(i);
+            map.put(ch, map.getOrDefault(ch, 0) + 1);
+        }
+        
+        queue.addAll(map.entrySet());
+        
+        while (!queue.isEmpty()) {
+            List<Map.Entry<Character, Integer>> next = new ArrayList<>();
+            
+            for (int i = 0; i < k; i++) {
+                if (!queue.isEmpty()) {
+                    Map.Entry<Character, Integer> peek = queue.poll();
+                    sb.append(peek.getKey());
+                    
+                    if (peek.getValue() > 1) {
+                        peek.setValue(peek.getValue() - 1);
+                        next.add(peek);
+                    }
+                } else {
+                    if (next.isEmpty()) {
+                        break;
+                    } else {
+                        return "";
+                    }
+                }
+            }
+            
+            queue.addAll(next);
+        }
+        
+        return sb.toString();
+    }
+}
+
+public class Solution {
+    public String rearrangeString(String s, int k) {
+        int len = s.length();
         int[] count = new int[26];
         int[] valid = new int[26];
         
