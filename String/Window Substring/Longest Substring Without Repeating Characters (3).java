@@ -4,7 +4,6 @@ public class Solution {
         int[] rec = new int[256];
         int start = 0;
         int end = 0;
-        int count = 0;
         
         while (end < s.length()) {
             int ch = s.charAt(end++);
