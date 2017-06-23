@@ -17,7 +17,7 @@ public class Solution {
             i++;
         }
         
-        while (i < len && '0' <= str.charAt(i) && str.charAt(i) <= '9') {
+        while (i < len && str.charAt(i) >= '0' && str.charAt(i) <= '9') {
             int digit = sign * (str.charAt(i) - '0');
             val = val * 10 + digit;
             
@@ -32,6 +32,6 @@ public class Solution {
             i++;
         }
         
-        return (int) val;
+        return (int)val;
     }
 }
