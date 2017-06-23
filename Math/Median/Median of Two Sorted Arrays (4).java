@@ -25,13 +25,15 @@ public class Solution {
             return Math.min(nums1[i], nums2[j]);
         }
         
-        int num1 = i + k / 2 - 1 < len1 ? nums1[i + k / 2 - 1] : Integer.MAX_VALUE;
-        int num2 = j + k / 2 - 1 < len2 ? nums2[j + k / 2 - 1] : Integer.MAX_VALUE;
+        int idx1 = i + k / 2 - 1;
+        int idx2 = j + k / 2 - 1;
+        int num1 = idx1 < len1 ? nums1[idx1] : Integer.MAX_VALUE;
+        int num2 = idx2 < len2 ? nums2[idx2] : Integer.MAX_VALUE;
             
-        if (num1 <= num2) {
-            return findKth(nums1, i + k / 2, nums2, j, k - k / 2);
+        if (num1 < num2) {
+            return findKth(nums1, idx1 + 1, nums2, j, k - k / 2);
         } else {
-            return findKth(nums1, i, nums2, j + k / 2, k - k / 2);
+            return findKth(nums1, i, nums2, idx2 + 1, k - k / 2);
         }
     }
 }
