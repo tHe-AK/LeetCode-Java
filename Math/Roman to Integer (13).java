@@ -1,6 +1,6 @@
 public class Solution {
     public int romanToInt(String s) {
-        Map<Character, Integer> rec = new HashMap<Character, Integer>();
+        Map<Character, Integer> rec = new HashMap<>();
         rec.put('I', 1);
         rec.put('V', 5);
         rec.put('X', 10);
@@ -14,8 +14,7 @@ public class Solution {
         for (int i = 0; i < s.length(); i++) {
             if (i + 1 < s.length() && rec.get(s.charAt(i)) < rec.get(s.charAt(i + 1))) {
                 sum -= rec.get(s.charAt(i));
-            }
-            else {
+            } else {
                 sum += rec.get(s.charAt(i));
             }
         }
