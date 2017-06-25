@@ -16,10 +16,10 @@ public class Solution {
                 char ch = p.charAt(j - 1);
                 
                 if (ch == '*') {
+                    dp[i][j] = dp[i][j - 2];
+                    
                     if (s.charAt(i - 1) == p.charAt(j - 2) || p.charAt(j - 2) == '.') {
-                        dp[i][j] = dp[i][j - 2] || dp[i - 1][j];
-                    } else {
-                        dp[i][j] = dp[i][j - 2];
+                        dp[i][j] |= dp[i - 1][j];
                     }
                 } else if (s.charAt(i - 1) == ch || ch == '.') {
                     dp[i][j] = dp[i - 1][j - 1];
