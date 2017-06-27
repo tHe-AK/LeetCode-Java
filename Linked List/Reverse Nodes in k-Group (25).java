@@ -26,9 +26,9 @@ public class Solution {
                 head = next;
             }
             
-            head = pre;
+            return pre;
+        } else {
+            return head;
         }
-        
-        return head;
     }
 }
