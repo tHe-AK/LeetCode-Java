@@ -10,16 +10,14 @@ public class Solution {
         int result = 0;
         
         while (dvd >= dvs) { 
-            long temp = dvs;
-            int shift = 1;
+            int shift = 0;
             
-            while (dvd >= (temp << 1)) {
-                temp <<= 1;
-                shift <<= 1;
+            while (dvd >= dvs << (shift + 1)) {
+                shift++;
             }
             
-            dvd -= temp;
-            result += shift;
+            dvd -= dvs << shift;
+            result += 1 << shift;
         }
         
         return sign == 1 ? result : -result; 
