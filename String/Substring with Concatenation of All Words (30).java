@@ -18,8 +18,7 @@ public class Solution {
                 if (copy.containsKey(str)) {
                     if (copy.get(str) == 1) {
                         copy.remove(str);
-                    }
-                    else {
+                    } else {
                         copy.put(str, copy.get(str) - 1);
                     }
                     
@@ -27,8 +26,7 @@ public class Solution {
                         result.add(i);
                         break;
                     }
-                }
-                else {
+                } else {
                     break;
                 }
             }
