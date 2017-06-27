@@ -8,15 +8,9 @@
  */
 public class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
-        PriorityQueue<ListNode> queue = new PriorityQueue<ListNode>(new Comparator<ListNode>() {
-            @Override
-            public int compare(ListNode a,ListNode b){
-                return a.val - b.val;
-            }
-        });
-        
+        PriorityQueue<ListNode> queue = new PriorityQueue<>((a, b) -> Integer.compare(a.val, b.val));
         ListNode dummy = new ListNode(0);
-        ListNode tail = dummy;
+        ListNode curr = dummy;
         
         for (ListNode head : lists) {
             if (head != null) {
@@ -25,11 +19,11 @@ public class Solution {
         }
         
         while (!queue.isEmpty()) {
-            tail.next = queue.poll();
-            tail = tail.next;
+            curr.next = queue.poll();
+            curr = curr.next;
             
-            if (tail.next != null) {
-                queue.offer(tail.next);
+            if (curr.next != null) {
+                queue.offer(curr.next);
             }
         }
         
