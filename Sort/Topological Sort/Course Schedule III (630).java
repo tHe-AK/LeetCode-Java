@@ -10,7 +10,7 @@ public class Solution {
                 time += course[0];
                 queue.offer(course[0]);
             } else {
-                if (!queue.isEmpty() && course[0] < queue.peek()) {
+                if (course[0] < queue.peek()) {
                     time += course[0] - queue.poll();
                     queue.offer(course[0]);
                 }
