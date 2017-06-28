@@ -1,5 +1,29 @@
 public class Solution {
     public int longestValidParentheses(String s) {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(-1);
+        int max = 0;
+        
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == '(') {
+                stack.push(i);
+            } else {
+                stack.pop();
+                
+                if (stack.empty()) {
+                    stack.push(i);
+                } else {
+                    max = Math.max(max, i - stack.peek());
+                }
+            }
+        }
+        
+        return max;
+    }
+}
+
+public class Solution {
+    public int longestValidParentheses(String s) {
         return Math.max(getMax(s, '('), getMax(new StringBuilder(s).reverse().toString(), ')'));
     }
     
@@ -19,30 +43,6 @@ public class Solution {
                 max = Math.max(max, 2 * left);
             } else if (right > left) {
                 left = right = 0;
-            }
-        }
-        
-        return max;
-    }
-}
-
-public class Solution {
-    public int longestValidParentheses(String s) {
-        Stack<Integer> stack = new Stack<>();
-        stack.push(-1);
-        int max = 0;
-        
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) == '(') {
-                stack.push(i);
-            } else {
-                stack.pop();
-                
-                if (stack.empty()) {
-                    stack.push(i);
-                } else {
-                    max = Math.max(max, i - stack.peek());
-                }
             }
         }
         
