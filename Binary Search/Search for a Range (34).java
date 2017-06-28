@@ -11,16 +11,14 @@ public class Solution {
             
             if (nums[mid] < target) {
                 low = mid + 1;
-            }
-            else {
+            } else {
                 high = mid - 1;
             }
         }
         
         if (low < nums.length && nums[low] == target) {
             result[0] = low;
-        }
-        else {
+        } else {
             return result;
         }
         
@@ -32,8 +30,7 @@ public class Solution {
             
             if (nums[mid] > target) {
                 high = mid - 1;
-            }
-            else {
+            } else {
                 low = mid + 1;
             }
         }
