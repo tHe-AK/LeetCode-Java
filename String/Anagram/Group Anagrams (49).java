@@ -6,14 +6,10 @@ public class Solution {
             char[] letters = str.toCharArray();
             Arrays.sort(letters);
             String key = new String(letters);
-            
-            if (!rec.containsKey(key)) {
-                rec.put(key, new ArrayList<String>());
-            }
-            
+            rec.putIfAbsent(key, new ArrayList<String>());
             rec.get(key).add(str);
         }
         
-        return new ArrayList<List<String>>(rec.values());
+        return new ArrayList<>(rec.values());
     }
 }
