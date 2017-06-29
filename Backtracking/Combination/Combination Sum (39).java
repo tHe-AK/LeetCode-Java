@@ -1,6 +1,6 @@
 public class Solution {
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        List<List<Integer>> result = new ArrayList<>();
         
         dfs(candidates, target, 0, new ArrayList<Integer>(), result);
         
