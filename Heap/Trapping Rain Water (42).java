@@ -2,6 +2,34 @@ public class Solution {
     public int trap(int[] height) {
         int low = 0;
         int high = height.length - 1;
+        int sum = 0;
+        
+        while (low + 1 < high) {
+            if (height[low] <= height[high]) {
+                if (height[low] > height[low + 1]) {
+                    sum += height[low] - height[low + 1];
+                    height[low + 1] = height[low];
+                }
+                
+                low++;
+            } else {
+                if (height[high] > height[high - 1]) {
+                    sum += height[high] - height[high - 1];
+                    height[high - 1] = height[high];
+                }
+                
+                high--;
+            }
+        }
+        
+        return sum;
+    }
+}
+
+public class Solution {
+    public int trap(int[] height) {
+        int low = 0;
+        int high = height.length - 1;
         int leftMax = 0;
         int rightMax = 0;
         int sum = 0;
