@@ -12,8 +12,7 @@ public class Solution {
                     next.append(count).append(say);
                     count = 1;
                     say = curr.charAt(j);
-                }
-                else {
+                } else {
                     count++;
                 }
             }
