@@ -17,7 +17,7 @@ public class Solution {
             i++;
         }
             
-        while (i < intervals.size() && intervals.get(i).start <= newInterval.end) {
+        while (i < intervals.size() && newInterval.end >= intervals.get(i).start) {
             newInterval.start = Math.min(newInterval.start, intervals.get(i).start);
             newInterval.end = Math.max(newInterval.end, intervals.get(i).end);
             i++;
