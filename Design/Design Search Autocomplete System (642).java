@@ -71,7 +71,7 @@ public class AutocompleteSystem {
                 node = null;
             } else {
                 node = node.get(c);
-                Queue<Pair> queue = new PriorityQueue<>((a, b) -> Integer.compare(b.count, a.count));
+                Queue<Pair> queue = new PriorityQueue<>((a, b) -> a.count != b.count ? Integer.compare(b.count, a.count) : String.compare(a.sentence, b.sentence));
                 traverse(node, sentence, queue);
                 
                 for (int i = 0; i < 3 && !queue.isEmpty(); i++) {
