@@ -37,7 +37,7 @@ public class LogSystem {
                 + ts[3] * 60 * 60 + ts[4] * 60 + ts[5];
     }
 
-    public long transform(String s, String gra, boolean isEnd) {
+    private long transform(String s, String gra, boolean isEnd) {
         int[] ts = Arrays.stream(s.split(":")).mapToInt(Integer::parseInt).toArray();
         int idx = graMap.get(gra);
         
