@@ -5,8 +5,8 @@ public class Excel {
     private Map<Integer, List<Integer>> backward;
 
     public Excel(int H, char W) {
-        width = W;
-        cells = new int[H][W - 'A' + 1];
+        this.width = W - 'A' + 1;
+        cells = new int[H][this.width];
         forward = new HashMap<>();
         backward = new HashMap<>();
     }
@@ -20,7 +20,7 @@ public class Excel {
         int j = c - 'A';
         int idx = i * width + j;
         removeLinks(idx);
-        updateVal(idx, v - cells[i][j]);
+        updateValue(idx, v - cells[i][j]);
     }
 
     public int sum(int r, char c, String[] strs) {
@@ -53,7 +53,7 @@ public class Excel {
             }
         }
         
-        updateVal(idx, sum - cells[i][j]);
+        updateValue(idx, sum - cells[i][j]);
         
         return sum;
     }
@@ -69,7 +69,7 @@ public class Excel {
         if (backward.containsKey(idx)) {
             for (Integer key : backward.get(idx)) {
                 List<Integer> list = forward.get(key);
-                list.remove(idx);
+                list.remove(Integer.valueOf(idx));
                 
                 if (list.isEmpty()) {
                     forward.remove(key);
@@ -80,7 +80,7 @@ public class Excel {
         }
     }
     
-    private void updateVal(int idx, int diff) {
+    private void updateValue(int idx, int diff) {
         Queue<Integer> queue = new LinkedList<>();
         queue.offer(idx);
         
