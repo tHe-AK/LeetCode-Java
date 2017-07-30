@@ -16,11 +16,9 @@ public class Solution {
             
             if (matrix[x][y] == target) {
                 return true;
-            }
-            else if (matrix[x][y] < target) {
+            } else if (matrix[x][y] < target) {
                 low = mid + 1;
-            }
-            else {
+            } else {
                 high = mid - 1;
             }
         }
