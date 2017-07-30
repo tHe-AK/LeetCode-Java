@@ -1,23 +1,23 @@
 public class Solution {
     public String simplifyPath(String path) {
-        Deque<String> deque = new LinkedList<String>();
+        Stack<String> stack = new Stack<>();
 
         for (String str : path.split("/")) {
             if (str.equals("") || str.equals(".")) {
                 continue;
             } else if (str.equals("..")) {
-                if (!deque.isEmpty()) {
-                    deque.pollLast();
+                if (!stack.isEmpty()) {
+                    stack.pop();
                 }
             } else {
-                deque.offerLast(str);
+                stack.push(str);
             }
         }
         
         StringBuilder sb = new StringBuilder();
             
-        while (!deque.isEmpty()) {
-            sb.append("/").append(deque.pollFirst());
+        for (String str : stack) {
+            sb.append("/").append(str);
         }
             
         return sb.length() == 0 ? "/" : sb.toString();
