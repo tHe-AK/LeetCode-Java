@@ -1,55 +1,57 @@
 public class Solution {
     public List<String> fullJustify(String[] words, int maxWidth) {
-        List<String> result = new ArrayList<>();
-        int len = words.length;
-        int i = 0;
+        List<String> res = new ArrayList<>();
+        int count = 1;
+        int len = words[0].length();
+        int i = 1;
         
-        while (i < len) {
+        while (i < words.length) {
             int wordLen = words[i].length();
-            int spaceLen = 0;
-            int j = i + 1;
             
-            while (j < len && wordLen + spaceLen + 1 + words[j].length() <= maxWidth) {
-                wordLen += words[j].length();
-                spaceLen += 1;
-                j++;
-            }
-            
-            StringBuilder sb = new StringBuilder();
-            
-            if (spaceLen == 0 || j == len) {
-                for (int k = i; k < j; k++) {
-                    if (k > i) {
-                        sb.append(" ");
-                    }
-                    
-                    sb.append(words[k]);
-                }
-                
-                appendSpace(sb, maxWidth - wordLen - spaceLen);
+            if (len + wordLen + count > maxWidth) {
+                res.add(printLine(words, maxWidth, i, count, len));
+                count = 1;
+                len = wordLen;
             } else {
-                int spaceCount = (maxWidth - wordLen) / spaceLen;
-                int extraCount = (maxWidth - wordLen) % spaceLen;
-                
-                for (int k = i; k < j; k++) {
-                    if (k > i) {
-                        appendSpace(sb, spaceCount);
-                        
-                        if (extraCount > 0) {
-                            sb.append(" ");
-                            extraCount--;
-                        }
-                    }
-                    
-                    sb.append(words[k]);
-                }
+                count++;
+                len += wordLen;
             }
             
-            result.add(sb.toString());
-            i = j;
+            i++;
         }
         
-        return result;
+        res.add(printLine(words, maxWidth, i, count, len));
+        return res;
+    }
+    
+    private String printLine(String[] words, int maxWidth, int i, int count, int len) {
+        StringBuilder sb = new StringBuilder();
+        int space = 1;
+        int extra = 0;
+        
+        if (i != words.length && count != 1) {
+            space = (maxWidth - len) / (count - 1);
+            extra = (maxWidth - len) % (count - 1);
+        }
+        
+        for (int j = i - count; j < i; j++) {
+            if (sb.length() > 0) {
+                appendSpace(sb, space);
+                
+                if (extra > 0) {
+                    appendSpace(sb, 1);
+                    extra--;
+                }
+             }
+            
+            sb.append(words[j]);
+        }
+        
+        if (sb.length() < maxWidth) {
+            appendSpace(sb, maxWidth - sb.length());
+        }
+        
+        return sb.toString();
     }
     
     private void appendSpace(StringBuilder sb, int count) {
