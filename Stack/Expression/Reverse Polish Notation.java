@@ -1,29 +1,3 @@
-public class Calculator {
-    private Stack<Double> stack;
-    private TokenFactory tokenFactory;
-    
-    public Calculator() {
-        stack = new Stack<>();
-        tokenFactory = new TokenFactory();
-    }
-    
-    public double process(String str) {
-        stack.clear();
-        String[] tokens = str.split(" ");
-        
-        for (String token : tokens) {
-            tokenFactory.getToken(token).process(stack);
-        }
-        
-        return stack.empty() ? 0 : stack.pop();
-    }
-    
-    public static void main(String[] args) {
-        Calculator cal = new Calculator();
-        System.out.println(cal.process("5 5 + 2 / 3 * 4 -"));
-    }
-}
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
@@ -141,5 +115,31 @@ class Divide extends Operator {
         }
         
         stack.push(nums[1] / nums[0]);
+    }
+}
+
+public class Calculator {
+    private Stack<Double> stack;
+    private TokenFactory tokenFactory;
+    
+    public Calculator() {
+        stack = new Stack<>();
+        tokenFactory = new TokenFactory();
+    }
+    
+    public double process(String str) {
+        stack.clear();
+        String[] tokens = str.split(" ");
+        
+        for (String token : tokens) {
+            tokenFactory.getToken(token).process(stack);
+        }
+        
+        return stack.empty() ? 0 : stack.pop();
+    }
+    
+    public static void main(String[] args) {
+        Calculator cal = new Calculator();
+        System.out.println(cal.process("5 5 + 2 / 3 * 4 -"));
     }
 }
