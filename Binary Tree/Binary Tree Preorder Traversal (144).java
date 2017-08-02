@@ -22,7 +22,7 @@ public class Solution {
             }
         }
         
-        return result;
+        return res;
     }
 }
 
