@@ -14,7 +14,7 @@ public class Solution {
 
         while (root != null || !stack.empty()) {
             if (root != null) {
-                result.add(root.val);
+                res.add(root.val);
                 stack.push(root.right);
                 root = root.left;
             } else {
