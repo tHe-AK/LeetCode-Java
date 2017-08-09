@@ -8,15 +8,8 @@ public class Solution {
             points.add(new int[] { building[1], -building[2] });
         }
         
-        Collections.sort(points, (p1, p2) -> {
-            if (p1[0] != p2[0]) {
-                return p1[0] - p2[0];
-            } else {
-                return p2[1] - p1[1];
-            }
-        });
-        
-        Queue<Integer> pq = new PriorityQueue<>((y1, y2) -> y2 - y1);
+        Collections.sort(points, (p1, p2) -> p1[0] != p2[0] ? Integer.compare(p1[0], p2[0]) : Integer.compare(p2[1], p1[1]));
+        Queue<Integer> pq = new PriorityQueue<>((y1, y2) -> Integer.compare(y2, y1));
         int prev = 0;
         pq.offer(0);
         
