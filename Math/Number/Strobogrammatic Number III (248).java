@@ -1,8 +1,6 @@
 public class Solution {
     public int strobogrammaticInRange(String low, String high) {
         Map<Integer, List<String>> map = new HashMap<>();
-        map.put(0, Arrays.asList(""));
-        map.put(1, Arrays.asList("0", "1", "8"));
         int left = low.length();
         int right = high.length();
         int count = 0;
