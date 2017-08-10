@@ -7,43 +7,23 @@
  *     Interval(int s, int e) { start = s; end = e; }
  * }
  */
- 
-class Event {
-    public int time;
-    public int type;
 
-    public Event(int time, int type) {
-        this.time = time;
-        this.type = type;
-    }
-}
-    
 public class Solution {
     public int minMeetingRooms(Interval[] intervals) {
-        List<Event> list = new ArrayList<>();
+        List<int[]> list = new ArrayList<>();
         int count = 0;
         int result = 0;
         
         for (Interval i : intervals) {
-            list.add(new Event(i.start, 0));
-            list.add(new Event(i.end, 1));
+            list.add(new int[] { i.start, 1 });
+            list.add(new int[] { i.end, -1});
         }
         
-        list.sort((e1, e2) -> {
-            if (e1.time != e2.time) {
-                return e1.time - e2.time;
-            } else {
-                return e2.type - e1.type;
-            }
-        });
+        list.sort((a, b) -> a[0] != b[0] ? Integer.compare(a[0], b[0]) : Integer.compare(a[1], b[1]));
         
-        for (Event e : list) {
-            if (e.type == 0) {
-                count++;
-                result = Math.max(result, count);
-            } else {
-                count--;
-            }
+        for (int[] pair : list) {
+            count += pair[1];
+            result = Math.max(result, count);
         }
         
         return result;
