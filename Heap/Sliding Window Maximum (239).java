@@ -23,7 +23,7 @@ public class Solution {
 
 public class Solution {
     public int[] maxSlidingWindow(int[] nums, int k) {
-        if (k <= 0) {
+if (k <= 0) {
             return new int[0];
         }
         
@@ -32,10 +32,6 @@ public class Solution {
         int[] result = new int[len - k + 1];
         
         for (int i = 0; i < len; i++) {
-            if (!queue.isEmpty() && queue.peek() <= i - k) {
-                queue.poll();
-            }
-            
             while (!queue.isEmpty() && nums[queue.peekLast()] < nums[i]) {
                 queue.pollLast();
             }
@@ -43,7 +39,12 @@ public class Solution {
             queue.offer(i);
             
             if (i >= k - 1) {
-                result[i - k + 1] = nums[queue.peek()];
+                int idx = i - k + 1;
+                result[idx] = nums[queue.peek()];
+                
+                if (queue.peek() <= idx) {
+                    queue.poll();
+                }
             }
         }
         
