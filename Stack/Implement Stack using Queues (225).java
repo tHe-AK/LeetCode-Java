@@ -11,9 +11,8 @@ public class MyStack {
         queue.offer(x);
         int size = queue.size();
         
-        while (size > 1) {
+        for (int i = 1; i < size; i++) {
             queue.offer(queue.poll());
-            size--;
         }
     }
     
