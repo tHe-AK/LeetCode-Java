@@ -13,7 +13,7 @@ public class Solution {
             return 0;
         }
         
-        Arrays.sort(intervals, (a, b) -> a.end - b.end);
+        Arrays.sort(intervals, (a, b) -> Integer.compare(a.end, b.end));
         
         int count = 0;
         int min = intervals[0].end;
@@ -45,13 +45,13 @@ public class Solution {
             return 0;
         }
         
-        Arrays.sort(intervals, (a, b) -> a.start - b.start);
+        Arrays.sort(intervals, (a, b) -> Integer.compare(a.start, b.start));
         
         int count = 0;
         int min = intervals[0].end;
         
         for (int i = 1; i < intervals.length; i++) {
-            if (min > intervals[i].start) {
+            if (intervals[i].start < min) {
                 count++;
                 min = Math.min(min, intervals[i].end);
             } else {
@@ -78,7 +78,7 @@ public class Solution {
             return 0;
         }
         
-        Arrays.sort(intervals, (a, b) -> a.start - b.start);
+        Arrays.sort(intervals, (a, b) -> Integer.compare(a.start, b.start));
         
         int len = intervals.length;
         int[] dp = new int[len];
