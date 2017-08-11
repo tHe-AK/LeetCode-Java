@@ -76,6 +76,7 @@ public class Solution {
             }
         }
         
+        visited[i] = false;
         return true;
     }
 }
