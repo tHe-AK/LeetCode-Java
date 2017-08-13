@@ -23,7 +23,7 @@ public class Solution {
         int len = citations.length;
         int i = 0;
         
-        while (i < len && citations[len - i - 1] > i) {
+        while ((i + 1) <= len && citations[len - i - 1] >= i + 1) {
             i++;
         }
         
