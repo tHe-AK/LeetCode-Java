@@ -1,18 +1,17 @@
 public class Solution {
     public String alienOrder(String[] words) {
-        List<List<Integer>> rec = new ArrayList<>();
-        boolean[] visited = new boolean[26];
+        List<Integer>[] rec = new List[26];
         String prev = null;
-        
-        for (int i = 0; i < 26; i++) {
-            rec.add(new ArrayList<Integer>());
-        }
         
         for (int i = 0; i < words.length; i++) {
             String curr = words[i];
             
             for (int j = 0; j < curr.length(); j++) {
-                visited[curr.charAt(j) - 'a'] = true;
+            		int idx = curr.charAt(j) - 'a';
+            		
+            		if (rec[idx] == null) {
+            			rec[idx] = new ArrayList<>();
+            		}
             }
 
             if (prev != null) {
@@ -21,11 +20,11 @@ public class Solution {
                 int j = 0;
                 
                 while (j < len1 && j < len2) {
-                    int ch1 = prev.charAt(j) - 'a';
-                    int ch2 = curr.charAt(j) - 'a';
+                    int idx1 = prev.charAt(j) - 'a';
+                    int idx2 = curr.charAt(j) - 'a';
                     
-                    if (ch1 != ch2) {
-                        rec.get(ch1).add(ch2);
+                    if (idx1 != idx2) {
+                        rec[idx1].add(idx2);
                         break;
                     }
                     
@@ -43,7 +42,7 @@ public class Solution {
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < 26; i++) {
-            if (visited[i] && !dfs(rec, i, new boolean[26], sb)) {
+            if (rec[i] == null || !dfs(rec, i, new boolean[26], sb)) {
                 return "";
             }
         }
@@ -53,20 +52,20 @@ public class Solution {
         return sb.toString();
     }
     
-    private boolean dfs(List<List<Integer>> rec, int i, boolean[] visited, StringBuilder sb) {
+    private boolean dfs(List<Integer>[] rec, int i, boolean[] visited, StringBuilder sb) {
         if (visited[i]) {
             return false;
         }
         
-        char ch = (char) ('a' + i);
+        String ch = Character.toString((char) ('a' + i));
         
-        if (sb.indexOf(Character.toString(ch)) != -1) {
+        if (sb.indexOf(ch) != -1) {
             return true;
         }
  
         visited[i] = true;
         
-        for (Integer j : rec.get(i)) {
+        for (Integer j : rec[i]) {
             if (!dfs(rec, j, visited, sb)) {
                 return false;
             }
