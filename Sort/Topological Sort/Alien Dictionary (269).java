@@ -7,11 +7,11 @@ public class Solution {
             String curr = words[i];
             
             for (int j = 0; j < curr.length(); j++) {
-            		int idx = curr.charAt(j) - 'a';
-            		
-            		if (rec[idx] == null) {
-            			rec[idx] = new ArrayList<>();
-            		}
+                int idx = curr.charAt(j) - 'a';
+                
+                if (rec[idx] == null) {
+                    rec[idx] = new ArrayList<>();
+                }
             }
 
             if (prev != null) {
