@@ -12,10 +12,11 @@ public class Solution {
         
         while (num > 0) {
             if (num % 1000 != 0) {
-                result = numberToWords(num % 1000, one, ten).trim() + " " + thousand[i++] + " " + result;
+                result = numberToWords(num % 1000, one, ten).trim() + " " + thousand[i] + " " + result;
             }
             
     	    num /= 1000;
+            i++;
         }
         
         return result.trim();
