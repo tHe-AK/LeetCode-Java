@@ -9,11 +9,12 @@ public class Solution {
         int[][] total = new int[row][col];
         int[][] delta = new int[][] { { 0, 1 }, { 0, - 1 }, { 1, 0 }, { -1, 0 } };
         int val = 0;
+        int min = -1;
         
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
                 if (grid[i][j] == 1) {
-                    int min = -1;
+                    min = -1;
                     int dist = 0;
                     Queue<int[]> queue = new LinkedList<>();
                     queue.offer(new int[] { i, j });
