@@ -4,7 +4,7 @@ public class Solution {
         Stack<Integer> stack = new Stack<>();
         
         for (int val : preorder) {
-            if (val <= min) {
+            if (val < min) {
                 return false;
             }
             
@@ -25,7 +25,7 @@ public class Solution {
         int curr = -1;
         
         for (int val : preorder) {
-            if (val <= min) {
+            if (val < min) {
                 return false;
             }
             
