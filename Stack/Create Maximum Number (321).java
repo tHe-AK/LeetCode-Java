@@ -1,47 +1,47 @@
 public class Solution {
     public int[] maxNumber(int[] nums1, int[] nums2, int k) {
-        int[] result = new int[k];
+        int[] res = new int[k];
         
         for (int i = 0; i <= k; i++) {
             if (i <= nums1.length && k - i <= nums2.length) {
-                int[] candidate = merge(getMaxK(nums1, i), getMaxK(nums2, k - i), k);
+                int[] candidate = merge(getMaxK(nums1, i), getMaxK(nums2, k - i));
                 
-                if (compare(candidate, 0, result, 0)) {
-                    result = candidate;
+                if (compare(candidate, 0, res, 0)) {
+                    res = candidate;
                 }
             }
         }
         
-        return result;
+        return res;
     }
     
     private int[] getMaxK(int[] nums, int k) {
         int len = nums.length;
-        int[] result = new int[k];
+        int[] res = new int[k];
 
         for (int i = 0, j = 0; i < len; i++) {
-            while (j > 0 && len - i + j > k && result[j - 1] < nums[i]) {
+            while (j > 0 && res[j - 1] < nums[i] && len - i + j - 1 >= k) {
                 j--;
             }
             
             if (j < k) {
-                result[j++] = nums[i];
+                res[j++] = nums[i];
             }
         }
         
-        return result;
+        return res;
     }
     
-    private int[] merge(int[] nums1, int[] nums2, int len) {
-        int[] result = new int[len];
+    private int[] merge(int[] nums1, int[] nums2) {
+        int[] res = new int[nums1.length + nums2.length];
         int i = 0;
         int j = 0;
         
-        for (int k = 0; k < len; k++) {
-            result[k] = compare(nums1, i, nums2, j) ? nums1[i++] : nums2[j++];
+        for (int k = 0; k < res.length; k++) {
+            res[k] = compare(nums1, i, nums2, j) ? nums1[i++] : nums2[j++];
         }
         
-        return result;
+        return res;
     }
     
     private boolean compare(int[] nums1, int i, int[] nums2, int j) {
