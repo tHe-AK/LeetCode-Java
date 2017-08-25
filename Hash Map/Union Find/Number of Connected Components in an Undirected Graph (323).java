@@ -59,12 +59,14 @@ public class Solution {
     }
     
     private void dfs(List<List<Integer>> list, int i, boolean[] visited) {
+        if (visited[i]) {
+            return;
+        }
+        
         visited[i] = true;
         
         for (int j : list.get(i)) {
-            if (!visited[j]) {
-                dfs(list, j, visited);
-            }
+            dfs(list, j, visited);
         }
     }
 }
