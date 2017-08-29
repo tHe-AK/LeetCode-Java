@@ -12,7 +12,7 @@ class Solution {
     
     private int postorder(TreeNode root, Map<Integer, Integer> map) {
         if (root == null) {
-        	    return 0;
+            return 0;
         }
 
         int sum = root.val + postorder(root.left, map) + postorder(root.right, map);
