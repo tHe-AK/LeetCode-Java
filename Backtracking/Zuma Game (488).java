@@ -1,4 +1,4 @@
-public class Solution {
+class Solution {
     public int findMinStep(String board, String hand) {
         int[] map = new int[26];
         
@@ -14,7 +14,7 @@ public class Solution {
             return 0;
         }
         
-        int result = -1;
+        int res = Integer.MAX_VALUE;
         int i = 0;
         
         for (int j = 1; j <= board.length(); j++) {
@@ -27,7 +27,7 @@ public class Solution {
                     int count = dfs(removeConsecutive(board.substring(0, i) + board.substring(j)), map);
                     
                     if (count != -1) {
-                        result = result == -1 ? count + need : Math.min(result, count + need);
+                         res = Math.min(res, count + need);
                     }
                     
                     map[ch] += need;
@@ -37,7 +37,7 @@ public class Solution {
             }
         }
         
-        return result;
+        return res == Integer.MAX_VALUE ? -1 : res;
     }
 
     private String removeConsecutive(String board) {
