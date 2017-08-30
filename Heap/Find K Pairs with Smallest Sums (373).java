@@ -8,7 +8,7 @@ public class Solution {
             return result;
         }
         
-        Queue<int[]> queue = new PriorityQueue<>((a, b) -> a[0] - b[0]);
+        Queue<int[]> queue = new PriorityQueue<>((a, b) -> Integer.compare(a[0], b[0]));
         queue.offer(new int[] { nums1[0] + nums2[0], 0, 0 });
         
         while (!queue.isEmpty() && k-- > 0) {
