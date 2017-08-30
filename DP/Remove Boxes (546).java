@@ -15,16 +15,16 @@ public class Solution {
             return dp[l][r][k];
         }
         
-        while (l < r && boxes[r] == boxes[r - 1]) {
-            r--;
+        while (l < r && boxes[l] == boxes[l + 1]) {
+            l++;
             k++;
         }
         
-        dp[l][r][k] = dfs(boxes, dp, l, r - 1, 0) + (k + 1) * (k + 1);
+        dp[l][r][k] = (k + 1) * (k + 1) + dfs(boxes, dp, l + 1, r, 0);
         
-        for (int i = l; i < r; i++) {
-            if (boxes[i] == boxes[r]) {
-                dp[l][r][k] = Math.max(dp[l][r][k], dfs(boxes, dp, l, i, k + 1) + dfs(boxes, dp, i + 1, r - 1, 0));
+        for (int i = l + 1; i <= r; i++) {
+            if (boxes[i] == boxes[l]) {
+                dp[l][r][k] = Math.max(dp[l][r][k], dfs(boxes, dp, l + 1, i - 1, 0) + dfs(boxes, dp, i, r, k + 1));
             }
         }
         
