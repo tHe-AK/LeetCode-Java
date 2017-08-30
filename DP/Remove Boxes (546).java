@@ -49,31 +49,27 @@ public class Solution {
             return 0;
         }
         
-        int result = 0;
+        int res = 0;
+        int i = 0;
         
-        for (int i = 0; i < boxes.length; i++) {
-            if (i == 0 || boxes[i] != boxes[i - 1]) {
-                int j = i + 1;
-                
-                while (j < boxes.length && boxes[j] == boxes[i]) {
-                    j++;
-                }
-                
+        for (int j = 1; j <= boxes.length; j++) {
+            if (j == boxes.length || boxes[j] != boxes[j - 1]) {
                 int count = j - i;
-                int[] newboxes = new int[boxes.length - count];
+                int[] newBoxes = new int[boxes.length - count];
                 int idx = 0;
                 
                 for (int k = 0; k < boxes.length; k++) {
                     if (k < i || k >= j) {
-                        newboxes[idx++] = boxes[k];
+                        newBoxes[idx++] = boxes[k];
                     }
                 }
                 
-                result = Math.max(result, remove(newboxes, map) + count * count);
+                res = Math.max(res, count * count + remove(newBoxes, map));
+                i = j;
             }
         }
         
-        map.put(key, result);
-        return result;
+        map.put(key, res);
+        return res;
     }
 }
