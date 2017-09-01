@@ -18,7 +18,7 @@ public class Solution {
     }
 }
 
-public class Solution {
+class Solution {
     public void wiggleSort(int[] nums) {
         int len = nums.length;
         int[] copy = new int[len];
@@ -41,15 +41,15 @@ public class Solution {
         int pivot = nums[low];
         int left = low;
         int right = high;
-        int idx = left;
+        int mid = left;
         
-        while (idx <= right) {
-            if (nums[idx] < pivot) {
-                swap(nums, left++, idx++);
-            } else if (nums[idx] > pivot) {
-                swap(nums, right--, idx);
+        while (mid <= right) {
+            if (nums[mid] < pivot) {
+                swap(nums, left++, mid++);
+            } else if (nums[mid] > pivot) {
+                swap(nums, right--, mid);
             } else {
-                idx++;
+                mid++;
             }
         }
         
