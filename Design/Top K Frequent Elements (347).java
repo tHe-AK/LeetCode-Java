@@ -1,4 +1,4 @@
-public class Solution {
+class Solution {
     public List<Integer> topKFrequent(int[] nums, int k) {
         int len = nums.length;
         List<Integer> result = new ArrayList<>();
@@ -23,9 +23,8 @@ public class Solution {
     	for (int i = len; i > 0; i--) {
             for (Integer num : buckets[i]) {
                 result.add(num);
-                k--;
     			
-                if (k == 0) {
+                if (--k == 0) {
                     return result;
                 }
             }
@@ -34,3 +33,4 @@ public class Solution {
     	return result;
     }
 }
+
