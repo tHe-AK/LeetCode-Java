@@ -1,4 +1,4 @@
-public class Solution {
+class Solution {
     public String minWindow(String s, String t) {
         int[] rec = new int[256];
         
@@ -23,7 +23,7 @@ public class Solution {
                     result = s.substring(start, end);
                 }
                 
-                if (rec[s.charAt(start++)]++ >= 0) {
+                if (rec[s.charAt(start++)]++ == 0) {
                     count++;
                 }
             }
