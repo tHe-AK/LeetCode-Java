@@ -11,7 +11,7 @@ class Solution {
         }
         
         for (char key : map.keySet()) {
-        		queue.offer(new int[] { key, map.get(key) });
+            queue.offer(new int[] { key, map.get(key) });
         }
         
         while (!queue.isEmpty()) {
