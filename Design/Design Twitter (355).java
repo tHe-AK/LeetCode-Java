@@ -68,7 +68,7 @@ public class Twitter {
         
         Set<Integer> users = userMap.get(userId).followed;
         users.add(userId);
-        Queue<Tweet> queue = new PriorityQueue<>((a, b) -> b.time - a.time);
+        Queue<Tweet> queue = new PriorityQueue<>((a, b) -> Integer.compare(b.time, a.time));
 
         for (int user: users) {
             Tweet tweet = userMap.get(user).head;
