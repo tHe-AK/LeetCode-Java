@@ -12,10 +12,10 @@ public class Logger {
     public boolean shouldPrintMessage(int timestamp, String message) {
         if (timestamp < map.getOrDefault(message, 0)) {
             return false;
+        } else {
+            map.put(message, timestamp + 10);
+            return true;
         }
-        
-        map.put(message, timestamp + 10);
-        return true;
     }
 }
 
