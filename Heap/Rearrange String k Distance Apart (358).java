@@ -2,15 +2,15 @@ class Solution {
 	public String rearrangeString(String s, int k) {
         int len = s.length();
         StringBuilder sb = new StringBuilder();
-        Map<Character, Integer> map = new HashMap<>();
+        Map<Integer, Integer> map = new HashMap<>();
         Queue<int[]> queue = new PriorityQueue<>((a, b) -> a[1] != b[1] ? Integer.compare(b[1], a[1]) : Integer.compare(a[0], b[0]));
         
         for (int i = 0; i < len; i++) {
-            char ch = s.charAt(i);
+            int ch = s.charAt(i);
             map.put(ch, map.getOrDefault(ch, 0) + 1);
         }
         
-        for (char key : map.keySet()) {
+        for (int key : map.keySet()) {
             queue.offer(new int[] { key, map.get(key) });
         }
         
