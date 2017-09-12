@@ -30,3 +30,30 @@ public class Solution {
         return height;
     }
 }
+
+public class Solution {
+	public List<List<Integer>> findLeaves(TreeNode root) {
+		List<List<Integer>> res = new ArrayList<>();
+
+		while (root != null) {
+			List<Integer> list = new ArrayList<>();
+			remove(root, list);
+			res.add(list);
+		}
+
+		return res;
+	}
+
+	private TreeNode remove(TreeNode root, List<Integer> list) {
+		if (root == null) {
+			return null;
+		} else if (root.left == null && root.right == null) {
+			list.add(root.val);
+			return null;
+		} else {
+			root.left = remove(root.left, list);
+			root.right = remove(root.right, list);
+			return root;
+		}
+	}
+}
