@@ -1,21 +1,21 @@
 class Solution {
-    public List<TreeNode> removeNodes(TreeNode root, Set<Integer> set) {
+    public List<TreeNode> deleteNodes(TreeNode root, Set<Integer> set) {
         List<TreeNode> res = new ArrayList<>();
 
-        if (removeNodes(root, set, res) != null) {
+        if (deleteNodes(root, set, res) != null) {
             res.add(root);
         }
 
         return res;
     }
 
-    private TreeNode removeNodes(TreeNode root, Set<Integer> set, List<TreeNode> res) {
+    private TreeNode deleteNodes(TreeNode root, Set<Integer> set, List<TreeNode> res) {
         if (root == null) {
             return null;
         }
 
-        root.left = removeNodes(root.left, set, res);
-        root.right = removeNodes(root.right, set, res);
+        root.left = deleteNodes(root.left, set, res);
+        root.right = deleteNodes(root.right, set, res);
 
         if (set.contains(root.val)) {
             if (root.left != null) {
