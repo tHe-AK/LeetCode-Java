@@ -63,7 +63,7 @@ public class Solution {
             first.val++;
             first = first.next;
             
-            while (first != null && first.val == 9) {
+            while (first != null) {
                 first.val = 0;
                 first = first.next;
             }
