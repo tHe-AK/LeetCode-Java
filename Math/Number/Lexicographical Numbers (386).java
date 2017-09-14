@@ -1,4 +1,4 @@
-public class Solution {
+class Solution {
     public List<Integer> lexicalOrder(int n) {
         List<Integer> result = new ArrayList<>();
         long curr = 1;
@@ -10,11 +10,13 @@ public class Solution {
             } else if (curr % 10 != 9 && curr + 1 <= n) {
                 curr += 1;
             } else {
-                while ((curr / 10) % 10 == 9) {
+                curr /= 10;
+                
+                while (curr % 10 == 9) {
                     curr /= 10;
                 }
                 
-                curr = curr / 10 + 1;
+                curr++;
             }
             
             result.add((int) curr);
