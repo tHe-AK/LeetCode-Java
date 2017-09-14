@@ -25,6 +25,7 @@ class RandomizedSet {
     public boolean remove(int val) {
         if (map.containsKey(val)) {
             int idx = map.get(val);
+            map.remove(val);
             int lastIdx = nums.size() - 1;
             
             if (idx != lastIdx) {
@@ -33,8 +34,7 @@ class RandomizedSet {
                 nums.set(idx, num);
             }
             
-            map.remove(val);
-            nums.remove(nums.size() - 1);
+            nums.remove(lastIdx);
             return true;
         } else {
             return false;
