@@ -1,4 +1,4 @@
-public class RandomizedSet {
+class RandomizedSet {
     private List<Integer> nums;
     private Map<Integer, Integer> map;
     private Random random;
@@ -25,7 +25,6 @@ public class RandomizedSet {
     public boolean remove(int val) {
         if (map.containsKey(val)) {
             int idx = map.get(val);
-            map.remove(val);
             int lastIdx = nums.size() - 1;
             
             if (idx != lastIdx) {
@@ -33,7 +32,8 @@ public class RandomizedSet {
                 map.put(num, idx);
                 nums.set(idx, num);
             }
-
+            
+            map.remove(val);
             nums.remove(nums.size() - 1);
             return true;
         } else {
