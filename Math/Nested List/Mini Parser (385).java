@@ -26,15 +26,16 @@
  *     public List<NestedInteger> getList();
  * }
  */
-public class Solution {
+class Solution {
     public NestedInteger deserialize(String s) {
         if (s.charAt(0) != '[') {
             return new NestedInteger(Integer.parseInt(s));
         } else {
             NestedInteger ni = new NestedInteger();
+            int i = 1;
             int start = 1;
 
-            for (int i = 1; i < s.length(); i++) {
+            while (i < s.length()) {
                 char ch = s.charAt(i);
                 
                 if (ch == '[') {
@@ -56,6 +57,8 @@ public class Solution {
                     
                     start = i + 1;
                 }
+                
+                i++;
             }
             
             return ni;
