@@ -1,16 +1,16 @@
-class Cell {
-    public int x;
-    public int y;
-    public int h;
-    
-    public Cell(int x, int y, int h) {
-        this.x = x;
-        this.y = y;
-        this.h = h;
-    }
-}
-
 class Solution {
+    class Cell {
+        public int x;
+        public int y;
+        public int h;
+
+        public Cell(int x, int y, int h) {
+            this.x = x;
+            this.y = y;
+            this.h = h;
+        }
+    }
+    
     public int trapRainWater(int[][] heightMap) {
         if (heightMap.length == 0 || heightMap[0].length == 0) {
             return 0;
@@ -20,7 +20,7 @@ class Solution {
         int row = heightMap.length;
         int col = heightMap[0].length;
         boolean[][] visited = new boolean[row][col];
-        PriorityQueue<Cell> pq = new PriorityQueue<>((a, b) -> Integer.compare(a.height, b.height));
+        PriorityQueue<Cell> pq = new PriorityQueue<>((a, b) -> Integer.compare(a.h, b.h));
         
         for (int i = 0; i < row; i++) {
             pq.offer(new Cell(i, 0, heightMap[i][0]));
@@ -46,11 +46,11 @@ class Solution {
                 int y = peek.y + diff[1];
                 
                 if (x >= 0 && x < row && y >= 0 && y < col && !visited[x][y]) {
-                    pq.offer(new Cell(x, y, Math.max(peek.height, heightMap[x][y])));
+                    pq.offer(new Cell(x, y, Math.max(peek.h, heightMap[x][y])));
                     visited[x][y] = true;
                     
-                    if (peek.height > heightMap[x][y]) {
-                        vol += peek.height - heightMap[x][y];
+                    if (peek.h > heightMap[x][y]) {
+                        vol += peek.h - heightMap[x][y];
                     }
                 }
             }
