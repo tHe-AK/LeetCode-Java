@@ -1,26 +1,26 @@
 class Cell {
     public int x;
     public int y;
-    public int height;
+    public int h;
     
-    public Cell(int x, int y, int height) {
+    public Cell(int x, int y, int h) {
         this.x = x;
         this.y = y;
-        this.height = height;
+        this.h = h;
     }
 }
 
-public class Solution {
+class Solution {
     public int trapRainWater(int[][] heightMap) {
         if (heightMap.length == 0 || heightMap[0].length == 0) {
             return 0;
         }
         
-        int volume = 0;
+        int vol = 0;
         int row = heightMap.length;
         int col = heightMap[0].length;
         boolean[][] visited = new boolean[row][col];
-        PriorityQueue<Cell> pq = new PriorityQueue<>((a, b) -> a.height - b.height);
+        PriorityQueue<Cell> pq = new PriorityQueue<>((a, b) -> Integer.compare(a.height, b.height));
         
         for (int i = 0; i < row; i++) {
             pq.offer(new Cell(i, 0, heightMap[i][0]));
@@ -50,12 +50,12 @@ public class Solution {
                     visited[x][y] = true;
                     
                     if (peek.height > heightMap[x][y]) {
-                        volume += peek.height - heightMap[x][y];
+                        vol += peek.height - heightMap[x][y];
                     }
                 }
             }
         }
         
-        return volume;
+        return vol;
     }
 }
