@@ -1,4 +1,4 @@
-public class Solution {
+class Solution {
     public boolean canCross(int[] stones) {
         int len = stones.length;
         Map<Integer, Set<Integer>> map = new HashMap<>();
@@ -23,7 +23,7 @@ public class Solution {
     }
 }
 
-public class Solution {
+class Solution {
     public boolean canCross(int[] stones) {
         return dfs(stones, 0, 0, new boolean[stones.length][stones.length]);
     }
@@ -36,7 +36,9 @@ public class Solution {
         if (visited[start][k]) {
             return false;
         }
-
+        
+        visited[start][k] = true;
+        
         for (int i = start + 1; i < stones.length; i++) {
             int diff = stones[i] - stones[start];
             
@@ -51,7 +53,6 @@ public class Solution {
             }
         }
         
-        visited[start][k] = true;
         return false;
     }
 }
