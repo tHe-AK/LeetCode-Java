@@ -1,19 +1,12 @@
-public class Solution {
+class Solution {
     public int[][] reconstructQueue(int[][] people) {
-        Arrays.sort(people, (a, b) -> {
-            if (a[0] != b[0]) {
-                return b[0] - a[0];
-            } else {
-                return a[1] - b[1];
-            }
-        });
-        
-        List<int[]> result = new LinkedList<>();
+        Arrays.sort(people, (a, b) -> a[0] != b[0] ? Integer.compare(b[0], a[0]) : Integer.compare(a[1], b[1]));
+        List<int[]> res = new LinkedList<>();
         
         for (int[] pair : people) {
-            result.add(pair[1], pair);
+            res.add(pair[1], pair);
         }
         
-        return result.toArray(new int[0][]);
+        return res.toArray(new int[0][]);
     }
 }
