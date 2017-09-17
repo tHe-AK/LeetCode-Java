@@ -57,7 +57,7 @@ class Solution {
     }
 }
 
-public class Solution {
+class Solution {
     public boolean canCross(int[] stones) {
         return dfs(stones, 0, 0, new HashSet<String>());
     }
@@ -73,6 +73,8 @@ public class Solution {
             return false;
         }
         
+        visited.add(key);
+        
         for (int i = start + 1; i < stones.length; i++) {
             int diff = stones[i] - stones[start];
             
@@ -87,12 +89,11 @@ public class Solution {
             }
         }
         
-        visited.add(key);
         return false;
     }
 }
 
-public class Solution {
+class Solution {
     public boolean canCross(int[] stones) {
         return dfs(stones, 0, 0, new HashSet<Integer>());
     }
@@ -108,6 +109,8 @@ public class Solution {
             return false;
         }
         
+        visited.add(key);
+        
         for (int i = start + 1; i < stones.length; i++) {
             int diff = stones[i] - stones[start];
             
@@ -120,9 +123,8 @@ public class Solution {
             } else {
                 break;
             }
-        }
+        }       
         
-        visited.add(key);
         return false;
     }
 }
