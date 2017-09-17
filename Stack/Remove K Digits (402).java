@@ -1,4 +1,4 @@
-public class Solution {
+class Solution {
     public String removeKdigits(String num, int k) {
         int len = num.length();
         k = len - k;
@@ -8,7 +8,7 @@ public class Solution {
         for (int i = 0; i < len; i++) {
             char ch = num.charAt(i);
             
-            while (idx > 0 && idx + len - i > k && str[idx - 1] > ch) {
+            while (idx > 0 && str[idx - 1] > ch && idx + len - i > k) {
                 idx--;
             }
             
@@ -18,13 +18,16 @@ public class Solution {
         }
         
         StringBuilder sb = new StringBuilder();
+        int i = 0;
         
-        for (int i = 0; i < k; i++) {
-            if (str[i] != '0' || sb.length() > 0) {
-                sb.append(str[i]);
-            }
+        while (i < k - 1 && str[i] == '0') {
+            i++;
         }
         
+        while (i < k) {
+            sb.append(str[i]);
+            i++;
+        }
         
         return sb.length() == 0 ? "0" : sb.toString();
     }
