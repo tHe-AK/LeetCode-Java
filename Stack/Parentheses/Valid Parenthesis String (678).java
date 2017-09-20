@@ -8,7 +8,7 @@ class Solution {
             high += ch != ')' ? 1 : -1;
             
             if (high < 0) {
-                return 
+                return false;
             }
             
             low = Math.max(low, 0);
