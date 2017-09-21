@@ -1,4 +1,4 @@
-public class Solution {
+class Solution {
     public int findMaximumXOR(int[] nums) {
         int max = 0;
         int mask = 0;
@@ -25,15 +25,15 @@ public class Solution {
     }
 }
 
-class TrieNode {
-    public TrieNode[] links;
-    
-    public TrieNode() {
-        links = new TrieNode[2];
+class Solution {
+    private class TrieNode {
+        public TrieNode[] links;
+
+        public TrieNode() {
+            links = new TrieNode[2];
+        }
     }
-}
-    
-public class Solution {
+
     public int findMaximumXOR(int[] nums) {
         TrieNode root = new TrieNode();
         
