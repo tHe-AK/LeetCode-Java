@@ -4,7 +4,7 @@ public class Solution {
         int mask = 0;
         
         for (int i = 31; i >= 0; i--) {
-            mask = mask | (1 << i);
+            mask |= (1 << i);
             Set<Integer> set = new HashSet<>();
             
             for (int num : nums){
@@ -61,7 +61,7 @@ public class Solution {
                 int bit = (num >>> i) & 1;
                 
                 if (node.links[bit ^ 1] != null) {
-                    curr += (1 << i);
+                    curr |= (1 << i);
                     node = node.links[bit ^ 1];
                 } else {
                     node = node.links[bit];
