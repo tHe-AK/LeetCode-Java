@@ -1,16 +1,16 @@
-class ListNode {
-    public int val;
-    public Set<String> keySet;
-    public ListNode pre;
-    public ListNode next;
-    
-    public ListNode(int val, Set<String> keySet) {
-        this.val = val;
-        this.keySet = keySet;
-    }
-}
+class AllOne {
+    private class ListNode {
+        public int val;
+        public Set<String> keySet;
+        public ListNode pre;
+        public ListNode next;
 
-public class AllOne {
+        public ListNode(int val, Set<String> keySet) {
+            this.val = val;
+            this.keySet = keySet;
+        }
+    }
+    
     private ListNode head;
     private ListNode tail;
     private Map<String, ListNode> keyMap;
@@ -29,9 +29,11 @@ public class AllOne {
         if (keyMap.containsKey(key)) {
             ListNode curr = keyMap.get(key);
             insertNext(curr, key);
+            keyMap.put(key, curr.next);
             remove(curr, key);
         } else {
             insertNext(head, key);
+            keyMap.put(key, head.next);
         }
     }
     
@@ -42,6 +44,7 @@ public class AllOne {
             
             if (curr.val > 1) {
                 insertPre(curr, key);
+                keyMap.put(key, curr.pre);
             } else {
                 keyMap.remove(key);
             }
@@ -69,8 +72,6 @@ public class AllOne {
         } else {
             insert(pre, curr, key, val);
         }
-        
-        keyMap.put(key, curr.pre);
     }
     
     private void insertNext(ListNode curr, String key) {
@@ -82,8 +83,6 @@ public class AllOne {
         } else {
             insert(curr, next, key, val);
         }
-                
-        keyMap.put(key, curr.next);
     }
     
     private void insert(ListNode pre, ListNode next, String key, int val) {
