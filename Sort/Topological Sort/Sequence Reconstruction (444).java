@@ -1,10 +1,12 @@
-public class Solution {
+class Solution {
     public boolean sequenceReconstruction(int[] org, List<List<Integer>> seqs) {
-        int len = org.length;
-        int[] idx = new int[len + 1];
-        boolean[] rec = new boolean[len];
-
-        for (int i = 0; i < len; i++) {
+        int n = org.length;
+        int[] idx = new int[n + 1];
+        boolean[] rec = new boolean[n];
+        int count = n - 1;
+        boolean existed = false;
+        
+        for (int i = 0; i < n; i++) {
             idx[org[i]] = i;
         }
         
@@ -12,38 +14,27 @@ public class Solution {
             for (int i = 0; i < seq.size(); i++) {
                 int y = seq.get(i);
                 
-                if (y < 1 || y > len) {
+                if (y < 1 || y > n) {
                     return false;
                 }
                 
-                if (i == 0) {
-                    if (len == 1) {
-                        rec[idx[y]] = true;
-                    }
-                } else {
+                existed = true;
+                
+                if (i > 0) {
                     int x = seq.get(i - 1);
                     
                     if (idx[x] >= idx[y]) {
                         return false;
                     }
                     
-                    if (idx[x] + 1 == idx[y]) {
+                    if (idx[x] + 1 == idx[y] && !rec[idx[y]]) {
                         rec[idx[y]] = true;
+                        count--;
                     }
                 }
             }
         }
         
-        if (len == 1) {
-            return rec[0];
-        } else {
-            for (int i = 1; i < len; i++) {
-                if (!rec[i]) {
-                    return false;
-                }
-            }
-            
-            return true;
-        }
+        return existed && count == 0;
     }
 }
