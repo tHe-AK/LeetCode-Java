@@ -54,8 +54,11 @@ public class Solution {
             rec.get(edge[1]).add(edge[0]);
         }
         
+        boolean[] visited = new boolean[n];
+        dfs(rec, 0, -1, visited);
+        
         for (int i = 0; i < n; i++) {
-            if (!dfs(rec, i, -1, new boolean[n])) {
+            if (!visited[i]) {
                 return false;
             }
         }
@@ -76,7 +79,6 @@ public class Solution {
             }
         }
         
-        visited[i] = false;
         return true;
     }
 }
