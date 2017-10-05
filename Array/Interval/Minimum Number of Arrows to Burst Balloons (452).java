@@ -32,7 +32,7 @@ class Solution {
         int min = points[0][1];
         
         for (int i = 1; i < points.length; i++) {
-            if (min >= points[i][0]) {
+            if (points[i][0] <= min) {
                 min = Math.min(min, points[i][1]);
             } else {
                 count++;
