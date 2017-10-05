@@ -4,7 +4,7 @@ public class Solution {
             return 0;
         }
         
-        Arrays.sort(points, (a, b) -> a[0] - b[0]);
+        Arrays.sort(points, (a, b) -> Integer.compare(a[0], b[0]));
         
         int count = 1;
         int min = points[0][1];
