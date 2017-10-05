@@ -15,7 +15,7 @@ public class Solution {
         StringBuilder sb = new StringBuilder();
         serialize(root, sb);
         
-        return sb.toString();
+        return sb.length() == 0 ? " " : sb.toString();
     }
     
     private void serialize(TreeNode root, StringBuilder sb) {
