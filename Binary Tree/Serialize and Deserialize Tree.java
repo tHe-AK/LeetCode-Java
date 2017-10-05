@@ -37,6 +37,10 @@ public class Solution {
     }
     
     private TreeNode deserialize(Iterator<String> it) {
+        if (!it.hasNext()) {
+            return null;
+        }
+        
         String str = it.next();
         
         if (str.equals("#")) {
