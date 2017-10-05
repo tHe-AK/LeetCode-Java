@@ -29,7 +29,7 @@ public class Solution {
             serialize(child, sb);
         }
         
-        sb.append("] ");
+        sb.append("# ");
     }
     
     public TreeNode deserialize(String data) {        
@@ -39,7 +39,7 @@ public class Solution {
     private TreeNode deserialize(Iterator<String> it) {
         String str = it.next();
         
-        if (str.equals("]")) {
+        if (str.equals("#")) {
             return null;
         }
         
