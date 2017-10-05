@@ -32,29 +32,23 @@ public class Solution {
         sb.append("] ");
     }
     
-    public TreeNode deserialize(String data) {
-        Scanner sc = new Scanner(data);
-        
-        return deserialize(sc);
+    public TreeNode deserialize(String data) {        
+        return deserialize(Arrays.asList(data.split(" ")).iterator());
     }
     
-    private TreeNode deserialize(Scanner sc) {
-        String str = sc.next();
+    private TreeNode deserialize(Iterator<String> it) {
+        String str = it.next();
         
         if (str.equals("]")) {
             return null;
         }
         
         TreeNode root = new TreeNode(str);
-
-        while (true) {
-            TreeNode child = deserialize(sc);
-            
-            if (child == null) {
-                break;
-            } else {
-                root.children.add(child);
-            }
+        TreeNode child = deserialize(it);
+        
+        while (child != null) {
+            root.children.add(child);
+            child = deserialize(it);
         }
         
         return root;
