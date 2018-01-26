@@ -14,7 +14,7 @@ class Solution {
     }
     
     private boolean dfs(int[] nums, int k, int start, int target, int sum, int count, boolean[] visited) {
-        if (k == 0) {
+        if (k == 1) {
             return true;
         } else {
             if (target == 0 && count > 0) {
