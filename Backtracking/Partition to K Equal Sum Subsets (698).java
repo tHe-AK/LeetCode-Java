@@ -28,6 +28,7 @@ class Solution {
     
     private boolean dfs(int[] nums, int idx, int target, int[] groups) {
         if (idx < 0) {
+
             return true;
         } else {
             for (int i = 0; i < groups.length; i++) {
@@ -84,5 +85,48 @@ class Solution {
                 return false;
             }
         }
+    }
+}
+
+class Solution {
+    public boolean canPartitionKSubsets(int[] nums, int k) {
+        int sum = 0;
+        
+        for (int num : nums) {
+            sum += num;
+        }
+        
+        if (sum % k != 0) {
+            return false;
+        }
+        
+        int val = sum / k;
+        int N = nums.length;
+        boolean[] dp = new boolean[1 << N];
+        
+        for (int i = 1; i < (1 << N); i++) {
+            sum = 0;
+            
+            for (int j = 0; j < N; j++) {
+                if (((i >> j) & 1) == 1) {
+                    sum += nums[j];
+                }
+            }
+            
+            if (sum % val == 0) {
+                if (sum == val) {
+                    dp[i] = true;
+                } else {
+                    for (int j = 1; j < i; j++) {
+                        if ((i & j) == j && dp[j] && dp[i - j]) {
+                            dp[i] = true;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        
+        return dp[dp.length - 1];
     }
 }
