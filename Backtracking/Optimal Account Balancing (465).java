@@ -88,3 +88,52 @@ public class Solution {
         }
     }
 }
+
+public class Solution {
+    public int minTransfers(int[][] transactions) {
+        Map<Integer, Long> map = new HashMap<>();
+        
+        for (int[] t : transactions){
+            map.put(t[0], map.getOrDefault(t[0], 0L) - t[2]);
+            map.put(t[1], map.getOrDefault(t[1], 0L) + t[2]);
+        }        
+
+        List<Long> list = new ArrayList<>();
+        
+        for (long val: map.values()){
+            if (val != 0) {
+                list.add(val);
+            }
+        }
+
+        int N = list.size();
+        int[] dp = new int[1 << N];
+        
+        for (int i = 1; i <= ((1 << N) - 1); i++) {
+            int sum = 0;
+            int num = i;
+            int count = 0;
+            
+            while (num > 0) {
+                if ((num & 1) == 1) {
+                    sum += list.get(count);
+                }
+                
+                num >>= 1;
+                count++;
+            }
+            
+            if (sum == 0) {
+                dp[i] = count - 1;
+            
+                for (int j = 1; j < i; j++) {
+                    if ((i & j) == j && dp[j] > 0) {
+                        dp[i] = Math.min(dp[i], dp[j] + dp[i - j]);
+                    }
+                }
+            }
+        }
+        
+        return dp[(1 << N) - 1];
+    }
+}
