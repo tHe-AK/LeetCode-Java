@@ -63,28 +63,28 @@ public class Solution {
 
         int[] min = new int[1];
         min[0] = Integer.MAX_VALUE;
-		dfs(list.toArray(new Long[0]), 0, 0, 0, 0, list.size(), new boolean[list.size()], min);
+	dfs(list.toArray(new Long[0]), 0, 0, 0, 0, list.size(), new boolean[list.size()], min);
         
         return min[0];
     }
-    
-	private void dfs(Long[] nums, int start, long target, int count, int total, int remaining, boolean[] visited, int[] min) {
-		if (target == 0 && count > 0) {
-			total += count - 1;
 
-			if (remaining == 0) {
-				min[0] = Math.min(min[0], total);
-			} else {
-				dfs(nums, 0, 0, 0, total, remaining, visited, min);
-			}
-		} else {
-			for (int i = start; i < nums.length; i++) {
-				if (!visited[i]) {
-					visited[i] = true;
-					dfs(nums, i + 1, target - nums[i], count + 1, total, remaining - 1, visited, min);
-					visited[i] = false;
-				}
-			}
-		}
-	}
+    private void dfs(Long[] nums, int start, long target, int count, int total, int remaining, boolean[] visited, int[] min) {
+        if (target == 0 && count > 0) {
+            total += count - 1;
+
+            if (remaining == 0) {
+                min[0] = Math.min(min[0], total);
+            } else {
+                dfs(nums, 0, 0, 0, total, remaining, visited, min);
+            }
+        } else {
+            for (int i = start; i < nums.length; i++) {
+                if (!visited[i]) {
+                    visited[i] = true;
+                    dfs(nums, i + 1, target - nums[i], count + 1, total, remaining - 1, visited, min);
+                    visited[i] = false;
+                }
+            }
+        }
+    }
 }
