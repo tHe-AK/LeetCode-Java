@@ -111,16 +111,13 @@ public class Solution {
         
         for (int i = 1; i <= ((1 << N) - 1); i++) {
             int sum = 0;
-            int num = i;
             int count = 0;
             
-            while (num > 0) {
-                if ((num & 1) == 1) {
-                    sum += list.get(count);
+            for (int j = 0; j < N; j++) {
+                if ((i >> j) & 1) == 1) {
+                    sum += list.get(j);
+		    count++;
                 }
-                
-                num >>= 1;
-                count++;
             }
             
             if (sum == 0) {
@@ -134,6 +131,6 @@ public class Solution {
             }
         }
         
-        return dp[(1 << N) - 1];
+        return dp[dp.length - 1];
     }
 }
