@@ -75,8 +75,7 @@ public class Solution {
             if (remaining == 0) {
                 min[0] = Math.min(min[0], total);
             } else {
-                dfs(nums, 0, 0, 0, total, remaining, visited, min);
-            }
+                dfs(nums, 0, 0, 0, total, remaining, visited, min);            }
         } else {
             for (int i = start; i < nums.length; i++) {
                 if (!visited[i]) {
@@ -109,7 +108,7 @@ public class Solution {
         int N = list.size();
         int[] dp = new int[1 << N];
         
-        for (int i = 1; i <= ((1 << N) - 1); i++) {
+        for (int i = 1; i < (1 << N); i++) {
             int sum = 0;
             int count = 0;
             
