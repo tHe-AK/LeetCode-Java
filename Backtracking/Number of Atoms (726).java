@@ -1,18 +1,18 @@
 class Solution {
     public String countOfAtoms(String formula) {
-        String res = "";
+        StringBuilder res = new StringBuilder();
         Map<String, Integer> map = parse(formula);
         
         for (String key : map.keySet()) {
-            res += key;
+            res.append(key);
             int count = map.get(key);
             
             if (count > 1) {
-                res += count;
+                res.append(count);
             }
         }
         
-        return res;
+        return res.toString();
     }
     
     private Map<String, Integer> parse(String formula) {
@@ -22,11 +22,11 @@ class Solution {
         
         while (i < len) {            
             if (Character.isLetter(formula.charAt(i))) {
-                String str = "" + formula.charAt(i);
-                i++;
+                StringBuilder str = new StringBuilder();
+                str.append(formula.charAt(i++));
 
                 while (i < len && Character.isLowerCase(formula.charAt(i))) {
-                    str += formula.charAt(i++);
+                    str.append(formula.charAt(i++));
                 }
                 
                 int count = getCount(formula, i);
@@ -35,7 +35,7 @@ class Solution {
                     i += Integer.toString(count).length();
                 }
                 
-                updateMap(map, str, count);
+                updateMap(map, str.toString(), count);
             } else {
                 int left = 1;
                 int start = ++i;
