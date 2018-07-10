@@ -7,30 +7,23 @@ class Solution {
         int start = -1;
         
         for (int i = 0; i <= m; i++) {
-        	for (int j = 0; j <= n; j++) {
-        		if (i == 0) {
-        			dp[i][j] = j;
-        		} else if (j == 0) {
-        			dp[i][j] = -1;
-        		} else {
-        			if (T.charAt(i - 1) == S.charAt(j - 1)) {
-        				dp[i][j] = dp[i - 1][j - 1];
-        				if (i == m && dp[i][j] != -1 && j - dp[i][j] < min) {
-        					min = j - dp[i][j];
-        					start = dp[i][j];
-        				}
-        			} else {
-        				dp[i][j] = dp[i][j - 1];
-        			}
-        		}
-        	}
-        }
-        
-        for (int[] x : dp) {
-        	for (int y : x) {
-        		System.out.print(y + " ");
-        	}
-        	System.out.println();
+            for (int j = 0; j <= n; j++) {
+                if (i == 0) {
+                    dp[i][j] = j;
+                } else if (j == 0) {
+                    dp[i][j] = -1;
+                } else {
+                    if (T.charAt(i - 1) == S.charAt(j - 1)) {
+                        dp[i][j] = dp[i - 1][j - 1];
+                        if (i == m && dp[i][j] != -1 && j - dp[i][j] < min) {
+                            min = j - dp[i][j];
+                            start = dp[i][j];
+                        }
+                    } else {
+                        dp[i][j] = dp[i][j - 1];
+                    }
+                }
+            }
         }
         
         return start != -1 ? S.substring(start, start + min) : "";
