@@ -14,6 +14,8 @@ class MyCalendarTwo {
             count += val;
             
             if (count > 2) {
+                map.put(start, map.get(start) - 1);
+                map.put(end, map.get(end) + 1);
                 return false;
             }
         }
