@@ -6,10 +6,8 @@ class MyCalendarTwo {
     }
     
     public boolean book(int start, int end) {
-        map.putIfAbsent(start, 0);
-        map.putIfAbsent(end, 0);
-        map.put(start, map.get(start) + 1);
-        map.put(end, map.get(end) - 1);
+        map.put(start, map.getOrDefault(start, 0) + 1);
+        map.put(end, map.getOrDefault(end, 0) - 1);
         int count = 0;
         
         for (int val : map.values()) {
