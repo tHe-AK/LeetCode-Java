@@ -34,7 +34,7 @@ class Solution {
             serialize(child, sb);
         }
         
-        sb.append("# ");
+        sb.append(") ");
     }
     
     public Node deserialize(String str) {        
@@ -48,7 +48,7 @@ class Solution {
     private Node deserialize(Iterator<String> it) {
         String str = it.next();
         
-        if (str.equals("#")) {
+        if (str.equals(")")) {
             return null;
         }
         
