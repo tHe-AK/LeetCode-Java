@@ -1,3 +1,24 @@
+/*
+// Definition for a Node.
+class Node {
+    public int val;
+    public List<Node> children;
+    public Node() {}
+    public Node(int _val,List<Node> _children) {
+        val = _val;
+        children = _children;
+    }
+};
+*/
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
 class Solution {
     public TreeNode encode(Node root) {
         if (root == null) {
