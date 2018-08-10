@@ -16,7 +16,11 @@ class Solution {
     public int[] flip() {
         int num = rand.nextInt(count--);
         int idx = map.getOrDefault(num, num);
-        map.put(num, map.getOrDefault(count, count));
+        
+        if (num < count) {
+            map.put(num, map.getOrDefault(count, count));
+        }
+        
         int x = idx / n_cols;
         int y = idx % n_cols;
         return new int[] { x, y };
