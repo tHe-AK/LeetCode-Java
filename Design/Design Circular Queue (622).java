@@ -9,7 +9,7 @@ class MyCircularQueue {
     public MyCircularQueue(int k) {
         queue = new int[k];
         front = 0;
-        rear = -1;
+        rear = k - 1;
         capacity = k;
         size = 0;
     }
