@@ -7,14 +7,14 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
-public class Solution {
+class Solution {
     public List<Integer> postorderTraversal(TreeNode root) {
-        List<Integer> result = new LinkedList<>();
+        List<Integer> res = new LinkedList<>();
         Stack<TreeNode> stack = new Stack<>();
         
         while (root != null || !stack.empty()) {
             if (root != null) {
-                result.add(0, root.val);
+                res.add(root.val);
                 stack.add(root.left);
                 root = root.right;
             } else {
@@ -22,7 +22,8 @@ public class Solution {
             }
         }
         
-        return result;
+        Collections.reverse(res);
+        return res;
     }
 }
 
@@ -35,7 +36,7 @@ public class Solution {
  *     TreeNode(int x) { val = x; }
  * }
  */
-public class Solution {
+class Solution {
     public List<Integer> postorderTraversal(TreeNode root) {
         List<Integer> result = new LinkedList<>();
         Stack<TreeNode> stack = new Stack<>();
@@ -68,7 +69,7 @@ public class Solution {
  *     TreeNode(int x) { val = x; }
  * }
  */
-public class Solution {
+class Solution {
     public List<Integer> postorderTraversal(TreeNode root) {
         List<Integer> result = new ArrayList<>();
         postorder(root, result);
