@@ -8,7 +8,7 @@ class MyCircularQueue {
     /** Initialize your data structure here. Set the size of the queue to be k. */
     public MyCircularQueue(int k) {
         queue = new int[k];
-        front = -1;
+        front = 0;
         rear = -1;
         capacity = k;
         size = 0;
@@ -22,11 +22,6 @@ class MyCircularQueue {
             rear = (rear + 1) % capacity;
             queue[rear] = value;
             size++;
-            
-            if (front == -1) {
-                front = 0;
-            }
-            
             return true;
         }
     }
