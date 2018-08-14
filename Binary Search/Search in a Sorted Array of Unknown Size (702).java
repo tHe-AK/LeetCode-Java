@@ -8,11 +8,11 @@ class Solution {
             int val = reader.get(mid);
             
             if (val == Integer.MAX_VALUE || val > target) {
-              high = mid - 1;
+                high = mid - 1;
             } else if (val < target) {
-              low = mid + 1;
+                low = mid + 1;
             } else {
-              return mid;
+                return mid;
             }
         }
 
