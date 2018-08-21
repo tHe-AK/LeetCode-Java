@@ -10,7 +10,6 @@ class Solution {
         for (int i = 0; i < path.size(); i++) {
             int[] pair = map.get(path.get(i));
             int dist = path.size() - i - 1 + pair[0];
-            System.out.println(path.get(i) + ":" + (path.size() - i - 1) + "+" + pair[0]);
 
             if (dist < min) {
                 min = dist;
