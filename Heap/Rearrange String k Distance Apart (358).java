@@ -1,27 +1,28 @@
 class Solution {
-	public String rearrangeString(String s, int k) {
+    public String rearrangeString(String s, int k) {
         int len = s.length();
         StringBuilder sb = new StringBuilder();
         Map<Integer, Integer> map = new HashMap<>();
-        Queue<int[]> queue = new PriorityQueue<>((a, b) -> a[1] != b[1] ? Integer.compare(b[1], a[1]) : Integer.compare(a[0], b[0]));
-        
+        Queue<int[]> queue = new PriorityQueue<>(
+                (a, b) -> a[1] != b[1] ? Integer.compare(b[1], a[1]) : Integer.compare(a[0], b[0]));
+
         for (int i = 0; i < len; i++) {
             int ch = s.charAt(i);
             map.put(ch, map.getOrDefault(ch, 0) + 1);
         }
-        
+
         for (int key : map.keySet()) {
             queue.offer(new int[] { key, map.get(key) });
         }
-        
+
         while (!queue.isEmpty()) {
             List<int[]> next = new ArrayList<>();
-            
+
             for (int i = 0; i < k; i++) {
                 if (!queue.isEmpty()) {
                     int[] peek = queue.poll();
                     sb.append((char) peek[0]);
-                    
+
                     if (peek[1] > 1) {
                         peek[1]--;
                         next.add(peek);
@@ -34,53 +35,10 @@ class Solution {
                     }
                 }
             }
-            
+
             queue.addAll(next);
         }
-        
-        return sb.toString();
-    }
-}
-    
-public class Solution {
-    public String rearrangeString(String s, int k) {
-        int len = s.length();
-        StringBuilder sb = new StringBuilder();
-        Map<Character, Integer> map = new HashMap<>();
-        Queue<Map.Entry<Character, Integer>> queue = new PriorityQueue<>((a, b) -> a.getValue() != b.getValue()
-                ? Integer.compare(b.getValue(), a.getValue()) : Character.compare(a.getKey(), b.getKey()));
-        
-        for (int i = 0; i < len; i++) {
-            char ch = s.charAt(i);
-            map.put(ch, map.getOrDefault(ch, 0) + 1);
-        }
-        
-        queue.addAll(map.entrySet());
-        
-        while (!queue.isEmpty()) {
-            List<Map.Entry<Character, Integer>> next = new ArrayList<>();
-            
-            for (int i = 0; i < k; i++) {
-                if (!queue.isEmpty()) {
-                    Map.Entry<Character, Integer> peek = queue.poll();
-                    sb.append(peek.getKey());
-                    
-                    if (peek.getValue() > 1) {
-                        peek.setValue(peek.getValue() - 1);
-                        next.add(peek);
-                    }
-                } else {
-                    if (next.isEmpty()) {
-                        break;
-                    } else {
-                        return "";
-                    }
-                }
-            }
-            
-            queue.addAll(next);
-        }
-        
+
         return sb.toString();
     }
 }
