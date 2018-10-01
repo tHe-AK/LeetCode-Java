@@ -45,9 +45,10 @@ class Solution {
         
         for (int i = 0; i < expression.length(); i++) {
             char ch = expression.charAt(i);
-            Map<List<String>, Integer> val = new HashMap<>();
             
             if (ch == '(' || Character.isLetterOrDigit(ch)) {
+                Map<List<String>, Integer> val = new HashMap<>();
+
                 if (ch == '(') {
                     int start = ++i;
                     int count = 1;
