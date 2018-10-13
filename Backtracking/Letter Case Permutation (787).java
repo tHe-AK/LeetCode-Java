@@ -22,3 +22,27 @@ class Solution {
         return new ArrayList<>(queue);
     }
 }
+
+class Solution {
+    public List<String> letterCasePermutation(String S) {
+        List<String> res = new ArrayList<>();
+        dfs(S, 0, "", res);
+        return res;
+    }
+    
+    private void dfs(String S, int i, String str, List<String> res) {
+        if (i == S.length()) {
+            res.add(str);
+            return;
+        }
+        
+        char ch = S.charAt(i);
+        
+        if (Character.isLetter(ch)) {
+            dfs(S, i + 1, str + Character.toLowerCase(ch), res);
+            dfs(S, i + 1, str + Character.toUpperCase(ch), res);
+        } else {
+            dfs(S, i + 1, str + ch, res);
+        }
+    }
+}
