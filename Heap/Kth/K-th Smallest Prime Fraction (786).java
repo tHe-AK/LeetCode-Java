@@ -22,3 +22,43 @@ class Solution {
         return new int[] { A[peek[0]], A[peek[1]] };
     }
 }
+
+class Solution {
+    public int[] kthSmallestPrimeFraction(int[] A, int K) {
+        int N = A.length;
+        double low = 1.0 * A[0] / A[N - 1];
+        double high = 1;
+
+        while (low <= high) {
+            double mid = low + (high - low) / 2;
+            int count = 0;
+            int p = A[0];
+            int q = A[N - 1];
+
+            for (int i = 0; i < N - 1; i++) {
+                for (int j = N - 1; j >= i; j--) {
+                    if (A[i] > mid * A[j]) {
+                        count += N - j - 1;
+
+                        if (j + 1 < N && A[i] * q > p * A[j + 1]) {
+                            p = A[i];
+                            q = A[j + 1];
+                        }
+
+                        break;
+                    }
+                }
+            }
+
+            if (count < K) {
+                low = mid;
+            } else if (count > K) {
+                high = mid;
+            } else {
+                return new int[] { p, q };
+            }
+        }
+
+        return null;
+    }
+}
