@@ -22,3 +22,37 @@ class Solution {
         return record[dst];
     }
 }
+
+// Dijkstra
+class Solution {
+    public int findCheapestPrice(int n, int[][] flights, int src, int dst, int K) {
+        Map<Integer, Map<Integer, Integer>> map = new HashMap<>();
+        
+        for (int[] flight : flights) {
+            map.putIfAbsent(flight[0], new HashMap<>());
+            map.get(flight[0]).put(flight[1], flight[2]);
+        }
+        
+        Queue<int[]> pq = new PriorityQueue<>((tuple1, tuple2) -> Integer.compare(tuple1[0], tuple2[0]));
+        pq.offer(new int[] { 0, src, K + 1 });
+        
+        while (!pq.isEmpty()) {
+            int[] peek = pq.poll();
+            int price = peek[0];
+            int city = peek[1];
+            int k = peek[2];
+            
+            if (city == dst) {
+                return price;
+            }
+            
+            if (k > 0 && map.containsKey(city)) {
+                for (int key : map.get(city).keySet()) {
+                    pq.offer(new int[] { price + map.get(city).get(key), key, k - 1 });
+                }
+            }
+        }
+        
+        return -1;
+    }
+}
