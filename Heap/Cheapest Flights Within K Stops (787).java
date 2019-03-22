@@ -27,6 +27,7 @@ class Solution {
 class Solution {
     public int findCheapestPrice(int n, int[][] flights, int src, int dst, int K) {
         Map<Integer, Map<Integer, Integer>> map = new HashMap<>();
+        boolean[] visited = new boolean[n];
         
         for (int[] flight : flights) {
             map.putIfAbsent(flight[0], new HashMap<>());
@@ -41,6 +42,7 @@ class Solution {
             int price = peek[0];
             int city = peek[1];
             int k = peek[2];
+            visited[city] = true;
             
             if (city == dst) {
                 return price;
@@ -48,7 +50,9 @@ class Solution {
             
             if (k > 0 && map.containsKey(city)) {
                 for (int key : map.get(city).keySet()) {
-                    pq.offer(new int[] { price + map.get(city).get(key), key, k - 1 });
+                    if (!visited[key]) {
+                        pq.offer(new int[] { price + map.get(city).get(key), key, k - 1 });
+                    }
                 }
             }
         }
