@@ -75,7 +75,8 @@ public class Solution {
             if (remaining == 0) {
                 min[0] = Math.min(min[0], total);
             } else {
-                dfs(nums, 0, 0, 0, total, remaining, visited, min);            }
+                dfs(nums, 0, 0, 0, total, remaining, visited, min);
+	    }
         } else {
             for (int i = start; i < nums.length; i++) {
                 if (!visited[i]) {
