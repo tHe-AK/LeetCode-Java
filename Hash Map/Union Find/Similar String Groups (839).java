@@ -25,7 +25,6 @@ class Solution {
     }
     
     private boolean areSimilar(String s1, String s2) {
-        int i = 0;
         int diff = 0;
         
         for (int i = 0; i < s1.length(); i++) {
