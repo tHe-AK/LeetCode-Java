@@ -61,3 +61,61 @@ class Solution {
         return first;
     }
 }
+
+class Solution {
+    public List<Integer> splitIntoFibonacci(String S) {
+        List<Integer> res = new ArrayList<>();
+        dfs(S, 0, res);
+        return res;
+    }
+    
+    private boolean dfs(String S, int i, List<Integer> res) {
+        if (i == S.length()) {
+            return res.size() > 2;
+        }
+        
+        if (res.size() >= 2) {
+            long num = 0L + res.get(res.size() - 1) + res.get(res.size() - 2);
+                    
+            if (num > Integer.MAX_VALUE) {
+                return false;
+            }
+                    
+            String str = String.valueOf(num);
+                    
+            if (!S.startsWith(str, i)) {
+                return false;
+            }
+            
+            res.add((int) num);
+            
+            if (dfs(S, i + str.length(), res)) {
+                return true;
+            }
+            
+            res.remove(res.size() - 1);
+        } else {
+            for (int j = i + 1; j <= S.length(); j++) {
+                if (j > i + 1 && S.charAt(i) == '0') {
+                    return false;
+                }
+
+                long num = Long.parseLong(S.substring(i, j));
+
+                if (num > Integer.MAX_VALUE) {
+                    return false;
+                }
+                
+                res.add((int) num);
+            
+                if (dfs(S, j, res)) {
+                    return true;
+                }
+
+                res.remove(res.size() - 1);
+            }
+        }
+        
+        return false;
+    }
+}
