@@ -3,7 +3,7 @@ class Solution {
         int i = S.length() - 1;
         int j = T.length() - 1;
         
-        while (true) {
+        while (i >= 0 || j >= 0) {
             int count = 0;
             
             while (i >= 0 && (count > 0 || S.charAt(i) == '#')) {
@@ -22,8 +22,10 @@ class Solution {
                 i--;
                 j--;
             } else {
-                return i == -1 && j == -1;
+                break;
             }
         }
+        
+        return i == -1 && j == -1;
     }
 }
