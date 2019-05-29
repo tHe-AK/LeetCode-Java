@@ -21,8 +21,10 @@ class Solution {
             int start = event[2];
             int end = event[3];
             
-            area = (area + (int) (1L * (x - prev) * mergeIntervals(intervals) % M)) % M;
-            prev = x;
+            if (x != prev) {
+                area = (area + (int) (1L * (x - prev) * mergeIntervals(intervals) % M)) % M;
+                prev = x;
+            }
             
             if (type == 1) {
                 intervals.add(new int[] { start, end });
