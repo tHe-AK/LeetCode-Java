@@ -57,10 +57,9 @@ class Solution {
             if (end < interval[0]) {
                 len += end - start;
                 start = interval[0];
-                end = interval[1];
-            } else {
-                end = Math.max(end, interval[1]);
             }
+            
+            end = Math.max(end, interval[1]);
         }
         
         len += end - start;
