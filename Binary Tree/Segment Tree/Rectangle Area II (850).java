@@ -28,17 +28,13 @@ class Solution {
                 intervals.add(new int[] { start, end });
                 Collections.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
             } else {
-                int j = 0;
-                
-                while (j < intervals.size()) {
+                for (int j = 0; j < intervals.size(); j++) {
                     int[] interval = intervals.get(j);
                     
                     if (interval[0] == start && interval[1] == end) {
                         intervals.remove(j);
                         break;
                     }
-                    
-                    j++;
                 }
             }
         }
