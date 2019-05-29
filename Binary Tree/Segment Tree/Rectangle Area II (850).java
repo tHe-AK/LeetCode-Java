@@ -6,8 +6,8 @@ class Solution {
         int i = 0;
         
         for (int[] rect : rectangles) {
-            events[i++] = new int[] { rect[0], 0, rect[1], rect[3] };
-            events[i++] = new int[] { rect[2], 1, rect[1], rect[3] };
+            events[i++] = new int[] { rect[0], 1, rect[1], rect[3] };
+            events[i++] = new int[] { rect[2], -1, rect[1], rect[3] };
         }
         
         Arrays.sort(events, (a, b) -> Integer.compare(a[0], b[0]));
@@ -24,7 +24,7 @@ class Solution {
             area = (area + (int) (1L * (x - prev) * mergeIntervals(intervals) % M)) % M;
             prev = x;
             
-            if (type == 0) {
+            if (type == 1) {
                 intervals.add(new int[] { start, end });
                 Collections.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
             } else {
