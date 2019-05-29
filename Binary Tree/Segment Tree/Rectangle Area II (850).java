@@ -34,13 +34,12 @@ class Solution {
                     int[] interval = intervals.get(j);
                     
                     if (interval[0] == start && interval[1] == end) {
+                        intervals.remove(j);
                         break;
                     }
                     
                     j++;
                 }
-                
-                intervals.remove(j);
             }
         }
         
