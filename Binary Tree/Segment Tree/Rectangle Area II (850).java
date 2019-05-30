@@ -77,64 +77,65 @@ class SegmentTreeNode {
         this.start = start;
         this.end = end;
     }
-    
-    public SegmentTreeNode(int start, int end, int val) {
-        this.start = start;
-        this.end = end;
-        this.val = val;
-    }
 }
 
 class SegmentTree {
     private SegmentTreeNode root;
+    private List<Integer> list;
     
     public SegmentTree(List<Integer> list) {
-        root = buildTree(0, list.size() - 1, list);
+        this.list = list;
+        root = buildTree(0, list.size() - 1);
     }
     
-    private SegmentTreeNode buildTree(int start, int end, List<Integer> list) {
+    private SegmentTreeNode buildTree(int start, int end) {
         if (start + 1 == end) {
-            return new SegmentTreeNode(start, end, list.get(end) - list.get(start));
+            return new SegmentTreeNode(start, end);
         } else {
             int mid = start + (end - start) / 2;
             SegmentTreeNode root = new SegmentTreeNode(start, end);
-            root.left = buildTree(start, mid, list);
-            root.right = buildTree(mid, end, list);
+            root.left = buildTree(start, mid);
+            root.right = buildTree(mid, end);
             return root;
         }
     }
     
-    public void update(int start, int end, int diff) {
-        update(root, start, end, diff);
+    public void update(int start, int end, int count) {
+        update(root, list.indexOf(start), list.indexOf(end), count);
     }
     
-    private void update(SegmentTreeNode root, int start, int end, int diff) {
+    private int update(SegmentTreeNode root, int start, int end, int count) {
+        int diff = 0;
+        
         if (root.start + 1 == root.end) {
-            root.count += diff;
+            root.count += count;
+            int dist = list.get(end) - list.get(start);
+            
+            if (root.count == 1 && count == 1) {
+                diff = dist;
+            }
+            
+            if (root.count == 0) {
+                diff = -dist;
+            }
         } else {
             int mid = root.start + (root.end - root.start) / 2;
             
             if (end <= mid) {
-                update(root.left, start, end, diff);
+                diff += update(root.left, start, end, count);
             } else if (mid <= start) {
-                update(root.right, start, end, diff);
+                diff += update(root.right, start, end, count);
             } else {
-                update(root.left, start, mid, diff);
-                update(root.right, mid, end, diff);
+                diff += update(root.left, start, mid, count) + update(root.right, mid, end, count);
             }
         }
+        
+        root.val += diff;
+        return diff;
     }
     
     public int getSum() {
-        return getSum(root);
-    }
-    
-    private int getSum(SegmentTreeNode root) {
-        if (root.start + 1 == root.end) {
-            return root.count > 0 ? root.val : 0;
-        } else {
-            return getSum(root.left) + getSum(root.right);
-        }
+        return root.val;
     }
 }
 
@@ -162,8 +163,8 @@ public class Solution {
         for (int[] event : events) {
             int x = event[0];
             int type = event[1];
-            int start = list.indexOf(event[2]);
-            int end =  list.indexOf(event[3]);
+            int start = event[2];
+            int end =  event[3];
             
             if (x != prev) {
                 area = (area + (int) (1L * (x - prev) * tree.getSum() % M)) % M;
