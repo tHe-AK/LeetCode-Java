@@ -63,14 +63,14 @@ public class ExamRoom {
     public ExamRoom(int N) {
         this.N = N;
         set = new TreeSet<>((a, b) -> {
-        	int dist1 = getDist(a);
-        	int dist2 = getDist(b);
+            int dist1 = getDist(a);
+            int dist2 = getDist(b);
         	
-        	if (dist1 == dist2) {
-        		return Integer.compare(a.start, b.start);
-        	}
+            if (dist1 == dist2) {
+                return Integer.compare(a.start, b.start);
+            }
         	
-        	return Integer.compare(dist2, dist1);
+            return Integer.compare(dist2, dist1);
         });
         map = new HashMap<>();
         addInterval(-1, N);
