@@ -8,28 +8,25 @@ class ExamRoom {
     }
     
     public int seat() {
-        if (set.isEmpty()) {
-            set.add(0);
-            return 0;
-        }
-        
         int prev = -1;
-        int idx = -1;
+        int idx = 0;
         int max = 0;
-
-        for (Integer i : set) {
-            int dist = prev == -1 ? i - prev - 1 : (i - prev) / 2;
-            
-            if (dist > max) {
-                max = dist;
-                idx = prev == -1 ? 0 : prev + dist;
-            }
-            
-            prev = i;
-        }
         
-        if (N - prev - 1 > max) {
-            idx = N - 1;
+        if (!set.isEmpty()) {
+            for (Integer i : set) {
+                int dist = prev == -1 ? i - prev - 1 : (i - prev) / 2;
+
+                if (dist > max) {
+                    max = dist;
+                    idx = prev == -1 ? 0 : prev + dist;
+                }
+
+                prev = i;
+            }
+
+            if (N - prev - 1 > max) {
+                idx = N - 1;
+            }
         }
         
         set.add(idx);
