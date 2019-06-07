@@ -23,28 +23,51 @@ class Solution {
 
 class Solution {
     public int minRefuelStops(int target, int startFuel, int[][] stations) {
-        int fuel = startFuel;
         int step = 0;
         Queue<Integer> queue = new PriorityQueue<>(Collections.reverseOrder());
         
         for (int i = 0; i < stations.length; i++) {
-            while (fuel < stations[i][0] && !queue.isEmpty()) {
-                fuel += queue.poll();
+            while (startFuel < stations[i][0] && !queue.isEmpty()) {
+                startFuel += queue.poll();
                 step++;
             }
             
-            if (fuel < stations[i][0]) {
+            if (startFuel < stations[i][0]) {
                 return -1;
             }
             
             queue.offer(stations[i][1]);
         }
         
-        while (fuel < target && !queue.isEmpty()) {
-            fuel += queue.poll();
+        while (startFuel < target && !queue.isEmpty()) {
+            startFuel += queue.poll();
             step++;
         }
         
-        return fuel < target ? -1 : step;
+        return startFuel < target ? -1 : step;
+    }
+}
+
+class Solution {
+    public int minRefuelStops(int target, int startFuel, int[][] stations) {
+        int step = 0;
+        int i = 0;
+        Queue<Integer> queue = new PriorityQueue<>(Collections.reverseOrder());
+        
+        while (startFuel < target) {
+            while (i < stations.length && stations[i][0] <= startFuel) {
+                queue.offer(stations[i][1]);
+                i++;
+            }
+            
+            if (queue.isEmpty()) {
+                return -1;
+            }
+            
+            startFuel += queue.poll();
+            step++;
+        }
+        
+        return step;
     }
 }
