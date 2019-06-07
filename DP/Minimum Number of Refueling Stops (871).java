@@ -27,23 +27,24 @@ class Solution {
         int step = 0;
         Queue<Integer> queue = new PriorityQueue<>(Collections.reverseOrder());
         
-        for (int i = 0; i <= stations.length; i++) {
-            int val = i < stations.length ? stations[i][0] : target;
-            
-            while (fuel < val && !queue.isEmpty()) {
+        for (int i = 0; i < stations.length; i++) {
+            while (fuel < stations[i][0] && !queue.isEmpty()) {
                 fuel += queue.poll();
                 step++;
             }
             
-            if (fuel < val) {
+            if (fuel < stations[i][0]) {
                 return -1;
             }
             
-            if (i < stations.length) {
-                queue.offer(stations[i][1]);
-            }
+            queue.offer(stations[i][1]);
         }
         
-        return step;
+        while (fuel < target && !queue.isEmpty()) {
+            fuel += queue.poll();
+            step++;
+        }
+        
+        return fuel < target ? -1 : step;
     }
 }
