@@ -32,3 +32,49 @@ class Solution {
         preorder(root.right, list);
     }
 }
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public boolean leafSimilar(TreeNode root1, TreeNode root2) {
+        Stack<TreeNode> stack1 = new Stack<>();
+        Stack<TreeNode> stack2 = new Stack<>();
+        stack1.push(root1);
+        stack2.push(root2);
+        
+        while (!stack1.empty() && !stack2.empty()) {
+            if (preorder(stack1) != preorder(stack2)) {
+                return false;
+            }
+        }
+        
+        return stack1.empty() && stack2.empty();
+    }
+    
+    private int preorder(Stack<TreeNode> stack) {        
+        while (!stack.empty()) {
+            TreeNode root = stack.pop();
+            
+            if (root.left == null && root.right == null) {
+                return root.val;
+            }
+            
+            if (root.right != null) {
+                stack.push(root.right);
+            }
+                
+            if (root.left != null) {
+                stack.push(root.left);
+            }
+        }
+        
+        return 0;
+    }
+}
