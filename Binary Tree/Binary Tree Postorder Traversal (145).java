@@ -71,6 +71,50 @@ class Solution {
  */
 class Solution {
     public List<Integer> postorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<>();
+        
+        if (root == null) {
+            return res;
+        }
+        
+        Stack<TreeNode> stack = new Stack<>();
+        helper(stack, root);
+        
+        while (!stack.isEmpty()) {
+            TreeNode peek = stack.pop();
+            res.add(peek.val);
+            
+            if (!stack.empty() && stack.peek().right != peek) {
+                helper(stack, stack.peek().right);
+            }
+        }
+        
+        return res;
+    }
+    
+    private void helper(Stack<TreeNode> stack, TreeNode root) {
+        while (root != null) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            
+            root = stack.peek().right;
+        }
+    }
+}
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public List<Integer> postorderTraversal(TreeNode root) {
         List<Integer> result = new ArrayList<>();
         postorder(root, result);
         
