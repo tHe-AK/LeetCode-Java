@@ -45,24 +45,22 @@ class Solution {
         }
         
         Stack<TreeNode> stack = new Stack<>();
-        
-        while (root != null) {
-            stack.push(root);
-            root = root.left;
-        }
+        helper(stack, root);
         
         while (!stack.empty()) {
             TreeNode node = stack.pop();
             res.add(node.val);
-            node = node.right;
-            
-            while (node != null) {
-                stack.push(node);
-                node = node.left;
-            }
+            helper(stack, node.right);
         }
         
         return res;
+    }
+    
+    private void helper(Stack<TreeNode> stack, TreeNode root) {
+        while (root != null) {
+            stack.push(root);
+            root = root.left;
+        }
     }
 }
 
