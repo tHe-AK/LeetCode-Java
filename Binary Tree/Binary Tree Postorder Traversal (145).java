@@ -14,7 +14,7 @@ class Solution {
         
         while (root != null || !stack.empty()) {
             if (root != null) {
-                res.add(root.val);
+                res.add(0, root.val);
                 stack.add(root.left);
                 root = root.right;
             } else {
@@ -22,7 +22,43 @@ class Solution {
             }
         }
         
-        Collections.reverse(res);
+        return res;
+    }
+}
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public List<Integer> postorderTraversal(TreeNode root) {
+        List<Integer> res = new LinkedList<>();
+        
+        if (root == null) {
+            return res;
+        }
+        
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        
+        while (!stack.empty()) {
+            TreeNode peek = stack.pop();
+            res.add(0, peek.val);
+            
+            if (peek.left != null) {
+                stack.push(peek.left);
+            }
+            
+            if (peek.right != null) {
+                stack.push(peek.right);
+            }
+        }
+        
         return res;
     }
 }
