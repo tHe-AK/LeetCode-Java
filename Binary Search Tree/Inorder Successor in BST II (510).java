@@ -19,11 +19,11 @@ public class Solution {
           
             if (parent != null && parent.left == node) {
               return parent;
-            } else {
-              node = parent;
             }
+            
+            node = parent;
         }
         
-        return null;
+        return successor;
     }
 }
