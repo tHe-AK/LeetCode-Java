@@ -23,3 +23,19 @@ class Solution {
         return dp[0][N - 1] > 0;
     }
 }
+
+class Solution {
+    public boolean stoneGame(int[] piles) {
+        int N = piles.length;
+        int[] dp = piles.clone();
+        
+        for (int k = 1; k < N; k++) {
+            for (int i = 0; i < N - k; i++) {
+                int j = i + k;
+                dp[i] = Math.max(piles[i] - dp[i + 1], piles[j] - dp[i]);
+            }
+        }
+        
+        return dp[0] > 0;
+    }
+}
