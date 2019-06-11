@@ -34,3 +34,33 @@ class Solution {
         return gcd(B, A % B);
     }
 }
+
+class Solution {
+    public int nthMagicalNumber(int N, int A, int B) {
+        int MOD = 1_000_000_007;
+        int gcd = gcd(A, B);
+        int lcm = A / gcd * B;
+        long low = Math.min(A, B);
+        long high = N * low;
+        
+        while (low <= high) {
+            long mid = low + (high - low) / 2;
+            
+            if (mid / A + mid / B - mid / lcm >= N) {
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        
+        return (int) (low % MOD);
+    }
+    
+    private int gcd(int A, int B) {
+        if (B == 0) {
+            return A;
+        }
+        
+        return gcd(B, A % B);
+    }
+}
