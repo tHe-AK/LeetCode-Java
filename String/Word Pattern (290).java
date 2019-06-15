@@ -20,7 +20,7 @@ public class Solution {
     }
 }
 
-public class Solution {
+class Solution {
     public boolean wordPattern(String pattern, String str) {
         String[] words = str.split(" ");
         int len = words.length;
@@ -29,26 +29,17 @@ public class Solution {
             return false;
         }
         
-        Map<Character, String> map = new HashMap<>();
-        Set<String> set = new HashSet<>();
+        Map<Character, String> map1 = new HashMap<>();
+        Map<String, Character> map2 = new HashMap<>();
         
         for (int i = 0; i < len; i++) {
             char ch = pattern.charAt(i);
             String word = words[i];
+            map1.putIfAbsent(ch, word);
+            map2.putIfAbsent(word, ch);
             
-            if (map.containsKey(ch)) {
-                if (map.get(ch).equals(word)) {
-                    continue;
-                } else {
-                    return false;
-                }
-            } else {
-                if (set.contains(word)) {
-                    return false;
-                }
-                
-                map.put(ch, word);
-                set.add(word);
+            if (!map1.get(ch).equals(word) || map2.get(word) != ch) {
+                return false;
             }
         }
         
