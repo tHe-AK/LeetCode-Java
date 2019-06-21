@@ -31,6 +31,41 @@ class Solution {
 
 class Solution {
     public int[] sortArray(int[] nums) {
+        quickSort(nums, 0, nums.length - 1);
+        return nums;
+    }
+
+    private void quickSort(int[] nums, int start, int end) {
+        if (start >= end) {
+            return;
+        }
+        
+        int pivot = nums[start];
+        int low = start + 1;
+        int high = end;
+
+        while (low <= high) {
+            if (nums[low] < pivot) {
+                low++;
+            } else if (nums[high] >= pivot) {
+                high--;
+            } else {
+                int temp = nums[high];
+                nums[high--] = nums[low];
+                nums[low++] = temp;
+            }
+        }
+        
+        nums[start] = nums[high];
+        nums[high] = pivot;
+        
+        quickSort(nums, start, high - 1);
+        quickSort(nums, high + 1, end);
+    }
+}
+
+class Solution {
+    public int[] sortArray(int[] nums) {
         return mergeSort(nums, 0, nums.length - 1);
     }
 
