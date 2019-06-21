@@ -1,5 +1,36 @@
 class Solution {
     public int[] sortArray(int[] nums) {
+        quickSort(nums, 0, nums.length - 1);
+        return nums;
+    }
+
+    private void quickSort(int[] nums, int start, int end) {
+        if (start >= end) {
+            return;
+        }
+        
+        int pivot = nums[start];
+        int idx = start + 1;
+
+        for (int i = start + 1; i <= end; i++) {
+            if (nums[i] < pivot) {
+                int temp = nums[i];
+                nums[i] = nums[idx];
+                nums[idx++] = temp;
+            }
+        }
+        
+        idx--;
+        nums[start] = nums[idx];
+        nums[idx] = pivot;
+
+        quickSort(nums, start, idx - 1);
+        quickSort(nums, idx + 1, end);
+    }
+}
+
+class Solution {
+    public int[] sortArray(int[] nums) {
         return mergeSort(nums, 0, nums.length - 1);
     }
 
