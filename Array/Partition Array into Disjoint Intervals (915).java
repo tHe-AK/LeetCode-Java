@@ -20,3 +20,23 @@ class Solution {
         return -1;
     }
 }
+
+class Solution {
+    public int partitionDisjoint(int[] A) {
+        int N = A.length;
+        int localMax = A[0];
+        int max = A[0];
+        int idx = 0;
+            
+        for (int i = 1; i < N - 1; i++) {
+            if (localMax > A[i]) {
+                localMax = max;
+                idx = i;
+            } else {
+                max = Math.max(max, A[i]);
+            }
+        }
+        
+        return idx + 1;
+    }
+}
