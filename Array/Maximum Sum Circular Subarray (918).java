@@ -14,6 +14,6 @@ class Solution {
             sum += A[i];
         }
         
-        return max >= 0 ? Math.max(max, sum - min) : max;
+        return max > 0 ? Math.max(max, sum - min) : max;
     }
 }
