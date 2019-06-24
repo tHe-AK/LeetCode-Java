@@ -33,9 +33,8 @@ class Solution {
             int[] peek = queue.poll();
             int prevMouse = peek[0];
             int prevCat = peek[1];
-            int prevTurn = peek[2];
+            int turn = 1 - peek[2];
             int color = peek[3];
-            int turn = 1 - prevTurn;
             
             for (int next : graph[turn == 0 ? prevMouse : prevCat]) {
                 int mouse = turn == 0 ? next : prevMouse;
