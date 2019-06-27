@@ -22,3 +22,27 @@ class Solution {
         return min;
     }
 }
+
+class Solution {
+    public int minFlipsMonoIncr(String S) {
+        int N = S.length();
+        int flip = 0;
+        int one = 0;
+
+        for (int i = 0; i < N; i++) {
+            if (S.charAt(i) == '0') {
+                if (one > 0) {
+                    flip++;
+                }
+            } else {
+                one++;
+            }
+            
+            if (flip > one) {
+                flip = one;
+            }
+        }
+        
+        return flip;
+    }
+}
