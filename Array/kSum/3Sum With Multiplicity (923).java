@@ -22,14 +22,16 @@ class Solution {
                     long countZ = map.get(z);
                     
                     if (x == y && y == z) {
-                        count = (count + countX * (countX - 1) * (countX - 2) / 6 % MOD) % MOD;
+                        count += countX * (countX - 1) * (countX - 2) / 6 % MOD;
                     } else if (x == y) {
-                        count = (count + countX * (countX - 1) / 2 * countZ % MOD) % MOD;
+                        count += countX * (countX - 1) / 2 * countZ % MOD;
                     } else if (y == z) {
-                        count = (count + countX * countY * (countY - 1) / 2 % MOD) % MOD;
+                        count += countX * countY * (countY - 1) / 2 % MOD;
                     } else {
-                        count = (count + countX * countY * countZ % MOD) % MOD;
+                        count += countX * countY * countZ % MOD;
                     }
+                    
+                    count %= MOD;
                 }
             }
         }
