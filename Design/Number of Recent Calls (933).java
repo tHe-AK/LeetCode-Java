@@ -20,3 +20,30 @@ class RecentCounter {
  * RecentCounter obj = new RecentCounter();
  * int param_1 = obj.ping(t);
  */
+
+class RecentCounter {
+    int[] ts;
+
+    public RecentCounter() {
+        ts = new int[3001];
+    }
+    
+    public int ping(int t) {
+        ts[t % 3001] = t;
+        int count = 0;
+        
+        for (int i : ts) {
+            if (i != 0 && i >= t - 3000) {
+                count++;
+            }
+        }
+        
+        return count;
+    }
+}
+
+/**
+ * Your RecentCounter object will be instantiated and called as such:
+ * RecentCounter obj = new RecentCounter();
+ * int param_1 = obj.ping(t);
+ */
