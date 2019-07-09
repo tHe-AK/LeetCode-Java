@@ -1,5 +1,20 @@
 class Solution {
     public int minIncrementForUnique(int[] A) {
+        Arrays.sort(A);
+        int need = 0;
+        int res = 0;
+        
+        for (int i : A) {
+            res += Math.max(need - i, 0);
+            need = Math.max(need, i) + 1;
+        }
+        
+        return res;
+    }
+}
+
+class Solution {
+    public int minIncrementForUnique(int[] A) {
         TreeMap<Integer, Integer> count = new TreeMap<>();
         
         for (int i : A) {
