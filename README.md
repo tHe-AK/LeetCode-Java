@@ -1,4 +1,5 @@
 LeetCode-Java
 =============
 
-Java Soluction for LeetCode
+見えたものを見えたように
+好きなものを好きなように
