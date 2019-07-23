@@ -51,3 +51,29 @@ class Solution {
         return count;
     }
 }
+
+class Solution {
+    public int minKBitFlips(int[] A, int K) {
+        int N = A.length;
+        int flipped = 0;
+        int count = 0;
+        
+        for (int i = 0; i < N; i++) {
+            if (flipped % 2 == A[i]) {
+                if (i + K > N) {
+                    return -1;
+                }
+                
+                flipped++;
+                A[i] = -1;
+                count++;
+            }
+            
+            if (i >= K - 1 && A[i - K + 1] < 0) {
+                flipped += A[i - K + 1];
+            }
+        }
+        
+        return count;
+    }
+}
