@@ -18,18 +18,14 @@ class Solution {
             for (int i = 0; i + k < N; i++) {
                 int j = i + k;
 
-                if (k == K) {
-                    dp[i][j] = sum[j + 1] - sum[i];
-                } else {
-                    dp[i][j] = Integer.MAX_VALUE;
+                dp[i][j] = Integer.MAX_VALUE;
 
-                    for (int mid = i; mid < j; mid += K) {
-                        dp[i][j] = Math.min(dp[i][j], dp[i][mid] + dp[mid + 1][j]);
-                    }
+                for (int mid = i; mid < j; mid += K) {
+                    dp[i][j] = Math.min(dp[i][j], dp[i][mid] + dp[mid + 1][j]);
+                }
 
-                    if ((j - i) % K == 0) {
-                        dp[i][j] += sum[j + 1] - sum[i];
-                    }
+                if ((j - i) % K == 0) {
+                    dp[i][j] += sum[j + 1] - sum[i];
                 }
             }
         }
