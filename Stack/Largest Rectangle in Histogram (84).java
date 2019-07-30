@@ -8,9 +8,9 @@ public class Solution {
             int curr = (i == len) ? -1 : heights[i];
             
             while (!stack.isEmpty() && heights[stack.peek()] >= curr) {
-                int heigth = heights[stack.pop()];
+                int height = heights[stack.pop()];
                 int width = stack.empty() ? i : i - stack.peek() - 1;
-                max = Math.max(max, heigth * width);
+                max = Math.max(max, height * width);
             }
             
             stack.push(i);
