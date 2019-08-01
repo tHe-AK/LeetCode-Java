@@ -9,7 +9,7 @@ public class Solution {
         int[][] rec = new int[len1 + 1][len2 + 1];
         
         for (int i = 0; i < len1 + 1; i++) {
-            for (int j = 0;j < len2 + 1; j++) {
+            for (int j = 0; j < len2 + 1; j++) {
                 if (i == 0 || j == 0) {
                     rec[i][j] = 0;
                 }
