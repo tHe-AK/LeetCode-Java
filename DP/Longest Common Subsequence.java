@@ -12,11 +12,9 @@ public class Solution {
             for (int j = 0; j < len2 + 1; j++) {
                 if (i == 0 || j == 0) {
                     rec[i][j] = 0;
-                }
-                else if (str1.charAt(i - 1) == str2.charAt(j - 1)) {
+                } else if (str1.charAt(i - 1) == str2.charAt(j - 1)) {
                     rec[i][j] = rec[i - 1][j - 1] + 1;
-                }
-                else {
+                } else {
                     rec[i][j] = Math.max(rec[i - 1][j], rec[i][j - 1]);
                 }
             }
