@@ -7,12 +7,12 @@ class Solution {
 
         for (int i = 1; i <= N; i++) {
             for (int j = i; j >= 1; j--) {
-            	boolean isValid = isSubsequence(source, target.substring(j - 1, i));
-            	
-            	if (!isValid) {
-            		break;
-            	}
-            	
+                boolean isValid = isSubsequence(source, target.substring(j - 1, i));
+                
+                if (!isValid) {
+                    break;
+                }
+                
                 if (dp[j - 1] >= 0) {
                     dp[i] = dp[i] >= 0 ? Math.min(dp[i], dp[j - 1] + 1) : dp[j - 1] + 1;
                 }
