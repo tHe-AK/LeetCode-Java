@@ -25,7 +25,6 @@ class Solution {
             val *= 10;
         }
         
-        System.out.println(count);
         return count;
     }
 }
