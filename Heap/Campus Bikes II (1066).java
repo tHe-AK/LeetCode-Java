@@ -38,6 +38,38 @@ class Solution {
 
 class Solution {
     public int assignBikes(int[][] workers, int[][] bikes) {
+        return dfs(workers, bikes, 0, 0, new HashMap<>());
+    }
+    
+    private int dfs(int[][] workers, int[][] bikes, int i, int j, Map<String, Integer> map) {
+        if (i == workers.length) {
+            return 0;
+        }
+        
+        String key = i + " " + j;
+        
+        if (map.containsKey(key)) {
+            return map.get(key);
+        }
+        
+        int min = Integer.MAX_VALUE;
+        int[] worker = workers[i];
+        
+        for (int k = 0; k < bikes.length; k++) {
+            if ((j & (1 << k)) == 0) {
+                int[] bike = bikes[k];
+                int dist = Math.abs(bike[0] - worker[0]) + Math.abs(bike[1] - worker[1]);
+                min = Math.min(min, dfs(workers, bikes, i + 1, j | (1 << k), map) + dist);
+            }
+        }
+        
+        map.put(key, min);
+        return min;
+    }
+}
+
+class Solution {
+    public int assignBikes(int[][] workers, int[][] bikes) {
         int M = workers.length;
         int N = bikes.length;
         int min = Integer.MAX_VALUE;
