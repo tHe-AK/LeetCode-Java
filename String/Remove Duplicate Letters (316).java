@@ -30,3 +30,38 @@ class Solution {
         return result;
     }
 }
+
+class Solution {
+    public String removeDuplicateLetters(String s) {
+        Stack<Integer> stack = new Stack<>();
+        boolean[] visited = new boolean[26];
+        int[] last = new int[26];
+        
+        for (int i = 0; i < s.length(); i++) {
+            last[s.charAt(i) - 'a'] = i;
+        }
+        
+        for (int i = 0; i < s.length(); i++) {
+            int idx = s.charAt(i) - 'a';
+            
+            if (visited[idx]) {
+                continue;
+            }
+            
+            while (!stack.empty() && idx < stack.peek() && i < last[stack.peek()]) {
+                visited[stack.pop()] = false;
+            }
+            
+            stack.push(idx);
+            visited[idx] = true;
+        }
+        
+        String str = "";
+        
+        for (Integer i : stack) {
+            str += (char) ('a' + i);
+        }
+        
+        return str;
+    }
+}
