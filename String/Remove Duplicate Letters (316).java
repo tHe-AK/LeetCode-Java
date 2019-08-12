@@ -1,4 +1,4 @@
-public class Solution {
+class Solution {
     public String removeDuplicateLetters(String s) {
         String result = "";
         
@@ -24,7 +24,7 @@ public class Solution {
             }
             
             result += s.charAt(idx);
-            s = s.substring(idx + 1).replaceAll(s.charAt(idx) + "", "");
+            s = s.substring(idx + 1).replaceAll(String.valueOf(s.charAt(idx)), "");
         }
         
         return result;
