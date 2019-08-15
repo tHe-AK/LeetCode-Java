@@ -27,15 +27,15 @@ class PrintOddEvenNum {
     }
 
     public static void main(String[] args) {
-        PrintOddEvenNum s = new PrintOddEvenNum(100);
+        PrintOddEvenNum printer = new PrintOddEvenNum(100);
         Thread t1 = new Thread() {
             public void run() {
-                s.print(0);
+                printer.print(0);
             }
         };
         Thread t2 = new Thread() {
             public void run() {
-                s.print(1);
+                printer.print(1);
             }
         };
         t1.start();
