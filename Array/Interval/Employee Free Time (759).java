@@ -9,7 +9,7 @@
  */
  
  class Solution {
-    public List<Interval> employeeFreeTime(List<List<Interval>> avails) {
+    public List<Interval> employeeFreeTime(List<List<Interval>> schedule) {
         List<Interval> res = new ArrayList<>();
         TreeMap<Integer, Integer> map = new TreeMap<>();
 
@@ -30,7 +30,6 @@
         for (Integer key : map.keySet()) {
             if (start != -1 && sum == 0) {
                 res.add(new Interval(start, key));
-                start = -1;
             }
 
             sum += map.get(key);
@@ -53,45 +52,43 @@
  *     Interval(int s, int e) { start = s; end = e; }
  * }
  */
+/*
+// Definition for an Interval.
+class Interval {
+    public int start;
+    public int end;
 
-class Solution {
-    private class Pair {
-        public int id;
-        public int idx;
+    public Interval() {}
 
-        public Pair(int id, int idx) {
-            this.id = id;
-            this.idx = idx;
-        }
+    public Interval(int _start,int _end) {
+        start = _start;
+        end = _end;
     }
-
-    public List<Interval> employeeFreeTime(List<List<Interval>> avails) {
+};
+*/
+class Solution {
+    public List<Interval> employeeFreeTime(List<List<Interval>> schedule) {
         List<Interval> res = new ArrayList<>();
-        PriorityQueue<Pair> pq = new PriorityQueue<>((a, b) -> Integer.compare(avails.get(a.id).get(a.idx).start, avails.get(b.id).get(b.idx).start));
-
-        for (int i = 0; i < avails.size(); i++) {
-            pq.add(new Pair(i, 0));
+        List<Interval> intervals = new ArrayList<>();
+        
+        for (List<Interval> list : schedule) {
+            intervals.addAll(list);
         }
-
-        int end = -1;
-
-        while (!pq.isEmpty()) {
-            Pair pair = pq.poll();
-            Interval interval = avails.get(pair.id).get(pair.idx);
-
-            if (end != -1 && end < interval.start) {
-                res.add(new Interval(end, interval.start));
+        
+        Collections.sort(intervals, (a, b) -> Integer.compare(a.start, b.start));
+        Interval interval = intervals.get(0);
+        
+        for (int i = 1; i < intervals.size(); i++) {
+            Interval curr = intervals.get(i);
+            
+            if (interval.end < curr.start) {
+                res.add(new Interval(interval.end, curr.start));
+                interval = curr;
+            } else {
+                interval.end = Math.max(interval.end, curr.end);
             }
-
-            end = Math.max(end, interval.end);
-
-            if (pair.idx < avails.get(pair.id).size() - 1) {
-                pair.idx++;
-                pq.offer(pair);
-            }
-
         }
-
+        
         return res;
     }
 }
