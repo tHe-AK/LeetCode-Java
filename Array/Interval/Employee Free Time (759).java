@@ -7,20 +7,31 @@
  *     Interval(int s, int e) { start = s; end = e; }
  * }
  */
- 
- class Solution {
+/*
+// Definition for an Interval.
+class Interval {
+    public int start;
+    public int end;
+
+    public Interval() {}
+
+    public Interval(int _start,int _end) {
+        start = _start;
+        end = _end;
+    }
+};
+*/
+class Solution {
     public List<Interval> employeeFreeTime(List<List<Interval>> schedule) {
         List<Interval> res = new ArrayList<>();
         TreeMap<Integer, Integer> map = new TreeMap<>();
 
-        for (List<Interval> employee : avails) {
+        for (List<Interval> employee : schedule) {
             for (Interval interval : employee) {
                 int start = interval.start;
                 int end = interval.end;
-                map.putIfAbsent(start, 0);
-                map.putIfAbsent(end, 0);
-                map.put(start, map.get(start) + 1);
-                map.put(end, map.get(end) - 1);
+                map.put(start, map.getOrDefault(start, 0) + 1);
+                map.put(end, map.getOrDefault(end, 0) - 1);
             }
         }
 
