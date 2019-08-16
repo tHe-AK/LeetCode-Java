@@ -1,117 +1,136 @@
-class Pair {
-    public int count;
-    public String sentence;
-    
-    public Pair(int count, String sentence) {
-        this.count = count;
-        this.sentence = sentence;
-    }
-}
-
 class TrieNode {
-    private final int N = 27;
     private TrieNode[] links;
     private int count;
-
+    private final int N = 27;
+    
     public TrieNode() {
         links = new TrieNode[N];
+        count = 0;
     }
-
+    
     public boolean containsKey(char ch) {
-        return links[getIdx(ch)] != null;
+        int idx = getIdx(ch);
+        return links[idx] != null;
     }
     
     public TrieNode get(char ch) {
-        return links[getIdx(ch)];
+        int idx = getIdx(ch);
+        return links[idx];
     }
     
-    public void put(char ch, TrieNode node) {
-        links[getIdx(ch)] = node;
+    public void putIfAbsent(char ch) {
+        int idx = getIdx(ch);
+        
+        if (links[idx] == null) {
+            links[idx] = new TrieNode();
+        }
     }
     
-    public void setCount(int count) {
-        this.count = count;
+    private int getIdx(char ch) {
+        return ch == ' ' ? N - 1 : ch - 'a';
     }
     
     public int getCount() {
         return count;
     }
     
-    private int getIdx(char ch) {
-        return ch == ' ' ? N - 1 : ch - 'a';
+    public void setCount(int count) {
+        this.count = count;
+    }
+}
+
+class Pair {
+    private String str;
+    private int count;
+    
+    public Pair(String str, int count) {
+        this.str = str;
+        this.count = count;
+    }
+    
+    public String getStr() {
+        return str;
+    }
+    
+    public int getCount() {
+        return count;
     }
 }
 
 public class AutocompleteSystem {
     private TrieNode root;
     private TrieNode node;
-    private String sentence;
-    
+    private String str;
+    private final int N = 27;
+
     public AutocompleteSystem(String[] sentences, int[] times) {
         root = new TrieNode();
         node = root;
-        sentence = "";
+        str = "";
         
         for (int i = 0; i < sentences.length; i++) {
-            insert(root, sentences[i], times[i]);
+            insert(sentences[i], times[i]);
         }
     }
-
+    
     public List<String> input(char c) {
         List<String> res = new ArrayList<>();
         
-        if (c == '#') { 
-            insert(root, sentence, 1);
+        if (c == '#') {
+            insert(str, 1);
             node = root;
-            sentence = "";
+            str = "";
         } else {
-            sentence += c;
+            str += c;
             
-            if (node == null || !node.containsKey(c)) {
-                node = null;
-            } else {
-                node = node.get(c);
-                Queue<Pair> queue = new PriorityQueue<>((a, b) -> a.count != b.count ? Integer.compare(b.count, a.count) : String.compare(a.sentence, b.sentence));
-                traverse(node, sentence, queue);
-                
-                for (int i = 0; i < 3 && !queue.isEmpty(); i++) {
-                    res.add(queue.poll().sentence);
+            if (node != null) {
+                if (node.containsKey(c)) {
+                    node = node.get(c);
+
+                    Queue<Pair> pq = new PriorityQueue<>((a, b) -> a.getCount() != b.getCount() ? Integer.compare(b.getCount(), a.getCount()) : a.getStr().compareTo(b.getStr()));
+                    search(node, str, pq);
+
+                    for (int i = 0; i < 3 && !pq.isEmpty(); i++) {
+                        res.add(pq.poll().getStr());
+                    }
+                } else {
+                    node = null;
                 }
             }
         }
-    
+        
         return res;
     }
     
-    private void insert(TrieNode node, String sentence, int count) {       
-        for (int i = 0; i < sentence.length(); i++) {
-            char ch = sentence.charAt(i);
-            
-            if (!node.containsKey(ch)) {
-                node.put(ch, new TrieNode());
-            }
-            
+    private void insert(String sentence, int time) {
+        TrieNode node = root;
+        
+        for (char ch : sentence.toCharArray()) {
+            node.putIfAbsent(ch);
             node = node.get(ch);
         }
         
-        node.setCount(node.getCount() + count);
+        node.setCount(node.getCount() + time);
     }
     
-    private void traverse(TrieNode node, String sentence, Queue<Pair> queue) {
+    private void search(TrieNode node, String str, Queue<Pair> pq) {
+        if (node == null) {
+            return;
+        }
+        
         if (node.getCount() > 0) {
-            queue.offer(new Pair(node.getCount(), sentence));
+            pq.offer(new Pair(str, node.getCount()));
         }
         
-        for (char c = 'a'; c <= 'z'; c++) {
-            if (node.containsKey(c)) {
-                traverse(node.get(c), sentence + c, queue);
-            }
-        }
-        
-        char space = ' ';
-        
-        if (node.containsKey(space)) {
-            traverse(node.get(space), sentence + space, queue);
+        for (int i = 0; i < N; i++) {
+            char ch = i < N - 1 ? (char) ('a' + i) : ' ';
+            search(node.get(ch), str + ch, pq);
         }
     }
 }
+
+/**
+ * Your AutocompleteSystem object will be instantiated and called as such:
+ * AutocompleteSystem obj = new AutocompleteSystem(sentences, times);
+ * List<String> param_1 = obj.input(c);
+ */
