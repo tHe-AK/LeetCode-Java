@@ -35,7 +35,9 @@ public class Solution {
         }
         
         for (int j = i - count; j < i; j++) {
-            if (sb.length() > 0) {
+            sb.append(words[j]);
+            
+            if (j < i - 1) {
                 appendSpace(sb, space);
                 
                 if (extra > 0) {
@@ -43,8 +45,6 @@ public class Solution {
                     extra--;
                 }
              }
-            
-            sb.append(words[j]);
         }
         
         if (sb.length() < maxWidth) {
