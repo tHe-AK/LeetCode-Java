@@ -1,14 +1,19 @@
-public class Solution {
+class Solution {
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
         Set<String> wordSet = new HashSet<>(wordList);
+        
+        if (!wordSet.contains(endWord)) {
+            return 0;
+        }
+        
         Queue<String> queue = new LinkedList<>();
         queue.offer(beginWord);
         wordSet.remove(beginWord);
-        int len = 1;
+        int step = 1;
         
         while (!queue.isEmpty()) {
             int size = queue.size();
-            len++;
+            step++;
             
             for (int i = 0; i < size; i++) {
                 String peek = queue.poll();
@@ -17,7 +22,7 @@ public class Solution {
                 for (String neighbor : neighbors) {
                     if (wordSet.contains(neighbor)) {
                         if (neighbor.equals(endWord)) {
-                    	    return len;
+                    	    return step;
                     	}
                     	
                         queue.offer(neighbor);
@@ -39,8 +44,7 @@ public class Solution {
             for (char c = 'a'; c <= 'z'; c++) {
                 if (c != str.charAt(j)) {
                     sb.setCharAt(j, c);
-                    String neighbor = sb.toString();
-                    neighbors.add(neighbor);
+                    neighbors.add(sb.toString());
                 }
             }
         }
@@ -49,7 +53,7 @@ public class Solution {
     }
 }
 
-public class Solution {
+class Solution {
     public int ladderLength(String beginWord, String endWord, List<String> wordList) {
         Set<String> wordSet = new HashSet<>(wordList);
         
@@ -63,11 +67,11 @@ public class Solution {
         queue2.add(endWord);
         wordSet.remove(beginWord);
         wordSet.remove(endWord);
-        int len = 1;
+        int step = 1;
 
         while (!queue1.isEmpty()) {
             int size = queue1.size();
-            len++;
+            step++;
             
             for (int i = 0; i < size; i++) {
                 String peek = queue1.poll();
@@ -75,7 +79,7 @@ public class Solution {
                 
                 for (String neighbor : neighbors) {
                     if (queue2.contains(neighbor)) {
-                        return len;
+                        return step;
                     }
                     
                     if (wordSet.contains(neighbor)) {
@@ -104,8 +108,7 @@ public class Solution {
             for (char c = 'a'; c <= 'z'; c++) {
                 if (c != str.charAt(j)) {
                     sb.setCharAt(j, c);
-                    String neighbor = sb.toString();
-                    neighbors.add(neighbor);
+                    neighbors.add(sb.toString());
                 }
             }
         }
