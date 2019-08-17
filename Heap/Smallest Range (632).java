@@ -1,4 +1,4 @@
-public class Solution {
+class Solution {
     public int[] smallestRange(List<List<Integer>> nums) {
         Queue<int[]> pq = new PriorityQueue<>((a, b) -> Integer.compare(a[0], b[0]));
         int max = Integer.MIN_VALUE;
@@ -18,8 +18,10 @@ public class Solution {
             min = peek[0];
             int i = peek[1];
             int j = peek[2];
+            int curr = max - min;
+            int diff = res[1] - res[0];
             
-            if (max - min < res[1] - res[0] || min < res[0]) {
+            if (curr < diff || (curr == diff && min < res[0])) {
                 res[0] = min;
                 res[1] = max;
             }
