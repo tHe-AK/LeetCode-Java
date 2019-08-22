@@ -7,7 +7,7 @@ class Solution {
             map.put(trip[2], map.getOrDefault(trip[2], 0) - trip[0]);
         }
         
-        for (int val : map.values()) {
+        for (Integer val : map.values()) {
             capacity -= val;
             
             if (capacity < 0) {
