@@ -1,10 +1,10 @@
 class ListNode {
     public int count;
-    public LinkedHashSet<Integer> keySet;
+    public Set<Integer> keySet;
     public ListNode pre;
     public ListNode next;
     
-    public ListNode(int count, LinkedHashSet<Integer> keySet) {
+    public ListNode(int count, Set<Integer> keySet) {
         this.count = count;
         this.keySet = keySet;
     }
@@ -75,7 +75,7 @@ public class LFUCache {
     }
     
     private void insert(ListNode pre, ListNode next, int key, int count) {
-        LinkedHashSet<Integer> keySet = new LinkedHashSet<>();
+        Set<Integer> keySet = new LinkedHashSet<>();
         keySet.add(key);
         ListNode curr = new ListNode(count, keySet);
         pre.next = curr;
