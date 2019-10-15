@@ -1,6 +1,8 @@
 LeetCode-Java
 =============
 
-見えたものを見えたように
+見えたものを見えたように : 
+As if I saw what I saw
 
-好きなものを好きなように
+好きなものを好きなように :
+As much as you like
